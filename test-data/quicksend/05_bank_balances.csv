@@ -1,0 +1,3 @@
+external_account_id,currency,closing_balance,balance_date,statement_reference
+SA-QS-MON-GBP-01,GBP,750000.00,2026-02-24,MNZ-QS-240226-001
+SA-QS-STL-GBP-01,GBP,750000.00,2026-02-24,STL-QS-240226-001

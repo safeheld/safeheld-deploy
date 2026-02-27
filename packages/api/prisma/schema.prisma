@@ -1,0 +1,1059 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── ENUMS ───────────────────────────────────────────────────────────────────
+
+enum FirmRegime {
+  PS25_PI
+  PS25_EMI
+  PS25_SMALL_EMI
+  CASS7
+  CASS15
+  MICA_CUSTODY
+}
+
+enum FirmStatus {
+  ONBOARDING
+  ACTIVE
+  SUSPENDED
+  OFFBOARDED
+}
+
+enum DateFormatEnum {
+  ISO_8601
+  DD_MM_YYYY
+  MM_DD_YYYY
+}
+
+enum SafeguardingMethod {
+  SEGREGATION
+  INSURANCE
+  GUARANTEE
+  MIXED
+}
+
+enum UserRole {
+  COMPLIANCE_OFFICER
+  FINANCE_OPS
+  AUDITOR
+  BANK_VIEWER
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  DISABLED
+  EXPIRED
+}
+
+enum FundType {
+  E_MONEY
+  PAYMENT_SERVICES
+  INVESTMENT
+  ALL
+}
+
+enum ClientAccountStatus {
+  ACTIVE
+  DORMANT
+  CLOSED
+}
+
+enum SafeguardingDesignation {
+  SAFEGUARDING
+  DESIGNATED_RELEVANT_FUNDS
+}
+
+enum SafeguardingAccountStatus {
+  ACTIVE
+  CLOSING
+  CLOSED
+}
+
+enum LetterStatus {
+  CONFIRMED
+  PENDING
+  MISSING
+  EXPIRED
+}
+
+enum AcknowledgementLetterStatus {
+  CURRENT
+  SUPERSEDED
+  EXPIRED
+}
+
+enum InputType {
+  CLIENT_BALANCES
+  CLIENT_TRANSACTIONS
+  SAFEGUARDING_LEDGER_BALANCES
+  BANK_BALANCES
+  BANK_TRANSACTIONS
+  ACCOUNT_REGISTER
+  DD_EVIDENCE
+  SAFEGUARDING_POLICY
+  CLIENT_CONTRACT
+}
+
+enum UploadStatus {
+  PENDING
+  VALIDATING
+  ACCEPTED
+  PARTIAL
+  REJECTED
+}
+
+enum TransactionDirection {
+  CREDIT
+  DEBIT
+}
+
+enum ReconciliationType {
+  INTERNAL
+  EXTERNAL
+}
+
+enum ReconciliationStatus {
+  MET
+  SHORTFALL
+  EXCESS
+  INCOMPLETE
+  NO_DATA
+}
+
+enum ReconciliationTrigger {
+  SCHEDULED
+  MANUAL
+  DATA_UPLOAD
+}
+
+enum DataCompleteness {
+  COMPLETE
+  PARTIAL_REQUIREMENT
+  PARTIAL_RESOURCE
+  PARTIAL_BOTH
+}
+
+enum BreakClassification {
+  TIMING
+  ERROR
+  UNRESOLVED
+}
+
+enum BreachType {
+  SHORTFALL
+  EXCESS
+  EXTERNAL_BREAK
+  MISSING_DATA
+  LETTER_EXPIRED
+  LETTER_MISSING
+  GOVERNANCE_GAP
+  POLICY_OVERDUE
+  DD_OVERDUE
+  RESOLUTION_PACK_INCOMPLETE
+  SEGREGATION_FAILURE
+  RECORD_KEEPING_FAILURE
+}
+
+enum BreachSeverity {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum BreachStatus {
+  DETECTED
+  ACKNOWLEDGED
+  REMEDIATING
+  RESOLVED
+  CLOSED
+}
+
+enum FcaNotificationType {
+  SAFEGUARDING_BREACH
+  RESOLUTION_PACK_FAILURE
+  RECORDS_FAILURE
+  RECONCILIATION_FAILURE
+}
+
+enum FcaNotificationStatus {
+  DRAFT
+  SUBMITTED
+  ACKNOWLEDGED
+}
+
+enum ReportType {
+  MONTHLY
+  QUARTERLY
+  ANNUAL
+  AD_HOC
+  SAFEGUARDING_RETURN
+  CMAR
+  BOARD_PACK
+  RESOLUTION_PACK
+  AUDIT_EVIDENCE
+}
+
+enum ReportStatus {
+  DRAFT
+  FINAL
+  SHARED
+  SUPERSEDED
+}
+
+enum RulePackStatus {
+  DRAFT
+  ACTIVE
+  DEPRECATED
+}
+
+enum ResponsibilityRoleType {
+  SAFEGUARDING_OWNER
+  MLRO
+  DIRECTOR_RESPONSIBLE
+}
+
+enum DueDiligenceReviewStatus {
+  CURRENT
+  DUE
+  OVERDUE
+}
+
+enum DueDiligenceOutcome {
+  APPROVED
+  APPROVED_WITH_CONDITIONS
+  REJECTED
+}
+
+enum InsuranceCoverageType {
+  INSURANCE
+  GUARANTEE
+}
+
+enum InsuranceContingencyStatus {
+  NOT_DUE
+  DUE
+  OVERDUE
+  FILED
+}
+
+enum InsuranceStatus {
+  ACTIVE
+  EXPIRING
+  EXPIRED
+  REPLACED
+}
+
+enum AgentType {
+  AGENT
+  DISTRIBUTOR
+  OTHER
+}
+
+enum AgentStatus {
+  ACTIVE
+  TERMINATED
+}
+
+enum PolicyDocumentType {
+  SAFEGUARDING_POLICY
+  RECONCILIATION_PROCEDURE
+  BREACH_PROCEDURE
+  CLIENT_CONTRACT_TEMPLATE
+  WIND_DOWN_PLAN
+  OTHER
+}
+
+enum PolicyDocumentStatus {
+  CURRENT
+  SUPERSEDED
+  DRAFT
+}
+
+enum ResolutionPackHealth {
+  GREEN
+  AMBER
+  RED
+}
+
+enum AuditorFindingSeverity {
+  HIGH
+  MEDIUM
+  LOW
+  OBSERVATION
+}
+
+enum AuditorFindingStatus {
+  OPEN
+  MANAGEMENT_RESPONSE
+  CLOSED
+}
+
+enum HealthCheckType {
+  INFRASTRUCTURE
+  DAILY_OPS
+  JOB_FAILURE
+}
+
+enum HealthCheckStatus {
+  PASS
+  WARN
+  FAIL
+}
+
+enum BankInstitutionStatus {
+  ACTIVE
+  SUSPENDED
+  OFFBOARDED
+}
+
+enum CommercialStatus {
+  PILOT
+  CONTRACTED
+  CHURNED
+}
+
+enum AlertType {
+  SYSTEM_DOWN
+  JOB_FAILURE
+  RECONCILIATION_FAILED
+  BREACH_DETECTED
+  BREACH_ESCALATED
+  DATA_MISSING
+  LETTER_EXPIRING
+  DD_OVERDUE
+  RESOLUTION_PACK_RED
+}
+
+enum AlertChannel {
+  EMAIL
+  WEBHOOK
+}
+
+enum EmailStatus {
+  SENT
+  FAILED
+  BOUNCED
+}
+
+// ─── MODELS ──────────────────────────────────────────────────────────────────
+
+model Firm {
+  id                              String              @id @default(uuid()) @db.Uuid
+  name                            String              @db.VarChar(255)
+  fcaFrn                          String?             @db.VarChar(20) @map("fca_frn")
+  regime                          FirmRegime
+  status                          FirmStatus          @default(ONBOARDING)
+  baseCurrency                    String              @default("GBP") @db.Char(3) @map("base_currency")
+  dateFormat                      DateFormatEnum      @default(DD_MM_YYYY) @map("date_format")
+  safeguardingMethod              SafeguardingMethod  @map("safeguarding_method")
+  reconciliationDays              Json                @default("[\"MON\",\"TUE\",\"WED\",\"THU\",\"FRI\"]") @map("reconciliation_days")
+  includeBankHolidaysAsReconDays  Boolean             @default(false) @map("include_bank_holidays_as_recon_days")
+  materialDiscrepancyPct          Decimal?            @db.Decimal(8, 4) @map("material_discrepancy_pct")
+  materialDiscrepancyAbs          Decimal?            @db.Decimal(18, 2) @map("material_discrepancy_abs")
+  dpaSignedDate                   DateTime?           @db.Date @map("dpa_signed_date")
+  dpaSigned                       Boolean             @default(false) @map("dpa_signed")
+  createdAt                       DateTime            @default(now()) @map("created_at")
+  updatedAt                       DateTime            @updatedAt @map("updated_at")
+
+  users                           User[]
+  clientAccounts                  ClientAccount[]
+  clientBalances                  ClientBalance[]
+  clientTransactions              ClientTransaction[]
+  safeguardingAccounts            SafeguardingAccount[]
+  safeguardingLedgerBalances      SafeguardingLedgerBalance[]
+  bankBalances                    BankBalance[]
+  bankTransactions                BankTransaction[]
+  uploads                         Upload[]
+  mappingConfigs                  MappingConfig[]
+  reconciliationRuns              ReconciliationRun[]
+  reconciliationBreaks            ReconciliationBreak[]
+  breaches                        Breach[]
+  fcaNotifications                FcaNotification[]
+  assuranceReports                AssuranceReport[]
+  acknowledgementLetters          AcknowledgementLetter[]
+  responsibilityAssignments       ResponsibilityAssignment[]
+  thirdPartyDueDiligence          ThirdPartyDueDiligence[]
+  insuranceGuarantees             InsuranceGuarantee[]
+  agentsAndDistributors           AgentAndDistributor[]
+  policyDocuments                 PolicyDocument[]
+  resolutionPackHealths           ResolutionPackHealthCheck[]
+  boardReports                    BoardReport[]
+  auditLogs                       AuditLog[]
+  auditorFindings                 AuditorFinding[]
+  systemHealthChecks              SystemHealthCheck[]
+  alertSettings                   AlertSetting[]
+  emailLogs                       EmailLog[]
+  bankInstitutionFirms            BankInstitutionFirm[]
+
+  @@map("firms")
+}
+
+model User {
+  id                String      @id @default(uuid()) @db.Uuid
+  firmId            String      @db.Uuid @map("firm_id")
+  email             String      @unique @db.VarChar(255)
+  passwordHash      String      @db.VarChar(255) @map("password_hash")
+  role              UserRole
+  name              String      @db.VarChar(255)
+  mfaEnabled        Boolean     @default(false) @map("mfa_enabled")
+  mfaSecret         String?     @db.VarChar(255) @map("mfa_secret")
+  status            UserStatus  @default(ACTIVE)
+  accessExpiresAt   DateTime?   @map("access_expires_at")
+  bankInstitutionId String?     @db.Uuid @map("bank_institution_id")
+  createdAt         DateTime    @default(now()) @map("created_at")
+  lastLoginAt       DateTime?   @map("last_login_at")
+  failedLoginCount  Int         @default(0) @map("failed_login_count")
+  lockedUntil       DateTime?   @map("locked_until")
+
+  firm              Firm        @relation(fields: [firmId], references: [id])
+  bankInstitution   BankInstitution? @relation(fields: [bankInstitutionId], references: [id])
+  refreshTokens     RefreshToken[]
+  uploads           Upload[]
+  boardReports      BoardReport[]
+  assuranceReports  AssuranceReport[]
+  auditLogs         AuditLog[]
+  resolvedBreaks    ReconciliationBreak[] @relation("ResolvedBreaks")
+  acknowledgedBreaches Breach[] @relation("AcknowledgedBreaches")
+  closedBreaches    Breach[]    @relation("ClosedBreaches")
+  submittedNotifications FcaNotification[] @relation("SubmittedNotifications")
+  uploadedLetters   AcknowledgementLetter[]
+  auditorFindings   AuditorFinding[] @relation("FindingsCreated")
+  findingResponses  AuditorFinding[] @relation("FindingResponses")
+  alertSettings     AlertSetting[]
+  emailLogs         EmailLog[]
+  uploadedPolicies  PolicyDocument[]
+
+  @@map("users")
+}
+
+model RefreshToken {
+  id          String    @id @default(uuid()) @db.Uuid
+  userId      String    @db.Uuid @map("user_id")
+  token       String    @unique @db.VarChar(500)
+  expiresAt   DateTime  @map("expires_at")
+  revokedAt   DateTime? @map("revoked_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+
+  user        User      @relation(fields: [userId], references: [id])
+
+  @@map("refresh_tokens")
+}
+
+model ClientAccount {
+  id          String              @id @default(uuid()) @db.Uuid
+  firmId      String              @db.Uuid @map("firm_id")
+  clientId    String              @db.VarChar(100) @map("client_id")
+  clientName  String?             @db.VarChar(255) @map("client_name")
+  fundType    FundType            @default(ALL) @map("fund_type")
+  status      ClientAccountStatus @default(ACTIVE)
+  createdAt   DateTime            @default(now()) @map("created_at")
+  updatedAt   DateTime            @updatedAt @map("updated_at")
+
+  firm        Firm                @relation(fields: [firmId], references: [id])
+  balances    ClientBalance[]
+  transactions ClientTransaction[]
+
+  @@unique([firmId, clientId])
+  @@map("client_accounts")
+}
+
+model ClientBalance {
+  id                String    @id @default(uuid()) @db.Uuid
+  firmId            String    @db.Uuid @map("firm_id")
+  clientAccountId   String    @db.Uuid @map("client_account_id")
+  currency          String    @db.Char(3)
+  balance           Decimal   @db.Decimal(18, 2)
+  balanceDate       DateTime  @db.Date @map("balance_date")
+  uploadId          String    @db.Uuid @map("upload_id")
+  createdAt         DateTime  @default(now()) @map("created_at")
+
+  firm              Firm      @relation(fields: [firmId], references: [id])
+  clientAccount     ClientAccount @relation(fields: [clientAccountId], references: [id])
+  upload            Upload    @relation(fields: [uploadId], references: [id])
+
+  @@unique([firmId, clientAccountId, currency, balanceDate])
+  @@index([firmId, balanceDate])
+  @@index([firmId, clientAccountId, currency, balanceDate])
+  @@map("client_balances")
+}
+
+model ClientTransaction {
+  id                    String              @id @default(uuid()) @db.Uuid
+  firmId                String              @db.Uuid @map("firm_id")
+  clientAccountId       String              @db.Uuid @map("client_account_id")
+  externalTransactionId String              @db.VarChar(100) @map("external_transaction_id")
+  amount                Decimal             @db.Decimal(18, 2)
+  currency              String              @db.Char(3)
+  direction             TransactionDirection
+  transactionDate       DateTime            @db.Date @map("transaction_date")
+  valueDate             DateTime?           @db.Date @map("value_date")
+  description           String?             @db.VarChar(500)
+  uploadId              String              @db.Uuid @map("upload_id")
+  createdAt             DateTime            @default(now()) @map("created_at")
+
+  firm                  Firm                @relation(fields: [firmId], references: [id])
+  clientAccount         ClientAccount       @relation(fields: [clientAccountId], references: [id])
+  upload                Upload              @relation(fields: [uploadId], references: [id])
+
+  @@map("client_transactions")
+}
+
+model SafeguardingAccount {
+  id                    String                    @id @default(uuid()) @db.Uuid
+  firmId                String                    @db.Uuid @map("firm_id")
+  externalAccountId     String                    @db.VarChar(100) @map("external_account_id")
+  bankName              String                    @db.VarChar(255) @map("bank_name")
+  accountNumberMasked   String                    @db.VarChar(34) @map("account_number_masked")
+  sortCode              String?                   @db.VarChar(8) @map("sort_code")
+  currency              String                    @db.Char(3)
+  fundType              FundType                  @default(ALL) @map("fund_type")
+  designation           SafeguardingDesignation
+  status                SafeguardingAccountStatus
+  openedDate            DateTime                  @db.Date @map("opened_date")
+  letterStatus          LetterStatus              @default(PENDING) @map("letter_status")
+  createdAt             DateTime                  @default(now()) @map("created_at")
+  updatedAt             DateTime                  @updatedAt @map("updated_at")
+
+  firm                  Firm                      @relation(fields: [firmId], references: [id])
+  ledgerBalances        SafeguardingLedgerBalance[]
+  bankBalances          BankBalance[]
+  bankTransactions      BankTransaction[]
+  reconciliationBreaks  ReconciliationBreak[]
+  acknowledgementLetters AcknowledgementLetter[]
+  thirdPartyDueDiligence ThirdPartyDueDiligence[]
+
+  @@unique([firmId, externalAccountId])
+  @@map("safeguarding_accounts")
+}
+
+model SafeguardingLedgerBalance {
+  id                      String              @id @default(uuid()) @db.Uuid
+  firmId                  String              @db.Uuid @map("firm_id")
+  safeguardingAccountId   String              @db.Uuid @map("safeguarding_account_id")
+  currency                String              @db.Char(3)
+  balance                 Decimal             @db.Decimal(18, 2)
+  balanceDate             DateTime            @db.Date @map("balance_date")
+  includesPrudentBuffer   Boolean             @default(false) @map("includes_prudent_buffer")
+  prudentBufferAmount     Decimal?            @db.Decimal(18, 2) @map("prudent_buffer_amount")
+  uploadId                String              @db.Uuid @map("upload_id")
+  createdAt               DateTime            @default(now()) @map("created_at")
+
+  firm                    Firm                @relation(fields: [firmId], references: [id])
+  safeguardingAccount     SafeguardingAccount @relation(fields: [safeguardingAccountId], references: [id])
+  upload                  Upload              @relation(fields: [uploadId], references: [id])
+
+  @@index([firmId, safeguardingAccountId, balanceDate])
+  @@map("safeguarding_ledger_balances")
+}
+
+model BankBalance {
+  id                    String              @id @default(uuid()) @db.Uuid
+  firmId                String              @db.Uuid @map("firm_id")
+  safeguardingAccountId String              @db.Uuid @map("safeguarding_account_id")
+  currency              String              @db.Char(3)
+  closingBalance        Decimal             @db.Decimal(18, 2) @map("closing_balance")
+  balanceDate           DateTime            @db.Date @map("balance_date")
+  statementReference    String?             @db.VarChar(255) @map("statement_reference")
+  uploadId              String              @db.Uuid @map("upload_id")
+  createdAt             DateTime            @default(now()) @map("created_at")
+
+  firm                  Firm                @relation(fields: [firmId], references: [id])
+  safeguardingAccount   SafeguardingAccount @relation(fields: [safeguardingAccountId], references: [id])
+  upload                Upload              @relation(fields: [uploadId], references: [id])
+
+  @@index([firmId, safeguardingAccountId, balanceDate])
+  @@map("bank_balances")
+}
+
+model BankTransaction {
+  id                    String              @id @default(uuid()) @db.Uuid
+  firmId                String              @db.Uuid @map("firm_id")
+  safeguardingAccountId String              @db.Uuid @map("safeguarding_account_id")
+  externalTransactionId String              @db.VarChar(100) @map("external_transaction_id")
+  amount                Decimal             @db.Decimal(18, 2)
+  currency              String              @db.Char(3)
+  direction             TransactionDirection
+  transactionDate       DateTime            @db.Date @map("transaction_date")
+  counterparty          String?             @db.VarChar(255)
+  reference             String?             @db.VarChar(255)
+  uploadId              String              @db.Uuid @map("upload_id")
+  createdAt             DateTime            @default(now()) @map("created_at")
+
+  firm                  Firm                @relation(fields: [firmId], references: [id])
+  safeguardingAccount   SafeguardingAccount @relation(fields: [safeguardingAccountId], references: [id])
+  upload                Upload              @relation(fields: [uploadId], references: [id])
+
+  @@map("bank_transactions")
+}
+
+model Upload {
+  id                String      @id @default(uuid()) @db.Uuid
+  firmId            String      @db.Uuid @map("firm_id")
+  userId            String      @db.Uuid @map("user_id")
+  inputType         InputType   @map("input_type")
+  filename          String      @db.VarChar(255)
+  fileHash          String      @db.VarChar(64) @map("file_hash")
+  fileSizeBytes     Int         @map("file_size_bytes")
+  rowCount          Int         @default(0) @map("row_count")
+  rowsAccepted      Int         @default(0) @map("rows_accepted")
+  rowsRejected      Int         @default(0) @map("rows_rejected")
+  status            UploadStatus @default(PENDING)
+  errorSummary      Json?       @map("error_summary")
+  mappingConfigId   String?     @db.Uuid @map("mapping_config_id")
+  storagePath       String?     @db.VarChar(500) @map("storage_path")
+  createdAt         DateTime    @default(now()) @map("created_at")
+
+  firm              Firm        @relation(fields: [firmId], references: [id])
+  user              User        @relation(fields: [userId], references: [id])
+  mappingConfig     MappingConfig? @relation(fields: [mappingConfigId], references: [id])
+  clientBalances    ClientBalance[]
+  clientTransactions ClientTransaction[]
+  ledgerBalances    SafeguardingLedgerBalance[]
+  bankBalances      BankBalance[]
+  bankTransactions  BankTransaction[]
+
+  @@index([firmId, inputType, createdAt])
+  @@map("uploads")
+}
+
+model MappingConfig {
+  id              String    @id @default(uuid()) @db.Uuid
+  firmId          String    @db.Uuid @map("firm_id")
+  inputType       InputType @map("input_type")
+  columnMappings  Json      @map("column_mappings")
+  hasHeaderRow    Boolean   @default(true) @map("has_header_row")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+
+  firm            Firm      @relation(fields: [firmId], references: [id])
+  uploads         Upload[]
+
+  @@unique([firmId, inputType])
+  @@map("mapping_configs")
+}
+
+model ReconciliationRun {
+  id                  String                @id @default(uuid()) @db.Uuid
+  firmId              String                @db.Uuid @map("firm_id")
+  reconciliationDate  DateTime              @db.Date @map("reconciliation_date")
+  reconciliationType  ReconciliationType    @map("reconciliation_type")
+  fundType            FundType              @map("fund_type")
+  currency            String                @db.Char(3)
+  totalRequirement    Decimal               @db.Decimal(18, 2) @map("total_requirement")
+  totalResource       Decimal               @db.Decimal(18, 2) @map("total_resource")
+  variance            Decimal               @db.Decimal(18, 2)
+  variancePercentage  Decimal               @db.Decimal(8, 4) @map("variance_percentage")
+  status              ReconciliationStatus
+  rulePackId          String                @db.Uuid @map("rule_pack_id")
+  trigger             ReconciliationTrigger
+  dataCompleteness    DataCompleteness      @map("data_completeness")
+  startedAt           DateTime              @map("started_at")
+  completedAt         DateTime?             @map("completed_at")
+  createdAt           DateTime              @default(now()) @map("created_at")
+
+  firm                Firm                  @relation(fields: [firmId], references: [id])
+  rulePack            RulePack              @relation(fields: [rulePackId], references: [id])
+  breaks              ReconciliationBreak[]
+  breaches            Breach[]
+
+  @@index([firmId, reconciliationDate, reconciliationType])
+  @@map("reconciliation_runs")
+}
+
+model ReconciliationBreak {
+  id                    String              @id @default(uuid()) @db.Uuid
+  firmId                String              @db.Uuid @map("firm_id")
+  reconciliationRunId   String              @db.Uuid @map("reconciliation_run_id")
+  safeguardingAccountId String              @db.Uuid @map("safeguarding_account_id")
+  internalBalance       Decimal             @db.Decimal(18, 2) @map("internal_balance")
+  externalBalance       Decimal             @db.Decimal(18, 2) @map("external_balance")
+  variance              Decimal             @db.Decimal(18, 2)
+  classification        BreakClassification @default(UNRESOLVED)
+  explanation           String?             @db.Text
+  resolvedAt            DateTime?           @map("resolved_at")
+  resolvedBy            String?             @db.Uuid @map("resolved_by")
+  firstDetectedDate     DateTime            @db.Date @map("first_detected_date")
+  ageBusinessDays       Int                 @default(0) @map("age_business_days")
+  createdAt             DateTime            @default(now()) @map("created_at")
+  updatedAt             DateTime            @updatedAt @map("updated_at")
+
+  firm                  Firm                @relation(fields: [firmId], references: [id])
+  reconciliationRun     ReconciliationRun   @relation(fields: [reconciliationRunId], references: [id])
+  safeguardingAccount   SafeguardingAccount @relation(fields: [safeguardingAccountId], references: [id])
+  resolver              User?               @relation("ResolvedBreaks", fields: [resolvedBy], references: [id])
+
+  @@map("reconciliation_breaks")
+}
+
+model Breach {
+  id                        String        @id @default(uuid()) @db.Uuid
+  firmId                    String        @db.Uuid @map("firm_id")
+  reconciliationRunId       String?       @db.Uuid @map("reconciliation_run_id")
+  breachType                BreachType    @map("breach_type")
+  severity                  BreachSeverity
+  isNotifiable              Boolean       @default(false) @map("is_notifiable")
+  materialDiscrepancyExceeded Boolean     @default(false) @map("material_discrepancy_exceeded")
+  currency                  String?       @db.Char(3)
+  shortfallAmount           Decimal?      @db.Decimal(18, 2) @map("shortfall_amount")
+  shortfallPercentage       Decimal?      @db.Decimal(8, 4) @map("shortfall_percentage")
+  description               String        @db.Text
+  status                    BreachStatus  @default(DETECTED)
+  version                   Int           @default(1)
+  acknowledgedBy            String?       @db.Uuid @map("acknowledged_by")
+  acknowledgedAt            DateTime?     @map("acknowledged_at")
+  remediationAction         String?       @db.Text @map("remediation_action")
+  resolvedAt                DateTime?     @map("resolved_at")
+  closedBy                  String?       @db.Uuid @map("closed_by")
+  closedAt                  DateTime?     @map("closed_at")
+  closureEvidence           String?       @db.Text @map("closure_evidence")
+  fcaNotificationId         String?       @db.Uuid @map("fca_notification_id")
+  createdAt                 DateTime      @default(now()) @map("created_at")
+
+  firm                      Firm          @relation(fields: [firmId], references: [id])
+  reconciliationRun         ReconciliationRun? @relation(fields: [reconciliationRunId], references: [id])
+  acknowledger              User?         @relation("AcknowledgedBreaches", fields: [acknowledgedBy], references: [id])
+  closer                    User?         @relation("ClosedBreaches", fields: [closedBy], references: [id])
+  fcaNotifications          FcaNotification[] @relation("BreachNotifications")
+
+  @@index([firmId, status])
+  @@index([firmId, breachType, status])
+  @@map("breaches")
+}
+
+model FcaNotification {
+  id                String                @id @default(uuid()) @db.Uuid
+  firmId            String                @db.Uuid @map("firm_id")
+  breachId          String                @db.Uuid @map("breach_id")
+  notificationType  FcaNotificationType   @map("notification_type")
+  description       String                @db.Text
+  submittedBy       String?               @db.Uuid @map("submitted_by")
+  submittedAt       DateTime?             @map("submitted_at")
+  fcaReference      String?               @db.VarChar(100) @map("fca_reference")
+  status            FcaNotificationStatus @default(DRAFT)
+  createdAt         DateTime              @default(now()) @map("created_at")
+  updatedAt         DateTime              @updatedAt @map("updated_at")
+
+  firm              Firm                  @relation(fields: [firmId], references: [id])
+  breach            Breach                @relation("BreachNotifications", fields: [breachId], references: [id])
+  submitter         User?                 @relation("SubmittedNotifications", fields: [submittedBy], references: [id])
+
+  @@map("fca_notifications")
+}
+
+model AssuranceReport {
+  id              String        @id @default(uuid()) @db.Uuid
+  firmId          String        @db.Uuid @map("firm_id")
+  reportType      ReportType    @map("report_type")
+  periodStart     DateTime      @db.Date @map("period_start")
+  periodEnd       DateTime      @db.Date @map("period_end")
+  generatedBy     String        @db.Uuid @map("generated_by")
+  version         Int           @default(1)
+  status          ReportStatus  @default(DRAFT)
+  contentHash     String        @db.VarChar(64) @map("content_hash")
+  pdfStoragePath  String        @db.VarChar(500) @map("pdf_storage_path")
+  shareToken      String?       @unique @db.VarChar(64) @map("share_token")
+  shareExpiresAt  DateTime?     @map("share_expires_at")
+  createdAt       DateTime      @default(now()) @map("created_at")
+
+  firm            Firm          @relation(fields: [firmId], references: [id])
+  generator       User          @relation(fields: [generatedBy], references: [id])
+
+  @@map("assurance_reports")
+}
+
+model AcknowledgementLetter {
+  id                    String                      @id @default(uuid()) @db.Uuid
+  firmId                String                      @db.Uuid @map("firm_id")
+  safeguardingAccountId String                      @db.Uuid @map("safeguarding_account_id")
+  version               Int
+  fileStoragePath       String                      @db.VarChar(500) @map("file_storage_path")
+  fileHash              String                      @db.VarChar(64) @map("file_hash")
+  uploadDate            DateTime                    @db.Date @map("upload_date")
+  effectiveDate         DateTime                    @db.Date @map("effective_date")
+  expiryDate            DateTime?                   @db.Date @map("expiry_date")
+  annualReviewDue       DateTime                    @db.Date @map("annual_review_due")
+  status                AcknowledgementLetterStatus @default(CURRENT)
+  uploadedBy            String                      @db.Uuid @map("uploaded_by")
+  createdAt             DateTime                    @default(now()) @map("created_at")
+
+  firm                  Firm                        @relation(fields: [firmId], references: [id])
+  safeguardingAccount   SafeguardingAccount         @relation(fields: [safeguardingAccountId], references: [id])
+  uploader              User                        @relation(fields: [uploadedBy], references: [id])
+
+  @@map("acknowledgement_letters")
+}
+
+model ResponsibilityAssignment {
+  id            String                  @id @default(uuid()) @db.Uuid
+  firmId        String                  @db.Uuid @map("firm_id")
+  roleType      ResponsibilityRoleType  @map("role_type")
+  personName    String                  @db.VarChar(255) @map("person_name")
+  jobTitle      String                  @db.VarChar(255) @map("job_title")
+  smfFunction   String?                 @db.VarChar(50) @map("smf_function")
+  effectiveFrom DateTime                @db.Date @map("effective_from")
+  effectiveTo   DateTime?               @db.Date @map("effective_to")
+  approvedBy    String?                 @db.VarChar(255) @map("approved_by")
+  approvalDate  DateTime?               @db.Date @map("approval_date")
+  createdAt     DateTime                @default(now()) @map("created_at")
+  updatedAt     DateTime                @updatedAt @map("updated_at")
+
+  firm          Firm                    @relation(fields: [firmId], references: [id])
+
+  @@map("responsibility_assignments")
+}
+
+model ThirdPartyDueDiligence {
+  id                          String                    @id @default(uuid()) @db.Uuid
+  firmId                      String                    @db.Uuid @map("firm_id")
+  safeguardingAccountId       String                    @db.Uuid @map("safeguarding_account_id")
+  bankName                    String                    @db.VarChar(255) @map("bank_name")
+  initialDdDate               DateTime                  @db.Date @map("initial_dd_date")
+  initialDdEvidencePath       String?                   @db.VarChar(500) @map("initial_dd_evidence_path")
+  lastReviewDate              DateTime                  @db.Date @map("last_review_date")
+  nextReviewDue               DateTime                  @db.Date @map("next_review_due")
+  reviewStatus                DueDiligenceReviewStatus  @map("review_status")
+  creditworthinessAssessment  String?                   @db.Text @map("creditworthiness_assessment")
+  diversificationConsidered   Boolean                   @default(false) @map("diversification_considered")
+  ddOutcome                   DueDiligenceOutcome       @map("dd_outcome")
+  createdAt                   DateTime                  @default(now()) @map("created_at")
+  updatedAt                   DateTime                  @updatedAt @map("updated_at")
+
+  firm                        Firm                      @relation(fields: [firmId], references: [id])
+  safeguardingAccount         SafeguardingAccount       @relation(fields: [safeguardingAccountId], references: [id])
+
+  @@map("third_party_due_diligence")
+}
+
+model InsuranceGuarantee {
+  id                          String                      @id @default(uuid()) @db.Uuid
+  firmId                      String                      @db.Uuid @map("firm_id")
+  insurerName                 String                      @db.VarChar(255) @map("insurer_name")
+  policyNumber                String                      @db.VarChar(100) @map("policy_number")
+  coverageType                InsuranceCoverageType       @map("coverage_type")
+  coverageAmount              Decimal                     @db.Decimal(18, 2) @map("coverage_amount")
+  coverageCurrency            String                      @db.Char(3) @map("coverage_currency")
+  effectiveDate               DateTime                    @db.Date @map("effective_date")
+  expiryDate                  DateTime                    @db.Date @map("expiry_date")
+  contingencyPlanRequiredBy   DateTime                    @db.Date @map("contingency_plan_required_by")
+  contingencyPlanStatus       InsuranceContingencyStatus  @default(NOT_DUE) @map("contingency_plan_status")
+  documentStoragePath         String?                     @db.VarChar(500) @map("document_storage_path")
+  status                      InsuranceStatus
+  createdAt                   DateTime                    @default(now()) @map("created_at")
+  updatedAt                   DateTime                    @updatedAt @map("updated_at")
+
+  firm                        Firm                        @relation(fields: [firmId], references: [id])
+
+  @@map("insurance_guarantees")
+}
+
+model AgentAndDistributor {
+  id                  String      @id @default(uuid()) @db.Uuid
+  firmId              String      @db.Uuid @map("firm_id")
+  name                String      @db.VarChar(255)
+  type                AgentType
+  contactName         String?     @db.VarChar(255) @map("contact_name")
+  contactEmail        String?     @db.VarChar(255) @map("contact_email")
+  contactPhone        String?     @db.VarChar(50) @map("contact_phone")
+  handlesRelevantFunds Boolean    @map("handles_relevant_funds")
+  status              AgentStatus
+  createdAt           DateTime    @default(now()) @map("created_at")
+  updatedAt           DateTime    @updatedAt @map("updated_at")
+
+  firm                Firm        @relation(fields: [firmId], references: [id])
+
+  @@map("agents_and_distributors")
+}
+
+model PolicyDocument {
+  id                  String                @id @default(uuid()) @db.Uuid
+  firmId              String                @db.Uuid @map("firm_id")
+  documentType        PolicyDocumentType    @map("document_type")
+  title               String                @db.VarChar(255)
+  version             Int
+  fileStoragePath     String                @db.VarChar(500) @map("file_storage_path")
+  fileHash            String                @db.VarChar(64) @map("file_hash")
+  boardApproved       Boolean               @default(false) @map("board_approved")
+  boardApprovalDate   DateTime?             @db.Date @map("board_approval_date")
+  annualReviewDue     DateTime?             @db.Date @map("annual_review_due")
+  status              PolicyDocumentStatus  @default(DRAFT)
+  uploadedBy          String                @db.Uuid @map("uploaded_by")
+  createdAt           DateTime              @default(now()) @map("created_at")
+
+  firm                Firm                  @relation(fields: [firmId], references: [id])
+  uploader            User                  @relation(fields: [uploadedBy], references: [id])
+
+  @@map("policy_documents")
+}
+
+model ResolutionPackHealthCheck {
+  id              String                @id @default(uuid()) @db.Uuid
+  firmId          String                @db.Uuid @map("firm_id")
+  checkDate       DateTime              @db.Date @map("check_date")
+  overallStatus   ResolutionPackHealth  @map("overall_status")
+  components      Json
+  missingComponents Json?               @map("missing_components")
+  createdAt       DateTime              @default(now()) @map("created_at")
+
+  firm            Firm                  @relation(fields: [firmId], references: [id])
+
+  @@map("resolution_pack_health")
+}
+
+model BoardReport {
+  id              String    @id @default(uuid()) @db.Uuid
+  firmId          String    @db.Uuid @map("firm_id")
+  reportMonth     DateTime  @db.Date @map("report_month")
+  generatedBy     String    @db.Uuid @map("generated_by")
+  pdfStoragePath  String    @db.VarChar(500) @map("pdf_storage_path")
+  contentHash     String    @db.VarChar(64) @map("content_hash")
+  createdAt       DateTime  @default(now()) @map("created_at")
+
+  firm            Firm      @relation(fields: [firmId], references: [id])
+  generator       User      @relation(fields: [generatedBy], references: [id])
+
+  @@map("board_reports")
+}
+
+model RulePack {
+  id              String          @id @default(uuid()) @db.Uuid
+  name            String          @db.VarChar(100)
+  regime          FirmRegime
+  version         Int
+  rulesConfig     Json            @map("rules_config")
+  effectiveFrom   DateTime        @db.Date @map("effective_from")
+  effectiveTo     DateTime?       @db.Date @map("effective_to")
+  status          RulePackStatus  @default(DRAFT)
+  createdAt       DateTime        @default(now()) @map("created_at")
+
+  reconciliationRuns ReconciliationRun[]
+
+  @@map("rule_packs")
+}
+
+model AuditLog {
+  id          String    @id @default(uuid()) @db.Uuid
+  firmId      String?   @db.Uuid @map("firm_id")
+  userId      String?   @db.Uuid @map("user_id")
+  action      String    @db.VarChar(100)
+  entityType  String    @db.VarChar(100) @map("entity_type")
+  entityId    String    @db.Uuid @map("entity_id")
+  details     Json
+  ipAddress   String?   @db.VarChar(45) @map("ip_address")
+  createdAt   DateTime  @default(now()) @map("created_at")
+
+  firm        Firm?     @relation(fields: [firmId], references: [id])
+  user        User?     @relation(fields: [userId], references: [id])
+
+  @@index([firmId, createdAt])
+  @@index([entityType, entityId])
+  @@map("audit_log")
+}
+
+model AuditorFinding {
+  id                String                @id @default(uuid()) @db.Uuid
+  firmId            String                @db.Uuid @map("firm_id")
+  createdBy         String                @db.Uuid @map("created_by")
+  auditPeriodEnd    DateTime              @db.Date @map("audit_period_end")
+  description       String                @db.Text
+  severity          AuditorFindingSeverity
+  linkedEntityType  String?               @db.VarChar(100) @map("linked_entity_type")
+  linkedEntityId    String?               @db.Uuid @map("linked_entity_id")
+  managementResponse String?              @db.Text @map("management_response")
+  respondedBy       String?               @db.Uuid @map("responded_by")
+  respondedAt       DateTime?             @map("responded_at")
+  status            AuditorFindingStatus  @default(OPEN)
+  createdAt         DateTime              @default(now()) @map("created_at")
+  updatedAt         DateTime              @updatedAt @map("updated_at")
+
+  firm              Firm                  @relation(fields: [firmId], references: [id])
+  creator           User                  @relation("FindingsCreated", fields: [createdBy], references: [id])
+  responder         User?                 @relation("FindingResponses", fields: [respondedBy], references: [id])
+
+  @@map("auditor_findings")
+}
+
+model SystemHealthCheck {
+  id          String            @id @default(uuid()) @db.Uuid
+  checkType   HealthCheckType   @map("check_type")
+  firmId      String?           @db.Uuid @map("firm_id")
+  status      HealthCheckStatus
+  details     Json
+  createdAt   DateTime          @default(now()) @map("created_at")
+
+  firm        Firm?             @relation(fields: [firmId], references: [id])
+
+  @@map("system_health_checks")
+}
+
+model AlertSetting {
+  id          String        @id @default(uuid()) @db.Uuid
+  userId      String        @db.Uuid @map("user_id")
+  alertType   AlertType     @map("alert_type")
+  channel     AlertChannel
+  enabled     Boolean       @default(true)
+  webhookUrl  String?       @db.VarChar(500) @map("webhook_url")
+  createdAt   DateTime      @default(now()) @map("created_at")
+
+  user        User          @relation(fields: [userId], references: [id])
+  firm        Firm?         @relation(fields: [firmId], references: [id])
+  firmId      String?       @db.Uuid @map("firm_id")
+
+  @@map("alert_settings")
+}
+
+model EmailLog {
+  id              String      @id @default(uuid()) @db.Uuid
+  firmId          String?     @db.Uuid @map("firm_id")
+  userId          String?     @db.Uuid @map("user_id")
+  emailType       String      @db.VarChar(50) @map("email_type")
+  recipientEmail  String      @db.VarChar(255) @map("recipient_email")
+  subject         String      @db.VarChar(255)
+  status          EmailStatus
+  errorMessage    String?     @db.Text @map("error_message")
+  createdAt       DateTime    @default(now()) @map("created_at")
+
+  firm            Firm?       @relation(fields: [firmId], references: [id])
+  user            User?       @relation(fields: [userId], references: [id])
+
+  @@map("email_log")
+}
+
+model BankInstitution {
+  id               String                @id @default(uuid()) @db.Uuid
+  name             String                @db.VarChar(255)
+  leiCode          String?               @db.VarChar(20) @map("lei_code")
+  status           BankInstitutionStatus @default(ACTIVE)
+  pilotStartDate   DateTime              @db.Date @map("pilot_start_date")
+  pilotEndDate     DateTime?             @db.Date @map("pilot_end_date")
+  commercialStatus CommercialStatus      @map("commercial_status")
+  createdAt        DateTime              @default(now()) @map("created_at")
+  updatedAt        DateTime              @updatedAt @map("updated_at")
+
+  users            User[]
+  linkedFirms      BankInstitutionFirm[]
+
+  @@map("bank_institutions")
+}
+
+model BankInstitutionFirm {
+  id                       String          @id @default(uuid()) @db.Uuid
+  bankInstitutionId        String          @db.Uuid @map("bank_institution_id")
+  firmId                   String          @db.Uuid @map("firm_id")
+  safeguardingAccountCount Int             @default(0) @map("safeguarding_account_count")
+  totalFundsHeld           Decimal         @db.Decimal(18, 2) @map("total_funds_held")
+  createdAt                DateTime        @default(now()) @map("created_at")
+
+  bankInstitution          BankInstitution @relation(fields: [bankInstitutionId], references: [id])
+  firm                     Firm            @relation(fields: [firmId], references: [id])
+
+  @@unique([bankInstitutionId, firmId])
+  @@map("bank_institution_firms")
+}

@@ -1,0 +1,150 @@
+version: '3.9'
+
+# ─────────────────────────────────────────────────────────────────────────────
+#  Safeheld — self-contained production stack
+#
+#  Quick start:
+#    cp .env.example .env          # fill in every value marked CHANGE_ME
+#    docker compose up -d --build  # build images, start all services
+#    docker compose exec api npm run migrate   # run DB migrations (first time)
+#    docker compose exec api npm run seed      # seed admin user (first time)
+#    docker compose logs -f                    # stream logs
+#
+#  Services exposed on the host:
+#    :80   → Web UI (Nginx + React SPA, proxies /api/ to the API)
+#    :3001 → API (direct access, localhost-only by default)
+#    :5432 → PostgreSQL (localhost-only)
+#    :6379 → Redis      (localhost-only)
+#    :9000 → MinIO S3   (localhost-only)
+#    :9001 → MinIO console (localhost-only)
+# ─────────────────────────────────────────────────────────────────────────────
+
+services:
+
+  # ── PostgreSQL 16 ────────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: safeheld_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER:     ${POSTGRES_USER:-safeheld}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB:       ${POSTGRES_DB:-safeheld}
+    ports:
+      - '127.0.0.1:5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-safeheld}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Redis 7 ──────────────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: safeheld_redis
+    restart: unless-stopped
+    ports:
+      - '127.0.0.1:6379:6379'
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── MinIO (S3-compatible object storage) ─────────────────────────────────────
+  #  To use AWS S3 instead: remove minio + minio-init, set FILE_STORAGE_TYPE=s3
+  #  in .env with your AWS credentials, and remove S3_ENDPOINT / S3_FORCE_PATH_STYLE.
+  minio:
+    image: minio/minio:latest
+    container_name: safeheld_minio
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER:     ${MINIO_ROOT_USER:-safeheld_minio}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:?Set MINIO_ROOT_PASSWORD in .env}
+    ports:
+      - '127.0.0.1:9000:9000'
+      - '127.0.0.1:9001:9001'
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:9000/minio/health/live']
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  # ── MinIO bucket init (one-shot, exits after creating buckets) ───────────────
+  minio-init:
+    image: minio/mc:latest
+    container_name: safeheld_minio_init
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+        mc alias set local http://minio:9000 ${MINIO_ROOT_USER:-safeheld_minio} ${MINIO_ROOT_PASSWORD:-change_me};
+        mc mb local/safeheld-uploads   --ignore-existing;
+        mc mb local/safeheld-reports   --ignore-existing;
+        mc mb local/safeheld-documents --ignore-existing;
+        exit 0;
+      "
+
+  # ── API (Node.js / Express / Prisma) ─────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: packages/api/Dockerfile
+    image: safeheld-api:latest
+    container_name: safeheld_api
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      NODE_ENV: production
+      # These override any DATABASE_URL / REDIS_URL / S3 values in .env
+      # so that internal Docker hostnames are always used:
+      DATABASE_URL:        postgresql://${POSTGRES_USER:-safeheld}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-safeheld}
+      REDIS_URL:           redis://redis:6379
+      S3_ENDPOINT:         http://minio:9000
+      S3_ACCESS_KEY:       ${MINIO_ROOT_USER:-safeheld_minio}
+      S3_SECRET_KEY:       ${MINIO_ROOT_PASSWORD}
+      FILE_STORAGE_TYPE:   s3
+      S3_FORCE_PATH_STYLE: "true"
+      S3_REGION:           us-east-1
+    ports:
+      - '127.0.0.1:3001:3001'
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD-SHELL', 'wget -qO- http://localhost:3001/api/v1/health || exit 1']
+      interval: 30s
+      timeout: 10s
+      start_period: 40s
+      retries: 3
+
+  # ── Web (React SPA via Nginx — proxies /api/* to the api container) ──────────
+  web:
+    build:
+      context: .
+      dockerfile: packages/web/Dockerfile
+    image: safeheld-web:latest
+    container_name: safeheld_web
+    restart: unless-stopped
+    ports:
+      - '80:80'
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  redis_data:
+  minio_data:

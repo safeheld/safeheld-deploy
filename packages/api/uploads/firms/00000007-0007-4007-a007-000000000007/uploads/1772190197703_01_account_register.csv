@@ -1,0 +1,2 @@
+external_account_id,bank_name,currency,designation,status,opened_date,account_number_masked,sort_code
+SA-NP-MON-GBP-01,Monzo Business Bank,GBP,SAFEGUARDING,ACTIVE,2024-03-15,****4401,23-26-57

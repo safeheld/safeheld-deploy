@@ -1,0 +1,3 @@
+external_account_id,currency,balance,balance_date,prudent_buffer_amount
+SA-QS-MON-GBP-01,GBP,750000.00,2026-02-24,3750.00
+SA-QS-STL-GBP-01,GBP,750000.00,2026-02-24,3750.00

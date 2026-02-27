@@ -1,0 +1,3 @@
+external_account_id,bank_name,currency,designation,status,opened_date,account_number_masked,sort_code
+SA-TQ-MON-GBP-01,Monzo Business Bank,GBP,SAFEGUARDING,ACTIVE,2023-09-01,****8801,
+SA-TQ-STL-GBP-01,Starling Bank,GBP,SAFEGUARDING,ACTIVE,2023-09-01,****9901,

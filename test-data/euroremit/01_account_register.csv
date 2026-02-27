@@ -1,0 +1,6 @@
+external_account_id,bank_name,currency,designation,status,opened_date,account_number_masked,sort_code
+SA-ER-NWI-GBP-01,Nationwide Building Society,GBP,SAFEGUARDING,ACTIVE,2022-09-01,****5501,07-00-55
+SA-ER-NWI-EUR-01,Nationwide Building Society,EUR,SAFEGUARDING,ACTIVE,2022-09-01,****5502,07-00-55
+SA-ER-NWS-GBP-01,NatWest Bank PLC,GBP,SAFEGUARDING,ACTIVE,2023-03-15,****6601,60-00-01
+SA-ER-NWS-EUR-01,NatWest Bank PLC,EUR,SAFEGUARDING,ACTIVE,2023-03-15,****6602,60-00-01
+SA-ER-LBG-GBP-01,Lloyds Bank PLC,GBP,DESIGNATED_RELEVANT_FUNDS,ACTIVE,2023-06-20,****2201,30-90-89

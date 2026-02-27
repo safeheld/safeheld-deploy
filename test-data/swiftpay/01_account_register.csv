@@ -1,0 +1,2 @@
+external_account_id,bank_name,currency,designation,status,opened_date,account_number_masked,sort_code
+SA-SP-STL-GBP-01,Starling Bank,GBP,SAFEGUARDING,ACTIVE,2023-04-15,****3301,60-83-71

@@ -1,0 +1,34 @@
+# Environment — NEVER commit real secrets
+.env
+.env.local
+.env.production
+packages/api/.env
+packages/web/.env
+
+# Node
+node_modules/
+packages/*/node_modules/
+
+# Build output
+packages/*/dist/
+packages/*/build/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Docker build cache
+.dockerignore
+
+# Database backups (keep locally, do not commit)
+backup_*.sql
