@@ -39,20 +39,10 @@ COPY --from=builder /app/packages/api/prisma        ./packages/api/prisma
 COPY --from=builder /app/node_modules/.prisma        ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma        ./node_modules/@prisma
 
-# Puppeteer: install Chromium at system level for PDF generation
-RUN apk add --no-cache \
-      chromium \
-      nss \
-      freetype \
-      harfbuzz \
-      ca-certificates \
-      ttf-freefont \
-  && addgroup -S appgroup \
+RUN addgroup -S appgroup \
   && adduser  -S appuser -G appgroup
 
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
-    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser \
-    NODE_ENV=production
+ENV NODE_ENV=production
 
 USER appuser
 
