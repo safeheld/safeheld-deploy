@@ -3,8 +3,8 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-# Install dependencies for native modules (bcrypt, canvas, etc.)
-RUN apk add --no-cache python3 make g++
+# Install dependencies for native modules (bcrypt, canvas, etc.) + openssl for Prisma
+RUN apk add --no-cache python3 make g++ openssl
 
 # Copy workspace manifests
 COPY package.json package-lock.json ./
@@ -26,6 +26,9 @@ RUN npm run -w packages/api build
 FROM node:20-alpine AS production
 
 WORKDIR /app
+
+# Install openssl (required by Prisma at runtime)
+RUN apk add --no-cache openssl
 
 # Only install production deps
 COPY package.json package-lock.json ./

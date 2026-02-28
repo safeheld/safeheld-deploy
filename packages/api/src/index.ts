@@ -25,6 +25,10 @@ import './modules/ingestion/queue';
 
 const app = express();
 
+// ─── Reverse Proxy ───────────────────────────────────────────────────────────
+
+app.set('trust proxy', 1);
+
 // ─── Security ────────────────────────────────────────────────────────────────
 
 app.use(helmet({
