@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../../hooks/useAuth';
 import { reconciliationApi } from '../../api/client';
-import { Card, Table, Button, Select, PageHeader, Pagination, statusBadge, Modal, Alert, StatCard, Grid } from '../../components/ui';
+import { Card, Table, Button, PageHeader, Pagination, statusBadge, Modal, Alert, Tabs } from '../../components/ui';
 import { format } from 'date-fns';
 
 export default function ReconciliationPage() {
@@ -56,11 +56,6 @@ export default function ReconciliationPage() {
     },
   });
 
-  const tabs = [
-    { id: 'history', label: 'Run History' },
-    { id: 'breaks', label: 'Open Breaks' },
-  ];
-
   return (
     <div>
       <PageHeader
@@ -71,7 +66,11 @@ export default function ReconciliationPage() {
               type="date"
               value={reconDate}
               onChange={e => setReconDate(e.target.value)}
-              style={{ padding: '7px 10px', border: '1px solid var(--color-gray-300)', borderRadius: '6px', fontSize: '13px' }}
+              style={{
+                padding: '8px 12px', border: '1px solid var(--color-navy-300)',
+                borderRadius: 'var(--radius-md)', fontSize: '13px',
+                color: 'var(--color-navy-700)',
+              }}
             />
             <Button onClick={() => runMutation.mutate()} loading={runMutation.isPending}>
               Run Reconciliation
@@ -80,30 +79,21 @@ export default function ReconciliationPage() {
         ) : undefined}
       />
 
-      {runError && <div style={{ marginBottom: '16px' }}><Alert type="error" message={runError} /></div>}
+      {runError && <div style={{ marginBottom: '20px' }}><Alert type="error" message={runError} /></div>}
       {runMutation.isSuccess && (
-        <div style={{ marginBottom: '16px' }}>
+        <div style={{ marginBottom: '20px' }}>
           <Alert type="success" message={`Reconciliation run completed for ${reconDate}.`} />
         </div>
       )}
 
-      {/* Tabs */}
-      <div style={{ display: 'flex', gap: '0', borderBottom: '2px solid var(--color-gray-200)', marginBottom: '20px' }}>
-        {tabs.map(tab => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id as typeof activeTab)}
-            style={{
-              padding: '10px 20px', background: 'none', border: 'none',
-              borderBottom: activeTab === tab.id ? '2px solid var(--color-primary)' : '2px solid transparent',
-              marginBottom: '-2px', cursor: 'pointer', fontSize: '14px', fontWeight: 500,
-              color: activeTab === tab.id ? 'var(--color-primary)' : 'var(--color-gray-500)',
-            }}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
+      <Tabs
+        tabs={[
+          { id: 'history', label: 'Run History' },
+          { id: 'breaks', label: 'Open Breaks' },
+        ]}
+        activeTab={activeTab}
+        onChange={id => setActiveTab(id as typeof activeTab)}
+      />
 
       {activeTab === 'history' && (
         <Card title="Reconciliation Run History">
@@ -114,19 +104,22 @@ export default function ReconciliationPage() {
               { key: 'reconciliationDate', header: 'Date', render: r => format(new Date(r.reconciliationDate), 'dd MMM yyyy') },
               { key: 'reconciliationType', header: 'Type', width: '100px' },
               { key: 'currency', header: 'CCY', width: '60px' },
-              { key: 'status', header: 'Status', render: r => statusBadge(r.status), width: '100px' },
+              { key: 'status', header: 'Status', render: r => statusBadge(r.status), width: '110px' },
               {
                 key: 'totalRequirement', header: 'Requirement',
-                render: r => Number(r.totalRequirement).toLocaleString(undefined, { minimumFractionDigits: 2 }),
+                render: r => <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px' }}>{Number(r.totalRequirement).toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>,
               },
               {
                 key: 'totalResource', header: 'Resource',
-                render: r => Number(r.totalResource).toLocaleString(undefined, { minimumFractionDigits: 2 }),
+                render: r => <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px' }}>{Number(r.totalResource).toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>,
               },
               {
                 key: 'variance', header: 'Variance',
                 render: r => (
-                  <span style={{ color: Number(r.variance) < 0 ? 'var(--color-danger)' : Number(r.variance) > 0 ? 'var(--color-success)' : undefined, fontFamily: 'monospace' }}>
+                  <span style={{
+                    color: Number(r.variance) < 0 ? 'var(--color-danger)' : Number(r.variance) > 0 ? 'var(--color-success)' : 'var(--color-navy-600)',
+                    fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 600,
+                  }}>
                     {Number(r.variance).toLocaleString(undefined, { minimumFractionDigits: 2 })}
                   </span>
                 ),
@@ -152,19 +145,19 @@ export default function ReconciliationPage() {
             loading={breaksLoading}
             data={breaksResp?.data || []}
             columns={[
-              { key: 'safeguardingAccount', header: 'Account', render: r => r.safeguardingAccount ? `${r.safeguardingAccount.bankName} (${r.safeguardingAccount.accountNumberMasked})` : '—' },
-              { key: 'currency', header: 'CCY', render: r => r.reconciliationRun?.currency || '—', width: '60px' },
+              { key: 'safeguardingAccount', header: 'Account', render: r => r.safeguardingAccount ? `${r.safeguardingAccount.bankName} (${r.safeguardingAccount.accountNumberMasked})` : '\u2014' },
+              { key: 'currency', header: 'CCY', render: r => r.reconciliationRun?.currency || '\u2014', width: '60px' },
               {
                 key: 'variance', header: 'Variance',
                 render: r => (
-                  <span style={{ fontFamily: 'monospace', color: r.variance < 0 ? 'var(--color-danger)' : 'var(--color-warning)' }}>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 600, fontSize: '12px', color: r.variance < 0 ? 'var(--color-danger)' : 'var(--color-warning)' }}>
                     {Number(r.variance).toLocaleString(undefined, { minimumFractionDigits: 2 })}
                   </span>
                 ),
               },
               { key: 'classification', header: 'Classification', render: r => statusBadge(r.classification) },
               { key: 'ageBusinessDays', header: 'Age (days)', width: '100px' },
-              { key: 'firstDetectedDate', header: 'Detected', render: r => r.firstDetectedDate ? format(new Date(r.firstDetectedDate), 'dd MMM yyyy') : '—' },
+              { key: 'firstDetectedDate', header: 'Detected', render: r => r.firstDetectedDate ? format(new Date(r.firstDetectedDate), 'dd MMM yyyy') : '\u2014' },
               {
                 key: 'actions', header: '',
                 render: r => isComplianceOrAdmin ? (
@@ -199,7 +192,7 @@ export default function ReconciliationPage() {
         onClose={() => setShowResolveModal(false)}
         title="Resolve Reconciliation Break"
       >
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {selectedBreak && (
             <Alert
               type={selectedBreak.variance < 0 ? 'error' : 'warning'}
@@ -207,11 +200,15 @@ export default function ReconciliationPage() {
             />
           )}
           <div>
-            <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '4px' }}>Classification</label>
+            <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, color: 'var(--color-navy-700)', marginBottom: '6px' }}>Classification</label>
             <select
               value={resolution.classification}
               onChange={e => setResolution(p => ({ ...p, classification: e.target.value }))}
-              style={{ width: '100%', padding: '8px 10px', border: '1px solid var(--color-gray-300)', borderRadius: '6px', fontSize: '13px' }}
+              style={{
+                width: '100%', padding: '9px 12px', border: '1px solid var(--color-navy-300)',
+                borderRadius: 'var(--radius-md)', fontSize: '13px', color: 'var(--color-navy-700)',
+                background: 'white',
+              }}
             >
               <option value="TIMING">Timing Difference</option>
               <option value="ERROR">Error</option>
@@ -219,13 +216,17 @@ export default function ReconciliationPage() {
             </select>
           </div>
           <div>
-            <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '4px' }}>Explanation</label>
+            <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, color: 'var(--color-navy-700)', marginBottom: '6px' }}>Explanation</label>
             <textarea
               value={resolution.explanation}
               onChange={e => setResolution(p => ({ ...p, explanation: e.target.value }))}
               rows={4}
               placeholder="Provide a detailed explanation for this break..."
-              style={{ width: '100%', padding: '8px 10px', border: '1px solid var(--color-gray-300)', borderRadius: '6px', fontSize: '13px', resize: 'vertical', boxSizing: 'border-box' }}
+              style={{
+                width: '100%', padding: '9px 12px', border: '1px solid var(--color-navy-300)',
+                borderRadius: 'var(--radius-md)', fontSize: '13px', resize: 'vertical',
+                boxSizing: 'border-box', color: 'var(--color-navy-700)', fontFamily: 'inherit',
+              }}
             />
           </div>
           <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>

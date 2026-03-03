@@ -10,6 +10,7 @@ const pageTitles: Record<string, string> = {
   '/reports': 'Reports',
   '/governance': 'Governance',
   '/audit': 'Audit Log',
+  '/bank-dashboard': 'Bank Dashboard',
   '/admin': 'Administration',
 };
 
@@ -29,34 +30,58 @@ export default function TopBar() {
 
   return (
     <header style={{
-      height: '56px',
+      height: '60px',
       background: 'white',
-      borderBottom: '1px solid var(--color-gray-200)',
+      borderBottom: '1px solid var(--color-navy-200)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      padding: '0 24px',
+      padding: '0 32px',
       flexShrink: 0,
-      boxShadow: 'var(--shadow-sm)',
     }}>
-      <h1 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--color-gray-800)' }}>
-        {title}
-      </h1>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <h1 style={{
+          fontSize: '15px', fontWeight: 600,
+          color: 'var(--color-navy-900)',
+          letterSpacing: '-0.01em',
+        }}>
+          {title}
+        </h1>
+      </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-        <div style={{ fontSize: '13px', color: 'var(--color-gray-500)' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+        <div style={{
+          fontSize: '13px', color: 'var(--color-navy-500)',
+          display: 'flex', alignItems: 'center', gap: '8px',
+        }}>
+          <span style={{
+            width: '6px', height: '6px',
+            borderRadius: '50%',
+            background: 'var(--color-success)',
+            display: 'inline-block',
+          }} />
           {user?.email}
         </div>
         <button
           onClick={handleLogout}
           style={{
-            padding: '6px 14px',
+            padding: '7px 16px',
             background: 'transparent',
-            border: '1px solid var(--color-gray-300)',
+            border: '1px solid var(--color-navy-200)',
             borderRadius: 'var(--radius-md)',
-            color: 'var(--color-gray-600)',
+            color: 'var(--color-navy-600)',
             fontSize: '13px',
+            fontWeight: 500,
             cursor: 'pointer',
+            transition: 'all var(--transition-fast)',
+          }}
+          onMouseEnter={e => {
+            (e.currentTarget as HTMLElement).style.background = 'var(--color-navy-50)';
+            (e.currentTarget as HTMLElement).style.borderColor = 'var(--color-navy-300)';
+          }}
+          onMouseLeave={e => {
+            (e.currentTarget as HTMLElement).style.background = 'transparent';
+            (e.currentTarget as HTMLElement).style.borderColor = 'var(--color-navy-200)';
           }}
         >
           Sign out

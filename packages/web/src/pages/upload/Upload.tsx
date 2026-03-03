@@ -103,7 +103,7 @@ export default function UploadPage() {
       <PageHeader title="Data Upload" />
 
       {/* Upload Form */}
-      <Card title="Upload New File" style={{ marginBottom: '20px' }}>
+      <Card title="Upload New File" style={{ marginBottom: '24px' }}>
         <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-end', flexWrap: 'wrap' }}>
           <Select
             label="Data Type"
@@ -111,7 +111,7 @@ export default function UploadPage() {
             value={inputType}
             onChange={e => setInputType(e.target.value)}
             options={INPUT_TYPES}
-            style={{ minWidth: '240px' }}
+            style={{ minWidth: '260px' }}
           />
           <Button
             onClick={() => fileRef.current?.click()}
@@ -127,13 +127,13 @@ export default function UploadPage() {
             onChange={handleFileChange}
           />
         </div>
-        <p style={{ color: 'var(--color-gray-400)', fontSize: '12px', marginTop: '12px', marginBottom: 0 }}>
+        <p style={{ color: 'var(--color-navy-400)', fontSize: '12px', marginTop: '14px', marginBottom: 0 }}>
           Accepted: CSV (up to 50MB). PDF/DOCX for documents.
         </p>
 
-        {error && <div style={{ marginTop: '12px' }}><Alert type="error" message={error} /></div>}
+        {error && <div style={{ marginTop: '14px' }}><Alert type="error" message={error} /></div>}
         {uploadResult && (
-          <div style={{ marginTop: '12px' }}>
+          <div style={{ marginTop: '14px' }}>
             <Alert type="success" message="File uploaded and queued for processing successfully." />
           </div>
         )}
@@ -145,19 +145,19 @@ export default function UploadPage() {
           loading={isLoading}
           data={uploads}
           columns={[
-            { key: 'filename', header: 'Filename', render: r => <span style={{ fontFamily: 'monospace', fontSize: '12px' }}>{r.filename}</span> },
+            { key: 'filename', header: 'Filename', render: r => <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--color-navy-600)' }}>{r.filename}</span> },
             { key: 'inputType', header: 'Type', render: r => r.inputType.replace(/_/g, ' '), width: '200px' },
-            { key: 'status', header: 'Status', render: r => statusBadge(r.status), width: '100px' },
-            { key: 'rowCount', header: 'Rows', render: r => r.rowCount?.toLocaleString() || '—', width: '80px' },
+            { key: 'status', header: 'Status', render: r => statusBadge(r.status), width: '110px' },
+            { key: 'rowCount', header: 'Rows', render: r => r.rowCount?.toLocaleString() || '\u2014', width: '80px' },
             {
               key: 'rowsAccepted', header: 'Accepted/Rejected', width: '140px',
               render: r => r.rowCount > 0 ? (
                 <span>
-                  <span style={{ color: 'var(--color-success)' }}>{r.rowsAccepted}</span>
+                  <span style={{ color: 'var(--color-success)', fontWeight: 600 }}>{r.rowsAccepted}</span>
                   {' / '}
-                  <span style={{ color: r.rowsRejected > 0 ? 'var(--color-danger)' : undefined }}>{r.rowsRejected}</span>
+                  <span style={{ color: r.rowsRejected > 0 ? 'var(--color-danger)' : 'var(--color-navy-400)', fontWeight: r.rowsRejected > 0 ? 600 : 400 }}>{r.rowsRejected}</span>
                 </span>
-              ) : '—',
+              ) : '\u2014',
             },
             { key: 'createdAt', header: 'Uploaded', render: r => format(new Date(r.createdAt), 'dd MMM yyyy HH:mm'), width: '160px' },
           ]}
@@ -178,32 +178,42 @@ export default function UploadPage() {
         open={showMappingModal}
         onClose={() => { setShowMappingModal(false); setPendingUpload(null); }}
         title="Map CSV Columns"
-        width={580}
+        width={600}
       >
         {pendingUpload && (
           <div>
-            <p style={{ fontSize: '13px', color: 'var(--color-gray-600)', marginTop: 0, marginBottom: '16px' }}>
+            <p style={{ fontSize: '13px', color: 'var(--color-navy-600)', marginTop: 0, marginBottom: '20px', lineHeight: 1.5 }}>
               Map your CSV columns to the required system fields. Required fields are marked.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', maxHeight: '400px', overflowY: 'auto' }}>
               {pendingUpload.headers.map(header => (
                 <div key={header} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <div style={{ flex: 1, fontFamily: 'monospace', fontSize: '13px', background: 'var(--color-gray-50)', padding: '6px 10px', borderRadius: '4px', border: '1px solid var(--color-gray-200)' }}>
+                  <div style={{
+                    flex: 1, fontFamily: 'var(--font-mono)', fontSize: '12px',
+                    background: 'var(--color-navy-50)', padding: '8px 12px',
+                    borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-navy-200)',
+                    color: 'var(--color-navy-700)',
+                  }}>
                     {header}
                   </div>
-                  <span style={{ color: 'var(--color-gray-400)' }}>→</span>
+                  <span style={{ color: 'var(--color-navy-300)', fontSize: '16px' }}>{'\u2192'}</span>
                   <select
                     value={columnMappings[header] || ''}
                     onChange={e => setColumnMappings(prev => ({ ...prev, [header]: e.target.value }))}
-                    style={{ flex: 1, padding: '6px 8px', border: '1px solid var(--color-gray-300)', borderRadius: '4px', fontSize: '13px' }}
+                    style={{
+                      flex: 1, padding: '8px 10px',
+                      border: '1px solid var(--color-navy-300)', borderRadius: 'var(--radius-sm)',
+                      fontSize: '13px', color: 'var(--color-navy-700)',
+                      background: 'white',
+                    }}
                   >
-                    <option value="">— ignore —</option>
+                    <option value="">{'\u2014'} ignore {'\u2014'}</option>
                     {systemFields.map(f => <option key={f} value={f}>{f}</option>)}
                   </select>
                 </div>
               ))}
             </div>
-            <div style={{ display: 'flex', gap: '10px', marginTop: '20px', justifyContent: 'flex-end' }}>
+            <div style={{ display: 'flex', gap: '10px', marginTop: '24px', justifyContent: 'flex-end' }}>
               <Button variant="secondary" onClick={() => { setShowMappingModal(false); setPendingUpload(null); }}>
                 Cancel
               </Button>
