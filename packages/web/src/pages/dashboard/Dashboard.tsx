@@ -1,9 +1,24 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../../hooks/useAuth';
-import { reconciliationApi, breachApi, governanceApi } from '../../api/client';
-import { StatCard, Card, Grid, statusBadge } from '../../components/ui';
+import { reconciliationApi, breachApi, governanceApi, reportingApi } from '../../api/client';
+import { StatCard, Card, Grid, Button, statusBadge } from '../../components/ui';
 import { format } from 'date-fns';
+
+function downloadPdf(fetcher: () => Promise<{ data: Blob }>, name: string) {
+  fetcher().then(({ data }) => {
+    const url = window.URL.createObjectURL(data);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${name}-${new Date().toISOString().split('T')[0]}.pdf`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    window.URL.revokeObjectURL(url);
+  }).catch(() => {
+    alert('Failed to generate report. Please try again.');
+  });
+}
 
 export default function DashboardPage() {
   const { user } = useAuth();
@@ -45,6 +60,19 @@ export default function DashboardPage() {
         <p style={{ margin: '4px 0 0', fontSize: '14px', color: 'var(--color-navy-500)' }}>
           Overview of your safeguarding compliance status
         </p>
+      </div>
+
+      {/* Export Buttons */}
+      <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
+        <Button variant="outline" size="sm" onClick={() => downloadPdf(() => reportingApi.exportSafeguardingReport(firmId), 'safeguarding-report')}>
+          Export Safeguarding Report
+        </Button>
+        <Button variant="outline" size="sm" onClick={() => downloadPdf(() => reportingApi.exportReconciliationSummary(firmId), 'reconciliation-summary')}>
+          Export Reconciliation Summary
+        </Button>
+        <Button variant="outline" size="sm" onClick={() => downloadPdf(() => reportingApi.exportBreachReport(firmId), 'breach-report')}>
+          Export Breach Report
+        </Button>
       </div>
 
       {/* Stat Cards */}

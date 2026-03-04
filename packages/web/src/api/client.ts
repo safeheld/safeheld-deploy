@@ -177,6 +177,16 @@ export const reportingApi = {
     apiClient.post(`/firms/${firmId}/reports/${reportId}/share`, { expires_in_hours: expiresInHours }).then(r => r.data.data),
   downloadReport: (firmId: string, reportId: string) =>
     `${API_BASE}/firms/${firmId}/reports/${reportId}/download`,
+  exportSafeguardingReport: (firmId: string, periodStart?: string, periodEnd?: string) => {
+    const params: Record<string, string> = {};
+    if (periodStart) params.period_start = periodStart;
+    if (periodEnd) params.period_end = periodEnd;
+    return apiClient.get(`/firms/${firmId}/exports/safeguarding-report`, { params, responseType: 'blob' });
+  },
+  exportReconciliationSummary: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/exports/reconciliation-summary`, { responseType: 'blob' }),
+  exportBreachReport: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/exports/breach-report`, { responseType: 'blob' }),
 };
 
 // ─── Bank Dashboard ───────────────────────────────────────────────────────────

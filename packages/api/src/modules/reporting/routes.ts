@@ -13,6 +13,11 @@ import {
   getReportDownloadUrl,
   generateSafeguardingReturn,
 } from './service';
+import {
+  generateSafeguardingReportPdf,
+  generateReconciliationSummaryPdf,
+  generateBreachReportPdf,
+} from '../../utils/pdf';
 import { ReportType } from '@prisma/client';
 
 const router = Router();
@@ -257,6 +262,196 @@ router.get('/:firmId/board-reports',
         prisma.boardReport.count({ where: { firmId: req.params.firmId } }),
       ]);
       paginatedResponse(res, reports, { page, pageSize, total, totalPages: Math.ceil(total / pageSize) });
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+// ─── PDF Export Endpoints ─────────────────────────────────────────────────────
+
+// GET /api/v1/firms/:firmId/exports/safeguarding-report
+router.get('/:firmId/exports/safeguarding-report',
+  authenticate,
+  requireFirmAccess,
+  requireRole('COMPLIANCE_OFFICER', 'ADMIN'),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { firmId } = req.params;
+      const { period_start, period_end } = req.query as Record<string, string>;
+
+      const periodEnd = period_end ? new Date(period_end) : new Date();
+      const periodStart = period_start ? new Date(period_start) : new Date(periodEnd.getFullYear(), periodEnd.getMonth() - 3, periodEnd.getDate());
+
+      const firm = await prisma.firm.findUnique({ where: { id: firmId } });
+      if (!firm) throw new NotFoundError('Firm');
+
+      const [reconRuns, breaches] = await Promise.all([
+        prisma.reconciliationRun.findMany({
+          where: { firmId, reconciliationDate: { gte: periodStart, lte: periodEnd } },
+          orderBy: [{ reconciliationDate: 'desc' }, { reconciliationType: 'asc' }],
+          take: 200,
+        }),
+        prisma.breach.findMany({
+          where: { firmId, createdAt: { gte: periodStart, lte: periodEnd } },
+          orderBy: { createdAt: 'desc' },
+          take: 200,
+        }),
+      ]);
+
+      const pdf = await generateSafeguardingReportPdf(
+        {
+          name: firm.name,
+          fcaFrn: firm.fcaFrn,
+          regime: firm.regime,
+          safeguardingMethod: firm.safeguardingMethod,
+          baseCurrency: firm.baseCurrency,
+        },
+        reconRuns.map(r => ({
+          reconciliationDate: r.reconciliationDate.toISOString(),
+          reconciliationType: r.reconciliationType,
+          currency: r.currency,
+          totalRequirement: Number(r.totalRequirement),
+          totalResource: Number(r.totalResource),
+          variance: Number(r.variance),
+          variancePercentage: Number(r.variancePercentage),
+          status: r.status,
+          dataCompleteness: r.dataCompleteness,
+        })),
+        breaches.map(b => ({
+          id: b.id,
+          breachType: b.breachType,
+          severity: b.severity,
+          status: b.status,
+          currency: b.currency,
+          shortfallAmount: b.shortfallAmount ? Number(b.shortfallAmount) : null,
+          description: b.description,
+          isNotifiable: b.isNotifiable,
+          createdAt: b.createdAt.toISOString(),
+          acknowledgedAt: b.acknowledgedAt?.toISOString(),
+          resolvedAt: b.resolvedAt?.toISOString(),
+        })),
+        periodStart,
+        periodEnd,
+      );
+
+      const filename = `safeguarding-report-${firm.name.replace(/\s+/g, '-').toLowerCase()}-${periodEnd.toISOString().split('T')[0]}.pdf`;
+      res.set({
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': `attachment; filename="${filename}"`,
+        'Content-Length': String(pdf.length),
+      });
+      res.end(pdf);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+// GET /api/v1/firms/:firmId/exports/reconciliation-summary
+router.get('/:firmId/exports/reconciliation-summary',
+  authenticate,
+  requireFirmAccess,
+  requireRole('COMPLIANCE_OFFICER', 'ADMIN'),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { firmId } = req.params;
+
+      const firm = await prisma.firm.findUnique({ where: { id: firmId } });
+      if (!firm) throw new NotFoundError('Firm');
+
+      const [runs, openBreaks] = await Promise.all([
+        prisma.reconciliationRun.findMany({
+          where: { firmId },
+          orderBy: [{ reconciliationDate: 'desc' }, { reconciliationType: 'asc' }],
+          take: 200,
+        }),
+        prisma.reconciliationBreak.count({ where: { firmId, resolvedAt: null } }),
+      ]);
+
+      const pdf = await generateReconciliationSummaryPdf(
+        {
+          name: firm.name,
+          fcaFrn: firm.fcaFrn,
+          regime: firm.regime,
+          safeguardingMethod: firm.safeguardingMethod,
+          baseCurrency: firm.baseCurrency,
+        },
+        runs.map(r => ({
+          reconciliationDate: r.reconciliationDate.toISOString(),
+          reconciliationType: r.reconciliationType,
+          currency: r.currency,
+          totalRequirement: Number(r.totalRequirement),
+          totalResource: Number(r.totalResource),
+          variance: Number(r.variance),
+          variancePercentage: Number(r.variancePercentage),
+          status: r.status,
+          dataCompleteness: r.dataCompleteness,
+        })),
+        openBreaks,
+      );
+
+      const filename = `reconciliation-summary-${firm.name.replace(/\s+/g, '-').toLowerCase()}-${new Date().toISOString().split('T')[0]}.pdf`;
+      res.set({
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': `attachment; filename="${filename}"`,
+        'Content-Length': String(pdf.length),
+      });
+      res.end(pdf);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+// GET /api/v1/firms/:firmId/exports/breach-report
+router.get('/:firmId/exports/breach-report',
+  authenticate,
+  requireFirmAccess,
+  requireRole('COMPLIANCE_OFFICER', 'ADMIN'),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { firmId } = req.params;
+
+      const firm = await prisma.firm.findUnique({ where: { id: firmId } });
+      if (!firm) throw new NotFoundError('Firm');
+
+      const breaches = await prisma.breach.findMany({
+        where: { firmId },
+        orderBy: [{ status: 'asc' }, { createdAt: 'desc' }],
+        take: 500,
+      });
+
+      const pdf = await generateBreachReportPdf(
+        {
+          name: firm.name,
+          fcaFrn: firm.fcaFrn,
+          regime: firm.regime,
+          safeguardingMethod: firm.safeguardingMethod,
+          baseCurrency: firm.baseCurrency,
+        },
+        breaches.map(b => ({
+          id: b.id,
+          breachType: b.breachType,
+          severity: b.severity,
+          status: b.status,
+          currency: b.currency,
+          shortfallAmount: b.shortfallAmount ? Number(b.shortfallAmount) : null,
+          description: b.description,
+          isNotifiable: b.isNotifiable,
+          createdAt: b.createdAt.toISOString(),
+          acknowledgedAt: b.acknowledgedAt?.toISOString(),
+          resolvedAt: b.resolvedAt?.toISOString(),
+        })),
+      );
+
+      const filename = `breach-report-${firm.name.replace(/\s+/g, '-').toLowerCase()}-${new Date().toISOString().split('T')[0]}.pdf`;
+      res.set({
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': `attachment; filename="${filename}"`,
+        'Content-Length': String(pdf.length),
+      });
+      res.end(pdf);
     } catch (err) {
       next(err);
     }
