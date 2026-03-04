@@ -39,8 +39,20 @@ function AdminRoute({ children }: { children: React.ReactNode }) {
 
 function BankViewerRoute({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();
-  if (user?.role !== 'BANK_VIEWER' && user?.role !== 'ADMIN') return <Navigate to="/" replace />;
+  if (user?.role !== 'BANK_VIEWER') return <Navigate to="/" replace />;
   return <>{children}</>;
+}
+
+function FirmRoute({ children }: { children: React.ReactNode }) {
+  const { user } = useAuth();
+  if (user?.role === 'BANK_VIEWER') return <Navigate to="/bank-dashboard" replace />;
+  return <>{children}</>;
+}
+
+function DefaultRedirect() {
+  const { user } = useAuth();
+  if (user?.role === 'BANK_VIEWER') return <Navigate to="/bank-dashboard" replace />;
+  return <Navigate to="/dashboard" replace />;
 }
 
 export default function App() {
@@ -56,14 +68,14 @@ export default function App() {
           </ProtectedRoute>
         }
       >
-        <Route index element={<Navigate to="/dashboard" replace />} />
-        <Route path="dashboard" element={<DashboardPage />} />
-        <Route path="upload" element={<UploadPage />} />
-        <Route path="reconciliation" element={<ReconciliationPage />} />
-        <Route path="breach" element={<BreachPage />} />
-        <Route path="reports" element={<ReportsPage />} />
-        <Route path="governance" element={<GovernancePage />} />
-        <Route path="audit" element={<AuditPage />} />
+        <Route index element={<DefaultRedirect />} />
+        <Route path="dashboard" element={<FirmRoute><DashboardPage /></FirmRoute>} />
+        <Route path="upload" element={<FirmRoute><UploadPage /></FirmRoute>} />
+        <Route path="reconciliation" element={<FirmRoute><ReconciliationPage /></FirmRoute>} />
+        <Route path="breach" element={<FirmRoute><BreachPage /></FirmRoute>} />
+        <Route path="reports" element={<FirmRoute><ReportsPage /></FirmRoute>} />
+        <Route path="governance" element={<FirmRoute><GovernancePage /></FirmRoute>} />
+        <Route path="audit" element={<FirmRoute><AuditPage /></FirmRoute>} />
         <Route
           path="bank-dashboard"
           element={

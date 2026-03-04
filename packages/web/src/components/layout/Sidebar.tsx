@@ -67,14 +67,14 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { path: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
+  { path: '/dashboard', label: 'Dashboard', icon: 'dashboard', roles: ['COMPLIANCE_OFFICER', 'FINANCE_OPS', 'AUDITOR', 'ADMIN'] },
   { path: '/upload', label: 'Data Upload', icon: 'upload', roles: ['COMPLIANCE_OFFICER', 'FINANCE_OPS', 'ADMIN'] },
-  { path: '/reconciliation', label: 'Reconciliation', icon: 'reconciliation' },
-  { path: '/breach', label: 'Breaches', icon: 'breach' },
-  { path: '/reports', label: 'Reports', icon: 'reports' },
-  { path: '/governance', label: 'Governance', icon: 'governance' },
+  { path: '/reconciliation', label: 'Reconciliation', icon: 'reconciliation', roles: ['COMPLIANCE_OFFICER', 'FINANCE_OPS', 'AUDITOR', 'ADMIN'] },
+  { path: '/breach', label: 'Breaches', icon: 'breach', roles: ['COMPLIANCE_OFFICER', 'FINANCE_OPS', 'AUDITOR', 'ADMIN'] },
+  { path: '/reports', label: 'Reports', icon: 'reports', roles: ['COMPLIANCE_OFFICER', 'FINANCE_OPS', 'AUDITOR', 'ADMIN'] },
+  { path: '/governance', label: 'Governance', icon: 'governance', roles: ['COMPLIANCE_OFFICER', 'FINANCE_OPS', 'AUDITOR', 'ADMIN'] },
   { path: '/audit', label: 'Audit Log', icon: 'audit', roles: ['COMPLIANCE_OFFICER', 'ADMIN', 'AUDITOR'] },
-  { path: '/bank-dashboard', label: 'Bank Dashboard', icon: 'bank', roles: ['BANK_VIEWER', 'ADMIN'] },
+  { path: '/bank-dashboard', label: 'Bank Dashboard', icon: 'bank', roles: ['BANK_VIEWER'] },
   { path: '/admin', label: 'Admin', icon: 'admin', roles: ['ADMIN'] },
 ];
 
