@@ -1,6 +1,6 @@
 import { prisma } from '../../utils/prisma';
 import { logger } from '../../utils/logger';
-import { sendEmail, breachDetectedEmail } from '../../utils/email';
+import { sendEmail, breachDetectedEmail, breachStatusChangeEmail } from '../../utils/email';
 import {
   BreachType,
   BreachSeverity,
@@ -293,7 +293,12 @@ export async function updateBreachStatusService(
     updateData.closureEvidence = evidence;
   }
 
-  return prisma.breach.update({ where: { id: breachId }, data: updateData });
+  const updated = await prisma.breach.update({ where: { id: breachId }, data: updateData });
+
+  // Notify stakeholders of status change
+  notifyBreachStatusChange(firmId, breachId, breach.breachType, breach.severity, breach.status, newStatus, userId).catch(() => {});
+
+  return updated;
 }
 
 export async function createFcaNotification(
@@ -337,6 +342,48 @@ export async function submitFcaNotification(
       fcaReference,
     },
   });
+}
+
+async function notifyBreachStatusChange(
+  firmId: string,
+  breachId: string,
+  breachType: BreachType,
+  severity: BreachSeverity,
+  previousStatus: string,
+  newStatus: string,
+  changedByUserId: string,
+): Promise<void> {
+  try {
+    const [firm, changedByUser, users] = await Promise.all([
+      prisma.firm.findUnique({ where: { id: firmId }, select: { name: true } }),
+      prisma.user.findUnique({ where: { id: changedByUserId }, select: { name: true } }),
+      prisma.user.findMany({
+        where: { firmId, role: { in: ['COMPLIANCE_OFFICER', 'ADMIN'] }, status: 'ACTIVE' },
+        select: { email: true, id: true },
+      }),
+    ]);
+
+    for (const user of users) {
+      await sendEmail({
+        to: user.email,
+        subject: `[Safeheld] Breach ${newStatus.replace(/_/g, ' ')} - ${breachType.replace(/_/g, ' ')}`,
+        html: breachStatusChangeEmail({
+          firmName: firm?.name || 'Unknown',
+          breachType,
+          severity,
+          breachId,
+          previousStatus,
+          newStatus,
+          changedBy: changedByUser?.name || 'System',
+        }),
+        firmId,
+        userId: user.id,
+        emailType: 'BREACH_STATUS_CHANGE',
+      }).catch(() => {});
+    }
+  } catch (err) {
+    logger.error({ err, breachId, newStatus }, 'Failed to notify breach status change');
+  }
 }
 
 export async function getBreaches(firmId: string, filters: {

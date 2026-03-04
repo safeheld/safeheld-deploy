@@ -10,6 +10,7 @@ import {
   Prisma,
 } from '@prisma/client';
 import { detectBreaches } from '../breach/service';
+import { sendEmail, reconciliationFailedEmail } from '../../utils/email';
 
 function toNum(val: unknown): number {
   if (val === null || val === undefined) return 0;
@@ -140,6 +141,11 @@ export async function runReconciliation(params: RunReconciliationParams): Promis
       },
     });
 
+    // Notify stakeholders if reconciliation failed
+    if (status === 'SHORTFALL') {
+      notifyReconciliationFailure(firmId, firm.name, 'INTERNAL', currency, requirement, resource, variance, variancePct, reconciliationDate).catch(() => {});
+    }
+
     logger.info({ firmId, currency, status, variance }, 'Internal recon completed');
   }
 
@@ -253,11 +259,62 @@ export async function runReconciliation(params: RunReconciliationParams): Promis
         });
       }
 
+      // Notify stakeholders if reconciliation failed
+      if (status === 'SHORTFALL') {
+        notifyReconciliationFailure(firmId, firm.name, 'EXTERNAL', currency, ledgerBal, bankBal, variance, variancePct, reconciliationDate, `${account.bankName} (${account.accountNumberMasked})`).catch(() => {});
+      }
+
       logger.info({ firmId, accountId: account.id, currency, status }, 'External recon completed');
     }
   }
 
   return runIds;
+}
+
+async function notifyReconciliationFailure(
+  firmId: string,
+  firmName: string,
+  reconciliationType: string,
+  currency: string,
+  requirement: number,
+  resource: number,
+  variance: number,
+  variancePct: number,
+  reconciliationDate: Date,
+  accountName?: string,
+): Promise<void> {
+  try {
+    const users = await prisma.user.findMany({
+      where: { firmId, role: { in: ['COMPLIANCE_OFFICER', 'ADMIN'] }, status: 'ACTIVE' },
+      select: { email: true, id: true },
+    });
+
+    const dateStr = reconciliationDate.toISOString().split('T')[0];
+
+    for (const user of users) {
+      await sendEmail({
+        to: user.email,
+        subject: `[Safeheld] Reconciliation Shortfall - ${currency} ${reconciliationType}`,
+        html: reconciliationFailedEmail({
+          firmName,
+          reconciliationType,
+          currency,
+          requirement: requirement.toFixed(2),
+          resource: resource.toFixed(2),
+          variance: variance.toFixed(2),
+          variancePct: variancePct.toFixed(2),
+          status: 'SHORTFALL',
+          reconciliationDate: dateStr,
+          accountName,
+        }),
+        firmId,
+        userId: user.id,
+        emailType: 'RECONCILIATION_FAILED',
+      }).catch(() => {});
+    }
+  } catch (err) {
+    logger.error({ err, firmId, reconciliationType, currency }, 'Failed to notify reconciliation failure');
+  }
 }
 
 export async function getReconciliationHistory(
