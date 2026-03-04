@@ -3,7 +3,7 @@ import React from 'react';
 // ─── Button ───────────────────────────────────────────────────────────────────
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'danger' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'outline' | 'danger' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   loading?: boolean;
 }
@@ -13,13 +13,18 @@ const buttonStyles: Record<string, React.CSSProperties> = {
     background: 'var(--color-accent)',
     color: 'white',
     border: '1px solid var(--color-accent)',
-    boxShadow: '0 1px 2px rgb(99 102 241 / 0.2)',
+    boxShadow: '0 1px 2px rgb(61 61 255 / 0.2)',
   },
   secondary: {
     background: 'white',
     color: 'var(--color-navy-700)',
     border: '1px solid var(--color-navy-200)',
     boxShadow: 'var(--shadow-xs)',
+  },
+  outline: {
+    background: 'transparent',
+    color: 'var(--color-accent)',
+    border: '1px solid var(--color-accent)',
   },
   danger: {
     background: 'var(--color-danger)',
@@ -349,7 +354,7 @@ export function Input({ label, error, id, style, ...props }: InputProps) {
         }}
         onFocus={e => {
           e.target.style.borderColor = 'var(--color-accent)';
-          e.target.style.boxShadow = '0 0 0 3px rgb(99 102 241 / 0.1)';
+          e.target.style.boxShadow = '0 0 0 3px rgb(61 61 255 / 0.1)';
         }}
         onBlur={e => {
           e.target.style.borderColor = error ? 'var(--color-danger)' : 'var(--color-navy-300)';
@@ -467,7 +472,7 @@ export function Modal({ open, onClose, title, children, width = 480 }: ModalProp
     <div
       style={{
         position: 'fixed', inset: 0,
-        background: 'rgba(15, 23, 42, 0.6)',
+        background: 'rgba(12, 20, 69, 0.6)',
         backdropFilter: 'blur(4px)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         zIndex: 1000, padding: '20px',

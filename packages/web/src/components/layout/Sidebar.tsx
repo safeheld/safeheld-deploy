@@ -122,7 +122,7 @@ export default function Sidebar() {
             borderRadius: 'var(--radius-md)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             fontWeight: 800, color: 'white', fontSize: '14px',
-            boxShadow: '0 1px 3px rgb(99 102 241 / 0.3)',
+            boxShadow: '0 1px 3px rgb(61 61 255 / 0.3)',
           }}>
             S
           </div>
@@ -167,7 +167,7 @@ export default function Sidebar() {
               ...linkBase,
               color: isActive ? 'white' : 'rgba(203, 213, 225, 0.7)',
               background: isActive
-                ? 'rgba(99, 102, 241, 0.2)'
+                ? 'rgba(61, 61, 255, 0.2)'
                 : 'transparent',
               boxShadow: isActive ? 'inset 3px 0 0 var(--color-accent)' : 'none',
             })}
@@ -205,7 +205,7 @@ export default function Sidebar() {
         <div style={{
           width: '32px', height: '32px',
           borderRadius: '50%',
-          background: 'rgba(99, 102, 241, 0.2)',
+          background: 'rgba(61, 61, 255, 0.2)',
           color: 'var(--color-accent-muted)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontSize: '13px', fontWeight: 600,

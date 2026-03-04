@@ -91,7 +91,7 @@ export default function BreachPage() {
               color: statusFilter === s ? 'white' : 'var(--color-navy-600)',
               borderColor: statusFilter === s ? 'var(--color-accent)' : 'var(--color-navy-200)',
               transition: 'all var(--transition-fast)',
-              boxShadow: statusFilter === s ? '0 1px 3px rgb(99 102 241 / 0.2)' : 'var(--shadow-xs)',
+              boxShadow: statusFilter === s ? '0 1px 3px rgb(61 61 255 / 0.2)' : 'var(--shadow-xs)',
             }}
           >
             {s || 'All'}

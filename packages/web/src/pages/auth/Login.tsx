@@ -47,7 +47,7 @@ export default function LoginPage() {
         position: 'absolute',
         width: '600px', height: '600px',
         borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(61,61,255,0.15) 0%, transparent 70%)',
         top: '-100px', right: '-100px',
         pointerEvents: 'none',
       }} />
@@ -55,7 +55,7 @@ export default function LoginPage() {
         position: 'absolute',
         width: '400px', height: '400px',
         borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(61,61,255,0.1) 0%, transparent 70%)',
         bottom: '-50px', left: '-50px',
         pointerEvents: 'none',
       }} />
@@ -79,7 +79,7 @@ export default function LoginPage() {
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             margin: '0 auto 16px',
             fontWeight: 800, color: 'white', fontSize: '18px',
-            boxShadow: '0 4px 12px rgb(99 102 241 / 0.3)',
+            boxShadow: '0 4px 12px rgb(61 61 255 / 0.3)',
           }}>
             S
           </div>
@@ -120,7 +120,7 @@ export default function LoginPage() {
               }}
               onFocus={e => {
                 e.target.style.borderColor = 'var(--color-accent)';
-                e.target.style.boxShadow = '0 0 0 3px rgb(99 102 241 / 0.1)';
+                e.target.style.boxShadow = '0 0 0 3px rgb(61 61 255 / 0.1)';
               }}
               onBlur={e => {
                 e.target.style.borderColor = 'var(--color-navy-300)';
@@ -151,7 +151,7 @@ export default function LoginPage() {
               }}
               onFocus={e => {
                 e.target.style.borderColor = 'var(--color-accent)';
-                e.target.style.boxShadow = '0 0 0 3px rgb(99 102 241 / 0.1)';
+                e.target.style.boxShadow = '0 0 0 3px rgb(61 61 255 / 0.1)';
               }}
               onBlur={e => {
                 e.target.style.borderColor = 'var(--color-navy-300)';
@@ -186,7 +186,7 @@ export default function LoginPage() {
               cursor: loading ? 'not-allowed' : 'pointer',
               marginTop: '4px',
               transition: 'background var(--transition-fast)',
-              boxShadow: '0 1px 3px rgb(99 102 241 / 0.3)',
+              boxShadow: '0 1px 3px rgb(61 61 255 / 0.3)',
             }}
           >
             {loading ? 'Signing in...' : 'Sign in'}
