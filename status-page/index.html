@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Safeheld Status</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0C1445;
+      color: #e2e8f0;
+      min-height: 100vh;
+    }
+    .container { max-width: 720px; margin: 0 auto; padding: 48px 24px; }
+    header { text-align: center; margin-bottom: 48px; }
+    header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
+    header h1 span { color: #3D3DFF; }
+    header p { color: #94a3b8; margin-top: 8px; font-size: 14px; }
+
+    .overall {
+      text-align: center;
+      padding: 32px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.05);
+      margin-bottom: 32px;
+    }
+    .overall .dot {
+      display: inline-block;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+    .overall .label { font-size: 20px; font-weight: 600; vertical-align: middle; }
+    .dot.green { background: #22c55e; box-shadow: 0 0 8px #22c55e80; }
+    .dot.red { background: #ef4444; box-shadow: 0 0 8px #ef444480; }
+    .dot.gray { background: #64748b; }
+
+    .components { display: flex; flex-direction: column; gap: 12px; }
+    .component {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .component .name { font-weight: 500; }
+    .component .status { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+    .component .status .dot { width: 8px; height: 8px; }
+    .latency { color: #94a3b8; font-size: 12px; }
+
+    footer {
+      text-align: center;
+      margin-top: 48px;
+      color: #64748b;
+      font-size: 13px;
+    }
+    footer .uptime { margin-bottom: 4px; }
+    #error-banner {
+      display: none;
+      background: rgba(239,68,68,0.15);
+      border: 1px solid rgba(239,68,68,0.3);
+      padding: 12px 20px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      text-align: center;
+      font-size: 14px;
+      color: #fca5a5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><span>Safeheld</span> Status</h1>
+      <p>Real-time system status</p>
+    </header>
+
+    <div id="error-banner"></div>
+
+    <div class="overall" id="overall">
+      <span class="dot gray"></span>
+      <span class="label">Checking...</span>
+    </div>
+
+    <div class="components" id="components">
+      <div class="component" data-key="api">
+        <span class="name">API</span>
+        <span class="status"><span class="dot gray"></span><span class="text">Checking</span></span>
+      </div>
+      <div class="component" data-key="database">
+        <span class="name">Database</span>
+        <span class="status"><span class="dot gray"></span><span class="text">Checking</span></span>
+      </div>
+      <div class="component" data-key="redis">
+        <span class="name">Redis</span>
+        <span class="status"><span class="dot gray"></span><span class="text">Checking</span></span>
+      </div>
+      <div class="component" data-key="web">
+        <span class="name">Web App</span>
+        <span class="status"><span class="dot gray"></span><span class="text">Checking</span></span>
+      </div>
+    </div>
+
+    <footer>
+      <div class="uptime" id="uptime"></div>
+      <div id="last-checked">Last checked: never</div>
+    </footer>
+  </div>
+
+  <script>
+    function formatUptime(seconds) {
+      const d = Math.floor(seconds / 86400);
+      const h = Math.floor((seconds % 86400) / 3600);
+      const m = Math.floor((seconds % 3600) / 60);
+      const parts = [];
+      if (d > 0) parts.push(d + 'd');
+      if (h > 0) parts.push(h + 'h');
+      parts.push(m + 'm');
+      return parts.join(' ');
+    }
+
+    function setComponent(key, healthy, latency) {
+      const el = document.querySelector('[data-key="' + key + '"]');
+      if (!el) return;
+      const dot = el.querySelector('.dot');
+      const text = el.querySelector('.text');
+      dot.className = 'dot ' + (healthy ? 'green' : 'red');
+      let label = healthy ? 'Operational' : 'Down';
+      if (healthy && latency != null) label += ' <span class="latency">' + latency + 'ms</span>';
+      text.innerHTML = label;
+    }
+
+    async function check() {
+      const banner = document.getElementById('error-banner');
+      const overall = document.getElementById('overall');
+
+      try {
+        const res = await fetch('/api/health');
+        const data = await res.json();
+
+        banner.style.display = 'none';
+
+        // API is reachable
+        setComponent('api', true);
+
+        // DB and Redis from health response
+        const db = data.services && data.services.database;
+        const rd = data.services && data.services.redis;
+        setComponent('database', db && db.status === 'healthy', db && db.latency);
+        setComponent('redis', rd && rd.status === 'healthy', rd && rd.latency);
+
+        // Web app: if we can fetch this page, the web server is up
+        setComponent('web', true);
+
+        const allOk = data.status === 'healthy';
+        overall.innerHTML =
+          '<span class="dot ' + (allOk ? 'green' : 'red') + '"></span>' +
+          '<span class="label">' + (allOk ? 'All Systems Operational' : 'Degraded Performance') + '</span>';
+
+        if (data.uptime != null) {
+          document.getElementById('uptime').textContent = 'API uptime: ' + formatUptime(data.uptime);
+        }
+      } catch (e) {
+        banner.textContent = 'Unable to reach the API. The service may be down.';
+        banner.style.display = 'block';
+        setComponent('api', false);
+        setComponent('database', false);
+        setComponent('redis', false);
+        setComponent('web', true); // Status page itself is up
+        overall.innerHTML =
+          '<span class="dot red"></span><span class="label">Service Disruption</span>';
+      }
+
+      document.getElementById('last-checked').textContent =
+        'Last checked: ' + new Date().toLocaleTimeString();
+    }
+
+    check();
+    setInterval(check, 30000);
+  </script>
+</body>
+</html>

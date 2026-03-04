@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import * as Sentry from '@sentry/node';
 import { AppError } from '../utils/errors';
 import { logger } from '../utils/logger';
 
@@ -11,6 +12,7 @@ export function errorHandler(
   if (err instanceof AppError) {
     if (!err.isOperational) {
       logger.error({ err, req: { method: req.method, url: req.url } }, 'Non-operational error');
+      Sentry.captureException(err);
     }
     res.status(err.statusCode).json({
       status: 'error',
@@ -21,6 +23,7 @@ export function errorHandler(
 
   // Unhandled/unexpected errors
   logger.error({ err, req: { method: req.method, url: req.url, body: req.body } }, 'Unhandled error');
+  Sentry.captureException(err);
   res.status(500).json({
     status: 'error',
     error: { code: 'INTERNAL_ERROR', message: 'An internal error occurred. Please try again.' },

@@ -1,12 +1,16 @@
+import './instrument';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import { rateLimit } from 'express-rate-limit';
 import pinoHttp from 'pino-http';
+import * as Sentry from '@sentry/node';
 
 import { config } from './config';
 import { logger } from './utils/logger';
+import { prisma } from './utils/prisma';
+import { redis } from './utils/redis';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler';
 
 import { authRouter } from './modules/auth/routes';
@@ -24,6 +28,7 @@ import { bankDashboardRouter } from './modules/bank-dashboard/routes';
 import './modules/ingestion/queue';
 
 const app = express();
+const startTime = Date.now();
 
 // ─── Reverse Proxy ───────────────────────────────────────────────────────────
 
@@ -75,8 +80,46 @@ app.use(cookieParser());
 
 // ─── Health Check ─────────────────────────────────────────────────────────────
 
-app.get('/health', (_req, res) => {
-  res.json({ status: 'ok', service: 'safeheld-api', timestamp: new Date().toISOString() });
+app.get('/health', async (_req, res) => {
+  res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+
+  const services: Record<string, { status: string; latency?: number }> = {};
+
+  // Check PostgreSQL
+  try {
+    const dbStart = Date.now();
+    await Promise.race([
+      prisma.$queryRawUnsafe('SELECT 1'),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 3000)),
+    ]);
+    services.database = { status: 'healthy', latency: Date.now() - dbStart };
+  } catch {
+    services.database = { status: 'unhealthy' };
+  }
+
+  // Check Redis
+  try {
+    const redisStart = Date.now();
+    await Promise.race([
+      redis.ping(),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 3000)),
+    ]);
+    services.redis = { status: 'healthy', latency: Date.now() - redisStart };
+  } catch {
+    services.redis = { status: 'unhealthy' };
+  }
+
+  const allHealthy = Object.values(services).every((s) => s.status === 'healthy');
+  const status = allHealthy ? 'healthy' : 'degraded';
+  const statusCode = allHealthy ? 200 : 503;
+
+  res.status(statusCode).json({
+    status,
+    service: 'safeheld-api',
+    services,
+    uptime: Math.floor((Date.now() - startTime) / 1000),
+    timestamp: new Date().toISOString(),
+  });
 });
 
 // ─── API Routes ───────────────────────────────────────────────────────────────
@@ -94,6 +137,7 @@ app.use('/api/v1/bank-dashboard', generalLimiter, bankDashboardRouter);
 
 // ─── Error Handling ───────────────────────────────────────────────────────────
 
+Sentry.setupExpressErrorHandler(app);
 app.use(notFoundHandler);
 app.use(errorHandler);
 

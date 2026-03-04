@@ -35,6 +35,7 @@ const configSchema = z.object({
   RATE_LIMIT_AUTH: z.coerce.number().default(10),
   RATE_LIMIT_UPLOAD: z.coerce.number().default(20),
   RATE_LIMIT_GENERAL: z.coerce.number().default(100),
+  SENTRY_DSN: z.string().default(''),
 });
 
 const parsed = configSchema.safeParse(process.env);
