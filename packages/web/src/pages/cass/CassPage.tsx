@@ -26,7 +26,8 @@ export default function CassPage() {
 
   return (
     <div>
-      <PageHeader title="CASS Module" subtitle="Client Assets Sourcebook — UK Investment Firms" />
+      <PageHeader title="CASS Module" />
+      <p style={{ margin: '-16px 0 20px', fontSize: '14px', color: 'var(--color-navy-500)' }}>Client Assets Sourcebook — UK Investment Firms</p>
 
       {/* Tab Navigation */}
       <div style={{ display: 'flex', gap: '4px', marginBottom: '24px', borderBottom: '1px solid var(--color-navy-200)', paddingBottom: '0' }}>

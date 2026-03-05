@@ -236,7 +236,7 @@ interface TableProps<T> {
   onRowClick?: (row: T) => void;
 }
 
-export function Table<T extends { id?: string }>({
+export function Table<T extends Record<string, any>>({
   columns, data, loading, emptyMessage = 'No data.', onRowClick,
 }: TableProps<T>) {
   if (loading) {
