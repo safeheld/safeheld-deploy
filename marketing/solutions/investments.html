@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Automated CASS compliance for investment firms — client money reconciliation under CASS 7, custody asset reconciliation under CASS 6, CMAR generation, and CASS 10 governance oversight.">
+  <meta name="description" content="Automated client money and custody asset reconciliation under FCA CASS 6, CASS 7, and CASS 10. CMAR generation, daily reconciliation, and governance oversight for investment firms.">
   <title>Investments — CASS Compliance — Safeheld</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233D3DFF'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='white' font-family='Inter,sans-serif' font-weight='800' font-size='20'%3ES%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -79,186 +79,126 @@
       </div>
       <div class="nav-cta">
         <a href="https://app.safeheld.com" class="nav-login">Log in</a>
-        <a href="/contact" class="btn btn-primary btn-sm">Get Started</a>
+        <a href="/contact" class="btn btn-primary btn-sm">Request a Demo</a>
       </div>
     </div>
   </nav>
 
   <!-- ── Page Hero ────────────────────────────────────────────────────────── -->
-  <section class="page-hero">
-    <div class="page-hero-bg">
-      <div class="hero-grid"></div>
-    </div>
+  <section class="page-hero bg-white">
     <div class="container">
-      <span class="page-hero-label">INVESTMENTS</span>
-      <h1 class="page-hero-title h-display">CASS Compliance for Investment Firms</h1>
-      <p class="page-hero-desc">Automated client money and custody asset reconciliation under FCA CASS 6, CASS 7, and CASS 10 rules, including CMAR report generation.</p>
+      <span class="superheader">Investments</span>
+      <h1 class="t-h1">CASS Compliance for Investment Firms</h1>
+      <p class="t-body-lg">Automated client money and custody asset reconciliation under FCA CASS 6, CASS 7, and CASS 10.</p>
     </div>
   </section>
 
   <!-- ── Overview ──────────────────────────────────────────────────────────── -->
-  <section class="section">
+  <section class="section bg-gray">
     <div class="container">
-      <div class="solution-grid">
+      <div class="section-header">
+        <span class="superheader">Overview</span>
+        <h2 class="t-h2">The CASS Regulatory Framework</h2>
+      </div>
+      <div class="grid grid-2">
         <div>
-          <span class="feature-label">Overview</span>
-          <h2 class="feature-title">The CASS Compliance Challenge</h2>
-          <p class="feature-desc">Investment firms authorised by the FCA must comply with the Client Assets sourcebook (CASS). This includes daily client money reconciliation (CASS 7.6), custody asset reconciliation (CASS 6.6), and submission of the Client Money and Assets Return (CMAR).</p>
-          <p class="feature-desc">Safeheld automates CASS compliance end-to-end &mdash; reconciliation, breach management, CMAR generation, and governance attestation.</p>
+          <p class="t-body">The FCA Client Assets sourcebook imposes daily reconciliation obligations on investment firms holding client money and custody assets. CASS 7.6 requires firms to perform an internal client money reconciliation on each business day, comparing client entitlements against records of money held. External reconciliation against third-party bank statements must also be conducted. For custody assets, CASS 6.6 mandates regular reconciliation between internal records and those of third-party custodians.</p>
         </div>
-        <div class="feature-visual">
-          <div class="feature-visual-content">
-            <div class="mock-ui">
-              <div class="mock-ui-header">
-                <span class="mock-ui-dot"></span>
-                <span class="mock-ui-dot"></span>
-                <span class="mock-ui-dot"></span>
-              </div>
-              <div class="mock-ui-body">
-                <div class="mock-ui-row">
-                  <span style="font-size: 12px; color: var(--text-secondary); min-width: 90px;">CASS 7</span>
-                  <span class="mock-ui-bar accent" style="flex: 1; height: 6px;"></span>
-                  <span class="mock-ui-badge green">Reconciled</span>
-                </div>
-                <div class="mock-ui-row">
-                  <span style="font-size: 12px; color: var(--text-secondary); min-width: 90px;">CASS 6</span>
-                  <span class="mock-ui-bar accent" style="flex: 1; height: 6px;"></span>
-                  <span class="mock-ui-badge green">Reconciled</span>
-                </div>
-                <div class="mock-ui-row">
-                  <span style="font-size: 12px; color: var(--text-secondary); min-width: 90px;">CMAR</span>
-                  <span class="mock-ui-bar accent" style="flex: 1; height: 6px;"></span>
-                  <span class="mock-ui-badge green">Generated</span>
-                </div>
-                <div class="mock-ui-row">
-                  <span style="font-size: 12px; color: var(--text-secondary); min-width: 90px;">CASS 10</span>
-                  <span class="mock-ui-bar accent" style="flex: 1; height: 6px;"></span>
-                  <span class="mock-ui-badge green">Attested</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div>
+          <p class="t-body">Beyond reconciliation, firms must submit the Client Money and Assets Return (CMAR) to the FCA, maintain a resolution pack for orderly wind-down scenarios, and operate within the CASS 10 governance framework. The CF10a function carries direct personal accountability for CASS compliance. Failures in any of these areas carry enforcement consequences and may result in client money audit qualifications.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ── Capabilities ──────────────────────────────────────────────────────── -->
-  <section class="section section-raised">
+  <section class="section bg-white">
     <div class="container">
       <div class="section-header">
-        <span class="label">Capabilities</span>
-        <h2 class="h2">What Safeheld Delivers</h2>
-        <p>Full-spectrum CASS compliance automation for FCA-authorised investment firms.</p>
+        <span class="superheader">Capabilities</span>
+        <h2 class="t-h2">Verification Infrastructure</h2>
       </div>
-      <div class="solution-capabilities">
+      <div class="capability-grid">
         <div class="capability">
-          <h4>CASS 7 Client Money</h4>
-          <p>Automated internal and external client money reconciliation with configurable tolerance thresholds and break management. Daily verification that client money is held in designated accounts at approved banks.</p>
+          <h4>CASS 7 Client Money Reconciliation</h4>
+          <p>Internal and external client money reconciliation performed on every business day as required by CASS 7.6.15. Configurable tolerance thresholds with break identification and resolution tracking.</p>
         </div>
         <div class="capability">
-          <h4>CASS 6 Custody Assets</h4>
-          <p>Reconciliation of custody assets between internal records and third-party custodians, with automated break detection. Continuous verification of asset positions and entitlements.</p>
+          <h4>CASS 6 Custody Asset Reconciliation</h4>
+          <p>Reconciliation of custody asset records between internal systems and third-party custodians. Continuous verification of asset positions and client entitlements against custodian confirmations.</p>
         </div>
         <div class="capability">
           <h4>CMAR Generation</h4>
-          <p>Automated generation of Client Money and Assets Return data, mapped to FCA submission requirements. Complete data lineage from source records through to CMAR figures.</p>
+          <p>Structured data outputs mapped to CMAR submission requirements. Complete data lineage from source records through to return figures, enabling traceability for every reported value.</p>
         </div>
         <div class="capability">
-          <h4>CASS 10 Governance</h4>
-          <p>Governance map, CASS oversight attestation workflows, resolution pack management, and compliance monitoring. Structured approval chains with full audit evidence.</p>
+          <h4>CASS 10 Governance Framework</h4>
+          <p>Governance map, oversight attestation workflows, and compliance monitoring aligned to CASS 10 requirements. Structured approval chains with recorded evidence for CF10a accountability.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── Key CASS Requirements Addressed ───────────────────────────────────── -->
-  <section class="section">
+  <!-- ── Key Requirements ──────────────────────────────────────────────────── -->
+  <section class="section bg-gray">
     <div class="container">
       <div class="section-header">
-        <span class="label">Compliance</span>
-        <h2 class="h2">Key CASS Requirements Addressed</h2>
-        <p>Safeheld maps directly to the obligations in the FCA Client Assets sourcebook.</p>
+        <span class="superheader">Requirements</span>
+        <h2 class="t-h2">Key CASS Requirements</h2>
       </div>
-      <div class="grid-3">
+      <div class="grid grid-3">
         <div class="card">
           <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
           </div>
-          <h3>Daily Reconciliation</h3>
-          <p>Internal and external reconciliation performed on every business day as required by CASS 7.6.15. Automated matching with configurable thresholds and break tracking.</p>
+          <h3 class="t-h4">Daily Internal Reconciliation</h3>
+          <p>CASS 7.6 mandates that firms reconcile client money balances internally on each business day. This involves comparing the total of individual client entitlements against the firm's record of client money held.</p>
         </div>
         <div class="card">
           <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
-          <h3>Adequate Safeguarding</h3>
-          <p>Verification that client money is held in designated client accounts at approved banks. Continuous monitoring of segregation status across all banking relationships.</p>
+          <h3 class="t-h4">External Reconciliation</h3>
+          <p>Firms must reconcile their own records of client money held against statements from banks and third parties where client money is deposited. Any discrepancies must be investigated and resolved promptly.</p>
         </div>
         <div class="card">
           <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"></path>
-              <line x1="12" y1="9" x2="12" y2="13"></line>
-              <line x1="12" y1="17" x2="12.01" y2="17"></line>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
           </div>
-          <h3>Breach Management</h3>
-          <p>Detection, classification, and escalation of safeguarding breaches with regulatory notification workflows. Severity-based routing and resolution tracking.</p>
+          <h3 class="t-h4">Client Money Calculation</h3>
+          <p>The client money resource calculation determines whether the firm holds sufficient money in designated client accounts. Both the standard and alternative approach must account for all relevant adjustments.</p>
         </div>
         <div class="card">
           <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path>
-              <polyline points="14 2 14 8 20 8"></polyline>
-              <line x1="16" y1="13" x2="8" y2="13"></line>
-              <line x1="16" y1="17" x2="8" y2="17"></line>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
           </div>
-          <h3>Resolution Pack</h3>
-          <p>Maintained and updated resolution pack information for orderly wind-down scenarios. Automated data collection ensures the pack is always current and complete.</p>
+          <h3 class="t-h4">Resolution Pack</h3>
+          <p>CASS 10 requires firms to maintain a resolution pack containing sufficient information to facilitate the orderly distribution of client assets in the event of firm failure. This pack must be kept current.</p>
         </div>
         <div class="card">
           <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"></path>
-              <rect x="8" y="2" width="8" height="4" rx="1"></rect>
-              <path d="M9 14l2 2 4-4"></path>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
           </div>
-          <h3>Governance Oversight</h3>
-          <p>CASS operational oversight framework with approval chains and attestation workflows. Structured governance mapping that satisfies CASS 10 requirements.</p>
+          <h3 class="t-h4">CASS Operational Oversight</h3>
+          <p>The CASS operational oversight function (CF10a) carries personal responsibility for the firm's compliance with CASS. The governance framework must document oversight arrangements and approval chains.</p>
         </div>
         <div class="card">
           <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           </div>
-          <h3>Audit Evidence</h3>
-          <p>Complete audit trail for CASS audit, regulatory examination, and internal compliance review. Every action, calculation, and data point is immutably recorded.</p>
+          <h3 class="t-h4">Audit and Examination Evidence</h3>
+          <p>Firms must produce a complete audit trail supporting every reconciliation, calculation, and compliance decision. This evidence must be available for the annual CASS audit and FCA supervisory examination.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ── CTA Section ──────────────────────────────────────────────────────── -->
-  <section class="cta-section">
+  <section class="bg-gradient-navy cta-section">
     <div class="container">
-      <div class="cta-glow"></div>
-      <div class="cta-content">
-        <h2 class="h2">Automate Your CASS Compliance</h2>
-        <p>Replace spreadsheets and manual processes with autonomous CASS verification. See how Safeheld delivers end-to-end compliance for investment firms.</p>
-        <div class="hero-actions" style="justify-content: center;">
-          <a href="/contact" class="btn btn-primary btn-lg">Get Started</a>
-          <a href="/contact" class="btn btn-secondary btn-lg">Contact Sales</a>
-        </div>
-      </div>
+      <h2 class="t-h2">See how Safeheld works for investment firms</h2>
+      <p class="t-body-lg">Learn how verification infrastructure supports CASS 6, CASS 7, and CASS 10 compliance obligations.</p>
+      <a href="/contact" class="btn btn-white btn-lg">Request a Demo</a>
     </div>
   </section>
 
@@ -267,7 +207,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/" class="nav-logo" style="margin-bottom: 4px;">
+          <a href="/" class="nav-logo">
             <div class="nav-logo-mark">S</div>
             Safeheld
           </a>
@@ -289,6 +229,10 @@
           <a href="/solutions/stablecoins">Stablecoins</a>
           <a href="/solutions/mica">MiCA</a>
           <a href="/solutions/genius-act">GENIUS Act</a>
+          <a href="/solutions/legal">Legal</a>
+          <a href="/solutions/insurance">Insurance</a>
+          <a href="/solutions/gaming">Gaming</a>
+          <a href="/solutions/real-estate">Real Estate</a>
         </div>
         <div class="footer-col">
           <h4>Company</h4>

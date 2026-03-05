@@ -3,54 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Get in touch with Safeheld. Whether you're exploring safeguarding automation or ready to deploy, our team can help scope the right solution for your compliance needs.">
+  <meta name="description" content="Contact Safeheld to request a platform demonstration or discuss compliance requirements for your regulated financial institution.">
+  <meta name="theme-color" content="#080E2C">
+  <meta property="og:title" content="Contact — Safeheld">
+  <meta property="og:description" content="Request a platform demonstration or discuss your compliance requirements with our team.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://safeheld.com/contact">
   <title>Contact — Safeheld</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233D3DFF'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='white' font-family='Inter,sans-serif' font-weight='800' font-size='20'%3ES%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- Navigation -->
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       Navigation
+       ═══════════════════════════════════════════════════════════════════════ -->
   <nav class="nav">
     <div class="nav-inner">
       <a href="/" class="nav-logo">
-        <span class="nav-logo-mark">S</span>
+        <div class="nav-logo-mark">S</div>
         Safeheld
       </a>
-      <ul class="nav-links">
-        <li><a href="/platform" class="nav-link">Platform</a></li>
-        <li class="nav-dropdown">
+
+      <div class="nav-links">
+        <a href="/platform" class="nav-link">Platform</a>
+
+        <!-- Solutions Dropdown -->
+        <div class="nav-dropdown">
           <button class="nav-dropdown-trigger">
             Solutions
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 6 8 10 4"></polyline></svg>
+            <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
           <div class="nav-dropdown-menu">
+
+            <!-- Financial Services -->
             <div class="nav-dropdown-group-label">Financial Services</div>
             <a href="/solutions/payments" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>Payments</h4>
-                <p>EMIs &amp; payment institutions</p>
+                <p>PS25 safeguarding for EMIs and PIs</p>
               </div>
             </a>
             <a href="/solutions/investments" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"></path><path d="M5 20V8l7-5 7 5v12"></path><path d="M9 20v-4h6v4"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>Investments</h4>
-                <p>CASS custody &amp; client assets</p>
+                <p>CASS 6, 7, 10 and CMAR reporting</p>
               </div>
             </a>
+
+            <!-- Digital Assets -->
             <div class="nav-dropdown-group-label">Digital Assets</div>
             <a href="/solutions/crypto" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>Crypto</h4>
@@ -59,35 +73,37 @@
             </a>
             <a href="/solutions/stablecoins" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M16 8h-6a2 2 0 100 4h4a2 2 0 110 4H8"></path><path d="M12 18V6"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>Stablecoins</h4>
-                <p>Peg &amp; reserve verification</p>
+                <p>Peg verification and reserve attestation</p>
               </div>
             </a>
             <a href="/solutions/mica" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>MiCA</h4>
-                <p>EU crypto-asset regulation</p>
+                <p>EU Markets in Crypto-Assets regulation</p>
               </div>
             </a>
             <a href="/solutions/genius-act" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"></path><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>GENIUS Act</h4>
-                <p>US stablecoin framework</p>
+                <p>US stablecoin regulatory framework</p>
               </div>
             </a>
+
+            <!-- Other Sectors -->
             <div class="nav-dropdown-group-label">Other Sectors</div>
             <a href="/solutions/legal" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1L1 7l11 6 11-6-11-6z"/><path d="M1 17l11 6 11-6"/><path d="M1 12l11 6 11-6"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>Legal</h4>
@@ -96,25 +112,25 @@
             </a>
             <a href="/solutions/insurance" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M9 12l2 2 4-4"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>Insurance</h4>
-                <p>Client premium protection</p>
+                <p>FCA client premium rules</p>
               </div>
             </a>
             <a href="/solutions/gaming" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><line x1="6" y1="12" x2="10" y2="12"></line><line x1="8" y1="10" x2="8" y2="14"></line><circle cx="16" cy="10" r="1"></circle><circle cx="18" cy="13" r="1"></circle></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>Gaming</h4>
-                <p>Player fund safeguarding</p>
+                <p>Gambling Commission player funds</p>
               </div>
             </a>
             <a href="/solutions/real-estate" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>Real Estate</h4>
@@ -122,84 +138,94 @@
               </div>
             </a>
           </div>
-        </li>
-        <li><a href="/for-banks" class="nav-link">For Banks</a></li>
-        <li><a href="/pricing" class="nav-link">Pricing</a></li>
-        <li><a href="/about" class="nav-link">About</a></li>
-      </ul>
+        </div>
+
+        <a href="/for-banks" class="nav-link">For Banks</a>
+        <a href="/pricing" class="nav-link">Pricing</a>
+        <a href="/about" class="nav-link">About</a>
+      </div>
+
       <div class="nav-cta">
         <a href="https://app.safeheld.com" class="nav-login">Log in</a>
-        <a href="/contact" class="btn btn-primary btn-sm">Get Started</a>
+        <a href="/contact" class="btn btn-primary btn-sm">Request a Demo</a>
       </div>
-      <button class="nav-mobile-toggle" aria-label="Toggle menu">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
+
+      <button class="nav-mobile-toggle" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
     </div>
   </nav>
 
-  <!-- Page Hero -->
-  <section class="page-hero">
-    <div class="page-hero-bg"></div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       Page Hero
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="page-hero bg-white">
     <div class="container">
-      <div class="page-hero-label">CONTACT</div>
-      <h1 class="h1 page-hero-title">Speak With Our Team</h1>
-      <p class="page-hero-desc">Whether you're exploring safeguarding automation or ready to deploy, our team can help scope the right solution.</p>
+      <span class="superheader">Contact</span>
+      <h1 class="t-h1">Speak With Our Team</h1>
+      <p class="t-body-lg">Request a platform demonstration or discuss your compliance requirements with our team.</p>
     </div>
   </section>
 
-  <!-- Contact Content -->
-  <section class="section">
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       Contact Form + Info
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="section bg-white">
     <div class="container">
-      <div class="grid-2" style="gap: 48px; align-items: start;">
+      <div class="grid grid-2" style="gap:48px;align-items:start;">
 
         <!-- Left: Contact Form -->
         <div>
-          <form action="#" method="post">
+          <form action="#" method="POST">
+
             <div class="form-group">
               <label class="form-label" for="company">Company Name</label>
               <input class="form-input" type="text" id="company" name="company" required>
             </div>
+
             <div class="form-group">
               <label class="form-label" for="name">Contact Name</label>
               <input class="form-input" type="text" id="name" name="name" required>
             </div>
+
             <div class="form-group">
               <label class="form-label" for="email">Email Address</label>
               <input class="form-input" type="email" id="email" name="email" required>
             </div>
+
             <div class="form-group">
-              <label class="form-label" for="phone">Phone <span class="text-muted">(optional)</span></label>
+              <label class="form-label" for="phone">Phone</label>
               <input class="form-input" type="tel" id="phone" name="phone">
             </div>
+
             <div class="form-group">
               <label class="form-label" for="role">Role</label>
-              <select class="form-select" id="role" name="role" required>
+              <select class="form-select" id="role" name="role">
                 <option value="" disabled selected>Select your role</option>
-                <option value="compliance-officer">Compliance Officer</option>
-                <option value="finance-operations">Finance Operations</option>
-                <option value="cto-technology">CTO / Technology</option>
-                <option value="legal-regulatory">Legal / Regulatory</option>
+                <option value="compliance_officer">Compliance Officer</option>
+                <option value="finance_operations">Finance Operations</option>
+                <option value="cto_technology">CTO / Technology</option>
+                <option value="legal_regulatory">Legal / Regulatory</option>
                 <option value="other">Other</option>
               </select>
             </div>
+
             <div class="form-group">
               <label class="form-label">Modules of Interest</label>
               <div class="form-checkbox-group">
                 <label class="form-checkbox">
-                  <input type="checkbox" name="modules" value="ps25">
-                  Client Money (PS25)
+                  <input type="checkbox" name="modules" value="payments_ps25">
+                  Payments (PS25)
                 </label>
                 <label class="form-checkbox">
                   <input type="checkbox" name="modules" value="cass">
                   CASS
                 </label>
                 <label class="form-checkbox">
-                  <input type="checkbox" name="modules" value="crypto">
-                  Crypto
+                  <input type="checkbox" name="modules" value="crypto_custody">
+                  Crypto Custody
                 </label>
                 <label class="form-checkbox">
                   <input type="checkbox" name="modules" value="stablecoins">
@@ -210,7 +236,7 @@
                   MiCA
                 </label>
                 <label class="form-checkbox">
-                  <input type="checkbox" name="modules" value="genius-act">
+                  <input type="checkbox" name="modules" value="genius_act">
                   GENIUS Act
                 </label>
                 <label class="form-checkbox">
@@ -226,76 +252,85 @@
                   Gaming
                 </label>
                 <label class="form-checkbox">
-                  <input type="checkbox" name="modules" value="real-estate">
+                  <input type="checkbox" name="modules" value="real_estate">
                   Real Estate
                 </label>
               </div>
             </div>
+
             <div class="form-group">
               <label class="form-label" for="message">Message</label>
-              <textarea class="form-textarea" id="message" name="message" rows="5"></textarea>
+              <textarea class="form-textarea" id="message" name="message"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">Submit Enquiry</button>
+
+            <button type="submit" class="btn btn-primary">Submit Enquiry</button>
+
           </form>
         </div>
 
-        <!-- Right: Contact Info -->
-        <div style="display: flex; flex-direction: column; gap: 20px;">
+        <!-- Right: Contact Info Cards -->
+        <div style="display:flex;flex-direction:column;gap:20px;">
+
           <div class="card">
             <div class="card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                <polyline points="22,6 12,13 2,6"></polyline>
-              </svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             </div>
             <h3>General Enquiries</h3>
-            <p><a href="mailto:info@safeheld.com" style="color: var(--accent);">info@safeheld.com</a></p>
+            <p><a href="mailto:info@safeheld.com" style="color:var(--accent);font-weight:500;">info@safeheld.com</a></p>
           </div>
+
           <div class="card">
             <div class="card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-              </svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
             </div>
             <h3>Sales</h3>
-            <p><a href="mailto:sales@safeheld.com" style="color: var(--accent);">sales@safeheld.com</a></p>
+            <p><a href="mailto:sales@safeheld.com" style="color:var(--accent);font-weight:500;">sales@safeheld.com</a></p>
           </div>
+
           <div class="card">
             <div class="card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
-            <h3>London, United Kingdom</h3>
-            <p class="text-secondary">Our team is based in the United Kingdom.</p>
+            <h3>Location</h3>
+            <p>London, United Kingdom</p>
           </div>
-          <p class="body-sm text-muted" style="margin-top: 8px;">We typically respond within one business day.</p>
+
+          <p class="t-body-sm" style="margin-top:4px;">We typically respond within one business day.</p>
+
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       Footer
+       ═══════════════════════════════════════════════════════════════════════ -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
+
+        <!-- Brand -->
         <div class="footer-brand">
-          <a href="/" class="nav-logo" style="margin-bottom: 8px;">
-            <span class="nav-logo-mark">S</span>
+          <a href="/" class="nav-logo">
+            <div class="nav-logo-mark">S</div>
             Safeheld
           </a>
-          <p>The global verification layer for client funds. Autonomous compliance infrastructure for regulated finance.</p>
+          <p>The global verification layer for client funds. Autonomous compliance infrastructure for every regulated sector and jurisdiction.</p>
         </div>
+
+        <!-- Platform -->
         <div class="footer-col">
           <h4>Platform</h4>
-          <a href="/platform">Platform Overview</a>
-          <a href="/for-banks">For Banks</a>
-          <a href="/pricing">Pricing</a>
-          <a href="https://app.safeheld.com">Log in</a>
+          <a href="/platform">Platform</a>
+          <a href="/platform">Reconciliation</a>
+          <a href="/platform">Breach Detection</a>
+          <a href="/platform">Reporting</a>
+          <a href="/platform">Governance</a>
         </div>
+
+        <!-- Solutions -->
         <div class="footer-col">
           <h4>Solutions</h4>
           <a href="/solutions/payments">Payments</a>
@@ -305,24 +340,31 @@
           <a href="/solutions/mica">MiCA</a>
           <a href="/solutions/genius-act">GENIUS Act</a>
         </div>
+
+        <!-- Company -->
         <div class="footer-col">
           <h4>Company</h4>
           <a href="/about">About</a>
+          <a href="/pricing">Pricing</a>
           <a href="/contact">Contact</a>
+          <a href="/for-banks">For Banks</a>
         </div>
+
+        <!-- Resources -->
         <div class="footer-col">
           <h4>Resources</h4>
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/terms">Terms of Service</a>
-          <a href="/cookies">Cookie Policy</a>
+          <a href="/docs">Documentation</a>
+          <a href="/docs/api">API Reference</a>
         </div>
+
       </div>
+
       <div class="footer-bottom">
-        <p>&copy; 2026 Safeheld Ltd. All rights reserved.</p>
+        <p>&copy; 2025 Safeheld Ltd. All rights reserved.</p>
         <div class="footer-bottom-links">
-          <a href="/privacy">Privacy</a>
-          <a href="/terms">Terms</a>
-          <a href="/cookies">Cookies</a>
+          <a href="/legal/terms">Terms</a>
+          <a href="/legal/privacy">Privacy</a>
+          <a href="/legal/cookies">Cookies</a>
         </div>
       </div>
     </div>

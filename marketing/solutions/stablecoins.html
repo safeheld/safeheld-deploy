@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Stablecoin reserve verification and peg monitoring — continuous peg monitoring, reserve composition verification, and regulatory attestation for stablecoin issuers and custodians.">
-  <title>Stablecoin Reserve Verification — Safeheld</title>
+  <meta name="description" content="Continuous peg monitoring, reserve composition analysis, and regulatory attestation for stablecoin issuers. Multi-regime compliance across MiCA, GENIUS Act, and UK FCA frameworks.">
+  <title>Stablecoins — Reserve Verification — Safeheld</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233D3DFF'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='white' font-family='Inter,sans-serif' font-weight='800' font-size='20'%3ES%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,25 +16,61 @@
   <!-- ── Navigation ─────────────────────────────────────────────────────── -->
   <nav class="nav">
     <div class="nav-inner">
-      <a href="/" class="nav-logo"><div class="nav-logo-mark">S</div> Safeheld</a>
+      <a href="/" class="nav-logo">
+        <div class="nav-logo-mark">S</div>
+        Safeheld
+      </a>
       <div class="nav-links">
         <a href="/platform" class="nav-link">Platform</a>
         <div class="nav-dropdown">
-          <button class="nav-dropdown-trigger active">Solutions <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <button class="nav-dropdown-trigger active">
+            Solutions
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
           <div class="nav-dropdown-menu">
             <div class="nav-dropdown-group-label">Financial Services</div>
-            <a href="/solutions/payments" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><div class="nav-dropdown-item-text"><h4>Payments</h4><p>EMI &amp; PI safeguarding</p></div></a>
-            <a href="/solutions/investments" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="nav-dropdown-item-text"><h4>Investments</h4><p>CASS compliance</p></div></a>
+            <a href="/solutions/payments" class="nav-dropdown-item">
+              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+              <div class="nav-dropdown-item-text"><h4>Payments</h4><p>EMI &amp; PI safeguarding</p></div>
+            </a>
+            <a href="/solutions/investments" class="nav-dropdown-item">
+              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+              <div class="nav-dropdown-item-text"><h4>Investments</h4><p>CASS compliance</p></div>
+            </a>
             <div class="nav-dropdown-group-label">Digital Assets</div>
-            <a href="/solutions/crypto" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></div><div class="nav-dropdown-item-text"><h4>Crypto</h4><p>Wallet reconciliation</p></div></a>
-            <a href="/solutions/stablecoins" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg></div><div class="nav-dropdown-item-text"><h4>Stablecoins</h4><p>Peg &amp; reserve verification</p></div></a>
-            <a href="/solutions/mica" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="nav-dropdown-item-text"><h4>MiCA</h4><p>EU crypto regulation</p></div></a>
-            <a href="/solutions/genius-act" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="nav-dropdown-item-text"><h4>GENIUS Act</h4><p>US stablecoin rules</p></div></a>
+            <a href="/solutions/crypto" class="nav-dropdown-item">
+              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></div>
+              <div class="nav-dropdown-item-text"><h4>Crypto</h4><p>Wallet reconciliation</p></div>
+            </a>
+            <a href="/solutions/stablecoins" class="nav-dropdown-item">
+              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg></div>
+              <div class="nav-dropdown-item-text"><h4>Stablecoins</h4><p>Peg &amp; reserve verification</p></div>
+            </a>
+            <a href="/solutions/mica" class="nav-dropdown-item">
+              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+              <div class="nav-dropdown-item-text"><h4>MiCA</h4><p>EU crypto regulation</p></div>
+            </a>
+            <a href="/solutions/genius-act" class="nav-dropdown-item">
+              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <div class="nav-dropdown-item-text"><h4>GENIUS Act</h4><p>US stablecoin rules</p></div>
+            </a>
             <div class="nav-dropdown-group-label">Other Sectors</div>
-            <a href="/solutions/legal" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="nav-dropdown-item-text"><h4>Legal</h4><p>SRA client money</p></div></a>
-            <a href="/solutions/insurance" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="nav-dropdown-item-text"><h4>Insurance</h4><p>Client premium rules</p></div></a>
-            <a href="/solutions/gaming" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><circle cx="17" cy="10" r="1"/><circle cx="15" cy="13" r="1"/></svg></div><div class="nav-dropdown-item-text"><h4>Gaming</h4><p>Player fund protection</p></div></a>
-            <a href="/solutions/real-estate" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="nav-dropdown-item-text"><h4>Real Estate</h4><p>Deposit protection</p></div></a>
+            <a href="/solutions/legal" class="nav-dropdown-item">
+              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div class="nav-dropdown-item-text"><h4>Legal</h4><p>SRA client money</p></div>
+            </a>
+            <a href="/solutions/insurance" class="nav-dropdown-item">
+              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <div class="nav-dropdown-item-text"><h4>Insurance</h4><p>Client premium rules</p></div>
+            </a>
+            <a href="/solutions/gaming" class="nav-dropdown-item">
+              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><circle cx="17" cy="10" r="1"/><circle cx="15" cy="13" r="1"/></svg></div>
+              <div class="nav-dropdown-item-text"><h4>Gaming</h4><p>Player fund protection</p></div>
+            </a>
+            <a href="/solutions/real-estate" class="nav-dropdown-item">
+              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+              <div class="nav-dropdown-item-text"><h4>Real Estate</h4><p>Deposit protection</p></div>
+            </a>
           </div>
         </div>
         <a href="/for-banks" class="nav-link">For Banks</a>
@@ -43,166 +79,126 @@
       </div>
       <div class="nav-cta">
         <a href="https://app.safeheld.com" class="nav-login">Log in</a>
-        <a href="/contact" class="btn btn-primary btn-sm">Get Started</a>
+        <a href="/contact" class="btn btn-primary btn-sm">Request a Demo</a>
       </div>
-      <button class="nav-mobile-toggle" aria-label="Toggle menu">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-      </button>
-    </div>
-    <div class="nav-mobile-menu" id="mobileMenu">
-      <a href="/platform">Platform</a>
-      <a href="/solutions/payments">Payments</a>
-      <a href="/solutions/investments">Investments</a>
-      <a href="/solutions/crypto">Crypto</a>
-      <a href="/solutions/stablecoins">Stablecoins</a>
-      <a href="/solutions/mica">MiCA</a>
-      <a href="/solutions/genius-act">GENIUS Act</a>
-      <a href="/solutions/legal">Legal</a>
-      <a href="/solutions/insurance">Insurance</a>
-      <a href="/solutions/gaming">Gaming</a>
-      <a href="/solutions/real-estate">Real Estate</a>
-      <a href="/for-banks">For Banks</a>
-      <a href="/pricing">Pricing</a>
-      <a href="/about">About</a>
-      <a href="https://app.safeheld.com">Log in</a>
-      <a href="/contact" class="btn btn-primary" style="margin-top: 16px; text-align: center;">Get Started</a>
     </div>
   </nav>
 
   <!-- ── Page Hero ────────────────────────────────────────────────────────── -->
-  <section class="page-hero">
-    <div class="page-hero-bg">
-      <div class="hero-grid"></div>
-    </div>
+  <section class="page-hero bg-white">
     <div class="container">
-      <div class="page-hero-label">STABLECOINS</div>
-      <h1 class="h1 page-hero-title">Stablecoin Reserve Verification and Peg Monitoring</h1>
-      <p class="page-hero-desc">Continuous peg monitoring, reserve composition verification, and regulatory attestation for stablecoin issuers and custodians.</p>
+      <span class="superheader">Stablecoins</span>
+      <h1 class="t-h1">Stablecoin Reserve Verification</h1>
+      <p class="t-body-lg">Continuous peg monitoring, reserve composition analysis, and regulatory attestation for stablecoin issuers.</p>
     </div>
   </section>
 
-  <!-- ── Overview ─────────────────────────────────────────────────────────── -->
-  <section class="section">
-    <div class="container">
-      <div class="solution-grid">
-        <div>
-          <p class="body-lg" style="color: var(--text-secondary); line-height: 1.8;">Stablecoin issuers must maintain and demonstrate adequate reserve backing at all times. Regulators increasingly require real-time proof that reserves match or exceed circulating supply.</p>
-        </div>
-        <div>
-          <p class="body-lg" style="color: var(--text-secondary); line-height: 1.8;">Safeheld provides continuous monitoring of peg stability, reserve composition analysis, and automated generation of regulatory-grade attestation reports.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Section Divider ──────────────────────────────────────────────────── -->
-  <div class="section-divider"></div>
-
-  <!-- ── Capabilities ─────────────────────────────────────────────────────── -->
-  <section class="section">
+  <!-- ── Overview ──────────────────────────────────────────────────────────── -->
+  <section class="section bg-gray">
     <div class="container">
       <div class="section-header">
-        <div class="label">Capabilities</div>
-        <h2 class="h2">End-to-end stablecoin compliance</h2>
-        <p>Automated verification infrastructure for reserve backing, peg stability, and regulatory attestation.</p>
+        <span class="superheader">Overview</span>
+        <h2 class="t-h2">The Reserve Verification Landscape</h2>
       </div>
-      <div class="solution-capabilities">
+      <div class="grid grid-2">
+        <div>
+          <p class="t-body">Stablecoin issuers face increasing regulatory pressure to demonstrate that circulating tokens are fully backed by qualifying reserve assets at all times. The EU Markets in Crypto-Assets Regulation requires EMT and ART issuers to maintain verifiable reserves. The US GENIUS Act mandates dollar-for-dollar backing with narrow categories of qualifying assets. The UK FCA is developing its own stablecoin framework with similar reserve adequacy expectations.</p>
+        </div>
+        <div>
+          <p class="t-body">Beyond reserve adequacy, regulators expect continuous peg stability monitoring, transparent reserve composition disclosure, and periodic attestation by independent parties. The operational challenge is that reserve assets span multiple custodians, asset classes, and jurisdictions. Issuers must reconcile on-chain supply data against off-chain reserve holdings and produce attestation-ready outputs that meet the specific requirements of each applicable regulatory regime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Capabilities ──────────────────────────────────────────────────────── -->
+  <section class="section bg-white">
+    <div class="container">
+      <div class="section-header">
+        <span class="superheader">Capabilities</span>
+        <h2 class="t-h2">Verification Infrastructure</h2>
+      </div>
+      <div class="capability-grid">
         <div class="capability">
           <h4>Peg Monitoring</h4>
-          <p>Real-time tracking of stablecoin market price against target peg. Automatic deviation classification from minor deviation through to depegged status.</p>
+          <p>Continuous tracking of stablecoin market price against the target peg value. Deviation classification from minor fluctuation through material depeg, with configurable alert thresholds.</p>
         </div>
         <div class="capability">
-          <h4>Reserve Verification</h4>
-          <p>Comprehensive analysis of reserve asset composition including cash, treasury bills, commercial paper, and other qualifying assets.</p>
+          <h4>Reserve Composition Analysis</h4>
+          <p>Breakdown and verification of reserve asset holdings by category: cash deposits, government securities, money market instruments, and other qualifying assets. Coverage ratio calculation against circulating supply.</p>
         </div>
         <div class="capability">
-          <h4>Attestation Reports</h4>
-          <p>Automated generation of reserve attestation reports with SHA-256 cryptographic hashing, coverage ratio calculations, and regulatory-aligned formatting.</p>
+          <h4>Attestation Generation</h4>
+          <p>Structured data outputs and report generation to support periodic attestation requirements. SHA-256 hashed reserve proofs with complete data lineage from source records through to attestation figures.</p>
         </div>
         <div class="capability">
           <h4>Multi-Regime Compliance</h4>
-          <p>Built-in support for MiCA reserve requirements, GENIUS Act backing mandates, and UK FCA expectations for stablecoin regulation.</p>
+          <p>Configurable compliance outputs aligned to MiCA reserve requirements, GENIUS Act backing mandates, and UK FCA expectations. Jurisdiction-specific reporting mapped to each regime's distinct obligations.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── Reserve Asset Categories ─────────────────────────────────────────── -->
-  <section class="section section-raised">
+  <!-- ── Key Requirements ──────────────────────────────────────────────────── -->
+  <section class="section bg-gray">
     <div class="container">
       <div class="section-header">
-        <div class="label">Reserve Asset Categories</div>
-        <h2 class="h2">Full reserve composition visibility</h2>
-        <p>Track and verify every category of reserve asset backing your stablecoin.</p>
+        <span class="superheader">Requirements</span>
+        <h2 class="t-h2">Key Regulatory Requirements</h2>
       </div>
-      <div class="grid-3">
+      <div class="grid grid-3">
         <div class="card">
           <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-              <line x1="8" y1="21" x2="16" y2="21"></line>
-              <line x1="12" y1="17" x2="12" y2="21"></line>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
           </div>
-          <h3>Cash &amp; Deposits</h3>
-          <p>Bank deposits and cash equivalents held at qualifying institutions.</p>
+          <h3 class="t-h4">1:1 Reserve Backing</h3>
+          <p>Stablecoin issuers must maintain reserve assets with a value equal to or exceeding the total circulating supply at all times. Any shortfall constitutes a regulatory breach requiring immediate remediation.</p>
         </div>
         <div class="card">
           <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M2 20h20"></path>
-              <path d="M5 20V8l7-5 7 5v12"></path>
-              <path d="M9 20v-4h6v4"></path>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
           </div>
-          <h3>Government Securities</h3>
-          <p>Treasury bills, government bonds, and sovereign debt instruments.</p>
+          <h3 class="t-h4">Qualifying Asset Verification</h3>
+          <p>Reserve assets must fall within defined qualifying categories that vary by jurisdiction. These typically include cash, short-term government securities, and central bank deposits. Non-qualifying assets must be identified and excluded.</p>
         </div>
         <div class="card">
           <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path>
-              <polyline points="14 2 14 8 20 8"></polyline>
-              <line x1="16" y1="13" x2="8" y2="13"></line>
-              <line x1="16" y1="17" x2="8" y2="17"></line>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
           </div>
-          <h3>Other Assets</h3>
-          <p>Commercial paper, money market instruments, and other qualifying reserve assets.</p>
+          <h3 class="t-h4">Peg Deviation Detection</h3>
+          <p>Material deviations from the target peg value must be detected and reported. Regulators expect issuers to monitor peg stability continuously and to have documented procedures for responding to depeg events.</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Regulatory Context ───────────────────────────────────────────────── -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <div class="label">Regulatory Context</div>
-        <h2 class="h2">Built for global stablecoin regulation</h2>
-      </div>
-      <div style="max-width: 760px; margin: 0 auto; text-align: center;">
-        <p class="body-lg" style="color: var(--text-secondary); line-height: 1.8;">Stablecoin regulation is the fastest-moving area of financial regulation globally. MiCA requires EMT and ART issuers to maintain verifiable reserves. The US GENIUS Act mandates 1:1 backing with qualifying assets. Safeheld is built to meet all current and emerging requirements.</p>
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <h3 class="t-h4">Monthly Attestation</h3>
+          <p>Most regulatory frameworks require periodic attestation of reserve adequacy, typically on a monthly basis. Attestation reports must be produced by or supported by independent parties and made publicly available.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3 class="t-h4">Redemption Compliance</h3>
+          <p>Stablecoin holders must be able to redeem tokens at par value within specified timeframes. Issuers must maintain sufficient liquid reserves to meet redemption demand without delay or discount.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="t-h4">Issuer Prudential Requirements</h3>
+          <p>Stablecoin issuers are subject to prudential requirements including minimum capital, governance arrangements, and risk management frameworks. These obligations vary by jurisdiction and issuer classification.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ── CTA Section ──────────────────────────────────────────────────────── -->
-  <section class="cta-section">
-    <div class="cta-glow"></div>
+  <section class="bg-gradient-navy cta-section">
     <div class="container">
-      <div class="cta-content">
-        <h2 class="h2">Automate Your Stablecoin Compliance</h2>
-        <p>Book a walkthrough and see how Safeheld verifies reserve backing, monitors peg stability, and generates regulatory attestations.</p>
-        <div class="hero-actions" style="justify-content: center;">
-          <a href="/contact" class="btn btn-primary btn-lg">Request a Demo</a>
-          <a href="/pricing" class="btn btn-secondary btn-lg">View Pricing</a>
-        </div>
-      </div>
+      <h2 class="t-h2">See how Safeheld works for stablecoin issuers</h2>
+      <p class="t-body-lg">Learn how verification infrastructure supports reserve monitoring, peg tracking, and regulatory attestation.</p>
+      <a href="/contact" class="btn btn-white btn-lg">Request a Demo</a>
     </div>
   </section>
 
@@ -211,32 +207,56 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/" class="nav-logo" style="margin-bottom: 4px;"><div class="nav-logo-mark">S</div> Safeheld</a>
+          <a href="/" class="nav-logo">
+            <div class="nav-logo-mark">S</div>
+            Safeheld
+          </a>
           <p>The global verification layer for client funds. Autonomous compliance infrastructure for regulated finance.</p>
         </div>
-        <div class="footer-col"><h4>Platform</h4><a href="/platform">Overview</a><a href="/platform">Reconciliation</a><a href="/platform">Breach Detection</a><a href="/platform">Reporting</a><a href="/platform">Governance</a></div>
-        <div class="footer-col"><h4>Solutions</h4><a href="/solutions/payments">Payments</a><a href="/solutions/investments">Investments</a><a href="/solutions/crypto">Crypto</a><a href="/solutions/stablecoins">Stablecoins</a><a href="/solutions/mica">MiCA</a><a href="/solutions/genius-act">GENIUS Act</a></div>
-        <div class="footer-col"><h4>Company</h4><a href="/about">About</a><a href="/pricing">Pricing</a><a href="/contact">Contact</a><a href="/for-banks">For Banks</a></div>
-        <div class="footer-col"><h4>Resources</h4><a href="/docs">Documentation</a><a href="/api">API Reference</a></div>
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <a href="/platform">Overview</a>
+          <a href="/platform">Reconciliation</a>
+          <a href="/platform">Breach Detection</a>
+          <a href="/platform">Reporting</a>
+          <a href="/platform">Governance</a>
+        </div>
+        <div class="footer-col">
+          <h4>Solutions</h4>
+          <a href="/solutions/payments">Payments</a>
+          <a href="/solutions/investments">Investments</a>
+          <a href="/solutions/crypto">Crypto</a>
+          <a href="/solutions/stablecoins">Stablecoins</a>
+          <a href="/solutions/mica">MiCA</a>
+          <a href="/solutions/genius-act">GENIUS Act</a>
+          <a href="/solutions/legal">Legal</a>
+          <a href="/solutions/insurance">Insurance</a>
+          <a href="/solutions/gaming">Gaming</a>
+          <a href="/solutions/real-estate">Real Estate</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="/about">About</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/contact">Contact</a>
+          <a href="/for-banks">For Banks</a>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <a href="/docs">Documentation</a>
+          <a href="/api">API Reference</a>
+        </div>
       </div>
       <div class="footer-bottom">
         <p>&copy; 2025 Safeheld Ltd. All rights reserved.</p>
-        <div class="footer-bottom-links"><a href="/terms">Terms</a><a href="/privacy">Privacy</a><a href="/cookies">Cookies</a></div>
+        <div class="footer-bottom-links">
+          <a href="/terms">Terms</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/cookies">Cookies</a>
+        </div>
       </div>
     </div>
   </footer>
-
-  <script>
-    (function () {
-      var toggle = document.querySelector('.nav-mobile-toggle');
-      var menu = document.getElementById('mobileMenu');
-      if (toggle && menu) {
-        toggle.addEventListener('click', function () {
-          menu.classList.toggle('open');
-        });
-      }
-    })();
-  </script>
 
 </body>
 </html>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Crypto asset safeguarding and proof of reserves — on-chain wallet reconciliation, proof of reserves generation, and custody verification for crypto asset service providers.">
-  <title>Crypto Asset Safeguarding — Safeheld</title>
+  <meta name="description" content="On-chain wallet reconciliation, proof of reserves, and custody verification for crypto asset service providers. Hot and cold wallet monitoring with full data lineage.">
+  <title>Crypto Custody — Wallet Reconciliation &amp; Proof of Reserves — Safeheld</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233D3DFF'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='white' font-family='Inter,sans-serif' font-weight='800' font-size='20'%3ES%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,25 +16,61 @@
   <!-- ── Navigation ─────────────────────────────────────────────────────── -->
   <nav class="nav">
     <div class="nav-inner">
-      <a href="/" class="nav-logo"><div class="nav-logo-mark">S</div> Safeheld</a>
+      <a href="/" class="nav-logo">
+        <div class="nav-logo-mark">S</div>
+        Safeheld
+      </a>
       <div class="nav-links">
         <a href="/platform" class="nav-link">Platform</a>
         <div class="nav-dropdown">
-          <button class="nav-dropdown-trigger active">Solutions <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <button class="nav-dropdown-trigger active">
+            Solutions
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
           <div class="nav-dropdown-menu">
             <div class="nav-dropdown-group-label">Financial Services</div>
-            <a href="/solutions/payments" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><div class="nav-dropdown-item-text"><h4>Payments</h4><p>EMI &amp; PI safeguarding</p></div></a>
-            <a href="/solutions/investments" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="nav-dropdown-item-text"><h4>Investments</h4><p>CASS compliance</p></div></a>
+            <a href="/solutions/payments" class="nav-dropdown-item">
+              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+              <div class="nav-dropdown-item-text"><h4>Payments</h4><p>EMI &amp; PI safeguarding</p></div>
+            </a>
+            <a href="/solutions/investments" class="nav-dropdown-item">
+              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+              <div class="nav-dropdown-item-text"><h4>Investments</h4><p>CASS compliance</p></div>
+            </a>
             <div class="nav-dropdown-group-label">Digital Assets</div>
-            <a href="/solutions/crypto" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></div><div class="nav-dropdown-item-text"><h4>Crypto</h4><p>Wallet reconciliation</p></div></a>
-            <a href="/solutions/stablecoins" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg></div><div class="nav-dropdown-item-text"><h4>Stablecoins</h4><p>Peg &amp; reserve verification</p></div></a>
-            <a href="/solutions/mica" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="nav-dropdown-item-text"><h4>MiCA</h4><p>EU crypto regulation</p></div></a>
-            <a href="/solutions/genius-act" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="nav-dropdown-item-text"><h4>GENIUS Act</h4><p>US stablecoin rules</p></div></a>
+            <a href="/solutions/crypto" class="nav-dropdown-item">
+              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></div>
+              <div class="nav-dropdown-item-text"><h4>Crypto</h4><p>Wallet reconciliation</p></div>
+            </a>
+            <a href="/solutions/stablecoins" class="nav-dropdown-item">
+              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg></div>
+              <div class="nav-dropdown-item-text"><h4>Stablecoins</h4><p>Peg &amp; reserve verification</p></div>
+            </a>
+            <a href="/solutions/mica" class="nav-dropdown-item">
+              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+              <div class="nav-dropdown-item-text"><h4>MiCA</h4><p>EU crypto regulation</p></div>
+            </a>
+            <a href="/solutions/genius-act" class="nav-dropdown-item">
+              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <div class="nav-dropdown-item-text"><h4>GENIUS Act</h4><p>US stablecoin rules</p></div>
+            </a>
             <div class="nav-dropdown-group-label">Other Sectors</div>
-            <a href="/solutions/legal" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="nav-dropdown-item-text"><h4>Legal</h4><p>SRA client money</p></div></a>
-            <a href="/solutions/insurance" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="nav-dropdown-item-text"><h4>Insurance</h4><p>Client premium rules</p></div></a>
-            <a href="/solutions/gaming" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><circle cx="17" cy="10" r="1"/><circle cx="15" cy="13" r="1"/></svg></div><div class="nav-dropdown-item-text"><h4>Gaming</h4><p>Player fund protection</p></div></a>
-            <a href="/solutions/real-estate" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="nav-dropdown-item-text"><h4>Real Estate</h4><p>Deposit protection</p></div></a>
+            <a href="/solutions/legal" class="nav-dropdown-item">
+              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div class="nav-dropdown-item-text"><h4>Legal</h4><p>SRA client money</p></div>
+            </a>
+            <a href="/solutions/insurance" class="nav-dropdown-item">
+              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <div class="nav-dropdown-item-text"><h4>Insurance</h4><p>Client premium rules</p></div>
+            </a>
+            <a href="/solutions/gaming" class="nav-dropdown-item">
+              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><circle cx="17" cy="10" r="1"/><circle cx="15" cy="13" r="1"/></svg></div>
+              <div class="nav-dropdown-item-text"><h4>Gaming</h4><p>Player fund protection</p></div>
+            </a>
+            <a href="/solutions/real-estate" class="nav-dropdown-item">
+              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+              <div class="nav-dropdown-item-text"><h4>Real Estate</h4><p>Deposit protection</p></div>
+            </a>
           </div>
         </div>
         <a href="/for-banks" class="nav-link">For Banks</a>
@@ -43,163 +79,126 @@
       </div>
       <div class="nav-cta">
         <a href="https://app.safeheld.com" class="nav-login">Log in</a>
-        <a href="/contact" class="btn btn-primary btn-sm">Get Started</a>
+        <a href="/contact" class="btn btn-primary btn-sm">Request a Demo</a>
       </div>
-      <button class="nav-mobile-toggle" aria-label="Toggle menu">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-      </button>
-    </div>
-    <div class="nav-mobile-menu" id="mobileMenu">
-      <a href="/platform">Platform</a>
-      <a href="/solutions/payments">Payments</a>
-      <a href="/solutions/investments">Investments</a>
-      <a href="/solutions/crypto">Crypto</a>
-      <a href="/solutions/stablecoins">Stablecoins</a>
-      <a href="/solutions/mica">MiCA</a>
-      <a href="/solutions/genius-act">GENIUS Act</a>
-      <a href="/solutions/legal">Legal</a>
-      <a href="/solutions/insurance">Insurance</a>
-      <a href="/solutions/gaming">Gaming</a>
-      <a href="/solutions/real-estate">Real Estate</a>
-      <a href="/for-banks">For Banks</a>
-      <a href="/pricing">Pricing</a>
-      <a href="/about">About</a>
-      <a href="https://app.safeheld.com">Log in</a>
-      <a href="/contact" class="btn btn-primary" style="margin-top: 16px; text-align: center;">Get Started</a>
     </div>
   </nav>
 
   <!-- ── Page Hero ────────────────────────────────────────────────────────── -->
-  <section class="page-hero">
-    <div class="page-hero-bg">
-      <div class="hero-grid"></div>
-    </div>
+  <section class="page-hero bg-white">
     <div class="container">
-      <div class="page-hero-label">CRYPTO ASSETS</div>
-      <h1 class="h1 page-hero-title">Crypto Asset Safeguarding and Proof of Reserves</h1>
-      <p class="page-hero-desc">On-chain wallet reconciliation, proof of reserves generation, and custody verification for crypto asset service providers.</p>
+      <span class="superheader">Crypto Custody</span>
+      <h1 class="t-h1">Crypto Asset Custody Verification</h1>
+      <p class="t-body-lg">On-chain wallet reconciliation, proof of reserves, and custody verification for crypto asset service providers.</p>
     </div>
   </section>
 
-  <!-- ── Overview ─────────────────────────────────────────────────────────── -->
-  <section class="section">
-    <div class="container">
-      <div class="solution-grid">
-        <div>
-          <p class="body-lg" style="color: var(--text-secondary); line-height: 1.8;">Crypto asset service providers face unique safeguarding challenges. Client assets are held across hot wallets, cold storage, and third-party custodians. Traditional reconciliation methods cannot verify on-chain holdings.</p>
-        </div>
-        <div>
-          <p class="body-lg" style="color: var(--text-secondary); line-height: 1.8;">Safeheld connects to blockchain data and custodian APIs to provide continuous, automated verification of client crypto asset holdings.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Section Divider ──────────────────────────────────────────────────── -->
-  <div class="section-divider"></div>
-
-  <!-- ── Capabilities ─────────────────────────────────────────────────────── -->
-  <section class="section">
+  <!-- ── Overview ──────────────────────────────────────────────────────────── -->
+  <section class="section bg-gray">
     <div class="container">
       <div class="section-header">
-        <div class="label">Capabilities</div>
-        <h2 class="h2">Comprehensive crypto safeguarding</h2>
-        <p>Automated verification infrastructure purpose-built for digital asset custody and safeguarding compliance.</p>
+        <span class="superheader">Overview</span>
+        <h2 class="t-h2">The Crypto Custody Challenge</h2>
       </div>
-      <div class="solution-capabilities">
+      <div class="grid grid-2">
+        <div>
+          <p class="t-body">Crypto asset custody introduces verification challenges that do not exist in traditional finance. Client assets are distributed across hot wallets, cold storage vaults, and third-party custodians. Each custody arrangement involves different interfaces, confirmation mechanisms, and latency characteristics. On-chain balances can be verified independently, but mapping those balances to individual client entitlements requires purpose-built infrastructure.</p>
+        </div>
+        <div>
+          <p class="t-body">The fragmented nature of crypto custody means that reconciliation must span blockchain data, custodian APIs, and internal ledger systems simultaneously. Proof of reserves requires cryptographic attestation that total on-chain holdings match or exceed aggregate client entitlements. As regulatory frameworks in the UK, EU, and US mature, the expectation for continuous, verifiable custody reporting is becoming a baseline requirement for licensed operators.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Capabilities ──────────────────────────────────────────────────────── -->
+  <section class="section bg-white">
+    <div class="container">
+      <div class="section-header">
+        <span class="superheader">Capabilities</span>
+        <h2 class="t-h2">Verification Infrastructure</h2>
+      </div>
+      <div class="capability-grid">
         <div class="capability">
           <h4>Wallet Reconciliation</h4>
-          <p>Automated matching of internal client entitlement records against on-chain wallet balances across multiple blockchains and custodians.</p>
+          <p>Matching of internal client entitlement records against on-chain wallet balances across multiple blockchains and custodian platforms. Configurable reconciliation schedules with break detection.</p>
         </div>
         <div class="capability">
           <h4>Proof of Reserves</h4>
-          <p>Cryptographically verifiable attestation that client assets are fully backed. SHA-256 hashed proof generation with complete data lineage.</p>
+          <p>Cryptographically verifiable attestation that client assets are fully backed by on-chain holdings. SHA-256 hashed proof generation with complete data lineage from source through to output.</p>
         </div>
         <div class="capability">
           <h4>Hot/Cold Wallet Monitoring</h4>
-          <p>Continuous monitoring of wallet balances with configurable alerts for unexpected movements, threshold breaches, and anomalous patterns.</p>
+          <p>Continuous monitoring of wallet balances with configurable alerts for unexpected movements, threshold breaches, and anomalous transaction patterns across all custody tiers.</p>
         </div>
         <div class="capability">
           <h4>Data Lineage</h4>
-          <p>Full provenance tracking for every data point used in reconciliation and attestation &mdash; from source through calculation to output.</p>
+          <p>Full provenance tracking for every data point used in reconciliation and attestation. Every balance, transaction, and calculation is traceable from blockchain source through to compliance output.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── Supported Asset Types ────────────────────────────────────────────── -->
-  <section class="section section-raised">
+  <!-- ── Key Requirements ──────────────────────────────────────────────────── -->
+  <section class="section bg-gray">
     <div class="container">
       <div class="section-header">
-        <div class="label">Supported Asset Types</div>
-        <h2 class="h2">Multi-chain reconciliation</h2>
-        <p>Verify client holdings across the blockchains and networks that matter to your business.</p>
+        <span class="superheader">Requirements</span>
+        <h2 class="t-h2">Key Custody Requirements</h2>
       </div>
-      <div class="grid-3">
+      <div class="grid grid-3">
         <div class="card">
           <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <path d="M16 8h-6a2 2 0 100 4h4a2 2 0 110 4H8"></path>
-              <path d="M12 18V6"></path>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
           </div>
-          <h3>Bitcoin</h3>
-          <p>Native BTC wallet reconciliation and balance verification.</p>
+          <h3 class="t-h4">Asset Segregation</h3>
+          <p>Client crypto assets must be held separately from the custodian's proprietary holdings. Segregation must be verifiable on-chain and through internal accounting records at all times.</p>
         </div>
         <div class="card">
           <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
           </div>
-          <h3>Ethereum</h3>
-          <p>ETH and ERC-20 token balance tracking and reconciliation.</p>
+          <h3 class="t-h4">Client Entitlement Matching</h3>
+          <p>Each client's entitlement to crypto assets must be reconciled against the total holdings in custody. The aggregate of all client entitlements must not exceed verified on-chain balances.</p>
         </div>
         <div class="card">
           <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="2" y1="12" x2="22" y2="12"></line>
-              <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
-          <h3>Multi-Chain</h3>
-          <p>Extensible framework supporting additional blockchains and layer-2 networks.</p>
+          <h3 class="t-h4">Cryptographic Attestation</h3>
+          <p>Proof of reserves must be generated using cryptographic methods that allow independent verification. Merkle tree proofs and signed attestations provide the evidence chain regulators expect.</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Regulatory Alignment ─────────────────────────────────────────────── -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <div class="label">Regulatory Alignment</div>
-        <h2 class="h2">Built for evolving regulation</h2>
-      </div>
-      <div style="max-width: 760px; margin: 0 auto; text-align: center;">
-        <p class="body-lg" style="color: var(--text-secondary); line-height: 1.8;">Crypto asset custody requirements are evolving rapidly across jurisdictions. Safeheld's crypto module is designed to meet the safeguarding expectations of the UK FCA, EU MiCA regulation, and emerging US frameworks.</p>
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <h3 class="t-h4">Custody Arrangements</h3>
+          <p>Where assets are held with third-party custodians, the firm must maintain documented custody arrangements and verify that the custodian's records agree with its own on a regular basis.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h3 class="t-h4">Multi-Chain Support</h3>
+          <p>Custody operations span multiple blockchains and layer-2 networks. Verification infrastructure must reconcile across all chains where client assets are held, with consistent methodology and reporting.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
+          </div>
+          <h3 class="t-h4">Regulatory Reporting</h3>
+          <p>Emerging regulatory frameworks require periodic reporting on custody arrangements, asset holdings, and segregation status. Structured outputs must be aligned to jurisdiction-specific requirements.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ── CTA Section ──────────────────────────────────────────────────────── -->
-  <section class="cta-section">
-    <div class="cta-glow"></div>
+  <section class="bg-gradient-navy cta-section">
     <div class="container">
-      <div class="cta-content">
-        <h2 class="h2">Automate Your Crypto Safeguarding</h2>
-        <p>Book a walkthrough and see how Safeheld verifies crypto asset holdings across wallets, custodians, and blockchains.</p>
-        <div class="hero-actions" style="justify-content: center;">
-          <a href="/contact" class="btn btn-primary btn-lg">Request a Demo</a>
-          <a href="/pricing" class="btn btn-secondary btn-lg">View Pricing</a>
-        </div>
-      </div>
+      <h2 class="t-h2">See how Safeheld works for crypto custodians</h2>
+      <p class="t-body-lg">Learn how verification infrastructure supports on-chain reconciliation, proof of reserves, and custody compliance.</p>
+      <a href="/contact" class="btn btn-white btn-lg">Request a Demo</a>
     </div>
   </section>
 
@@ -208,32 +207,56 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/" class="nav-logo" style="margin-bottom: 4px;"><div class="nav-logo-mark">S</div> Safeheld</a>
+          <a href="/" class="nav-logo">
+            <div class="nav-logo-mark">S</div>
+            Safeheld
+          </a>
           <p>The global verification layer for client funds. Autonomous compliance infrastructure for regulated finance.</p>
         </div>
-        <div class="footer-col"><h4>Platform</h4><a href="/platform">Overview</a><a href="/platform">Reconciliation</a><a href="/platform">Breach Detection</a><a href="/platform">Reporting</a><a href="/platform">Governance</a></div>
-        <div class="footer-col"><h4>Solutions</h4><a href="/solutions/payments">Payments</a><a href="/solutions/investments">Investments</a><a href="/solutions/crypto">Crypto</a><a href="/solutions/stablecoins">Stablecoins</a><a href="/solutions/mica">MiCA</a><a href="/solutions/genius-act">GENIUS Act</a></div>
-        <div class="footer-col"><h4>Company</h4><a href="/about">About</a><a href="/pricing">Pricing</a><a href="/contact">Contact</a><a href="/for-banks">For Banks</a></div>
-        <div class="footer-col"><h4>Resources</h4><a href="/docs">Documentation</a><a href="/api">API Reference</a></div>
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <a href="/platform">Overview</a>
+          <a href="/platform">Reconciliation</a>
+          <a href="/platform">Breach Detection</a>
+          <a href="/platform">Reporting</a>
+          <a href="/platform">Governance</a>
+        </div>
+        <div class="footer-col">
+          <h4>Solutions</h4>
+          <a href="/solutions/payments">Payments</a>
+          <a href="/solutions/investments">Investments</a>
+          <a href="/solutions/crypto">Crypto</a>
+          <a href="/solutions/stablecoins">Stablecoins</a>
+          <a href="/solutions/mica">MiCA</a>
+          <a href="/solutions/genius-act">GENIUS Act</a>
+          <a href="/solutions/legal">Legal</a>
+          <a href="/solutions/insurance">Insurance</a>
+          <a href="/solutions/gaming">Gaming</a>
+          <a href="/solutions/real-estate">Real Estate</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="/about">About</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/contact">Contact</a>
+          <a href="/for-banks">For Banks</a>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <a href="/docs">Documentation</a>
+          <a href="/api">API Reference</a>
+        </div>
       </div>
       <div class="footer-bottom">
         <p>&copy; 2025 Safeheld Ltd. All rights reserved.</p>
-        <div class="footer-bottom-links"><a href="/terms">Terms</a><a href="/privacy">Privacy</a><a href="/cookies">Cookies</a></div>
+        <div class="footer-bottom-links">
+          <a href="/terms">Terms</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/cookies">Cookies</a>
+        </div>
       </div>
     </div>
   </footer>
-
-  <script>
-    (function () {
-      var toggle = document.querySelector('.nav-mobile-toggle');
-      var menu = document.getElementById('mobileMenu');
-      if (toggle && menu) {
-        toggle.addEventListener('click', function () {
-          menu.classList.toggle('open');
-        });
-      }
-    })();
-  </script>
 
 </body>
 </html>

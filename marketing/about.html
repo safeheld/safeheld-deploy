@@ -3,54 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Safeheld exists to solve one of the most critical problems in financial regulation: proving that client money is where it should be. Learn about our mission and values.">
+  <meta name="description" content="Safeheld provides autonomous verification infrastructure purpose-built for the regulatory demands of payments, investments, crypto custody, and emerging digital finance frameworks.">
+  <meta name="theme-color" content="#080E2C">
+  <meta property="og:title" content="About — Safeheld">
+  <meta property="og:description" content="Verification infrastructure for regulated finance. Proving that client money is where it should be.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://safeheld.com/about">
   <title>About — Safeheld</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233D3DFF'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='white' font-family='Inter,sans-serif' font-weight='800' font-size='20'%3ES%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- Navigation -->
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       Navigation
+       ═══════════════════════════════════════════════════════════════════════ -->
   <nav class="nav">
     <div class="nav-inner">
       <a href="/" class="nav-logo">
-        <span class="nav-logo-mark">S</span>
+        <div class="nav-logo-mark">S</div>
         Safeheld
       </a>
-      <ul class="nav-links">
-        <li><a href="/platform" class="nav-link">Platform</a></li>
-        <li class="nav-dropdown">
+
+      <div class="nav-links">
+        <a href="/platform" class="nav-link">Platform</a>
+
+        <!-- Solutions Dropdown -->
+        <div class="nav-dropdown">
           <button class="nav-dropdown-trigger">
             Solutions
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 6 8 10 4"></polyline></svg>
+            <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
           <div class="nav-dropdown-menu">
+
+            <!-- Financial Services -->
             <div class="nav-dropdown-group-label">Financial Services</div>
             <a href="/solutions/payments" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>Payments</h4>
-                <p>EMIs &amp; payment institutions</p>
+                <p>PS25 safeguarding for EMIs and PIs</p>
               </div>
             </a>
             <a href="/solutions/investments" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"></path><path d="M5 20V8l7-5 7 5v12"></path><path d="M9 20v-4h6v4"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>Investments</h4>
-                <p>CASS custody &amp; client assets</p>
+                <p>CASS 6, 7, 10 and CMAR reporting</p>
               </div>
             </a>
+
+            <!-- Digital Assets -->
             <div class="nav-dropdown-group-label">Digital Assets</div>
             <a href="/solutions/crypto" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>Crypto</h4>
@@ -59,35 +73,37 @@
             </a>
             <a href="/solutions/stablecoins" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M16 8h-6a2 2 0 100 4h4a2 2 0 110 4H8"></path><path d="M12 18V6"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>Stablecoins</h4>
-                <p>Peg &amp; reserve verification</p>
+                <p>Peg verification and reserve attestation</p>
               </div>
             </a>
             <a href="/solutions/mica" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>MiCA</h4>
-                <p>EU crypto-asset regulation</p>
+                <p>EU Markets in Crypto-Assets regulation</p>
               </div>
             </a>
             <a href="/solutions/genius-act" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"></path><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>GENIUS Act</h4>
-                <p>US stablecoin framework</p>
+                <p>US stablecoin regulatory framework</p>
               </div>
             </a>
+
+            <!-- Other Sectors -->
             <div class="nav-dropdown-group-label">Other Sectors</div>
             <a href="/solutions/legal" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1L1 7l11 6 11-6-11-6z"/><path d="M1 17l11 6 11-6"/><path d="M1 12l11 6 11-6"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>Legal</h4>
@@ -96,25 +112,25 @@
             </a>
             <a href="/solutions/insurance" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M9 12l2 2 4-4"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>Insurance</h4>
-                <p>Client premium protection</p>
+                <p>FCA client premium rules</p>
               </div>
             </a>
             <a href="/solutions/gaming" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><line x1="6" y1="12" x2="10" y2="12"></line><line x1="8" y1="10" x2="8" y2="14"></line><circle cx="16" cy="10" r="1"></circle><circle cx="18" cy="13" r="1"></circle></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>Gaming</h4>
-                <p>Player fund safeguarding</p>
+                <p>Gambling Commission player funds</p>
               </div>
             </a>
             <a href="/solutions/real-estate" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>Real Estate</h4>
@@ -122,186 +138,179 @@
               </div>
             </a>
           </div>
-        </li>
-        <li><a href="/for-banks" class="nav-link">For Banks</a></li>
-        <li><a href="/pricing" class="nav-link">Pricing</a></li>
-        <li><a href="/about" class="nav-link active">About</a></li>
-      </ul>
+        </div>
+
+        <a href="/for-banks" class="nav-link">For Banks</a>
+        <a href="/pricing" class="nav-link">Pricing</a>
+        <a href="/about" class="nav-link active">About</a>
+      </div>
+
       <div class="nav-cta">
         <a href="https://app.safeheld.com" class="nav-login">Log in</a>
-        <a href="/contact" class="btn btn-primary btn-sm">Get Started</a>
+        <a href="/contact" class="btn btn-primary btn-sm">Request a Demo</a>
       </div>
-      <button class="nav-mobile-toggle" aria-label="Toggle menu">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
+
+      <button class="nav-mobile-toggle" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
     </div>
   </nav>
 
-  <!-- Page Hero -->
-  <section class="page-hero">
-    <div class="page-hero-bg"></div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       Page Hero
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="page-hero bg-white">
     <div class="container">
-      <div class="page-hero-label">ABOUT</div>
-      <h1 class="h1 page-hero-title">Building the Trust Infrastructure for Regulated Finance</h1>
-      <p class="page-hero-desc">Safeheld exists to solve one of the most critical problems in financial regulation: proving that client money is where it should be.</p>
+      <span class="superheader">About</span>
+      <h1 class="t-h1">Verification Infrastructure for Regulated Finance</h1>
+      <p class="t-body-lg">Safeheld exists to solve a fundamental problem in financial regulation: proving that client money is where it should be.</p>
     </div>
   </section>
 
-  <!-- Our Mission -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <div class="label">Our Mission</div>
-        <h2 class="h2">Replacing manual safeguarding with autonomous verification</h2>
-      </div>
-      <div class="grid-2" style="max-width: 960px; margin: 0 auto; gap: 48px;">
-        <div>
-          <p class="body-lg text-secondary" style="line-height: 1.8;">For over 18 years, the safeguarding of client funds has relied on manual reconciliation, spreadsheet-based processes, and periodic compliance checks. This approach cannot scale with the complexity of modern financial services.</p>
-        </div>
-        <div>
-          <p class="body-lg text-secondary" style="line-height: 1.8;">Safeheld replaces manual safeguarding processes with an autonomous verification engine &mdash; purpose-built for the regulatory demands of payments, investments, crypto assets, and emerging digital finance frameworks.</p>
-        </div>
-      </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       Mission
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="section bg-white">
+    <div class="container-narrow">
+      <p class="t-body-lg" style="margin-bottom:var(--space-md);">For over eighteen years, the safeguarding of client funds has depended on manual reconciliation, spreadsheet-based controls, and periodic compliance checks. This approach is structurally unable to scale with the complexity of modern financial services &mdash; across multiple jurisdictions, asset classes, and regulatory frameworks.</p>
+      <p class="t-body-lg">Safeheld provides autonomous verification infrastructure purpose-built for the regulatory demands of payments, investments, crypto custody, and emerging digital finance frameworks. The platform operates continuously and independently, removing the operational burden of manual compliance processes.</p>
     </div>
   </section>
 
-  <div class="section-divider"></div>
 
-  <!-- Values -->
-  <section class="section">
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       Values
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="section bg-gray">
     <div class="container">
-      <div class="section-header">
-        <div class="label">Our Values</div>
-        <h2 class="h2">What drives every decision we make</h2>
+      <div class="section-header center text-center">
+        <h2 class="t-h2">Principles</h2>
       </div>
-      <div class="about-values grid-3">
-        <div class="about-value card">
+
+      <div class="grid grid-3">
+
+        <div class="card">
           <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <polyline points="12 6 12 12 16 14"></polyline>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           </div>
           <h3>Regulatory Precision</h3>
-          <p>Built by compliance professionals who understand the weight of regulatory obligation. Every output is designed to withstand regulatory scrutiny.</p>
+          <p>Every output is designed for regulatory examination. Reconciliation, breach detection, and reporting are built to the standards required by tier-one regulators.</p>
         </div>
-        <div class="about-value card">
+
+        <div class="card">
           <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
           </div>
-          <h3>Autonomous Operation</h3>
-          <p>The platform operates continuously and independently. No manual intervention, no gaps in coverage, no human error in reconciliation.</p>
+          <h3>Continuous Operation</h3>
+          <p>The platform operates autonomously. No manual intervention, no gaps in coverage, no dependency on human reconciliation.</p>
         </div>
-        <div class="about-value card">
+
+        <div class="card">
           <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-              <path d="M9 12l2 2 4-4"></path>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M5 20V8l7-5 7 5v12"/><path d="M9 20v-4h6v4"/></svg>
           </div>
-          <h3>Institutional Trust</h3>
-          <p>Designed to the standards expected by tier-one banks, global regulators, and the most demanding compliance teams.</p>
+          <h3>Institutional Standard</h3>
+          <p>Infrastructure designed for the expectations of global banks, financial regulators, and compliance teams operating under FCA, EU, and US frameworks.</p>
         </div>
+
       </div>
     </div>
   </section>
 
-  <div class="section-divider"></div>
 
-  <!-- What We Cover -->
-  <section class="section">
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       Regulatory Coverage
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="section bg-white">
     <div class="container">
-      <div class="section-header">
-        <div class="label">Regulatory Coverage</div>
-        <h2 class="h2">What we cover</h2>
+      <div class="section-header center text-center">
+        <h2 class="t-h2">Regulatory Coverage</h2>
       </div>
-      <div class="grid-2" style="max-width: 960px; margin: 0 auto;">
+
+      <div class="grid grid-2">
+
         <div class="card">
           <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
-              <line x1="4" y1="22" x2="4" y2="15"></line>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
           </div>
-          <h3>UK FCA</h3>
-          <p>CASS, PS 17/19, e-money regulations</p>
+          <h3>United Kingdom</h3>
+          <p>FCA Client Assets sourcebook (CASS), Payment Services Regulations, e-money safeguarding requirements</p>
         </div>
+
         <div class="card">
           <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="2" y1="12" x2="22" y2="12"></line>
-              <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           </div>
-          <h3>EU</h3>
-          <p>Markets in Crypto-Assets Regulation (MiCA)</p>
+          <h3>European Union</h3>
+          <p>Markets in Crypto-Assets Regulation (MiCA), reserve and prudential requirements for CASPs and token issuers</p>
         </div>
+
         <div class="card">
           <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M2 20h20"></path>
-              <path d="M5 20V8l7-5 7 5v12"></path>
-              <path d="M9 20v-4h6v4"></path>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
           <h3>United States</h3>
-          <p>GENIUS Act, state money transmitter requirements</p>
+          <p>GENIUS Act stablecoin regulation, state-level money transmitter requirements</p>
         </div>
+
         <div class="card">
           <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <path d="M2 12h20"></path>
-              <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1L1 7l11 6 11-6-11-6z"/><path d="M1 17l11 6 11-6"/><path d="M1 12l11 6 11-6"/></svg>
           </div>
           <h3>Global</h3>
-          <p>Extensible framework for any jurisdiction</p>
+          <p>Extensible verification framework adaptable to any jurisdiction and regulatory regime</p>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- CTA Section -->
-  <section class="cta-section">
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       CTA
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="cta-section bg-gradient-navy">
     <div class="container">
-      <div class="cta-glow"></div>
       <div class="cta-content">
-        <h2 class="h2">Ready to modernise your safeguarding compliance?</h2>
-        <p>See how Safeheld automates reconciliation, breach management, and regulatory reporting across every regulated sector.</p>
+        <h2 class="t-h2">Request a Demo</h2>
+        <p class="t-body-lg">Speak with our team to discuss your compliance requirements.</p>
         <div class="hero-actions">
-          <a href="/contact" class="btn btn-primary btn-lg">Get Started</a>
-          <a href="/contact" class="btn btn-secondary btn-lg">Contact Sales</a>
+          <a href="/contact" class="btn btn-white btn-lg">Contact Sales</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       Footer
+       ═══════════════════════════════════════════════════════════════════════ -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
+
+        <!-- Brand -->
         <div class="footer-brand">
-          <a href="/" class="nav-logo" style="margin-bottom: 8px;">
-            <span class="nav-logo-mark">S</span>
+          <a href="/" class="nav-logo">
+            <div class="nav-logo-mark">S</div>
             Safeheld
           </a>
-          <p>The global verification layer for client funds. Autonomous compliance infrastructure for regulated finance.</p>
+          <p>The global verification layer for client funds. Autonomous compliance infrastructure for every regulated sector and jurisdiction.</p>
         </div>
+
+        <!-- Platform -->
         <div class="footer-col">
           <h4>Platform</h4>
-          <a href="/platform">Platform Overview</a>
-          <a href="/for-banks">For Banks</a>
-          <a href="/pricing">Pricing</a>
-          <a href="https://app.safeheld.com">Log in</a>
+          <a href="/platform">Platform</a>
+          <a href="/platform">Reconciliation</a>
+          <a href="/platform">Breach Detection</a>
+          <a href="/platform">Reporting</a>
+          <a href="/platform">Governance</a>
         </div>
+
+        <!-- Solutions -->
         <div class="footer-col">
           <h4>Solutions</h4>
           <a href="/solutions/payments">Payments</a>
@@ -311,24 +320,31 @@
           <a href="/solutions/mica">MiCA</a>
           <a href="/solutions/genius-act">GENIUS Act</a>
         </div>
+
+        <!-- Company -->
         <div class="footer-col">
           <h4>Company</h4>
           <a href="/about">About</a>
+          <a href="/pricing">Pricing</a>
           <a href="/contact">Contact</a>
+          <a href="/for-banks">For Banks</a>
         </div>
+
+        <!-- Resources -->
         <div class="footer-col">
           <h4>Resources</h4>
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/terms">Terms of Service</a>
-          <a href="/cookies">Cookie Policy</a>
+          <a href="/docs">Documentation</a>
+          <a href="/docs/api">API Reference</a>
         </div>
+
       </div>
+
       <div class="footer-bottom">
-        <p>&copy; 2026 Safeheld Ltd. All rights reserved.</p>
+        <p>&copy; 2025 Safeheld Ltd. All rights reserved.</p>
         <div class="footer-bottom-links">
-          <a href="/privacy">Privacy</a>
-          <a href="/terms">Terms</a>
-          <a href="/cookies">Cookies</a>
+          <a href="/legal/terms">Terms</a>
+          <a href="/legal/privacy">Privacy</a>
+          <a href="/legal/cookies">Cookies</a>
         </div>
       </div>
     </div>

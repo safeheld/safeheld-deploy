@@ -3,118 +3,134 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Safeheld for Banks — Real-time oversight of safeguarded funds. A dedicated dashboard giving banks and custodians continuous visibility into the segregation status of client funds held across their accounts.">
+  <meta name="description" content="Institutional oversight dashboard for banks holding client funds. Aggregate visibility into safeguarding status, real-time monitoring, reconciliation alerts, and API integration.">
+  <meta name="theme-color" content="#080E2C">
+  <meta property="og:title" content="For Banks — Safeheld">
+  <meta property="og:description" content="Institutional oversight dashboard for banks holding client funds. Real-time monitoring, automated alerts, and API integration.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://safeheld.com/for-banks">
   <title>For Banks — Safeheld</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233D3DFF'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='white' font-family='Inter,sans-serif' font-weight='800' font-size='20'%3ES%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- ── Navigation ─────────────────────────────────────────────────────── -->
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       Navigation
+       ═══════════════════════════════════════════════════════════════════════ -->
   <nav class="nav">
     <div class="nav-inner">
       <a href="/" class="nav-logo">
-        <span class="nav-logo-mark">S</span>
+        <div class="nav-logo-mark">S</div>
         Safeheld
       </a>
+
       <div class="nav-links">
         <a href="/platform" class="nav-link">Platform</a>
+
+        <!-- Solutions Dropdown -->
         <div class="nav-dropdown">
           <button class="nav-dropdown-trigger">
             Solutions
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 6 8 10 4"></polyline></svg>
+            <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
           <div class="nav-dropdown-menu">
+
+            <!-- Financial Services -->
             <div class="nav-dropdown-group-label">Financial Services</div>
             <a href="/solutions/payments" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>Payments</h4>
-                <p>EMIs &amp; payment institutions</p>
+                <p>PS25 safeguarding for EMIs and PIs</p>
               </div>
             </a>
             <a href="/solutions/investments" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>Investments</h4>
-                <p>Client assets &amp; custody</p>
+                <p>CASS 6, 7, 10 and CMAR reporting</p>
               </div>
             </a>
+
+            <!-- Digital Assets -->
             <div class="nav-dropdown-group-label">Digital Assets</div>
             <a href="/solutions/crypto" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>Crypto</h4>
-                <p>Digital asset custodians</p>
+                <p>On-chain wallet reconciliation</p>
               </div>
             </a>
             <a href="/solutions/stablecoins" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M16 8h-6a2 2 0 100 4h4a2 2 0 110 4H8"></path><path d="M12 18V6"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>Stablecoins</h4>
-                <p>Issuer compliance</p>
+                <p>Peg verification and reserve attestation</p>
               </div>
             </a>
             <a href="/solutions/mica" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"></path><path d="M5 20V8l7-5 7 5v12"></path><path d="M9 20v-4h6v4"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>MiCA</h4>
-                <p>EU crypto-asset regulation</p>
+                <p>EU Markets in Crypto-Assets regulation</p>
               </div>
             </a>
             <a href="/solutions/genius-act" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>GENIUS Act</h4>
-                <p>US stablecoin legislation</p>
+                <p>US stablecoin regulatory framework</p>
               </div>
             </a>
+
+            <!-- Other Sectors -->
             <div class="nav-dropdown-group-label">Other Sectors</div>
             <a href="/solutions/legal" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1"></rect></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1L1 7l11 6 11-6-11-6z"/><path d="M1 17l11 6 11-6"/><path d="M1 12l11 6 11-6"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>Legal</h4>
-                <p>SRA client money</p>
+                <p>SRA client money rules</p>
               </div>
             </a>
             <a href="/solutions/insurance" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M9 12l2 2 4-4"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>Insurance</h4>
-                <p>Client premium rules</p>
+                <p>FCA client premium rules</p>
               </div>
             </a>
             <a href="/solutions/gaming" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M12 12h.01"></path><path d="M17 12h.01"></path><path d="M7 12h.01"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>Gaming</h4>
-                <p>Player fund protection</p>
+                <p>Gambling Commission player funds</p>
               </div>
             </a>
             <a href="/solutions/real-estate" class="nav-dropdown-item">
               <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
               </div>
               <div class="nav-dropdown-item-text">
                 <h4>Real Estate</h4>
@@ -123,155 +139,172 @@
             </a>
           </div>
         </div>
+
         <a href="/for-banks" class="nav-link active">For Banks</a>
         <a href="/pricing" class="nav-link">Pricing</a>
         <a href="/about" class="nav-link">About</a>
       </div>
+
       <div class="nav-cta">
         <a href="https://app.safeheld.com" class="nav-login">Log in</a>
-        <a href="/contact" class="btn btn-primary btn-sm">Get Started</a>
+        <a href="/contact" class="btn btn-primary btn-sm">Request a Demo</a>
       </div>
-      <button class="nav-mobile-toggle" aria-label="Toggle menu">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
+
+      <button class="nav-mobile-toggle" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
     </div>
   </nav>
 
-  <!-- ── Page Hero ───────────────────────────────────────────────────────── -->
-  <section class="page-hero">
-    <div class="page-hero-bg">
-      <div class="hero-grid"></div>
-    </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       Page Hero
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="page-hero bg-white">
     <div class="container">
-      <div class="page-hero-label">FOR BANKS</div>
-      <h1 class="h1 page-hero-title">Real-Time Oversight of Safeguarded Funds</h1>
-      <p class="page-hero-desc">A dedicated dashboard giving banks and custodians continuous visibility into the segregation status of client funds held across their accounts.</p>
+      <span class="superheader">For Banks</span>
+      <h1 class="t-h1">Institutional Oversight Dashboard</h1>
+      <p class="t-body-lg">Aggregate visibility into the segregation status of client funds held across accounts at your institution. Real-time monitoring, automated alerts, API integration.</p>
     </div>
   </section>
 
-  <!-- ── Feature Grid ────────────────────────────────────────────────────── -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <div class="label">Capabilities</div>
-        <h2 class="h2">Complete oversight infrastructure</h2>
-        <p>Purpose-built tools giving banking partners continuous, structured visibility into the safeguarding compliance of firms holding client funds at your institution.</p>
-      </div>
-      <div class="banks-features grid-2">
-        <div class="bank-feature">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-            </svg>
-          </div>
-          <h3>Real-Time Monitoring</h3>
-          <p>Live view of safeguarding positions across all accounts. See inflows, outflows, and current segregation status.</p>
-        </div>
-        <div class="bank-feature">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"></path>
-              <line x1="12" y1="9" x2="12" y2="13"></line>
-              <line x1="12" y1="17" x2="12.01" y2="17"></line>
-            </svg>
-          </div>
-          <h3>Automated Reconciliation Alerts</h3>
-          <p>Receive notifications when reconciliation breaks are detected. Track resolution status and regulatory escalation.</p>
-        </div>
-        <div class="bank-feature">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-              <path d="M9 12l2 2 4-4"></path>
-            </svg>
-          </div>
-          <h3>Regulatory Compliance View</h3>
-          <p>Structured view of compliance status mapped to applicable regulations. Evidence of adequate safeguarding at your fingertips.</p>
-        </div>
-        <div class="bank-feature">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path>
-              <polyline points="14 2 14 8 20 8"></polyline>
-              <line x1="16" y1="13" x2="8" y2="13"></line>
-              <line x1="16" y1="17" x2="8" y2="17"></line>
-            </svg>
-          </div>
-          <h3>Audit-Ready Reporting</h3>
-          <p>Download regulatory-grade reports on demand. Full audit trail of all safeguarding events linked to your institution.</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ── Section Divider ─────────────────────────────────────────────────── -->
-  <div class="section-divider"></div>
-
-  <!-- ── How It Works ────────────────────────────────────────────────────── -->
-  <section class="section">
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       Capabilities Grid
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="section bg-gray">
     <div class="container">
       <div class="section-header">
-        <div class="label">How It Works</div>
-        <h2 class="h2">Three steps to continuous oversight</h2>
-        <p>Safeheld connects regulated firms to their banking partners through a shared compliance layer. No integration required on your side.</p>
+        <h2 class="t-h2">Oversight Capabilities</h2>
+        <p class="t-body-lg">Dedicated tooling for institutions holding safeguarded client funds.</p>
       </div>
-      <div class="grid-3">
-        <div class="card" style="text-align: center;">
-          <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--accent-subtle); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 1.2rem; font-weight: 700; color: var(--accent);">1</div>
-          <h3 style="margin-bottom: 12px;">Firms Connect Accounts</h3>
-          <p>Firms using Safeheld connect their accounts at your institution.</p>
+
+      <div class="grid grid-2">
+
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3>Real-Time Position Monitoring</h3>
+          <p>Live view of safeguarding positions across all accounts. Inflow, outflow, and current segregation status by firm.</p>
         </div>
-        <div class="card" style="text-align: center;">
-          <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--accent-subtle); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 1.2rem; font-weight: 700; color: var(--accent);">2</div>
-          <h3 style="margin-bottom: 12px;">Continuous Reconciliation</h3>
-          <p>Automated reconciliation runs continuously against your records.</p>
+
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <h3>Reconciliation Alerts</h3>
+          <p>Notification when reconciliation breaks are detected across any firm using Safeheld. Track resolution status and regulatory escalation.</p>
         </div>
-        <div class="card" style="text-align: center;">
-          <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--accent-subtle); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 1.2rem; font-weight: 700; color: var(--accent);">3</div>
-          <h3 style="margin-bottom: 12px;">Real-Time Dashboard</h3>
-          <p>Access your dedicated dashboard for real-time oversight.</p>
+
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <h3>Compliance Reporting</h3>
+          <p>Structured compliance view mapped to applicable regulations. Evidence of adequate safeguarding across your client base.</p>
         </div>
+
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </div>
+          <h3>API Integration</h3>
+          <p>RESTful API access for embedding safeguarding data into existing banking infrastructure and risk management systems.</p>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ── CTA Section ─────────────────────────────────────────────────────── -->
-  <section class="cta-section">
-    <div class="cta-glow"></div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       How It Works
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="section bg-white">
+    <div class="container">
+      <div class="section-header center text-center">
+        <h2 class="t-h2">How It Works</h2>
+      </div>
+
+      <div class="arch-diagram">
+
+        <div class="arch-step">
+          <div class="arch-step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </div>
+          <div class="arch-step-title">Firms Connect</div>
+          <div class="arch-step-desc">Regulated firms using Safeheld link their accounts at your institution</div>
+        </div>
+
+        <div class="arch-connector"></div>
+
+        <div class="arch-step">
+          <div class="arch-step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div class="arch-step-title">Continuous Verification</div>
+          <div class="arch-step-desc">Automated reconciliation runs against institution records</div>
+        </div>
+
+        <div class="arch-connector"></div>
+
+        <div class="arch-step">
+          <div class="arch-step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <div class="arch-step-title">Dashboard Access</div>
+          <div class="arch-step-desc">Real-time oversight via dedicated bank portal or API</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       CTA
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="cta-section bg-gradient-navy">
     <div class="container">
       <div class="cta-content">
-        <h2 class="h2">Explore the Bank Dashboard</h2>
-        <p>Contact sales to arrange a demonstration of the dedicated bank oversight dashboard.</p>
+        <h2 class="t-h2">Institutional access</h2>
+        <p class="t-body-lg">Contact our team to discuss bank integration and oversight capabilities.</p>
         <div class="hero-actions">
-          <a href="/contact" class="btn btn-primary btn-lg">Contact Sales</a>
-          <a href="/platform" class="btn btn-secondary btn-lg">View Platform</a>
+          <a href="/contact" class="btn btn-white btn-lg">Contact Sales</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── Footer ──────────────────────────────────────────────────────────── -->
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       Footer
+       ═══════════════════════════════════════════════════════════════════════ -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
+
+        <!-- Brand -->
         <div class="footer-brand">
-          <a href="/" class="nav-logo" style="margin-bottom: 4px;">
-            <span class="nav-logo-mark">S</span>
+          <a href="/" class="nav-logo">
+            <div class="nav-logo-mark">S</div>
             Safeheld
           </a>
-          <p>The global verification layer for client funds. Continuous proof that client money is properly safeguarded across every regulated sector.</p>
+          <p>The global verification layer for client funds. Autonomous compliance infrastructure for every regulated sector and jurisdiction.</p>
         </div>
+
+        <!-- Platform -->
         <div class="footer-col">
           <h4>Platform</h4>
-          <a href="/platform">Platform Overview</a>
-          <a href="/for-banks">For Banks</a>
-          <a href="/pricing">Pricing</a>
-          <a href="/contact">Contact Sales</a>
+          <a href="/platform">Platform</a>
+          <a href="/platform">Reconciliation</a>
+          <a href="/platform">Breach Detection</a>
+          <a href="/platform">Reporting</a>
+          <a href="/platform">Governance</a>
         </div>
+
+        <!-- Solutions -->
         <div class="footer-col">
           <h4>Solutions</h4>
           <a href="/solutions/payments">Payments</a>
@@ -281,27 +314,31 @@
           <a href="/solutions/mica">MiCA</a>
           <a href="/solutions/genius-act">GENIUS Act</a>
         </div>
+
+        <!-- Company -->
         <div class="footer-col">
           <h4>Company</h4>
           <a href="/about">About</a>
+          <a href="/pricing">Pricing</a>
           <a href="/contact">Contact</a>
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/terms">Terms of Service</a>
+          <a href="/for-banks">For Banks</a>
         </div>
+
+        <!-- Resources -->
         <div class="footer-col">
           <h4>Resources</h4>
-          <a href="/solutions/legal">Legal</a>
-          <a href="/solutions/insurance">Insurance</a>
-          <a href="/solutions/gaming">Gaming</a>
-          <a href="/solutions/real-estate">Real Estate</a>
+          <a href="/docs">Documentation</a>
+          <a href="/docs/api">API Reference</a>
         </div>
+
       </div>
+
       <div class="footer-bottom">
-        <p>&copy; 2026 Safeheld Ltd. All rights reserved.</p>
+        <p>&copy; 2025 Safeheld Ltd. All rights reserved.</p>
         <div class="footer-bottom-links">
-          <a href="/privacy">Privacy</a>
-          <a href="/terms">Terms</a>
-          <a href="/cookies">Cookies</a>
+          <a href="/legal/terms">Terms</a>
+          <a href="/legal/privacy">Privacy</a>
+          <a href="/legal/cookies">Cookies</a>
         </div>
       </div>
     </div>
