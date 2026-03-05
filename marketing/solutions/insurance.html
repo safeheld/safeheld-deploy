@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Client money verification for insurance brokers and intermediaries under FCA CASS 5. Premium reconciliation, IBA monitoring, and regulatory reporting.">
-  <title>Insurance — Client Premium Protection for Insurance Intermediaries — Safeheld</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233D3DFF'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='white' font-family='Inter,sans-serif' font-weight='800' font-size='20'%3ES%3C/text%3E%3C/svg%3E">
+  <title>Client Premium Safeguarding | Safeheld</title>
+  <meta name="description" content="FCA CASS 5 compliance for insurance brokers. Safeheld automates client premium money protection, trust account monitoring, and statutory trust compliance.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,230 +13,456 @@
 <body>
 
   <!-- ── Navigation ─────────────────────────────────────────────────────── -->
-  <nav class="nav">
+  <nav class="nav nav-solid">
     <div class="nav-inner">
-      <a href="/" class="nav-logo"><div class="nav-logo-mark">S</div> Safeheld</a>
+      <a href="/" class="nav-logo">
+        <div class="nav-mark">S</div>
+        Safeheld
+      </a>
       <div class="nav-links">
-        <a href="/platform" class="nav-link">Platform</a>
-        <div class="nav-dropdown">
-          <button class="nav-dropdown-trigger active">Solutions <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="nav-dropdown-menu">
-            <div class="nav-dropdown-group-label">Financial Services</div>
-            <a href="/solutions/payments" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><div class="nav-dropdown-item-text"><h4>Payments</h4><p>EMI &amp; PI safeguarding</p></div></a>
-            <a href="/solutions/investments" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="nav-dropdown-item-text"><h4>Investments</h4><p>CASS compliance</p></div></a>
-            <div class="nav-dropdown-group-label">Digital Assets</div>
-            <a href="/solutions/crypto" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></div><div class="nav-dropdown-item-text"><h4>Crypto</h4><p>Wallet reconciliation</p></div></a>
-            <a href="/solutions/stablecoins" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg></div><div class="nav-dropdown-item-text"><h4>Stablecoins</h4><p>Peg &amp; reserve verification</p></div></a>
-            <a href="/solutions/mica" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="nav-dropdown-item-text"><h4>MiCA</h4><p>EU crypto regulation</p></div></a>
-            <a href="/solutions/genius-act" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="nav-dropdown-item-text"><h4>GENIUS Act</h4><p>US stablecoin rules</p></div></a>
-            <div class="nav-dropdown-group-label">Other Sectors</div>
-            <a href="/solutions/legal" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="nav-dropdown-item-text"><h4>Legal</h4><p>SRA client money</p></div></a>
-            <a href="/solutions/insurance" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="nav-dropdown-item-text"><h4>Insurance</h4><p>Client premium rules</p></div></a>
-            <a href="/solutions/gaming" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><circle cx="17" cy="10" r="1"/><circle cx="15" cy="13" r="1"/></svg></div><div class="nav-dropdown-item-text"><h4>Gaming</h4><p>Player fund protection</p></div></a>
-            <a href="/solutions/real-estate" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="nav-dropdown-item-text"><h4>Real Estate</h4><p>Deposit protection</p></div></a>
+        <div class="nav-dd">
+          <div class="nav-dd-trigger">
+            Solutions
+            <svg viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="nav-dd-menu">
+            <div class="nav-dd-label">Regulatory Modules</div>
+            <a href="/solutions/payments" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10h20M2 14h20M6 18h2M12 18h6"/><rect x="2" y="6" width="20" height="14" rx="2"/></svg></div>
+              <div><h4>Payments (PS25)</h4><p>UK EMI &amp; PI safeguarding</p></div>
+            </a>
+            <a href="/solutions/cass" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 3v18"/></svg></div>
+              <div><h4>CASS</h4><p>FCA client assets regime</p></div>
+            </a>
+            <a href="/solutions/crypto" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12h6M12 9v6"/></svg></div>
+              <div><h4>Crypto</h4><p>On-chain wallet reconciliation</p></div>
+            </a>
+            <a href="/solutions/stablecoin" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M8 8h8M8 16h8"/></svg></div>
+              <div><h4>Stablecoin</h4><p>Reserve &amp; peg verification</p></div>
+            </a>
+            <a href="/solutions/mica" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><ellipse cx="12" cy="12" rx="4" ry="10"/></svg></div>
+              <div><h4>MiCA</h4><p>EU crypto regulation</p></div>
+            </a>
+            <a href="/solutions/genius-act" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 4v16"/></svg></div>
+              <div><h4>GENIUS Act</h4><p>US stablecoin regulation</p></div>
+            </a>
+            <div class="nav-dd-label">Sector Solutions</div>
+            <a href="/solutions/legal" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+              <div><h4>Legal</h4><p>SRA client money rules</p></div>
+            </a>
+            <a href="/solutions/insurance" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5.5-3.8 10.7-8 12-4.2-1.3-8-6.5-8-12V6l8-4z"/></svg></div>
+              <div><h4>Insurance</h4><p>FCA CASS 5 compliance</p></div>
+            </a>
+            <a href="/solutions/gaming" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg></div>
+              <div><h4>Gaming</h4><p>Player fund protection</p></div>
+            </a>
+            <a href="/solutions/real-estate" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg></div>
+              <div><h4>Real Estate</h4><p>Client deposit protection</p></div>
+            </a>
           </div>
         </div>
+        <a href="/platform" class="nav-link">Platform</a>
         <a href="/for-banks" class="nav-link">For Banks</a>
         <a href="/pricing" class="nav-link">Pricing</a>
         <a href="/about" class="nav-link">About</a>
       </div>
       <div class="nav-cta">
-        <a href="https://app.safeheld.com" class="nav-login">Log in</a>
-        <a href="/contact" class="btn btn-primary btn-sm">Request a Demo</a>
+        <a href="/login" class="nav-login">Log In</a>
+        <a href="/contact" class="btn btn-accent btn-sm">Request a Demo</a>
       </div>
-      <button class="nav-mobile-toggle" aria-label="Toggle menu">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
+      <button class="nav-mobile" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
-    </div>
-    <div class="nav-mobile-menu" id="mobileMenu">
-      <a href="/platform">Platform</a>
-      <a href="/solutions/payments">Payments</a>
-      <a href="/solutions/investments">Investments</a>
-      <a href="/solutions/crypto">Crypto</a>
-      <a href="/solutions/stablecoins">Stablecoins</a>
-      <a href="/solutions/mica">MiCA</a>
-      <a href="/solutions/genius-act">GENIUS Act</a>
-      <a href="/solutions/legal">Legal</a>
-      <a href="/solutions/insurance">Insurance</a>
-      <a href="/solutions/gaming">Gaming</a>
-      <a href="/solutions/real-estate">Real Estate</a>
-      <a href="/for-banks">For Banks</a>
-      <a href="/pricing">Pricing</a>
-      <a href="/about">About</a>
-      <a href="https://app.safeheld.com">Log in</a>
-      <a href="/contact" class="btn btn-primary" style="margin-top: 16px; text-align: center;">Request a Demo</a>
     </div>
   </nav>
 
-  <!-- ── Page Hero ────────────────────────────────────────────────────────── -->
-  <section class="page-hero bg-white">
-    <div class="page-hero-bg">
-      <div class="hero-grid"></div>
-    </div>
+  <!-- ── Page Header ────────────────────────────────────────────────────── -->
+  <header class="page-header bg-dark dark">
     <div class="container">
-      <span class="superheader">Insurance</span>
-      <h1 class="t-h1">Client Premium Protection for Insurance Intermediaries</h1>
-      <p class="t-body-lg">Client money verification for insurance brokers and intermediaries under FCA CASS 5.</p>
+      <div class="reveal">
+        <p class="t-label">INSURANCE</p>
+        <h1 class="t-h1">Client Premium Safeguarding</h1>
+        <p class="t-body-lg">FCA CASS 5 compliance for insurance brokers — continuous verification that client premium money is properly segregated, trust accounts are monitored, and statutory trust obligations are met at every stage of the premium handling chain.</p>
+      </div>
     </div>
-  </section>
+  </header>
 
-  <!-- ── Overview ─────────────────────────────────────────────────────────── -->
-  <section class="section bg-gray">
-    <div class="container-narrow">
-      <p class="t-body-lg">Insurance intermediaries regulated by the FCA must comply with the Client Assets sourcebook (CASS 5), which governs the handling and protection of client money. CASS 5 requires firms to segregate client premiums from their own funds, perform regular reconciliations, and maintain accurate records of all client money movements.</p>
-      <p class="t-body-lg" style="margin-top: var(--space-md);">Intermediaries must also manage Insurer Business Accounts (IBAs) appropriately, ensuring that funds held under risk transfer arrangements are properly categorised and tracked. The FCA expects firms to have robust systems and controls in place to prevent shortfalls and to detect breaches without delay.</p>
-      <p class="t-body-lg" style="margin-top: var(--space-md);">Safeheld provides automated verification infrastructure that enables insurance intermediaries to demonstrate continuous compliance with CASS 5 requirements &mdash; from premium receipt through reconciliation to regulatory reporting.</p>
-    </div>
-  </section>
-
-  <!-- ── Capabilities ─────────────────────────────────────────────────────── -->
+  <!-- ── Overview Section ───────────────────────────────────────────────── -->
   <section class="section bg-white">
     <div class="container">
-      <div class="section-header">
-        <span class="superheader">Capabilities</span>
-        <h2 class="t-h2">What Safeheld Delivers</h2>
+      <div class="sh center reveal">
+        <p class="t-label">Overview</p>
+        <h2 class="t-h2">Insurance Client Money Under CASS 5</h2>
+        <p class="t-body-lg">Insurance intermediaries hold billions in client premiums under statutory or non-statutory trust. FCA CASS 5 requires rigorous segregation, daily reconciliation, and robust governance. Manual processes cannot keep pace.</p>
       </div>
-      <div class="capability-grid">
-        <div class="capability">
-          <h4>Premium Reconciliation</h4>
-          <p>Automated matching of client premium records against insurance client money bank accounts. Every premium is tracked from receipt through to insurer remittance or client refund, with full transaction-level visibility.</p>
-        </div>
-        <div class="capability">
-          <h4>CASS 5 Compliance Monitoring</h4>
-          <p>Continuous verification of compliance with CASS 5 client money requirements. The platform monitors segregation obligations, reconciliation frequency, record-keeping standards, and client money calculation accuracy.</p>
-        </div>
-        <div class="capability">
-          <h4>Claims Fund Verification</h4>
-          <p>Verification that claims proceeds are properly handled and allocated. End-to-end tracking from insurer payment through to client disbursement with complete audit evidence at every stage.</p>
-        </div>
-        <div class="capability">
-          <h4>IBA Monitoring</h4>
-          <p>Monitoring of Insurer Business Accounts alongside client money accounts. Verification that funds held under risk transfer arrangements are properly categorised, tracked, and reported in accordance with CASS 5 requirements.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Key Requirements ─────────────────────────────────────────────────── -->
-  <section class="section bg-gray">
-    <div class="container">
-      <div class="section-header">
-        <span class="superheader">Key Requirements</span>
-        <h2 class="t-h2">CASS 5 Obligations Coverage</h2>
-        <p class="t-body-lg">Core obligations that insurance intermediaries must meet under FCA client money rules.</p>
-      </div>
-      <div class="grid-3">
+      <div class="grid g3 reveal">
         <div class="card">
           <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="7" height="7"></rect>
-              <rect x="14" y="3" width="7" height="7"></rect>
-              <rect x="3" y="14" width="7" height="7"></rect>
-              <rect x="14" y="14" width="7" height="7"></rect>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5.5-3.8 10.7-8 12-4.2-1.3-8-6.5-8-12V6l8-4z"/></svg>
           </div>
-          <h3>Premium Segregation</h3>
-          <p>Client premiums held in designated client money accounts, fully separated from the firm's own funds at all times.</p>
+          <h3>Statutory Trust Compliance</h3>
+          <p>CASS 5.3 requires insurance intermediaries to hold client money under statutory trust (or a non-statutory trust alternative). Safeheld continuously verifies trust status and account designations.</p>
         </div>
         <div class="card">
           <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <polyline points="12 6 12 12 16 14"></polyline>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
           </div>
           <h3>Daily Reconciliation</h3>
-          <p>Regular comparison of client money records against bank statements to identify and resolve discrepancies in accordance with CASS 5 frequency requirements.</p>
+          <p>CASS 5.5.63R mandates daily calculation and reconciliation of client money balances. Safeheld automates this entirely, ensuring your internal records match bank statements every business day.</p>
         </div>
         <div class="card">
           <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M12 11v6M9 14h6"/></svg>
           </div>
-          <h3>Client Money Calculation</h3>
-          <p>Accurate computation of total client money requirement with proper treatment of mixed remittance payments and premium adjustments.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="17 1 21 5 17 9"></polyline>
-              <path d="M3 11V9a4 4 0 014-4h14"></path>
-              <polyline points="7 23 3 19 7 15"></polyline>
-              <path d="M21 13v2a4 4 0 01-4 4H3"></path>
-            </svg>
-          </div>
-          <h3>Risk Transfer Verification</h3>
-          <p>Proper handling and documentation of risk transfer arrangements between intermediary, client, and insurer under CASS 5 provisions.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-              <polyline points="14 2 14 8 20 8"></polyline>
-              <line x1="16" y1="13" x2="8" y2="13"></line>
-              <line x1="16" y1="17" x2="8" y2="17"></line>
-              <polyline points="10 9 9 9 8 9"></polyline>
-            </svg>
-          </div>
-          <h3>Record Keeping</h3>
-          <p>Complete, accurate records of all client money transactions maintained in accordance with FCA requirements and available for regulatory examination.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
-              <line x1="4" y1="22" x2="4" y2="15"></line>
-            </svg>
-          </div>
-          <h3>Regulatory Reporting</h3>
-          <p>Structured outputs for FCA regulatory submissions with full audit evidence, data lineage, and compliance attestation support.</p>
+          <h3>CMAR Reporting Support</h3>
+          <p>Generate the data required for your Client Money and Assets Return submissions, with automated calculation of client money requirement figures aligned to FCA reporting periods.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── CTA Section ──────────────────────────────────────────────────────── -->
-  <section class="cta-section bg-gradient-navy">
+  <!-- ── Key Capabilities ───────────────────────────────────────────────── -->
+  <section class="section bg-light">
     <div class="container">
-      <div class="cta-content">
-        <h2 class="t-h2">Verify Your CASS 5 Compliance</h2>
-        <p class="t-body-lg">See how Safeheld automates client money verification and regulatory reporting for insurance intermediaries.</p>
-        <div class="hero-actions" style="justify-content: center;">
-          <a href="/contact" class="btn btn-primary btn-lg">Request a Demo</a>
+      <div class="sh center reveal">
+        <p class="t-label">Key Capabilities</p>
+        <h2 class="t-h2">Purpose-Built for Insurance Intermediaries</h2>
+        <p class="t-body-lg">From Lloyd's brokers to regional intermediaries, Safeheld handles the specific complexities of insurance client money — IBA accounts, risk transfer, and the premium trust chain.</p>
+      </div>
+
+      <!-- Feat Row 1 -->
+      <div class="feat reveal">
+        <div class="feat-content">
+          <p class="t-label">Reconciliation</p>
+          <h3 class="t-h3">Insurance Client Money Reconciliation</h3>
+          <p class="t-body">Perform the daily internal client money reconciliation required by CASS 5.5.63R. Safeheld compares your insurance broking system records against designated client money bank accounts, identifying discrepancies that could indicate a shortfall in client money held.</p>
+          <ul class="feat-list">
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Daily internal client money calculation per CASS 5.5.63R
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Separate tracking of IBA (Insurance Broking Account) and general client money
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Automated shortfall detection with immediate escalation to CF10a
+            </li>
+          </ul>
+        </div>
+        <div class="feat-visual">
+          <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Insurance reconciliation dashboard -->
+            <rect x="30" y="20" width="340" height="260" rx="12" fill="#F8F9FB" stroke="#E5E7EB"/>
+            <text x="55" y="48" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#080E2C">Daily Client Money Calculation</text>
+            <text x="345" y="48" text-anchor="end" font-family="Inter,sans-serif" font-size="10" fill="#9CA3AF">5 Mar 2026</text>
+            <!-- Client Money Requirement box -->
+            <rect x="55" y="60" width="135" height="56" rx="8" fill="white" stroke="#E5E7EB"/>
+            <text x="67" y="78" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#9CA3AF">CLIENT MONEY REQUIREMENT</text>
+            <text x="67" y="102" font-family="Inter,sans-serif" font-size="18" font-weight="700" fill="#080E2C">$4,812,450</text>
+            <!-- Client Money Resource box -->
+            <rect x="210" y="60" width="135" height="56" rx="8" fill="white" stroke="#E5E7EB"/>
+            <text x="222" y="78" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#9CA3AF">CLIENT MONEY RESOURCE</text>
+            <text x="222" y="102" font-family="Inter,sans-serif" font-size="18" font-weight="700" fill="#10B981">$4,856,200</text>
+            <!-- Surplus -->
+            <rect x="55" y="128" width="290" height="32" rx="6" fill="#10B981" fill-opacity="0.08" stroke="#10B981" stroke-opacity="0.2"/>
+            <text x="200" y="149" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#059669">Surplus: $43,750 (0.91%)</text>
+            <!-- Account breakdown -->
+            <text x="55" y="185" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#6B7280">Account Breakdown</text>
+            <rect x="55" y="195" width="290" height="24" rx="4" fill="white" stroke="#E5E7EB"/>
+            <text x="67" y="211" font-family="Inter,sans-serif" font-size="10" fill="#374151">IBA — Barclays ***4821</text>
+            <text x="333" y="211" text-anchor="end" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#080E2C">$3,214,600</text>
+            <rect x="55" y="223" width="290" height="24" rx="4" fill="white" stroke="#E5E7EB"/>
+            <text x="67" y="239" font-family="Inter,sans-serif" font-size="10" fill="#374151">IBA — Lloyds ***7392</text>
+            <text x="333" y="239" text-anchor="end" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#080E2C">$1,241,600</text>
+            <rect x="55" y="251" width="290" height="24" rx="4" fill="white" stroke="#E5E7EB"/>
+            <text x="67" y="267" font-family="Inter,sans-serif" font-size="10" fill="#374151">General Client Money — HSBC ***0156</text>
+            <text x="333" y="267" text-anchor="end" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#080E2C">$400,000</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Feat Row 2 -->
+      <div class="feat reverse reveal">
+        <div class="feat-content">
+          <p class="t-label">Monitoring</p>
+          <h3 class="t-h3">Trust Account Monitoring</h3>
+          <p class="t-body">CASS 5 requires client money to be held in properly designated trust accounts with approved banks. Safeheld monitors account designations, trust acknowledgement letters, and bank status to ensure your trust arrangements remain valid at all times.</p>
+          <ul class="feat-list">
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Track trust acknowledgement letter status for every client money account
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Monitor approved bank status against FCA approved institution lists
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Alert when account designation changes or trust letters expire
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Verify diversification of client money across multiple approved banks
+            </li>
+          </ul>
+        </div>
+        <div class="feat-visual">
+          <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Trust account monitoring -->
+            <rect x="30" y="20" width="340" height="260" rx="12" fill="#F8F9FB" stroke="#E5E7EB"/>
+            <text x="55" y="48" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#080E2C">Trust Account Status</text>
+            <!-- Account 1 -->
+            <rect x="55" y="62" width="290" height="52" rx="8" fill="white" stroke="#E5E7EB"/>
+            <circle cx="76" cy="82" r="10" fill="#10B981" fill-opacity="0.12"/>
+            <svg x="70" y="76" width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6L5 8.5L9.5 4" stroke="#10B981" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+            <text x="96" y="78" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#080E2C">Barclays IBA ***4821</text>
+            <text x="96" y="94" font-family="Inter,sans-serif" font-size="10" fill="#9CA3AF">Trust letter: Valid | Designation: Correct | Bank: Approved</text>
+            <rect x="295" y="74" width="40" height="18" rx="9" fill="#10B981" fill-opacity="0.12"/>
+            <text x="315" y="87" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#10B981">Valid</text>
+            <!-- Account 2 -->
+            <rect x="55" y="122" width="290" height="52" rx="8" fill="white" stroke="#E5E7EB"/>
+            <circle cx="76" cy="142" r="10" fill="#10B981" fill-opacity="0.12"/>
+            <svg x="70" y="136" width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6L5 8.5L9.5 4" stroke="#10B981" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+            <text x="96" y="138" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#080E2C">Lloyds IBA ***7392</text>
+            <text x="96" y="154" font-family="Inter,sans-serif" font-size="10" fill="#9CA3AF">Trust letter: Valid | Designation: Correct | Bank: Approved</text>
+            <rect x="295" y="134" width="40" height="18" rx="9" fill="#10B981" fill-opacity="0.12"/>
+            <text x="315" y="147" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#10B981">Valid</text>
+            <!-- Account 3 - Warning -->
+            <rect x="55" y="182" width="290" height="52" rx="8" fill="#FFFBEB" stroke="#FDE68A"/>
+            <circle cx="76" cy="202" r="10" fill="#F59E0B" fill-opacity="0.12"/>
+            <text x="76" y="206" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#F59E0B">!</text>
+            <text x="96" y="198" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#080E2C">HSBC General ***0156</text>
+            <text x="96" y="214" font-family="Inter,sans-serif" font-size="10" fill="#92400E">Trust letter: Expires in 14 days | Action required</text>
+            <rect x="282" y="194" width="53" height="18" rx="9" fill="#F59E0B" fill-opacity="0.12"/>
+            <text x="308" y="207" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#D97706">Renew</text>
+            <!-- Diversification -->
+            <text x="55" y="256" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#6B7280">Diversification Check</text>
+            <rect x="55" y="262" width="290" height="6" rx="3" fill="#E5E7EB"/>
+            <rect x="55" y="262" width="190" height="6" rx="3" fill="#3D3DFF"/>
+            <rect x="245" y="262" width="60" height="6" rx="3" fill="#3D3DFF" fill-opacity="0.5"/>
+            <rect x="305" y="262" width="40" height="6" rx="3" fill="#3D3DFF" fill-opacity="0.3"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Feat Row 3 -->
+      <div class="feat reveal">
+        <div class="feat-content">
+          <p class="t-label">Verification</p>
+          <h3 class="t-h3">Premium Handling Verification</h3>
+          <p class="t-body">Track the full lifecycle of client premiums from collection through to remittance to insurers. Safeheld verifies that premiums are handled correctly at every stage, with risk transfer points clearly identified and documented for regulatory purposes.</p>
+          <ul class="feat-list">
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              End-to-end premium flow tracking from policyholder to insurer
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Risk transfer point identification per CASS 5.2 definitions
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Aged premium analysis to flag delayed remittances to underwriters
+            </li>
+          </ul>
+        </div>
+        <div class="feat-visual">
+          <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Premium flow diagram -->
+            <rect x="30" y="20" width="340" height="260" rx="12" fill="#F8F9FB" stroke="#E5E7EB"/>
+            <text x="200" y="48" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#080E2C">Premium Handling Flow</text>
+            <!-- Policyholder -->
+            <rect x="55" y="70" width="90" height="40" rx="8" fill="#3D3DFF" fill-opacity="0.08" stroke="#3D3DFF" stroke-opacity="0.3"/>
+            <text x="100" y="87" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#3D3DFF">Policyholder</text>
+            <text x="100" y="101" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#080E2C">$12,500</text>
+            <!-- Arrow -->
+            <path d="M145 90 L170 90" stroke="#3D3DFF" stroke-width="1.5" marker-end="url(#arrowIns)"/>
+            <!-- IBA Account -->
+            <rect x="170" y="65" width="100" height="50" rx="8" fill="#080E2C"/>
+            <text x="220" y="83" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#CBD1E0">IBA Account</text>
+            <text x="220" y="100" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="white">In Trust</text>
+            <!-- Arrow -->
+            <path d="M270 90 L295 90" stroke="#3D3DFF" stroke-width="1.5" marker-end="url(#arrowIns)"/>
+            <!-- Insurer -->
+            <rect x="295" y="70" width="75" height="40" rx="8" fill="#10B981" fill-opacity="0.12" stroke="#10B981" stroke-opacity="0.3"/>
+            <text x="332" y="87" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#059669">Insurer</text>
+            <text x="332" y="101" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#059669">$12,500</text>
+            <!-- Risk transfer indicator -->
+            <rect x="150" y="125" width="140" height="22" rx="4" fill="#3D3DFF" fill-opacity="0.06"/>
+            <text x="220" y="140" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#3D3DFF">Risk Transfer Point: Day 3</text>
+            <!-- Aged premiums table -->
+            <text x="55" y="172" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#6B7280">Aged Premium Analysis</text>
+            <rect x="55" y="182" width="290" height="22" rx="0" fill="#F1F3F7"/>
+            <text x="67" y="197" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#6B7280">Period</text>
+            <text x="170" y="197" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#6B7280">Amount</text>
+            <text x="260" y="197" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#6B7280">Policies</text>
+            <text x="330" y="197" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#6B7280">Status</text>
+            <!-- Row 1 -->
+            <rect x="55" y="204" width="290" height="22" rx="0" fill="white" stroke="#E5E7EB" stroke-width="0.5"/>
+            <text x="67" y="219" font-family="Inter,sans-serif" font-size="9" fill="#374151">0-30 days</text>
+            <text x="170" y="219" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#374151">$2,140,800</text>
+            <text x="260" y="219" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#374151">342</text>
+            <circle cx="318" cy="215" r="4" fill="#10B981"/><text x="330" y="219" font-family="Inter,sans-serif" font-size="9" fill="#059669">OK</text>
+            <!-- Row 2 -->
+            <rect x="55" y="226" width="290" height="22" rx="0" fill="white" stroke="#E5E7EB" stroke-width="0.5"/>
+            <text x="67" y="241" font-family="Inter,sans-serif" font-size="9" fill="#374151">31-60 days</text>
+            <text x="170" y="241" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#374151">$485,200</text>
+            <text x="260" y="241" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#374151">67</text>
+            <circle cx="318" cy="237" r="4" fill="#F59E0B"/><text x="330" y="241" font-family="Inter,sans-serif" font-size="9" fill="#D97706">Review</text>
+            <!-- Row 3 -->
+            <rect x="55" y="248" width="290" height="22" rx="0" fill="#FEF2F2" stroke="#FECACA" stroke-width="0.5"/>
+            <text x="67" y="263" font-family="Inter,sans-serif" font-size="9" fill="#991B1B">60+ days</text>
+            <text x="170" y="263" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#991B1B">$34,100</text>
+            <text x="260" y="263" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#991B1B">5</text>
+            <circle cx="318" cy="259" r="4" fill="#EF4444"/><text x="330" y="263" font-family="Inter,sans-serif" font-size="9" fill="#DC2626">Alert</text>
+            <!-- Arrow marker -->
+            <defs><marker id="arrowIns" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0 0L8 3L0 6" fill="#3D3DFF"/></marker></defs>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Feat Row 4 -->
+      <div class="feat reverse reveal">
+        <div class="feat-content">
+          <p class="t-label">Governance</p>
+          <h3 class="t-h3">Statutory Trust Compliance</h3>
+          <p class="t-body">Ensure your firm's client money arrangements meet CASS 5.3 statutory trust requirements. Safeheld monitors trust deed status, client money distribution documentation, and the governance framework required by your CF10a (CASS Operational Oversight function holder).</p>
+          <ul class="feat-list">
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Statutory trust vs non-statutory trust arrangement tracking
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              CASS resolution pack documentation status monitoring
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              CF10a governance dashboard with escalation workflows
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Annual CASS audit preparation with pre-populated evidence packs
+            </li>
+          </ul>
+        </div>
+        <div class="feat-visual">
+          <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Governance dashboard -->
+            <rect x="30" y="20" width="340" height="260" rx="12" fill="#F8F9FB" stroke="#E5E7EB"/>
+            <text x="55" y="48" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#080E2C">CASS 5 Governance Overview</text>
+            <!-- Trust arrangement -->
+            <rect x="55" y="62" width="140" height="70" rx="8" fill="white" stroke="#E5E7EB"/>
+            <text x="67" y="80" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#9CA3AF">TRUST ARRANGEMENT</text>
+            <text x="67" y="98" font-family="Inter,sans-serif" font-size="14" font-weight="700" fill="#080E2C">Statutory</text>
+            <circle cx="82" cy="118" r="5" fill="#10B981"/>
+            <text x="94" y="122" font-family="Inter,sans-serif" font-size="10" fill="#059669">Active &amp; Valid</text>
+            <!-- CASS Resolution Pack -->
+            <rect x="205" y="62" width="140" height="70" rx="8" fill="white" stroke="#E5E7EB"/>
+            <text x="217" y="80" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#9CA3AF">RESOLUTION PACK</text>
+            <text x="217" y="98" font-family="Inter,sans-serif" font-size="14" font-weight="700" fill="#080E2C">Up to Date</text>
+            <text x="217" y="122" font-family="Inter,sans-serif" font-size="10" fill="#9CA3AF">Last reviewed: 18 Feb 2026</text>
+            <!-- CF10a Tasks -->
+            <text x="55" y="155" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#6B7280">CF10a Oversight Tasks</text>
+            <rect x="55" y="165" width="290" height="28" rx="6" fill="white" stroke="#E5E7EB"/>
+            <circle cx="74" cy="179" r="6" fill="#10B981"/>
+            <path d="M71 179l2 2 3-3" stroke="white" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+            <text x="88" y="183" font-family="Inter,sans-serif" font-size="10" fill="#374151">Monthly client money review — completed 28 Feb</text>
+            <rect x="55" y="197" width="290" height="28" rx="6" fill="white" stroke="#E5E7EB"/>
+            <circle cx="74" cy="211" r="6" fill="#10B981"/>
+            <path d="M71 211l2 2 3-3" stroke="white" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+            <text x="88" y="215" font-family="Inter,sans-serif" font-size="10" fill="#374151">Reconciliation exception review — 0 outstanding</text>
+            <rect x="55" y="229" width="290" height="28" rx="6" fill="#FFFBEB" stroke="#FDE68A"/>
+            <circle cx="74" cy="243" r="6" fill="#F59E0B"/>
+            <text x="74" y="247" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" font-weight="700" fill="white">!</text>
+            <text x="88" y="247" font-family="Inter,sans-serif" font-size="10" fill="#92400E">Annual CASS audit preparation — due 31 Mar 2026</text>
+            <!-- Progress bar -->
+            <text x="55" y="272" font-family="Inter,sans-serif" font-size="9" fill="#9CA3AF">CASS audit readiness</text>
+            <rect x="175" y="264" width="170" height="6" rx="3" fill="#E5E7EB"/>
+            <rect x="175" y="264" width="125" height="6" rx="3" fill="#3D3DFF"/>
+            <text x="350" y="272" text-anchor="end" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#3D3DFF">74%</text>
+          </svg>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── Footer ───────────────────────────────────────────────────────────── -->
+  <!-- ── How It Works ───────────────────────────────────────────────────── -->
+  <section class="section bg-dark dark">
+    <div class="container">
+      <div class="sh center reveal">
+        <p class="t-label">How It Works</p>
+        <h2 class="t-h2">CASS 5 Compliance in Three Steps</h2>
+        <p class="t-body-lg">Connect your insurance broking systems and bank accounts. Safeheld handles the daily reconciliation, trust monitoring, and governance reporting your CF10a needs.</p>
+      </div>
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Connect Systems</h3>
+          <p>Link your insurance broking platform and designated client money bank accounts. Safeheld integrates with major IBA providers and UK clearing banks.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Daily Verification</h3>
+          <p>Each business day, Safeheld performs the client money calculation, reconciles against bank balances, and flags any shortfall or surplus requiring attention.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Govern &amp; Report</h3>
+          <p>Your CF10a reviews a compliance dashboard, signs off on exceptions, and generates CMAR data and CASS audit evidence packs with a single click.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA Section ────────────────────────────────────────────────────── -->
+  <section class="cta-section bg-white">
+    <div class="container reveal">
+      <p class="t-label">Get Started</p>
+      <h2 class="t-h2">Safeguard Client Premiums with Confidence</h2>
+      <p class="t-body-lg" style="max-width:560px;margin:0 auto 32px">Insurance brokers across the UK rely on Safeheld to automate CASS 5 compliance, reduce operational risk, and give their CF10a the tools to govern client money effectively.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="/contact" class="btn btn-accent btn-lg">Request a Demo</a>
+        <a href="/platform" class="btn btn-outline btn-lg">Explore the Platform</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────────────────────── -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/" class="nav-logo" style="margin-bottom: 4px;"><div class="nav-logo-mark">S</div> Safeheld</a>
-          <p>The global verification layer for client funds. Autonomous compliance infrastructure for regulated finance.</p>
+          <a href="/" class="nav-logo">
+            <div class="nav-mark">S</div>
+            Safeheld
+          </a>
+          <p>The verification layer for client funds. Proving client money is safeguarded across every regulated sector.</p>
         </div>
         <div class="footer-col">
           <h4>Platform</h4>
           <a href="/platform">Overview</a>
-          <a href="/platform">Reconciliation</a>
-          <a href="/platform">Breach Detection</a>
-          <a href="/platform">Reporting</a>
-          <a href="/platform">Governance</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/for-banks">For Banks</a>
+          <a href="/contact">Request a Demo</a>
         </div>
         <div class="footer-col">
           <h4>Solutions</h4>
-          <a href="/solutions/payments">Payments</a>
-          <a href="/solutions/investments">Investments</a>
+          <a href="/solutions/payments">Payments (PS25)</a>
+          <a href="/solutions/cass">CASS</a>
           <a href="/solutions/crypto">Crypto</a>
-          <a href="/solutions/stablecoins">Stablecoins</a>
-          <a href="/solutions/mica">MiCA</a>
-          <a href="/solutions/genius-act">GENIUS Act</a>
+          <a href="/solutions/stablecoin">Stablecoin</a>
           <a href="/solutions/legal">Legal</a>
           <a href="/solutions/insurance">Insurance</a>
           <a href="/solutions/gaming">Gaming</a>
@@ -246,33 +471,36 @@
         <div class="footer-col">
           <h4>Company</h4>
           <a href="/about">About</a>
-          <a href="/pricing">Pricing</a>
           <a href="/contact">Contact</a>
-          <a href="/for-banks">For Banks</a>
         </div>
         <div class="footer-col">
-          <h4>Resources</h4>
-          <a href="/docs">Documentation</a>
-          <a href="/api">API Reference</a>
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2025 Safeheld Ltd. All rights reserved.</p>
-        <div class="footer-bottom-links"><a href="/terms">Terms</a><a href="/privacy">Privacy</a><a href="/cookies">Cookies</a></div>
+        <p>&copy; 2026 Safeheld. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+        </div>
       </div>
     </div>
   </footer>
 
+  <!-- ── Reveal Animation ───────────────────────────────────────────────── -->
   <script>
-    (function () {
-      var toggle = document.querySelector('.nav-mobile-toggle');
-      var menu = document.getElementById('mobileMenu');
-      if (toggle && menu) {
-        toggle.addEventListener('click', function () {
-          menu.classList.toggle('open');
+    document.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
         });
-      }
-    })();
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    });
   </script>
 
 </body>

@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Automated client money and custody asset reconciliation under FCA CASS 6, CASS 7, and CASS 10. CMAR generation, daily reconciliation, and governance oversight for investment firms.">
-  <title>Investments — CASS Compliance — Safeheld</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233D3DFF'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='white' font-family='Inter,sans-serif' font-weight='800' font-size='20'%3ES%3C/text%3E%3C/svg%3E">
+  <title>CASS Compliance Automation | SafeHeld</title>
+  <meta name="description" content="CASS 6, CASS 7, CASS 10, and CMAR reporting automation for UK investment firms. Client money reconciliation, custody asset verification, and resolution pack preparation.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,250 +12,456 @@
 </head>
 <body>
 
-  <!-- ── Navigation ─────────────────────────────────────────────────────── -->
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo">
-        <div class="nav-logo-mark">S</div>
-        Safeheld
-      </a>
-      <div class="nav-links">
-        <a href="/platform" class="nav-link">Platform</a>
-        <div class="nav-dropdown">
-          <button class="nav-dropdown-trigger active">
-            Solutions
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="nav-dropdown-menu">
-            <div class="nav-dropdown-group-label">Financial Services</div>
-            <a href="/solutions/payments" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Payments</h4><p>EMI &amp; PI safeguarding</p></div>
-            </a>
-            <a href="/solutions/investments" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Investments</h4><p>CASS compliance</p></div>
-            </a>
-            <div class="nav-dropdown-group-label">Digital Assets</div>
-            <a href="/solutions/crypto" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Crypto</h4><p>Wallet reconciliation</p></div>
-            </a>
-            <a href="/solutions/stablecoins" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Stablecoins</h4><p>Peg &amp; reserve verification</p></div>
-            </a>
-            <a href="/solutions/mica" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>MiCA</h4><p>EU crypto regulation</p></div>
-            </a>
-            <a href="/solutions/genius-act" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>GENIUS Act</h4><p>US stablecoin rules</p></div>
-            </a>
-            <div class="nav-dropdown-group-label">Other Sectors</div>
-            <a href="/solutions/legal" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Legal</h4><p>SRA client money</p></div>
-            </a>
-            <a href="/solutions/insurance" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Insurance</h4><p>Client premium rules</p></div>
-            </a>
-            <a href="/solutions/gaming" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><circle cx="17" cy="10" r="1"/><circle cx="15" cy="13" r="1"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Gaming</h4><p>Player fund protection</p></div>
-            </a>
-            <a href="/solutions/real-estate" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Real Estate</h4><p>Deposit protection</p></div>
-            </a>
-          </div>
-        </div>
-        <a href="/for-banks" class="nav-link">For Banks</a>
-        <a href="/pricing" class="nav-link">Pricing</a>
-        <a href="/about" class="nav-link">About</a>
-      </div>
-      <div class="nav-cta">
-        <a href="https://app.safeheld.com" class="nav-login">Log in</a>
-        <a href="/contact" class="btn btn-primary btn-sm">Request a Demo</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- ── Page Hero ────────────────────────────────────────────────────────── -->
-  <section class="page-hero bg-white">
-    <div class="container">
-      <span class="superheader">Investments</span>
-      <h1 class="t-h1">CASS Compliance for Investment Firms</h1>
-      <p class="t-body-lg">Automated client money and custody asset reconciliation under FCA CASS 6, CASS 7, and CASS 10.</p>
-    </div>
-  </section>
-
-  <!-- ── Overview ──────────────────────────────────────────────────────────── -->
-  <section class="section bg-gray">
-    <div class="container">
-      <div class="section-header">
-        <span class="superheader">Overview</span>
-        <h2 class="t-h2">The CASS Regulatory Framework</h2>
-      </div>
-      <div class="grid grid-2">
-        <div>
-          <p class="t-body">The FCA Client Assets sourcebook imposes daily reconciliation obligations on investment firms holding client money and custody assets. CASS 7.6 requires firms to perform an internal client money reconciliation on each business day, comparing client entitlements against records of money held. External reconciliation against third-party bank statements must also be conducted. For custody assets, CASS 6.6 mandates regular reconciliation between internal records and those of third-party custodians.</p>
-        </div>
-        <div>
-          <p class="t-body">Beyond reconciliation, firms must submit the Client Money and Assets Return (CMAR) to the FCA, maintain a resolution pack for orderly wind-down scenarios, and operate within the CASS 10 governance framework. The CF10a function carries direct personal accountability for CASS compliance. Failures in any of these areas carry enforcement consequences and may result in client money audit qualifications.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Capabilities ──────────────────────────────────────────────────────── -->
-  <section class="section bg-white">
-    <div class="container">
-      <div class="section-header">
-        <span class="superheader">Capabilities</span>
-        <h2 class="t-h2">Verification Infrastructure</h2>
-      </div>
-      <div class="capability-grid">
-        <div class="capability">
-          <h4>CASS 7 Client Money Reconciliation</h4>
-          <p>Internal and external client money reconciliation performed on every business day as required by CASS 7.6.15. Configurable tolerance thresholds with break identification and resolution tracking.</p>
-        </div>
-        <div class="capability">
-          <h4>CASS 6 Custody Asset Reconciliation</h4>
-          <p>Reconciliation of custody asset records between internal systems and third-party custodians. Continuous verification of asset positions and client entitlements against custodian confirmations.</p>
-        </div>
-        <div class="capability">
-          <h4>CMAR Generation</h4>
-          <p>Structured data outputs mapped to CMAR submission requirements. Complete data lineage from source records through to return figures, enabling traceability for every reported value.</p>
-        </div>
-        <div class="capability">
-          <h4>CASS 10 Governance Framework</h4>
-          <p>Governance map, oversight attestation workflows, and compliance monitoring aligned to CASS 10 requirements. Structured approval chains with recorded evidence for CF10a accountability.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Key Requirements ──────────────────────────────────────────────────── -->
-  <section class="section bg-gray">
-    <div class="container">
-      <div class="section-header">
-        <span class="superheader">Requirements</span>
-        <h2 class="t-h2">Key CASS Requirements</h2>
-      </div>
-      <div class="grid grid-3">
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </div>
-          <h3 class="t-h4">Daily Internal Reconciliation</h3>
-          <p>CASS 7.6 mandates that firms reconcile client money balances internally on each business day. This involves comparing the total of individual client entitlements against the firm's record of client money held.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <h3 class="t-h4">External Reconciliation</h3>
-          <p>Firms must reconcile their own records of client money held against statements from banks and third parties where client money is deposited. Any discrepancies must be investigated and resolved promptly.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          </div>
-          <h3 class="t-h4">Client Money Calculation</h3>
-          <p>The client money resource calculation determines whether the firm holds sufficient money in designated client accounts. Both the standard and alternative approach must account for all relevant adjustments.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-          </div>
-          <h3 class="t-h4">Resolution Pack</h3>
-          <p>CASS 10 requires firms to maintain a resolution pack containing sufficient information to facilitate the orderly distribution of client assets in the event of firm failure. This pack must be kept current.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
-          </div>
-          <h3 class="t-h4">CASS Operational Oversight</h3>
-          <p>The CASS operational oversight function (CF10a) carries personal responsibility for the firm's compliance with CASS. The governance framework must document oversight arrangements and approval chains.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          </div>
-          <h3 class="t-h4">Audit and Examination Evidence</h3>
-          <p>Firms must produce a complete audit trail supporting every reconciliation, calculation, and compliance decision. This evidence must be available for the annual CASS audit and FCA supervisory examination.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── CTA Section ──────────────────────────────────────────────────────── -->
-  <section class="bg-gradient-navy cta-section">
-    <div class="container">
-      <h2 class="t-h2">See how Safeheld works for investment firms</h2>
-      <p class="t-body-lg">Learn how verification infrastructure supports CASS 6, CASS 7, and CASS 10 compliance obligations.</p>
-      <a href="/contact" class="btn btn-white btn-lg">Request a Demo</a>
-    </div>
-  </section>
-
-  <!-- ── Footer ───────────────────────────────────────────────────────────── -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="/" class="nav-logo">
-            <div class="nav-logo-mark">S</div>
-            Safeheld
+<!-- ── Nav ─────────────────────────────────────────────────────────────── -->
+<nav class="nav nav-solid">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <div class="nav-mark">S</div>
+      SafeHeld
+    </a>
+    <div class="nav-links">
+      <div class="nav-dd">
+        <button class="nav-dd-trigger">
+          Solutions
+          <svg viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-dd-menu">
+          <div class="nav-dd-label">Regulatory Modules</div>
+          <a href="/solutions/payments" class="nav-dd-item">
+            <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 010-4h14v4"/><path d="M3 5v14a2 2 0 002 2h16v-5"/><path d="M18 12a2 2 0 000 4h4v-4h-4z"/></svg></div>
+            <div><h4>PS25 Safeguarding</h4><p>UK EMI &amp; PI compliance</p></div>
           </a>
-          <p>The global verification layer for client funds. Autonomous compliance infrastructure for regulated finance.</p>
-        </div>
-        <div class="footer-col">
-          <h4>Platform</h4>
-          <a href="/platform">Overview</a>
-          <a href="/platform">Reconciliation</a>
-          <a href="/platform">Breach Detection</a>
-          <a href="/platform">Reporting</a>
-          <a href="/platform">Governance</a>
-        </div>
-        <div class="footer-col">
-          <h4>Solutions</h4>
-          <a href="/solutions/payments">Payments</a>
-          <a href="/solutions/investments">Investments</a>
-          <a href="/solutions/crypto">Crypto</a>
-          <a href="/solutions/stablecoins">Stablecoins</a>
-          <a href="/solutions/mica">MiCA</a>
-          <a href="/solutions/genius-act">GENIUS Act</a>
-          <a href="/solutions/legal">Legal</a>
-          <a href="/solutions/insurance">Insurance</a>
-          <a href="/solutions/gaming">Gaming</a>
-          <a href="/solutions/real-estate">Real Estate</a>
-        </div>
-        <div class="footer-col">
-          <h4>Company</h4>
-          <a href="/about">About</a>
-          <a href="/pricing">Pricing</a>
-          <a href="/contact">Contact</a>
-          <a href="/for-banks">For Banks</a>
-        </div>
-        <div class="footer-col">
-          <h4>Resources</h4>
-          <a href="/docs">Documentation</a>
-          <a href="/api">API Reference</a>
+          <a href="/solutions/investments" class="nav-dd-item">
+            <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+            <div><h4>CASS Compliance</h4><p>Investment firm rules</p></div>
+          </a>
+          <a href="/solutions/crypto" class="nav-dd-item">
+            <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".5"/></svg></div>
+            <div><h4>Crypto Custody</h4><p>On-chain verification</p></div>
+          </a>
+          <a href="/solutions/stablecoins" class="nav-dd-item">
+            <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v12"/><path d="M15 9.5a3.5 3.5 0 00-3-1.5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H9a3.5 3.5 0 01-3-1.5"/></svg></div>
+            <div><h4>Stablecoin Reserves</h4><p>Peg &amp; reserve verification</p></div>
+          </a>
+          <a href="/solutions/mica" class="nav-dd-item">
+            <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+            <div><h4>MiCA Compliance</h4><p>EU crypto regulation</p></div>
+          </a>
+          <a href="/solutions/genius-act" class="nav-dd-item">
+            <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
+            <div><h4>GENIUS Act</h4><p>US stablecoin regulation</p></div>
+          </a>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 Safeheld Ltd. All rights reserved.</p>
-        <div class="footer-bottom-links">
-          <a href="/terms">Terms</a>
-          <a href="/privacy">Privacy</a>
-          <a href="/cookies">Cookies</a>
+      <a href="/platform" class="nav-link">Platform</a>
+      <a href="/for-banks" class="nav-link">For Banks</a>
+      <a href="/pricing" class="nav-link">Pricing</a>
+      <a href="/about" class="nav-link">About</a>
+    </div>
+    <div class="nav-cta">
+      <a href="/login" class="nav-login">Log In</a>
+      <a href="/request-demo" class="btn btn-accent btn-sm">Request a Demo</a>
+    </div>
+    <button class="nav-mobile" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ── Page Header ─────────────────────────────────────────────────────── -->
+<header class="page-header bg-dark dark">
+  <div class="container">
+    <div class="reveal">
+      <p class="t-label">INVESTMENTS</p>
+      <h1 class="t-h1">CASS Compliance Automation</h1>
+      <p class="t-body-lg">Comprehensive CASS 6, CASS 7, CASS 10, and CMAR reporting for UK investment firms. Automate client money and custody asset obligations with continuous monitoring and audit-ready outputs.</p>
+    </div>
+  </div>
+</header>
+
+<!-- ── Overview Section ────────────────────────────────────────────────── -->
+<section class="section bg-white">
+  <div class="container">
+    <div class="sh center reveal">
+      <p class="t-label">Overview</p>
+      <h2 class="t-h2">The Full CASS Suite, Automated</h2>
+      <p class="t-body-lg">Investment firms face complex client asset obligations spanning money, custody assets, and regulatory returns. SafeHeld automates all of it.</p>
+    </div>
+    <div class="grid g3 reveal">
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
         </div>
+        <h3>CASS 7 Client Money</h3>
+        <p>Daily internal and external client money reconciliations, with automated acknowledgement letter tracking and compliant record-keeping for all designated client accounts.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        </div>
+        <h3>CASS 6 Custody Assets</h3>
+        <p>Automated custody asset reconciliation against third-party records, with holdings verification and registration checks for nominee accounts and sub-custodians.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <h3>CMAR &amp; CASS 10</h3>
+        <p>Automated CMAR return generation with pre-populated fields, plus CASS 10 resolution pack maintenance with real-time data for orderly wind-down scenarios.</p>
       </div>
     </div>
-  </footer>
+  </div>
+</section>
+
+<!-- ── Key Capabilities ────────────────────────────────────────────────── -->
+<section class="section bg-light">
+  <div class="container">
+    <div class="sh center reveal">
+      <p class="t-label">Key Capabilities</p>
+      <h2 class="t-h2">Built for CASS Precision</h2>
+      <p class="t-body-lg">Every feature maps directly to FCA CASS sourcebook requirements, delivering the rigour your compliance team and auditors expect.</p>
+    </div>
+
+    <!-- Feat 1: Client Money Reconciliation -->
+    <div class="feat reveal">
+      <div class="feat-content">
+        <p class="t-label">CASS 7</p>
+        <h3 class="t-h3">Client Money Reconciliation</h3>
+        <p class="t-body">Perform both internal and external client money reconciliations as required under CASS 7.15. SafeHeld compares client money balances held at banks and custodians against your internal client money obligation.</p>
+        <ul class="feat-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Internal reconciliation: client ledger vs. client money requirement
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            External reconciliation: bank/custodian statements vs. firm records
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Alternative and standard approach calculation support
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Automated margin call and cleared trade adjustments
+          </li>
+        </ul>
+      </div>
+      <div class="feat-visual">
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- CASS 7 reconciliation -->
+          <text x="200" y="25" text-anchor="middle" font-size="11" font-weight="600" fill="#6B7280">CLIENT MONEY RECONCILIATION</text>
+          <!-- Internal -->
+          <rect x="30" y="45" width="155" height="100" rx="8" stroke="#3D3DFF" stroke-width="1.5" fill="rgba(61,61,255,0.03)"/>
+          <text x="107" y="65" text-anchor="middle" font-size="10" font-weight="600" fill="#374151">Internal Records</text>
+          <rect x="42" y="78" width="130" height="20" rx="4" fill="rgba(61,61,255,0.08)"/>
+          <text x="107" y="92" text-anchor="middle" font-size="9" fill="#374151">Client Obligation: &#163;14.2M</text>
+          <rect x="42" y="104" width="130" height="20" rx="4" fill="rgba(61,61,255,0.08)"/>
+          <text x="107" y="118" text-anchor="middle" font-size="9" fill="#374151">Margined TXs: &#163;1.8M</text>
+          <!-- External -->
+          <rect x="215" y="45" width="155" height="100" rx="8" stroke="#3D3DFF" stroke-width="1.5" fill="rgba(61,61,255,0.03)"/>
+          <text x="292" y="65" text-anchor="middle" font-size="10" font-weight="600" fill="#374151">External Statements</text>
+          <rect x="227" y="78" width="130" height="20" rx="4" fill="rgba(61,61,255,0.08)"/>
+          <text x="292" y="92" text-anchor="middle" font-size="9" fill="#374151">Bank Balance: &#163;12.8M</text>
+          <rect x="227" y="104" width="130" height="20" rx="4" fill="rgba(61,61,255,0.08)"/>
+          <text x="292" y="118" text-anchor="middle" font-size="9" fill="#374151">Custodian: &#163;3.4M</text>
+          <!-- Arrows down -->
+          <line x1="107" y1="150" x2="107" y2="175" stroke="#3D3DFF" stroke-width="1.5"/>
+          <line x1="292" y1="150" x2="292" y2="175" stroke="#3D3DFF" stroke-width="1.5"/>
+          <!-- Reconciliation box -->
+          <rect x="70" y="180" width="260" height="50" rx="8" stroke="#3D3DFF" stroke-width="1.5" fill="rgba(61,61,255,0.04)"/>
+          <text x="200" y="200" text-anchor="middle" font-size="10" font-weight="600" fill="#374151">Reconciliation Engine</text>
+          <text x="200" y="218" text-anchor="middle" font-size="9" fill="#6B7280">Matching | Breaks | Resolution</text>
+          <!-- Result -->
+          <line x1="200" y1="235" x2="200" y2="255" stroke="#3D3DFF" stroke-width="1.5"/>
+          <rect x="135" y="258" width="130" height="28" rx="14" fill="rgba(16,185,129,0.1)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+          <text x="200" y="276" text-anchor="middle" font-size="10" font-weight="600" fill="#059669">RECONCILED &#163;16.2M</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Feat 2: Custody Asset Verification -->
+    <div class="feat reverse reveal">
+      <div class="feat-content">
+        <p class="t-label">CASS 6</p>
+        <h3 class="t-h3">Custody Asset Verification</h3>
+        <p class="t-body">Verify custody assets held by nominees, sub-custodians, and third parties against your internal records. Track registration status and ensure assets are properly designated as client assets.</p>
+        <ul class="feat-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Multi-custodian holdings reconciliation with automated matching
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Nominee and sub-custodian registration status checks
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Physical and dematerialised asset tracking
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Corporate action reconciliation and entitlement verification
+          </li>
+        </ul>
+      </div>
+      <div class="feat-visual">
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Custody hierarchy -->
+          <text x="200" y="25" text-anchor="middle" font-size="11" font-weight="600" fill="#6B7280">CUSTODY ASSET CHAIN</text>
+          <!-- Firm -->
+          <rect x="135" y="40" width="130" height="36" rx="8" fill="rgba(61,61,255,0.1)" stroke="#3D3DFF" stroke-width="1.5"/>
+          <text x="200" y="63" text-anchor="middle" font-size="10" font-weight="600" fill="#3D3DFF">Your Firm</text>
+          <!-- Lines down -->
+          <line x1="140" y1="76" x2="80" y2="110" stroke="#3D3DFF" stroke-width="1" stroke-dasharray="4 3"/>
+          <line x1="200" y1="76" x2="200" y2="110" stroke="#3D3DFF" stroke-width="1" stroke-dasharray="4 3"/>
+          <line x1="260" y1="76" x2="320" y2="110" stroke="#3D3DFF" stroke-width="1" stroke-dasharray="4 3"/>
+          <!-- Custodians -->
+          <rect x="30" y="110" width="100" height="50" rx="6" fill="rgba(61,61,255,0.04)" stroke="#E5E7EB" stroke-width="1"/>
+          <text x="80" y="132" text-anchor="middle" font-size="9" font-weight="600" fill="#374151">Custodian A</text>
+          <text x="80" y="148" text-anchor="middle" font-size="8" fill="#6B7280">Equities: 2,400</text>
+          <rect x="150" y="110" width="100" height="50" rx="6" fill="rgba(61,61,255,0.04)" stroke="#E5E7EB" stroke-width="1"/>
+          <text x="200" y="132" text-anchor="middle" font-size="9" font-weight="600" fill="#374151">Custodian B</text>
+          <text x="200" y="148" text-anchor="middle" font-size="8" fill="#6B7280">Bonds: 850</text>
+          <rect x="270" y="110" width="100" height="50" rx="6" fill="rgba(61,61,255,0.04)" stroke="#E5E7EB" stroke-width="1"/>
+          <text x="320" y="132" text-anchor="middle" font-size="9" font-weight="600" fill="#374151">Sub-Custodian</text>
+          <text x="320" y="148" text-anchor="middle" font-size="8" fill="#6B7280">Funds: 1,200</text>
+          <!-- Verification badges -->
+          <circle cx="80" cy="180" r="10" fill="rgba(16,185,129,0.12)"/>
+          <path d="M75 180l3.5 3.5 6-6" stroke="#059669" stroke-width="1.5" fill="none"/>
+          <circle cx="200" cy="180" r="10" fill="rgba(16,185,129,0.12)"/>
+          <path d="M195 180l3.5 3.5 6-6" stroke="#059669" stroke-width="1.5" fill="none"/>
+          <circle cx="320" cy="180" r="10" fill="rgba(245,158,11,0.12)"/>
+          <text x="320" y="184" text-anchor="middle" font-size="10" font-weight="700" fill="#D97706">!</text>
+          <!-- Summary -->
+          <rect x="80" y="210" width="240" height="60" rx="8" fill="rgba(61,61,255,0.03)" stroke="#3D3DFF" stroke-width="1"/>
+          <text x="200" y="235" text-anchor="middle" font-size="10" font-weight="600" fill="#374151">Total Assets: 4,450 holdings</text>
+          <text x="200" y="255" text-anchor="middle" font-size="9" fill="#6B7280">2 custodians verified | 1 pending review</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Feat 3: CMAR Report Generation -->
+    <div class="feat reveal">
+      <div class="feat-content">
+        <p class="t-label">CMAR</p>
+        <h3 class="t-h3">CMAR Report Generation</h3>
+        <p class="t-body">Automatically generate and validate your Client Money and Assets Return before submission to the FCA. SafeHeld pre-populates all fields from your live reconciliation data, reducing errors and manual effort.</p>
+        <ul class="feat-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Auto-populated CMAR fields from live reconciliation data
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Pre-submission validation checks against FCA business rules
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Historical CMAR comparison to detect reporting anomalies
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Dual sign-off workflow for compliance officer approval
+          </li>
+        </ul>
+      </div>
+      <div class="feat-visual">
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- CMAR form visualization -->
+          <rect x="80" y="15" width="240" height="270" rx="8" stroke="#3D3DFF" stroke-width="1.5" fill="white"/>
+          <rect x="80" y="15" width="240" height="45" rx="8 8 0 0" fill="rgba(61,61,255,0.06)"/>
+          <text x="200" y="35" text-anchor="middle" font-size="10" font-weight="700" fill="#374151">CLIENT MONEY &amp; ASSETS RETURN</text>
+          <text x="200" y="50" text-anchor="middle" font-size="8" fill="#6B7280">FCA CMAR - Quarterly Submission</text>
+          <!-- Section A -->
+          <text x="100" y="80" font-size="9" font-weight="600" fill="#3D3DFF">Section A: Client Money</text>
+          <rect x="95" y="88" width="190" height="16" rx="3" fill="#F8F9FB" stroke="#E5E7EB" stroke-width="0.5"/>
+          <text x="100" y="100" font-size="8" fill="#374151">Total client money held</text>
+          <text x="280" y="100" text-anchor="end" font-size="8" font-weight="600" fill="#374151">&#163;16.2M</text>
+          <rect x="95" y="108" width="190" height="16" rx="3" fill="#F8F9FB" stroke="#E5E7EB" stroke-width="0.5"/>
+          <text x="100" y="120" font-size="8" fill="#374151">Client money requirement</text>
+          <text x="280" y="120" text-anchor="end" font-size="8" font-weight="600" fill="#374151">&#163;16.0M</text>
+          <!-- Section B -->
+          <text x="100" y="148" font-size="9" font-weight="600" fill="#3D3DFF">Section B: Custody Assets</text>
+          <rect x="95" y="156" width="190" height="16" rx="3" fill="#F8F9FB" stroke="#E5E7EB" stroke-width="0.5"/>
+          <text x="100" y="168" font-size="8" fill="#374151">Total custody assets</text>
+          <text x="280" y="168" text-anchor="end" font-size="8" font-weight="600" fill="#374151">4,450</text>
+          <rect x="95" y="176" width="190" height="16" rx="3" fill="#F8F9FB" stroke="#E5E7EB" stroke-width="0.5"/>
+          <text x="100" y="188" font-size="8" fill="#374151">Reconciliation breaks</text>
+          <text x="280" y="188" text-anchor="end" font-size="8" font-weight="600" fill="#059669">0</text>
+          <!-- Validation -->
+          <rect x="95" y="210" width="190" height="32" rx="6" fill="rgba(16,185,129,0.06)" stroke="rgba(16,185,129,0.2)" stroke-width="1"/>
+          <text x="200" y="228" text-anchor="middle" font-size="9" font-weight="600" fill="#059669">All validation checks passed</text>
+          <!-- Submit -->
+          <rect x="130" y="253" width="140" height="24" rx="12" fill="rgba(61,61,255,0.9)"/>
+          <text x="200" y="269" text-anchor="middle" font-size="9" font-weight="600" fill="white">Ready for Submission</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Feat 4: Resolution Pack -->
+    <div class="feat reverse reveal">
+      <div class="feat-content">
+        <p class="t-label">CASS 10</p>
+        <h3 class="t-h3">Resolution Pack Preparation</h3>
+        <p class="t-body">Maintain an up-to-date resolution pack that enables the orderly return of client assets in the event of firm failure. SafeHeld keeps all required data current and audit-ready at all times.</p>
+        <ul class="feat-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Real-time client entitlement calculations for all asset classes
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Counterparty and custodian exposure mapping
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Trust letter and acknowledgement tracking dashboard
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Insolvency practitioner data pack export on demand
+          </li>
+        </ul>
+      </div>
+      <div class="feat-visual">
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Resolution pack structure -->
+          <text x="200" y="25" text-anchor="middle" font-size="11" font-weight="600" fill="#6B7280">RESOLUTION PACK</text>
+          <!-- Pack documents -->
+          <rect x="50" y="45" width="300" height="55" rx="8" fill="rgba(61,61,255,0.04)" stroke="#3D3DFF" stroke-width="1"/>
+          <text x="70" y="68" font-size="10" font-weight="600" fill="#374151">Client Entitlements Register</text>
+          <text x="70" y="84" font-size="8" fill="#6B7280">1,247 clients | Updated: real-time</text>
+          <circle cx="330" cy="72" r="10" fill="rgba(16,185,129,0.12)"/>
+          <path d="M325 72l3.5 3.5 6-6" stroke="#059669" stroke-width="1.5" fill="none"/>
+
+          <rect x="50" y="108" width="300" height="55" rx="8" fill="rgba(61,61,255,0.04)" stroke="#3D3DFF" stroke-width="1"/>
+          <text x="70" y="131" font-size="10" font-weight="600" fill="#374151">Custodian &amp; Counterparty Map</text>
+          <text x="70" y="147" font-size="8" fill="#6B7280">8 custodians | 23 counterparties</text>
+          <circle cx="330" cy="135" r="10" fill="rgba(16,185,129,0.12)"/>
+          <path d="M325 135l3.5 3.5 6-6" stroke="#059669" stroke-width="1.5" fill="none"/>
+
+          <rect x="50" y="171" width="300" height="55" rx="8" fill="rgba(61,61,255,0.04)" stroke="#3D3DFF" stroke-width="1"/>
+          <text x="70" y="194" font-size="10" font-weight="600" fill="#374151">Trust &amp; Acknowledgement Letters</text>
+          <text x="70" y="210" font-size="8" fill="#6B7280">31 letters | 28 acknowledged | 3 pending</text>
+          <circle cx="330" cy="198" r="10" fill="rgba(245,158,11,0.12)"/>
+          <text x="330" y="202" text-anchor="middle" font-size="10" font-weight="700" fill="#D97706">!</text>
+
+          <rect x="50" y="234" width="300" height="55" rx="8" fill="rgba(61,61,255,0.04)" stroke="#3D3DFF" stroke-width="1"/>
+          <text x="70" y="257" font-size="10" font-weight="600" fill="#374151">Pooling Event Procedure</text>
+          <text x="70" y="273" font-size="8" fill="#6B7280">Last reviewed: 14 days ago</text>
+          <circle cx="330" cy="261" r="10" fill="rgba(16,185,129,0.12)"/>
+          <path d="M325 261l3.5 3.5 6-6" stroke="#059669" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── How It Works ────────────────────────────────────────────────────── -->
+<section class="section bg-dark dark">
+  <div class="container">
+    <div class="sh center reveal">
+      <p class="t-label">How It Works</p>
+      <h2 class="t-h2">End-to-End CASS Automation</h2>
+      <p class="t-body-lg">From data feeds to regulatory submission in three steps.</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Ingest Data Feeds</h3>
+        <p>Connect bank accounts, custodian platforms, and internal ledger systems. SafeHeld normalises data from any source into a unified client money and asset model.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Continuous Reconciliation</h3>
+        <p>Perform daily internal and external reconciliations for CASS 7 client money and CASS 6 custody assets. Breaks are flagged, escalated, and tracked to resolution.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Generate &amp; Submit</h3>
+        <p>Auto-populate your CMAR, maintain resolution packs in real time, and produce audit-ready reports for your CASS auditor and the FCA.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA Section ─────────────────────────────────────────────────────── -->
+<section class="cta-section bg-white">
+  <div class="container reveal">
+    <h2 class="t-h2">Simplify Your CASS Obligations</h2>
+    <p class="t-body-lg" style="max-width:560px;margin:0 auto 32px">Join investment firms using SafeHeld to automate client money and custody asset compliance.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="/request-demo" class="btn btn-accent btn-lg">Request a Demo</a>
+      <a href="/pricing" class="btn btn-outline btn-lg">View Pricing</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ──────────────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo"><div class="nav-mark">S</div> SafeHeld</div>
+        <p>The verification layer for client funds. Proving safeguarding compliance across every regulated sector.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Solutions</h4>
+        <a href="/solutions/payments">PS25 Safeguarding</a>
+        <a href="/solutions/investments">CASS Compliance</a>
+        <a href="/solutions/crypto">Crypto Custody</a>
+        <a href="/solutions/stablecoins">Stablecoin Reserves</a>
+        <a href="/solutions/mica">MiCA Compliance</a>
+        <a href="/solutions/genius-act">GENIUS Act</a>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="/platform">Overview</a>
+        <a href="/platform#reconciliation">Reconciliation</a>
+        <a href="/platform#monitoring">Monitoring</a>
+        <a href="/platform#reporting">Reporting</a>
+        <a href="/for-banks">For Banks</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/about">About</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/request-demo">Request Demo</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/terms">Terms of Service</a>
+        <a href="/legal/cookies">Cookie Policy</a>
+        <a href="/legal/security">Security</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 SafeHeld Ltd. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="/legal/privacy">Privacy</a>
+        <a href="/legal/terms">Terms</a>
+        <a href="/legal/cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  });
+</script>
 
 </body>
 </html>

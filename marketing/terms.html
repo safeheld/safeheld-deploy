@@ -3,10 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Safeheld Terms of Service — the terms governing use of the Safeheld client funds verification platform.">
-  <meta name="theme-color" content="#080E2C">
   <title>Terms of Service — Safeheld</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233D3DFF'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='white' font-family='Inter,sans-serif' font-weight='800' font-size='20'%3ES%3C/text%3E%3C/svg%3E">
+  <meta name="description" content="Terms of Service for the Safeheld platform. Read the terms that govern your use of our client funds verification and compliance reporting services.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,256 +12,193 @@
 </head>
 <body>
 
-  <!-- ── Navigation ─────────────────────────────────────────────────────── -->
-  <nav class="nav">
+  <!-- ── Nav ──────────────────────────────────────────────────────────────── -->
+  <nav class="nav nav-solid">
     <div class="nav-inner">
       <a href="/" class="nav-logo">
-        <div class="nav-logo-mark">S</div>
+        <div class="nav-mark">S</div>
         Safeheld
       </a>
+
       <div class="nav-links">
-        <a href="/platform" class="nav-link">Platform</a>
-        <div class="nav-dropdown">
-          <button class="nav-dropdown-trigger">
+        <div class="nav-dd">
+          <div class="nav-dd-trigger">
             Solutions
-            <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="nav-dropdown-menu">
-            <div class="nav-dropdown-group-label">Financial Services</div>
-            <a href="/solutions/payments" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-              </div>
-              <div class="nav-dropdown-item-text">
-                <h4>Payments</h4>
-                <p>PS25 safeguarding for EMIs and PIs</p>
-              </div>
+            <svg viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="nav-dd-menu">
+            <div class="nav-dd-label">By Regulation</div>
+            <a href="/solutions/ps25" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/></svg></div>
+              <div><h4>PS25 Safeguarding</h4><p>Automated compliance for UK EMIs &amp; PIs</p></div>
             </a>
-            <a href="/solutions/investments" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-              </div>
-              <div class="nav-dropdown-item-text">
-                <h4>Investments</h4>
-                <p>CASS 6, 7, 10 and CMAR reporting</p>
-              </div>
+            <a href="/solutions/cass" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20"/><path d="M5 20V8l7-5 7 5v12"/><path d="M9 20v-4h6v4"/></svg></div>
+              <div><h4>CASS Compliance</h4><p>Client assets &amp; money rules for investment firms</p></div>
             </a>
-            <div class="nav-dropdown-group-label">Digital Assets</div>
-            <a href="/solutions/crypto" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-              </div>
-              <div class="nav-dropdown-item-text">
-                <h4>Crypto</h4>
-                <p>On-chain wallet reconciliation</p>
-              </div>
+            <a href="/solutions/crypto" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+              <div><h4>Crypto &amp; Stablecoin</h4><p>On-chain reserve verification &amp; proof of reserves</p></div>
             </a>
-            <a href="/solutions/stablecoins" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
-              </div>
-              <div class="nav-dropdown-item-text">
-                <h4>Stablecoins</h4>
-                <p>Peg verification and reserve attestation</p>
-              </div>
+            <div class="nav-dd-label">By Role</div>
+            <a href="/solutions/compliance-teams" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+              <div><h4>Compliance Teams</h4><p>Streamlined safeguarding oversight</p></div>
             </a>
-            <a href="/solutions/mica" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
-              </div>
-              <div class="nav-dropdown-item-text">
-                <h4>MiCA</h4>
-                <p>EU Markets in Crypto-Assets regulation</p>
-              </div>
-            </a>
-            <a href="/solutions/genius-act" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              </div>
-              <div class="nav-dropdown-item-text">
-                <h4>GENIUS Act</h4>
-                <p>US stablecoin regulatory framework</p>
-              </div>
-            </a>
-            <div class="nav-dropdown-group-label">Other Sectors</div>
-            <a href="/solutions/legal" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1L1 7l11 6 11-6-11-6z"/><path d="M1 17l11 6 11-6"/><path d="M1 12l11 6 11-6"/></svg>
-              </div>
-              <div class="nav-dropdown-item-text">
-                <h4>Legal</h4>
-                <p>SRA client money rules</p>
-              </div>
-            </a>
-            <a href="/solutions/insurance" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-              </div>
-              <div class="nav-dropdown-item-text">
-                <h4>Insurance</h4>
-                <p>FCA client premium rules</p>
-              </div>
-            </a>
-            <a href="/solutions/gaming" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
-              </div>
-              <div class="nav-dropdown-item-text">
-                <h4>Gaming</h4>
-                <p>Gambling Commission player funds</p>
-              </div>
-            </a>
-            <a href="/solutions/real-estate" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-              </div>
-              <div class="nav-dropdown-item-text">
-                <h4>Real Estate</h4>
-                <p>Client deposit protection</p>
-              </div>
+            <a href="/solutions/finance-ops" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg></div>
+              <div><h4>Finance Operations</h4><p>Automated reconciliation &amp; reporting</p></div>
             </a>
           </div>
         </div>
+        <a href="/platform" class="nav-link">Platform</a>
         <a href="/for-banks" class="nav-link">For Banks</a>
         <a href="/pricing" class="nav-link">Pricing</a>
         <a href="/about" class="nav-link">About</a>
       </div>
+
       <div class="nav-cta">
-        <a href="https://app.safeheld.com" class="nav-login">Log in</a>
-        <a href="/contact" class="btn btn-primary btn-sm">Request a Demo</a>
+        <a href="https://app.safeheld.com" class="nav-login">Log In</a>
+        <a href="/demo" class="btn btn-accent btn-sm">Request a Demo</a>
       </div>
-      <button class="nav-mobile-toggle" aria-label="Open menu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+
+      <button class="nav-mobile" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
     </div>
   </nav>
 
-  <!-- ── Legal Content ──────────────────────────────────────────────────── -->
-  <div class="legal-content">
+  <!-- ── Legal Content ────────────────────────────────────────────────────── -->
+  <div class="legal">
     <h1>Terms of Service</h1>
-    <p class="updated">Last updated: March 2026</p>
+    <p class="updated">Last updated: 1 March 2026</p>
 
     <h2>1. Agreement to Terms</h2>
-    <p>By accessing or using the Safeheld platform, you agree to be bound by these Terms of Service. If you do not agree to these terms, you must not access or use the platform. These terms constitute a legally binding agreement between you and Safeheld Ltd, a company registered in England and Wales.</p>
-    <p>We may update these terms from time to time. We will notify you of material changes through the platform or via email. Your continued use of the platform following any modifications constitutes your acceptance of the updated terms.</p>
+    <p>These Terms of Service ("Terms") constitute a legally binding agreement between you ("User", "you", or "your") and Safeheld Ltd ("Safeheld", "we", "us", or "our"), a company registered in England and Wales. By accessing or using the Safeheld platform, including any associated applications, services, tools, and features (collectively, the "Service"), you acknowledge that you have read, understood, and agree to be bound by these Terms.</p>
+    <p>If you are accessing or using the Service on behalf of a company, organisation, or other legal entity, you represent and warrant that you have the authority to bind such entity to these Terms. In such cases, the terms "you" and "your" shall refer to that entity. If you do not have such authority, or if you do not agree with these Terms, you must not accept these Terms and must not access or use the Service.</p>
+    <p>We reserve the right to modify these Terms at any time. Material changes will be communicated to you through the Service or via the email address associated with your account. Your continued use of the Service following the posting of revised Terms constitutes your acceptance of such changes.</p>
 
     <h2>2. Description of Service</h2>
-    <p>Safeheld provides automated client fund verification and regulatory compliance infrastructure for regulated institutions. The platform includes:</p>
+    <p>Safeheld provides automated client funds verification and compliance reporting for regulated firms. The platform enables electronic money institutions, payment institutions, investment firms, and other regulated entities to perform continuous reconciliation of client funds, detect safeguarding breaches, generate regulatory reports, maintain comprehensive audit trails, and manage governance processes related to client money protection.</p>
+    <p>The Service includes, but is not limited to, the following capabilities:</p>
     <ul>
-      <li>Automated reconciliation of client funds against segregated bank accounts, custodian reports, and on-chain data sources</li>
-      <li>Breach detection, classification, and regulatory notification workflows</li>
-      <li>Governance and document management for compliance records</li>
-      <li>Regulatory reporting and board pack generation, including CMAR, MiCA, and jurisdiction-specific formats</li>
-      <li>Cryptographic attestation and proof of reserves for digital asset custody</li>
-      <li>Bank-level portfolio oversight across client firms</li>
+      <li>Automated daily reconciliation of client funds held across multiple safeguarding accounts and banking partners</li>
+      <li>Real-time breach detection and alerting when client funds fall below required safeguarding thresholds</li>
+      <li>Generation of regulatory compliance reports, including those required under the FCA's Payment Services Regulations and Client Assets Sourcebook (CASS)</li>
+      <li>Secure audit trail recording of all reconciliation activities, user actions, and system events</li>
+      <li>Bank dashboard functionality enabling safeguarding banks to oversee the funds held on their behalf</li>
+      <li>Governance workflows for managing safeguarding policies, approvals, and compliance sign-offs</li>
     </ul>
-    <p>The platform is designed to support compliance activities for regulated firms across payments, investments, digital assets, legal, insurance, gaming, and real estate sectors.</p>
+    <p>We may update, modify, or discontinue any aspect of the Service at our discretion, and will provide reasonable notice of material changes where practicable. We do not warrant that the Service will be uninterrupted, error-free, or that any defects will be corrected within a specific timeframe, though we endeavour to maintain high availability and promptly address any issues.</p>
 
-    <h2>3. Account Registration</h2>
-    <p>To access the Safeheld platform, users must register an account and provide accurate, complete, and current information. Access to the platform requires authorised firm credentials, and you are responsible for maintaining the confidentiality of your account credentials.</p>
-    <p>You agree to:</p>
-    <ul>
-      <li>Provide truthful and accurate information during registration</li>
-      <li>Maintain and promptly update your account information</li>
-      <li>Notify Safeheld immediately of any unauthorised use of your account</li>
-      <li>Ensure that only authorised personnel within your organisation access the platform</li>
-      <li>Implement appropriate access controls, including multi-factor authentication where available</li>
-    </ul>
-    <p>Safeheld reserves the right to suspend or terminate accounts that violate these terms or that we reasonably believe are being used in an unauthorised manner.</p>
+    <h2>3. User Accounts</h2>
+    <p>To access certain features of the Service, you must create an account and provide accurate, complete, and current information. You are responsible for maintaining the confidentiality of your account credentials, including your password and any multi-factor authentication methods configured on your account.</p>
+    <p>You agree to notify Safeheld immediately of any unauthorised use of your account or any other breach of security. Safeheld shall not be liable for any loss or damage arising from your failure to protect your account credentials. You are solely responsible for all activity that occurs under your account, whether or not you authorised such activity.</p>
+    <p>Each account is intended for use by a single individual. You must not share your login credentials with any other person. Your organisation may create multiple user accounts under its subscription, with each account assigned appropriate access permissions based on the user's role within the organisation.</p>
+    <p>We reserve the right to suspend or terminate accounts that we reasonably believe have been compromised, that violate these Terms, or that have remained inactive for an extended period, subject to prior notice where reasonably practicable.</p>
 
     <h2>4. Acceptable Use</h2>
-    <p>You agree to use the Safeheld platform only for lawful compliance purposes in connection with your regulated activities. You must not:</p>
+    <p>You agree to use the Service only for lawful purposes and in accordance with these Terms. You shall not use the Service in any way that:</p>
     <ul>
-      <li>Attempt to reverse-engineer, decompile, or disassemble any part of the platform</li>
-      <li>Interfere with or disrupt the integrity or performance of the service</li>
-      <li>Attempt to gain unauthorised access to any systems or networks connected to the platform</li>
-      <li>Use the platform for any purpose other than its intended compliance and regulatory functions</li>
-      <li>Transmit any malicious code, viruses, or harmful content through the platform</li>
-      <li>Misuse the service in any way that could damage, disable, or impair its operation</li>
-      <li>Share account credentials with unauthorised individuals or third parties</li>
-      <li>Use automated scraping tools or bots to extract data from the platform without prior written consent</li>
+      <li>Violates any applicable local, national, or international law or regulation, including but not limited to financial services regulations, data protection legislation, and anti-money laundering requirements</li>
+      <li>Infringes upon the rights of any third party, including intellectual property rights, privacy rights, or contractual rights</li>
+      <li>Attempts to gain unauthorised access to any portion of the Service, other user accounts, computer systems, or networks connected to the Service</li>
+      <li>Introduces any viruses, trojan horses, worms, logic bombs, or other material that is malicious or technologically harmful</li>
+      <li>Interferes with or disrupts the integrity or performance of the Service, its servers, or the networks connected to the Service</li>
+      <li>Uses any automated means, including bots, scrapers, or crawlers, to access the Service except through APIs provided and authorised by Safeheld</li>
+      <li>Reverse engineers, decompiles, disassembles, or otherwise attempts to derive the source code of any software forming part of the Service</li>
+      <li>Uploads, transmits, or distributes data that you do not have the right to process, or that is inaccurate, fraudulent, or misleading</li>
     </ul>
+    <p>We reserve the right to investigate and take appropriate action against any violation of these provisions, including suspending or terminating the offending account and reporting the conduct to relevant law enforcement or regulatory authorities.</p>
 
     <h2>5. Intellectual Property</h2>
-    <p>All content, software, technology, designs, trademarks, and other intellectual property associated with the Safeheld platform are owned by Safeheld Ltd or its licensors. Nothing in these terms grants you any right, title, or interest in the platform beyond the limited right to use it in accordance with these terms.</p>
-    <p>You may not copy, modify, distribute, sell, or lease any part of the platform or its content without prior written consent from Safeheld Ltd. All rights not expressly granted herein are reserved.</p>
-    <p>Your data remains your property. You grant Safeheld a limited licence to process your data solely for the purpose of providing and improving the services described in these terms.</p>
+    <p>The Service, including all software, algorithms, interfaces, designs, documentation, and other materials (collectively, "Safeheld IP"), is owned by Safeheld or its licensors and is protected by copyright, trademark, patent, trade secret, and other intellectual property laws of England and Wales and international treaties.</p>
+    <p>Subject to your compliance with these Terms, Safeheld grants you a limited, non-exclusive, non-transferable, revocable licence to access and use the Service solely for your internal business purposes during the term of your subscription. This licence does not permit you to sublicense, sell, resell, or otherwise make the Service available to any third party except as expressly permitted under your subscription agreement.</p>
+    <p>You retain all ownership rights in the data you upload to or process through the Service ("Customer Data"). By using the Service, you grant Safeheld a limited licence to process, store, and transmit your Customer Data solely to the extent necessary to provide and improve the Service and to comply with applicable law.</p>
+    <p>Safeheld may use aggregated, anonymised, or de-identified data derived from your use of the Service for analytics, benchmarking, product improvement, and other business purposes, provided that such data cannot reasonably be used to identify you, your clients, or any individual.</p>
 
-    <h2>6. Data Processing</h2>
-    <p>We process data in accordance with our <a href="/privacy" style="color: var(--accent);">Privacy Policy</a> and applicable data protection laws, including the UK GDPR and the EU General Data Protection Regulation. By using the platform, you acknowledge and agree to the data processing practices described in our Privacy Policy.</p>
-    <p>Where you upload or process personal data through the platform, you are responsible for ensuring that you have the appropriate legal basis and authority to do so. You represent and warrant that all data uploaded to the platform has been collected in accordance with applicable data protection legislation.</p>
-    <p>Where Safeheld acts as a data processor on your behalf, the terms of data processing shall be governed by a separate Data Processing Agreement, which shall be entered into prior to or upon commencement of the service.</p>
+    <h2>6. Data Protection</h2>
+    <p>We take the protection of your data seriously. Our processing of personal data is governed by our <a href="/privacy" style="color:var(--accent)">Privacy Policy</a>, which forms an integral part of these Terms. By using the Service, you acknowledge that you have read and understood our Privacy Policy.</p>
+    <p>Where Safeheld processes personal data on your behalf as a data processor, the terms of our Data Processing Agreement ("DPA") shall apply. The DPA sets out the subject matter, duration, nature, and purpose of processing, the types of personal data processed, and the categories of data subjects, as required under Article 28 of the UK General Data Protection Regulation (UK GDPR).</p>
+    <p>You represent and warrant that you have obtained all necessary consents, authorisations, and legal bases required under applicable data protection laws to upload and process data through the Service. You shall ensure that your use of the Service complies with all applicable data protection legislation, including the UK GDPR, the Data Protection Act 2018, and any sector-specific regulations applicable to your business.</p>
+    <p>In the event of a personal data breach affecting data processed through the Service, Safeheld will notify you without undue delay after becoming aware of the breach, and will provide reasonable cooperation to assist you in fulfilling your obligations under applicable data protection law.</p>
 
     <h2>7. Confidentiality</h2>
-    <p>Each party agrees to keep confidential all information received from the other party that is designated as confidential or that reasonably should be understood to be confidential given the nature of the information and the circumstances of disclosure.</p>
-    <p>Confidential information includes, but is not limited to:</p>
-    <ul>
-      <li>Client fund data, reconciliation records, and compliance reports processed through the platform</li>
-      <li>Platform architecture, algorithms, and proprietary technology</li>
-      <li>Business strategies, pricing information, and commercial terms</li>
-      <li>Any information marked or identified as confidential by either party</li>
-    </ul>
-    <p>Confidentiality obligations shall not apply to information that is publicly available, independently developed, or required to be disclosed by law or regulatory authority.</p>
+    <p>Each party acknowledges that, in connection with these Terms and the use of the Service, it may receive or have access to confidential information of the other party ("Confidential Information"). Confidential Information includes, without limitation, business plans, financial data, customer lists, technical specifications, product roadmaps, trade secrets, and any other information that is designated as confidential or that a reasonable person would understand to be confidential given the nature of the information and the circumstances of disclosure.</p>
+    <p>Each party agrees to: (a) hold the other party's Confidential Information in strict confidence; (b) not disclose Confidential Information to any third party without the prior written consent of the disclosing party, except to employees, contractors, or advisers who have a legitimate need to know and are bound by obligations of confidentiality at least as protective as those contained herein; and (c) use the Confidential Information only for the purposes of performing its obligations or exercising its rights under these Terms.</p>
+    <p>The obligations of confidentiality shall not apply to information that: (i) is or becomes publicly available through no fault of the receiving party; (ii) was already known to the receiving party prior to disclosure; (iii) is independently developed by the receiving party without reference to the Confidential Information; or (iv) is required to be disclosed by law, regulation, or order of a court or regulatory authority, provided that the receiving party gives the disclosing party prompt written notice of such requirement where permitted by law.</p>
+    <p>The obligations of confidentiality shall survive the termination or expiration of these Terms for a period of three (3) years, except with respect to trade secrets, which shall remain confidential for as long as they retain their status as trade secrets under applicable law.</p>
 
     <h2>8. Limitation of Liability</h2>
-    <p>Safeheld provides compliance tools to support regulated activities. The platform does not constitute legal or regulatory advice, and should not be relied upon as a substitute for professional legal, financial, or compliance counsel. You remain solely responsible for your regulatory compliance obligations.</p>
-    <p>To the maximum extent permitted by law, Safeheld Ltd shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the platform, including but not limited to loss of profits, data, or business opportunities.</p>
-    <p>Our total aggregate liability for any claims arising from or related to these terms shall not exceed the amount you have paid to Safeheld in the twelve months preceding the claim.</p>
-    <p>Nothing in these terms excludes or limits liability for death or personal injury caused by negligence, fraud, or any other liability that cannot be excluded or limited under applicable law.</p>
+    <p>To the maximum extent permitted by applicable law, in no event shall Safeheld, its directors, officers, employees, agents, or affiliates be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, loss of data, loss of business or anticipated savings, loss of goodwill, or business interruption, however caused and under any theory of liability, whether in contract, tort (including negligence), strict liability, or otherwise, arising out of or in connection with your use of or inability to use the Service.</p>
+    <p>Subject to the foregoing, Safeheld's total aggregate liability arising out of or in connection with these Terms or the Service shall not exceed the greater of: (a) the total fees paid by you to Safeheld during the twelve (12) months immediately preceding the event giving rise to the claim; or (b) one hundred pounds sterling (GBP 100).</p>
+    <p>Nothing in these Terms shall exclude or limit liability for: (a) death or personal injury caused by negligence; (b) fraud or fraudulent misrepresentation; (c) any breach of the obligations implied by section 12 of the Sale of Goods Act 1979 or section 2 of the Supply of Goods and Services Act 1982; or (d) any other liability that cannot be excluded or limited under applicable law.</p>
+    <p>You acknowledge that the Service is designed to assist with compliance processes and is not a substitute for professional legal, regulatory, or financial advice. Safeheld does not guarantee that use of the Service will ensure regulatory compliance, and you remain solely responsible for your organisation's compliance with all applicable laws and regulations.</p>
 
-    <h2>9. Governing Law</h2>
-    <p>These Terms of Service are governed by and construed in accordance with the laws of England and Wales. Any disputes arising from or in connection with these terms shall be subject to the exclusive jurisdiction of the courts of England and Wales.</p>
-    <p>If any provision of these terms is found to be invalid or unenforceable, the remaining provisions shall continue in full force and effect. The failure of either party to enforce any right or provision of these terms shall not constitute a waiver of such right or provision.</p>
+    <h2>9. Termination</h2>
+    <p>You may terminate your account at any time by contacting us at legal@safeheld.com or through the account settings within the Service. Upon termination, your right to access and use the Service will cease immediately.</p>
+    <p>Safeheld may suspend or terminate your access to the Service, in whole or in part, at any time and for any reason, including but not limited to: (a) your breach of these Terms; (b) your failure to pay applicable fees when due; (c) a request by law enforcement or other governmental authority; (d) unexpected technical or security issues; or (e) extended periods of inactivity. Where reasonably practicable, we will provide notice prior to such suspension or termination.</p>
+    <p>Upon termination, Safeheld will make your Customer Data available for export for a period of thirty (30) days following the effective date of termination. After this period, we may delete your Customer Data from our systems, subject to any legal obligations requiring us to retain certain data for a longer period. Data retained for legal or regulatory purposes will continue to be protected in accordance with our Privacy Policy.</p>
+    <p>The following provisions shall survive termination of these Terms: Intellectual Property, Confidentiality, Limitation of Liability, Governing Law, and any other provisions that by their nature are intended to survive termination.</p>
 
-    <h2>10. Contact</h2>
-    <p>If you have any questions about these Terms of Service, please contact us at <a href="mailto:legal@safeheld.com" style="color: var(--accent);">legal@safeheld.com</a>.</p>
-    <p>Safeheld Ltd<br>Registered in England and Wales</p>
+    <h2>10. Governing Law</h2>
+    <p>These Terms shall be governed by and construed in accordance with the laws of England and Wales, without regard to its conflict of law principles.</p>
+    <p>Any dispute arising out of or in connection with these Terms, including any question regarding their existence, validity, or termination, shall be subject to the exclusive jurisdiction of the courts of England and Wales. Notwithstanding the foregoing, Safeheld may seek injunctive or other equitable relief in any court of competent jurisdiction to protect its intellectual property rights or Confidential Information.</p>
+    <p>If any provision of these Terms is found to be unenforceable or invalid by a court of competent jurisdiction, that provision shall be limited or eliminated to the minimum extent necessary so that these Terms shall otherwise remain in full force and effect. The failure of either party to exercise any right or enforce any provision of these Terms shall not constitute a waiver of such right or provision.</p>
+
+    <h2>11. Changes to Terms</h2>
+    <p>We reserve the right to update or modify these Terms at any time at our sole discretion. When we make material changes, we will update the "Last updated" date at the top of this page and take reasonable steps to notify you, which may include sending a notification through the Service, posting a notice on our website, or emailing the address associated with your account.</p>
+    <p>Your continued use of the Service after the effective date of any changes constitutes your acceptance of the revised Terms. If you do not agree to the revised Terms, you must discontinue your use of the Service and terminate your account. We encourage you to review these Terms periodically to stay informed of any updates.</p>
+
+    <h2>12. Contact</h2>
+    <p>If you have any questions, concerns, or requests regarding these Terms of Service, please contact us at:</p>
+    <p>
+      Safeheld Ltd<br>
+      Email: <a href="mailto:legal@safeheld.com" style="color:var(--accent)">legal@safeheld.com</a>
+    </p>
   </div>
 
-  <!-- ── Footer ─────────────────────────────────────────────────────────── -->
+  <!-- ── Footer ───────────────────────────────────────────────────────────── -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
           <a href="/" class="nav-logo">
-            <div class="nav-logo-mark">S</div>
+            <div class="nav-mark">S</div>
             Safeheld
           </a>
-          <p>The global verification layer for client funds. Autonomous compliance infrastructure for every regulated sector and jurisdiction.</p>
+          <p>The verification layer for client funds. Automated safeguarding compliance for regulated firms.</p>
         </div>
         <div class="footer-col">
           <h4>Platform</h4>
-          <a href="/platform">Platform</a>
-          <a href="/platform">Reconciliation</a>
-          <a href="/platform">Breach Detection</a>
-          <a href="/platform">Reporting</a>
-          <a href="/platform">Governance</a>
+          <a href="/platform">How It Works</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/docs">Documentation</a>
+          <a href="/api">API Reference</a>
         </div>
         <div class="footer-col">
           <h4>Solutions</h4>
-          <a href="/solutions/payments">Payments</a>
-          <a href="/solutions/investments">Investments</a>
-          <a href="/solutions/crypto">Crypto</a>
-          <a href="/solutions/stablecoins">Stablecoins</a>
-          <a href="/solutions/mica">MiCA</a>
-          <a href="/solutions/genius-act">GENIUS Act</a>
+          <a href="/solutions/ps25">PS25 Safeguarding</a>
+          <a href="/solutions/cass">CASS Compliance</a>
+          <a href="/solutions/crypto">Crypto &amp; Stablecoin</a>
+          <a href="/for-banks">For Banks</a>
         </div>
         <div class="footer-col">
           <h4>Company</h4>
           <a href="/about">About</a>
-          <a href="/pricing">Pricing</a>
-          <a href="/contact">Contact</a>
-          <a href="/for-banks">For Banks</a>
+          <a href="/demo">Request a Demo</a>
+          <a href="https://app.safeheld.com">Log In</a>
         </div>
         <div class="footer-col">
-          <h4>Resources</h4>
-          <a href="/docs">Documentation</a>
-          <a href="/api">API Reference</a>
+          <h4>Legal</h4>
+          <a href="/terms">Terms of Service</a>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/cookies">Cookie Policy</a>
         </div>
       </div>
       <div class="footer-bottom">
         <p>&copy; 2026 Safeheld Ltd. All rights reserved.</p>
-        <div class="footer-bottom-links">
+        <div class="footer-links">
           <a href="/terms">Terms</a>
           <a href="/privacy">Privacy</a>
           <a href="/cookies">Cookies</a>
@@ -271,6 +206,23 @@
       </div>
     </div>
   </footer>
+
+  <!-- ── Reveal Animation ─────────────────────────────────────────────────── -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const reveals = document.querySelectorAll('.reveal');
+      if (!reveals.length) return;
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      reveals.forEach(function (el) { observer.observe(el); });
+    });
+  </script>
 
 </body>
 </html>

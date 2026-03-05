@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Verification of client deposit handling for estate agents and property transaction intermediaries. Deposit reconciliation, segregation verification, and compliance reporting.">
-  <title>Real Estate — Client Deposit Protection for Property Transactions — Safeheld</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233D3DFF'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='white' font-family='Inter,sans-serif' font-weight='800' font-size='20'%3ES%3C/text%3E%3C/svg%3E">
+  <title>Client Deposit Protection | Safeheld</title>
+  <meta name="description" content="Protection of client deposits and funds held by property firms. Safeheld automates deposit account reconciliation, client money segregation, and estate agent compliance.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,229 +13,457 @@
 <body>
 
   <!-- ── Navigation ─────────────────────────────────────────────────────── -->
-  <nav class="nav">
+  <nav class="nav nav-solid">
     <div class="nav-inner">
-      <a href="/" class="nav-logo"><div class="nav-logo-mark">S</div> Safeheld</a>
+      <a href="/" class="nav-logo">
+        <div class="nav-mark">S</div>
+        Safeheld
+      </a>
       <div class="nav-links">
-        <a href="/platform" class="nav-link">Platform</a>
-        <div class="nav-dropdown">
-          <button class="nav-dropdown-trigger active">Solutions <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="nav-dropdown-menu">
-            <div class="nav-dropdown-group-label">Financial Services</div>
-            <a href="/solutions/payments" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><div class="nav-dropdown-item-text"><h4>Payments</h4><p>EMI &amp; PI safeguarding</p></div></a>
-            <a href="/solutions/investments" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="nav-dropdown-item-text"><h4>Investments</h4><p>CASS compliance</p></div></a>
-            <div class="nav-dropdown-group-label">Digital Assets</div>
-            <a href="/solutions/crypto" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></div><div class="nav-dropdown-item-text"><h4>Crypto</h4><p>Wallet reconciliation</p></div></a>
-            <a href="/solutions/stablecoins" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg></div><div class="nav-dropdown-item-text"><h4>Stablecoins</h4><p>Peg &amp; reserve verification</p></div></a>
-            <a href="/solutions/mica" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="nav-dropdown-item-text"><h4>MiCA</h4><p>EU crypto regulation</p></div></a>
-            <a href="/solutions/genius-act" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="nav-dropdown-item-text"><h4>GENIUS Act</h4><p>US stablecoin rules</p></div></a>
-            <div class="nav-dropdown-group-label">Other Sectors</div>
-            <a href="/solutions/legal" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="nav-dropdown-item-text"><h4>Legal</h4><p>SRA client money</p></div></a>
-            <a href="/solutions/insurance" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="nav-dropdown-item-text"><h4>Insurance</h4><p>Client premium rules</p></div></a>
-            <a href="/solutions/gaming" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><circle cx="17" cy="10" r="1"/><circle cx="15" cy="13" r="1"/></svg></div><div class="nav-dropdown-item-text"><h4>Gaming</h4><p>Player fund protection</p></div></a>
-            <a href="/solutions/real-estate" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="nav-dropdown-item-text"><h4>Real Estate</h4><p>Deposit protection</p></div></a>
+        <div class="nav-dd">
+          <div class="nav-dd-trigger">
+            Solutions
+            <svg viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="nav-dd-menu">
+            <div class="nav-dd-label">Regulatory Modules</div>
+            <a href="/solutions/payments" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10h20M2 14h20M6 18h2M12 18h6"/><rect x="2" y="6" width="20" height="14" rx="2"/></svg></div>
+              <div><h4>Payments (PS25)</h4><p>UK EMI &amp; PI safeguarding</p></div>
+            </a>
+            <a href="/solutions/cass" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 3v18"/></svg></div>
+              <div><h4>CASS</h4><p>FCA client assets regime</p></div>
+            </a>
+            <a href="/solutions/crypto" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12h6M12 9v6"/></svg></div>
+              <div><h4>Crypto</h4><p>On-chain wallet reconciliation</p></div>
+            </a>
+            <a href="/solutions/stablecoin" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M8 8h8M8 16h8"/></svg></div>
+              <div><h4>Stablecoin</h4><p>Reserve &amp; peg verification</p></div>
+            </a>
+            <a href="/solutions/mica" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><ellipse cx="12" cy="12" rx="4" ry="10"/></svg></div>
+              <div><h4>MiCA</h4><p>EU crypto regulation</p></div>
+            </a>
+            <a href="/solutions/genius-act" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 4v16"/></svg></div>
+              <div><h4>GENIUS Act</h4><p>US stablecoin regulation</p></div>
+            </a>
+            <div class="nav-dd-label">Sector Solutions</div>
+            <a href="/solutions/legal" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+              <div><h4>Legal</h4><p>SRA client money rules</p></div>
+            </a>
+            <a href="/solutions/insurance" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5.5-3.8 10.7-8 12-4.2-1.3-8-6.5-8-12V6l8-4z"/></svg></div>
+              <div><h4>Insurance</h4><p>FCA CASS 5 compliance</p></div>
+            </a>
+            <a href="/solutions/gaming" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg></div>
+              <div><h4>Gaming</h4><p>Player fund protection</p></div>
+            </a>
+            <a href="/solutions/real-estate" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg></div>
+              <div><h4>Real Estate</h4><p>Client deposit protection</p></div>
+            </a>
           </div>
         </div>
+        <a href="/platform" class="nav-link">Platform</a>
         <a href="/for-banks" class="nav-link">For Banks</a>
         <a href="/pricing" class="nav-link">Pricing</a>
         <a href="/about" class="nav-link">About</a>
       </div>
       <div class="nav-cta">
-        <a href="https://app.safeheld.com" class="nav-login">Log in</a>
-        <a href="/contact" class="btn btn-primary btn-sm">Request a Demo</a>
+        <a href="/login" class="nav-login">Log In</a>
+        <a href="/contact" class="btn btn-accent btn-sm">Request a Demo</a>
       </div>
-      <button class="nav-mobile-toggle" aria-label="Toggle menu">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
+      <button class="nav-mobile" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
-    </div>
-    <div class="nav-mobile-menu" id="mobileMenu">
-      <a href="/platform">Platform</a>
-      <a href="/solutions/payments">Payments</a>
-      <a href="/solutions/investments">Investments</a>
-      <a href="/solutions/crypto">Crypto</a>
-      <a href="/solutions/stablecoins">Stablecoins</a>
-      <a href="/solutions/mica">MiCA</a>
-      <a href="/solutions/genius-act">GENIUS Act</a>
-      <a href="/solutions/legal">Legal</a>
-      <a href="/solutions/insurance">Insurance</a>
-      <a href="/solutions/gaming">Gaming</a>
-      <a href="/solutions/real-estate">Real Estate</a>
-      <a href="/for-banks">For Banks</a>
-      <a href="/pricing">Pricing</a>
-      <a href="/about">About</a>
-      <a href="https://app.safeheld.com">Log in</a>
-      <a href="/contact" class="btn btn-primary" style="margin-top: 16px; text-align: center;">Request a Demo</a>
     </div>
   </nav>
 
-  <!-- ── Page Hero ────────────────────────────────────────────────────────── -->
-  <section class="page-hero bg-white">
-    <div class="page-hero-bg">
-      <div class="hero-grid"></div>
-    </div>
+  <!-- ── Page Header ────────────────────────────────────────────────────── -->
+  <header class="page-header bg-dark dark">
     <div class="container">
-      <span class="superheader">Real Estate</span>
-      <h1 class="t-h1">Client Deposit Protection for Property Transactions</h1>
-      <p class="t-body-lg">Verification of client deposit handling for estate agents and property transaction intermediaries.</p>
+      <div class="reveal">
+        <p class="t-label">REAL ESTATE</p>
+        <h1 class="t-h1">Client Deposit Protection</h1>
+        <p class="t-body-lg">Protection of client deposits and funds held by property firms. Continuously verify that tenant deposits, buyer funds, and other client money held by estate agents and property managers are properly segregated and compliant with regulatory requirements.</p>
+      </div>
     </div>
-  </section>
+  </header>
 
-  <!-- ── Overview ─────────────────────────────────────────────────────────── -->
-  <section class="section bg-gray">
-    <div class="container-narrow">
-      <p class="t-body-lg">Estate agents and property intermediaries hold significant client deposits during property transactions. These funds must be properly protected, segregated from the firm's own money, and accounted for throughout the entire transaction lifecycle &mdash; from initial receipt through to completion or return.</p>
-      <p class="t-body-lg" style="margin-top: var(--space-md);">Regulatory requirements and industry standards mandate that client deposits are held in designated client accounts, that accurate records are maintained for every transaction, and that funds are returned promptly when transactions do not complete. Firms must also manage interest obligations and maintain clear evidence chains to support dispute resolution.</p>
-      <p class="t-body-lg" style="margin-top: var(--space-md);">Safeheld provides automated verification infrastructure that enables property intermediaries to demonstrate continuous compliance with deposit protection requirements &mdash; tracking every deposit from receipt through to final disbursement with full audit evidence.</p>
-    </div>
-  </section>
-
-  <!-- ── Capabilities ─────────────────────────────────────────────────────── -->
+  <!-- ── Overview Section ───────────────────────────────────────────────── -->
   <section class="section bg-white">
     <div class="container">
-      <div class="section-header">
-        <span class="superheader">Capabilities</span>
-        <h2 class="t-h2">What Safeheld Delivers</h2>
+      <div class="sh center reveal">
+        <p class="t-label">Overview</p>
+        <h2 class="t-h2">Client Money in Property</h2>
+        <p class="t-body-lg">Estate agents, lettings agents, and property managers handle significant client funds — from tenant deposits to exchange deposits. The Estate Agents Act 1979 and industry requirements demand proper segregation, insurance, and record-keeping.</p>
       </div>
-      <div class="capability-grid">
-        <div class="capability">
-          <h4>Deposit Reconciliation</h4>
-          <p>Automated tracking and reconciliation of client deposits across multiple property transactions. Every deposit is matched from receipt through to completion or return, with full transaction-level visibility.</p>
+      <div class="grid g3 reveal">
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg>
+          </div>
+          <h3>Deposit Segregation</h3>
+          <p>The Estate Agents Act requires client money to be held separately from business funds. Safeheld monitors account structures and balances to verify continuous segregation of all client deposits.</p>
         </div>
-        <div class="capability">
-          <h4>Segregation Verification</h4>
-          <p>Continuous verification that client deposits are held in designated client accounts separate from firm funds. Real-time monitoring of account balances against total deposit obligations at all times.</p>
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5.5-3.8 10.7-8 12-4.2-1.3-8-6.5-8-12V6l8-4z"/></svg>
+          </div>
+          <h3>Deposit Protection Schemes</h3>
+          <p>Tenancy deposits must be protected in a government-authorised scheme within 30 days. Safeheld tracks registration status and deadlines for every deposit your firm holds.</p>
         </div>
-        <div class="capability">
-          <h4>Transaction Lifecycle Tracking</h4>
-          <p>End-to-end tracking of deposit handling from receipt through to completion or return. Full visibility into the status of every client deposit at every stage of the property transaction.</p>
-        </div>
-        <div class="capability">
-          <h4>Compliance Reporting</h4>
-          <p>Structured outputs for regulatory compliance and client assurance. Complete data lineage from source records through to final report figures with full audit trail and evidence chain.</p>
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+          </div>
+          <h3>Redress &amp; Audit</h3>
+          <p>Property redress scheme membership (TPO or PRS) requires proper client money handling. Safeheld generates the evidence and audit trails needed for scheme compliance audits.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── Key Requirements ─────────────────────────────────────────────────── -->
-  <section class="section bg-gray">
+  <!-- ── Key Capabilities ───────────────────────────────────────────────── -->
+  <section class="section bg-light">
     <div class="container">
-      <div class="section-header">
-        <span class="superheader">Key Requirements</span>
-        <h2 class="t-h2">Deposit Protection Obligations</h2>
-        <p class="t-body-lg">Core obligations that property intermediaries must meet for client deposit protection.</p>
+      <div class="sh center reveal">
+        <p class="t-label">Key Capabilities</p>
+        <h2 class="t-h2">Built for Property Professionals</h2>
+        <p class="t-body-lg">From high-street estate agents to large property management firms, Safeheld provides the continuous verification layer that proves client deposits are safe and compliant.</p>
       </div>
-      <div class="grid-3">
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-            </svg>
-          </div>
-          <h3>Deposit Protection</h3>
-          <p>Client deposits safeguarded through proper segregation and protection arrangements throughout the entire property transaction lifecycle.</p>
+
+      <!-- Feat Row 1 -->
+      <div class="feat reveal">
+        <div class="feat-content">
+          <p class="t-label">Reconciliation</p>
+          <h3 class="t-h3">Deposit Account Reconciliation</h3>
+          <p class="t-body">Reconcile client money accounts holding tenant deposits, exchange deposits, and rental income against your property management system records. Safeheld identifies discrepancies between the amounts you should be holding and the actual balances in your designated client accounts.</p>
+          <ul class="feat-list">
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Match individual deposit records against bank account balances
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Separate tracking of tenancy deposits, exchange deposits, and rent held
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Shortfall alerts with severity grading and remediation timelines
+            </li>
+          </ul>
         </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="7" height="7"></rect>
-              <rect x="14" y="3" width="7" height="7"></rect>
-              <rect x="3" y="14" width="7" height="7"></rect>
-              <rect x="14" y="14" width="7" height="7"></rect>
-            </svg>
-          </div>
-          <h3>Account Segregation</h3>
-          <p>Client deposits held in designated client accounts, fully separated from the firm's operational funds and business accounts.</p>
+        <div class="feat-visual">
+          <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Deposit reconciliation dashboard -->
+            <rect x="30" y="20" width="340" height="260" rx="12" fill="#F8F9FB" stroke="#E5E7EB"/>
+            <text x="55" y="48" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#080E2C">Deposit Reconciliation</text>
+            <text x="345" y="48" text-anchor="end" font-family="Inter,sans-serif" font-size="10" fill="#9CA3AF">5 Mar 2026</text>
+            <!-- Summary boxes -->
+            <rect x="55" y="60" width="90" height="55" rx="8" fill="white" stroke="#E5E7EB"/>
+            <text x="67" y="76" font-family="Inter,sans-serif" font-size="8" font-weight="600" fill="#9CA3AF">DEPOSITS HELD</text>
+            <text x="67" y="100" font-family="Inter,sans-serif" font-size="16" font-weight="700" fill="#080E2C">247</text>
+            <rect x="155" y="60" width="90" height="55" rx="8" fill="white" stroke="#E5E7EB"/>
+            <text x="167" y="76" font-family="Inter,sans-serif" font-size="8" font-weight="600" fill="#9CA3AF">TOTAL VALUE</text>
+            <text x="167" y="100" font-family="Inter,sans-serif" font-size="16" font-weight="700" fill="#080E2C">$392K</text>
+            <rect x="255" y="60" width="90" height="55" rx="8" fill="white" stroke="#E5E7EB"/>
+            <text x="267" y="76" font-family="Inter,sans-serif" font-size="8" font-weight="600" fill="#9CA3AF">BANK BALANCE</text>
+            <text x="267" y="100" font-family="Inter,sans-serif" font-size="16" font-weight="700" fill="#10B981">$392K</text>
+            <!-- Status -->
+            <rect x="55" y="128" width="290" height="28" rx="6" fill="#10B981" fill-opacity="0.08" stroke="#10B981" stroke-opacity="0.2"/>
+            <circle cx="74" cy="142" r="5" fill="#10B981"/>
+            <text x="86" y="146" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#059669">Fully Reconciled — all deposits accounted for</text>
+            <!-- Breakdown table -->
+            <text x="55" y="178" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#6B7280">By Deposit Type</text>
+            <rect x="55" y="188" width="290" height="22" rx="0" fill="#F1F3F7"/>
+            <text x="67" y="203" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#6B7280">Type</text>
+            <text x="190" y="203" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#6B7280">Count</text>
+            <text x="270" y="203" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#6B7280">Value</text>
+            <text x="335" y="203" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#6B7280">Status</text>
+
+            <rect x="55" y="210" width="290" height="22" rx="0" fill="white" stroke="#E5E7EB" stroke-width="0.5"/>
+            <text x="67" y="225" font-family="Inter,sans-serif" font-size="9" fill="#374151">Tenancy deposits</text>
+            <text x="190" y="225" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#374151">198</text>
+            <text x="270" y="225" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#374151">$267,400</text>
+            <circle cx="325" cy="221" r="4" fill="#10B981"/><text x="335" y="225" font-family="Inter,sans-serif" font-size="9" fill="#059669">OK</text>
+
+            <rect x="55" y="232" width="290" height="22" rx="0" fill="white" stroke="#E5E7EB" stroke-width="0.5"/>
+            <text x="67" y="247" font-family="Inter,sans-serif" font-size="9" fill="#374151">Exchange deposits</text>
+            <text x="190" y="247" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#374151">12</text>
+            <text x="270" y="247" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#374151">$98,500</text>
+            <circle cx="325" cy="243" r="4" fill="#10B981"/><text x="335" y="247" font-family="Inter,sans-serif" font-size="9" fill="#059669">OK</text>
+
+            <rect x="55" y="254" width="290" height="22" rx="0" fill="white" stroke="#E5E7EB" stroke-width="0.5"/>
+            <text x="67" y="269" font-family="Inter,sans-serif" font-size="9" fill="#374151">Rent held in trust</text>
+            <text x="190" y="269" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#374151">37</text>
+            <text x="270" y="269" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#374151">$26,100</text>
+            <circle cx="325" cy="265" r="4" fill="#10B981"/><text x="335" y="269" font-family="Inter,sans-serif" font-size="9" fill="#059669">OK</text>
+          </svg>
         </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-              <polyline points="14 2 14 8 20 8"></polyline>
-              <line x1="16" y1="13" x2="8" y2="13"></line>
-              <line x1="16" y1="17" x2="8" y2="17"></line>
-              <polyline points="10 9 9 9 8 9"></polyline>
-            </svg>
-          </div>
-          <h3>Transaction Records</h3>
-          <p>Complete, accurate records of all deposit receipts, movements, and disbursements for every property transaction handled by the firm.</p>
+      </div>
+
+      <!-- Feat Row 2 -->
+      <div class="feat reverse reveal">
+        <div class="feat-content">
+          <p class="t-label">Segregation</p>
+          <h3 class="t-h3">Client Money Segregation</h3>
+          <p class="t-body">The Estate Agents Act 1979 (section 14) requires estate agents to keep client money in a separate client account at an authorised institution. Safeheld monitors that your client account arrangements are properly maintained, with no commingling of client and business funds.</p>
+          <ul class="feat-list">
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Monitor designated client account status with authorised banks
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Detect potential commingling between client and office accounts
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Track interest earned on client money and proper allocation
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Alert on any withdrawal from client accounts that lacks matching authority
+            </li>
+          </ul>
         </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <polyline points="12 6 12 12 16 14"></polyline>
-            </svg>
-          </div>
-          <h3>Timely Return of Funds</h3>
-          <p>Prompt return of client deposits when transactions do not complete, with full tracking, evidence of return, and audit trail.</p>
+        <div class="feat-visual">
+          <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Segregation diagram -->
+            <rect x="30" y="20" width="340" height="260" rx="12" fill="#F8F9FB" stroke="#E5E7EB"/>
+            <text x="200" y="48" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#080E2C">Account Segregation Structure</text>
+            <!-- Client Money side -->
+            <rect x="55" y="65" width="135" height="30" rx="6" fill="#3D3DFF" fill-opacity="0.1"/>
+            <text x="122" y="84" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#3D3DFF">Client Money Accounts</text>
+            <!-- Client sub-accounts -->
+            <rect x="55" y="105" width="135" height="32" rx="6" fill="white" stroke="#3D3DFF" stroke-opacity="0.2"/>
+            <text x="67" y="120" font-family="Inter,sans-serif" font-size="9" font-weight="500" fill="#374151">Deposit Account</text>
+            <text x="178" y="120" text-anchor="end" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#080E2C">$267K</text>
+            <rect x="55" y="141" width="135" height="32" rx="6" fill="white" stroke="#3D3DFF" stroke-opacity="0.2"/>
+            <text x="67" y="156" font-family="Inter,sans-serif" font-size="9" font-weight="500" fill="#374151">Exchange Account</text>
+            <text x="178" y="156" text-anchor="end" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#080E2C">$98K</text>
+            <rect x="55" y="177" width="135" height="32" rx="6" fill="white" stroke="#3D3DFF" stroke-opacity="0.2"/>
+            <text x="67" y="192" font-family="Inter,sans-serif" font-size="9" font-weight="500" fill="#374151">Rent Trust Account</text>
+            <text x="178" y="192" text-anchor="end" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#080E2C">$26K</text>
+            <!-- Divider -->
+            <line x1="200" y1="65" x2="200" y2="220" stroke="#EF4444" stroke-width="2" stroke-dasharray="6 4"/>
+            <rect x="188" y="222" width="24" height="16" rx="4" fill="#FEF2F2" stroke="#FECACA"/>
+            <text x="200" y="234" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" font-weight="700" fill="#EF4444">SEP</text>
+            <!-- Office Money side -->
+            <rect x="210" y="65" width="135" height="30" rx="6" fill="#6B7280" fill-opacity="0.1"/>
+            <text x="277" y="84" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#6B7280">Office Accounts</text>
+            <rect x="210" y="105" width="135" height="32" rx="6" fill="white" stroke="#E5E7EB"/>
+            <text x="222" y="120" font-family="Inter,sans-serif" font-size="9" font-weight="500" fill="#374151">Operating Account</text>
+            <text x="333" y="120" text-anchor="end" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#6B7280">$142K</text>
+            <rect x="210" y="141" width="135" height="32" rx="6" fill="white" stroke="#E5E7EB"/>
+            <text x="222" y="156" font-family="Inter,sans-serif" font-size="9" font-weight="500" fill="#374151">Commission Account</text>
+            <text x="333" y="156" text-anchor="end" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#6B7280">$38K</text>
+            <!-- Status -->
+            <rect x="55" y="250" width="290" height="22" rx="6" fill="#10B981" fill-opacity="0.08" stroke="#10B981" stroke-opacity="0.2"/>
+            <circle cx="74" cy="261" r="4" fill="#10B981"/>
+            <text x="84" y="265" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#059669">No commingling detected | Segregation: Compliant</text>
+          </svg>
         </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <path d="M16 8h-6a2 2 0 100 4h4a2 2 0 110 4H8"></path>
-              <path d="M12 18V6"></path>
-            </svg>
-          </div>
-          <h3>Interest Management</h3>
-          <p>Proper handling of interest earned on client deposits in accordance with regulatory and contractual requirements, with transparent accounting.</p>
+      </div>
+
+      <!-- Feat Row 3 -->
+      <div class="feat reveal">
+        <div class="feat-content">
+          <p class="t-label">Compliance</p>
+          <h3 class="t-h3">Estate Agent Compliance</h3>
+          <p class="t-body">Meet your obligations under the Estate Agents Act 1979, the Consumer Rights Act 2015, and industry body requirements (ARLA Propertymark, NAEA Propertymark). Safeheld maps each regulatory requirement and monitors your firm's compliance status, from client money protection insurance to proper record-keeping practices.</p>
+          <ul class="feat-list">
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Estate Agents Act 1979 section 14 client money compliance
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Client Money Protection scheme membership verification
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              ARLA / NAEA Propertymark compliance audit support
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              National Trading Standards estate agent compliance readiness
+            </li>
+          </ul>
         </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
-              <line x1="4" y1="22" x2="4" y2="15"></line>
-            </svg>
-          </div>
-          <h3>Dispute Resolution Tracking</h3>
-          <p>Complete audit trail and evidence chain to support resolution of any disputes relating to client deposits, available for inspection at any time.</p>
+        <div class="feat-visual">
+          <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Compliance status -->
+            <rect x="30" y="20" width="340" height="260" rx="12" fill="#F8F9FB" stroke="#E5E7EB"/>
+            <text x="55" y="48" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#080E2C">Regulatory Compliance Status</text>
+            <text x="345" y="48" text-anchor="end" font-family="Inter,sans-serif" font-size="10" fill="#10B981">6/6 Met</text>
+            <!-- Compliance items -->
+            <rect x="55" y="62" width="290" height="30" rx="6" fill="white" stroke="#E5E7EB"/>
+            <circle cx="74" cy="77" r="7" fill="#10B981"/>
+            <path d="M71 77l2 2 4-4" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <text x="90" y="81" font-family="Inter,sans-serif" font-size="10" fill="#374151">EA Act s.14 — Client money held separately</text>
+
+            <rect x="55" y="96" width="290" height="30" rx="6" fill="white" stroke="#E5E7EB"/>
+            <circle cx="74" cy="111" r="7" fill="#10B981"/>
+            <path d="M71 111l2 2 4-4" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <text x="90" y="115" font-family="Inter,sans-serif" font-size="10" fill="#374151">CMP scheme — Active membership confirmed</text>
+
+            <rect x="55" y="130" width="290" height="30" rx="6" fill="white" stroke="#E5E7EB"/>
+            <circle cx="74" cy="145" r="7" fill="#10B981"/>
+            <path d="M71 145l2 2 4-4" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <text x="90" y="149" font-family="Inter,sans-serif" font-size="10" fill="#374151">Redress scheme — TPO membership active</text>
+
+            <rect x="55" y="164" width="290" height="30" rx="6" fill="white" stroke="#E5E7EB"/>
+            <circle cx="74" cy="179" r="7" fill="#10B981"/>
+            <path d="M71 179l2 2 4-4" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <text x="90" y="183" font-family="Inter,sans-serif" font-size="10" fill="#374151">Insurance — PI &amp; CMP cover adequate</text>
+
+            <rect x="55" y="198" width="290" height="30" rx="6" fill="white" stroke="#E5E7EB"/>
+            <circle cx="74" cy="213" r="7" fill="#10B981"/>
+            <path d="M71 213l2 2 4-4" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <text x="90" y="217" font-family="Inter,sans-serif" font-size="10" fill="#374151">Account records — Up to date, reconciled</text>
+
+            <rect x="55" y="232" width="290" height="30" rx="6" fill="white" stroke="#E5E7EB"/>
+            <circle cx="74" cy="247" r="7" fill="#10B981"/>
+            <path d="M71 247l2 2 4-4" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <text x="90" y="251" font-family="Inter,sans-serif" font-size="10" fill="#374151">CMP certificate — Displayed to clients</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Feat Row 4 -->
+      <div class="feat reverse reveal">
+        <div class="feat-content">
+          <p class="t-label">Deposits</p>
+          <h3 class="t-h3">Deposit Protection Scheme Verification</h3>
+          <p class="t-body">Tenancy deposits must be registered with a government-authorised deposit protection scheme (DPS, TDS, or mydeposits) within 30 days of receipt. Safeheld tracks every deposit from receipt to registration, alerts you when deadlines approach, and verifies that prescribed information has been served to tenants.</p>
+          <ul class="feat-list">
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              30-day registration deadline tracking for every tenancy deposit
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Prescribed information service status per Housing Act 2004 s.213
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Scheme registration verification across DPS, TDS, and mydeposits
+            </li>
+          </ul>
+        </div>
+        <div class="feat-visual">
+          <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Deposit protection tracking -->
+            <rect x="30" y="20" width="340" height="260" rx="12" fill="#F8F9FB" stroke="#E5E7EB"/>
+            <text x="55" y="48" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#080E2C">Deposit Protection Tracker</text>
+            <text x="345" y="48" text-anchor="end" font-family="Inter,sans-serif" font-size="10" fill="#10B981">247 Protected</text>
+            <!-- Summary bar -->
+            <rect x="55" y="60" width="290" height="8" rx="4" fill="#E5E7EB"/>
+            <rect x="55" y="60" width="280" height="8" rx="4" fill="#10B981"/>
+            <rect x="335" y="60" width="10" height="8" rx="0" fill="#F59E0B"/>
+            <!-- Legend -->
+            <rect x="55" y="76" width="6" height="6" rx="1" fill="#10B981"/>
+            <text x="66" y="82" font-family="Inter,sans-serif" font-size="9" fill="#6B7280">Registered (244)</text>
+            <rect x="145" y="76" width="6" height="6" rx="1" fill="#F59E0B"/>
+            <text x="156" y="82" font-family="Inter,sans-serif" font-size="9" fill="#6B7280">Pending (3)</text>
+            <!-- Recent deposits table -->
+            <text x="55" y="106" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#6B7280">Recent Deposits Requiring Action</text>
+            <rect x="55" y="116" width="290" height="48" rx="8" fill="#FFFBEB" stroke="#FDE68A"/>
+            <text x="67" y="135" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#080E2C">14 Oak Lane, Flat 3 — $1,200</text>
+            <text x="67" y="152" font-family="Inter,sans-serif" font-size="9" fill="#92400E">Received: 20 Feb 2026 | Deadline: 22 Mar 2026 | 17 days remaining</text>
+            <rect x="290" y="128" width="45" height="20" rx="10" fill="#F59E0B" fill-opacity="0.15"/>
+            <text x="312" y="142" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#D97706">Register</text>
+
+            <rect x="55" y="172" width="290" height="48" rx="8" fill="#FFFBEB" stroke="#FDE68A"/>
+            <text x="67" y="191" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#080E2C">7 Willow Court, Unit 12 — $950</text>
+            <text x="67" y="208" font-family="Inter,sans-serif" font-size="9" fill="#92400E">Received: 25 Feb 2026 | Deadline: 27 Mar 2026 | 22 days remaining</text>
+            <rect x="290" y="184" width="45" height="20" rx="10" fill="#F59E0B" fill-opacity="0.15"/>
+            <text x="312" y="198" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#D97706">Register</text>
+
+            <rect x="55" y="228" width="290" height="48" rx="8" fill="white" stroke="#E5E7EB"/>
+            <text x="67" y="247" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#080E2C">22 Maple Drive — $1,500</text>
+            <text x="67" y="264" font-family="Inter,sans-serif" font-size="9" fill="#9CA3AF">Received: 1 Mar 2026 | Deadline: 31 Mar 2026 | 26 days remaining</text>
+            <rect x="290" y="240" width="45" height="20" rx="10" fill="#3D3DFF" fill-opacity="0.08"/>
+            <text x="312" y="254" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#3D3DFF">New</text>
+          </svg>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── CTA Section ──────────────────────────────────────────────────────── -->
-  <section class="cta-section bg-gradient-navy">
+  <!-- ── How It Works ───────────────────────────────────────────────────── -->
+  <section class="section bg-dark dark">
     <div class="container">
-      <div class="cta-content">
-        <h2 class="t-h2">Verify Your Deposit Protection</h2>
-        <p class="t-body-lg">See how Safeheld automates deposit reconciliation and compliance verification for property intermediaries.</p>
-        <div class="hero-actions" style="justify-content: center;">
-          <a href="/contact" class="btn btn-primary btn-lg">Request a Demo</a>
+      <div class="sh center reveal">
+        <p class="t-label">How It Works</p>
+        <h2 class="t-h2">Deposit Protection in Three Steps</h2>
+        <p class="t-body-lg">From property management system integration to compliance audit readiness, Safeheld automates the verification of every client deposit your firm holds.</p>
+      </div>
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Connect Your Systems</h3>
+          <p>Link your property management software and designated client money bank accounts. Safeheld integrates with major platforms including Reapit, Alto, Goodlord, and more.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Continuous Monitoring</h3>
+          <p>Safeheld reconciles deposit records against bank balances, tracks scheme registration deadlines, and monitors account segregation — every day, automatically.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Prove Compliance</h3>
+          <p>Generate compliance reports for ARLA Propertymark audits, National Trading Standards inspections, and CMP scheme reviews. Full evidence trail maintained for every deposit.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── Footer ───────────────────────────────────────────────────────────── -->
+  <!-- ── CTA Section ────────────────────────────────────────────────────── -->
+  <section class="cta-section bg-white">
+    <div class="container reveal">
+      <p class="t-label">Get Started</p>
+      <h2 class="t-h2">Protect Every Client Deposit</h2>
+      <p class="t-body-lg" style="max-width:560px;margin:0 auto 32px">Property firms across the UK trust Safeheld to automate client deposit protection, meet Estate Agents Act requirements, and demonstrate compliance to redress schemes and industry bodies.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="/contact" class="btn btn-accent btn-lg">Request a Demo</a>
+        <a href="/platform" class="btn btn-outline btn-lg">Explore the Platform</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────────────────────── -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/" class="nav-logo" style="margin-bottom: 4px;"><div class="nav-logo-mark">S</div> Safeheld</a>
-          <p>The global verification layer for client funds. Autonomous compliance infrastructure for regulated finance.</p>
+          <a href="/" class="nav-logo">
+            <div class="nav-mark">S</div>
+            Safeheld
+          </a>
+          <p>The verification layer for client funds. Proving client money is safeguarded across every regulated sector.</p>
         </div>
         <div class="footer-col">
           <h4>Platform</h4>
           <a href="/platform">Overview</a>
-          <a href="/platform">Reconciliation</a>
-          <a href="/platform">Breach Detection</a>
-          <a href="/platform">Reporting</a>
-          <a href="/platform">Governance</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/for-banks">For Banks</a>
+          <a href="/contact">Request a Demo</a>
         </div>
         <div class="footer-col">
           <h4>Solutions</h4>
-          <a href="/solutions/payments">Payments</a>
-          <a href="/solutions/investments">Investments</a>
+          <a href="/solutions/payments">Payments (PS25)</a>
+          <a href="/solutions/cass">CASS</a>
           <a href="/solutions/crypto">Crypto</a>
-          <a href="/solutions/stablecoins">Stablecoins</a>
-          <a href="/solutions/mica">MiCA</a>
-          <a href="/solutions/genius-act">GENIUS Act</a>
+          <a href="/solutions/stablecoin">Stablecoin</a>
           <a href="/solutions/legal">Legal</a>
           <a href="/solutions/insurance">Insurance</a>
           <a href="/solutions/gaming">Gaming</a>
@@ -245,33 +472,36 @@
         <div class="footer-col">
           <h4>Company</h4>
           <a href="/about">About</a>
-          <a href="/pricing">Pricing</a>
           <a href="/contact">Contact</a>
-          <a href="/for-banks">For Banks</a>
         </div>
         <div class="footer-col">
-          <h4>Resources</h4>
-          <a href="/docs">Documentation</a>
-          <a href="/api">API Reference</a>
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2025 Safeheld Ltd. All rights reserved.</p>
-        <div class="footer-bottom-links"><a href="/terms">Terms</a><a href="/privacy">Privacy</a><a href="/cookies">Cookies</a></div>
+        <p>&copy; 2026 Safeheld. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+        </div>
       </div>
     </div>
   </footer>
 
+  <!-- ── Reveal Animation ───────────────────────────────────────────────── -->
   <script>
-    (function () {
-      var toggle = document.querySelector('.nav-mobile-toggle');
-      var menu = document.getElementById('mobileMenu');
-      if (toggle && menu) {
-        toggle.addEventListener('click', function () {
-          menu.classList.toggle('open');
+    document.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
         });
-      }
-    })();
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    });
   </script>
 
 </body>

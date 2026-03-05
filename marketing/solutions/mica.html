@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Verification infrastructure for CASPs, EMT issuers, and ART issuers under the EU Markets in Crypto-Assets Regulation. Asset segregation, reserve compliance, and regulatory reporting.">
-  <title>MiCA — Markets in Crypto-Assets Regulation — Safeheld</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233D3DFF'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='white' font-family='Inter,sans-serif' font-weight='800' font-size='20'%3ES%3C/text%3E%3C/svg%3E">
+  <title>MiCA Compliance Framework | SafeHeld</title>
+  <meta name="description" content="EU Markets in Crypto-Assets regulation compliance for CASPs and token issuers. Asset segregation, reserve monitoring, and regulatory reporting for EU authorities.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,250 +12,479 @@
 </head>
 <body>
 
-  <!-- ── Navigation ─────────────────────────────────────────────────────── -->
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo">
-        <div class="nav-logo-mark">S</div>
-        Safeheld
-      </a>
-      <div class="nav-links">
-        <a href="/platform" class="nav-link">Platform</a>
-        <div class="nav-dropdown">
-          <button class="nav-dropdown-trigger active">
-            Solutions
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="nav-dropdown-menu">
-            <div class="nav-dropdown-group-label">Financial Services</div>
-            <a href="/solutions/payments" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Payments</h4><p>EMI &amp; PI safeguarding</p></div>
-            </a>
-            <a href="/solutions/investments" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Investments</h4><p>CASS compliance</p></div>
-            </a>
-            <div class="nav-dropdown-group-label">Digital Assets</div>
-            <a href="/solutions/crypto" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Crypto</h4><p>Wallet reconciliation</p></div>
-            </a>
-            <a href="/solutions/stablecoins" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Stablecoins</h4><p>Peg &amp; reserve verification</p></div>
-            </a>
-            <a href="/solutions/mica" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>MiCA</h4><p>EU crypto regulation</p></div>
-            </a>
-            <a href="/solutions/genius-act" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>GENIUS Act</h4><p>US stablecoin rules</p></div>
-            </a>
-            <div class="nav-dropdown-group-label">Other Sectors</div>
-            <a href="/solutions/legal" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Legal</h4><p>SRA client money</p></div>
-            </a>
-            <a href="/solutions/insurance" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Insurance</h4><p>Client premium rules</p></div>
-            </a>
-            <a href="/solutions/gaming" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><circle cx="17" cy="10" r="1"/><circle cx="15" cy="13" r="1"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Gaming</h4><p>Player fund protection</p></div>
-            </a>
-            <a href="/solutions/real-estate" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Real Estate</h4><p>Deposit protection</p></div>
-            </a>
-          </div>
-        </div>
-        <a href="/for-banks" class="nav-link">For Banks</a>
-        <a href="/pricing" class="nav-link">Pricing</a>
-        <a href="/about" class="nav-link">About</a>
-      </div>
-      <div class="nav-cta">
-        <a href="https://app.safeheld.com" class="nav-login">Log in</a>
-        <a href="/contact" class="btn btn-primary btn-sm">Request a Demo</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- ── Page Hero ────────────────────────────────────────────────────────── -->
-  <section class="page-hero bg-white">
-    <div class="container">
-      <span class="superheader">MiCA</span>
-      <h1 class="t-h1">Markets in Crypto-Assets Regulation</h1>
-      <p class="t-body-lg">Verification infrastructure for CASPs, EMT issuers, and ART issuers under the EU Markets in Crypto-Assets Regulation.</p>
-    </div>
-  </section>
-
-  <!-- ── Overview ──────────────────────────────────────────────────────────── -->
-  <section class="section bg-gray">
-    <div class="container">
-      <div class="section-header">
-        <span class="superheader">Overview</span>
-        <h2 class="t-h2">The MiCA Regulatory Framework</h2>
-      </div>
-      <div class="grid grid-2">
-        <div>
-          <p class="t-body">MiCA establishes the first comprehensive regulatory framework for crypto-asset service providers across the European Union. It introduces specific obligations for three categories of regulated entity: crypto-asset service providers (CASPs) must segregate client assets from proprietary holdings under Article 70; e-money token (EMT) issuers must maintain reserves under Title IV; and asset-referenced token (ART) issuers must meet reserve composition and diversification requirements under Title III.</p>
-        </div>
-        <div>
-          <p class="t-body">Beyond asset safeguarding, MiCA imposes prudential requirements on authorised CASPs, mandatory white paper disclosures for token issuers, and ongoing reporting obligations to national competent authorities. The regulation also establishes a passporting framework that allows authorised entities to operate across EU member states. For firms operating across MiCA and other jurisdictions, the challenge is maintaining continuous compliance across overlapping regulatory regimes with distinct reporting requirements.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Capabilities ──────────────────────────────────────────────────────── -->
-  <section class="section bg-white">
-    <div class="container">
-      <div class="section-header">
-        <span class="superheader">Capabilities</span>
-        <h2 class="t-h2">Verification Infrastructure</h2>
-      </div>
-      <div class="capability-grid">
-        <div class="capability">
-          <h4>CASP Asset Segregation (Art. 70)</h4>
-          <p>Verification that client crypto assets are held separately from CASP proprietary holdings at all times. Continuous reconciliation between internal records and custodian or on-chain positions.</p>
-        </div>
-        <div class="capability">
-          <h4>EMT Reserve Compliance (Title IV)</h4>
-          <p>Monitoring of e-money token reserves to verify that backing assets meet MiCA's Title IV requirements. Reserve adequacy verification against circulating supply with qualifying asset classification.</p>
-        </div>
-        <div class="capability">
-          <h4>ART Reserve Verification (Title III)</h4>
-          <p>Reserve composition analysis for asset-referenced tokens, including diversification and liquidity requirements. Verification that reserve assets meet the specific criteria defined under MiCA Title III.</p>
-        </div>
-        <div class="capability">
-          <h4>Regulatory Reporting</h4>
-          <p>Structured outputs aligned to MiCA reporting obligations for national competent authorities. Reserve adequacy reports, segregation verification, and prudential status documentation.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Key Requirements ──────────────────────────────────────────────────── -->
-  <section class="section bg-gray">
-    <div class="container">
-      <div class="section-header">
-        <span class="superheader">Requirements</span>
-        <h2 class="t-h2">Key MiCA Requirements</h2>
-      </div>
-      <div class="grid grid-3">
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          </div>
-          <h3 class="t-h4">Client Asset Segregation</h3>
-          <p>Article 70 requires CASPs to hold client crypto assets and funds separately from their own at all times. Segregation must be verifiable through internal records and independent custodian confirmation.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
-          </div>
-          <h3 class="t-h4">Reserve Composition</h3>
-          <p>EMT and ART issuers must maintain reserves composed of qualifying assets that meet specific liquidity, credit quality, and diversification criteria. The composition must be verified and reported on an ongoing basis.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </div>
-          <h3 class="t-h4">Prudential Requirements</h3>
-          <p>Authorised CASPs must maintain own funds not less than the higher of their permanent minimum capital requirement or one quarter of fixed overheads. Continuous monitoring ensures compliance with prudential thresholds.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <h3 class="t-h4">Custody Obligations</h3>
-          <p>CASPs providing custody and administration services must establish custody policies, maintain records of client positions, and ensure that client assets are protected in the event of insolvency.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-          </div>
-          <h3 class="t-h4">White Paper Disclosures</h3>
-          <p>Token issuers must publish and maintain a crypto-asset white paper containing prescribed disclosures. The data infrastructure supporting these disclosures must be accurate, current, and auditable.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          </div>
-          <h3 class="t-h4">Cross-Border Passporting</h3>
-          <p>MiCA-authorised entities may passport services across EU member states. Compliance must be maintained at the home member state level while meeting any additional host member state notification requirements.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── CTA Section ──────────────────────────────────────────────────────── -->
-  <section class="bg-gradient-navy cta-section">
-    <div class="container">
-      <h2 class="t-h2">See how Safeheld works for MiCA compliance</h2>
-      <p class="t-body-lg">Learn how verification infrastructure supports CASP segregation, reserve compliance, and regulatory reporting under MiCA.</p>
-      <a href="/contact" class="btn btn-white btn-lg">Request a Demo</a>
-    </div>
-  </section>
-
-  <!-- ── Footer ───────────────────────────────────────────────────────────── -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="/" class="nav-logo">
-            <div class="nav-logo-mark">S</div>
-            Safeheld
+<!-- ── Nav ─────────────────────────────────────────────────────────────── -->
+<nav class="nav nav-solid">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <div class="nav-mark">S</div>
+      SafeHeld
+    </a>
+    <div class="nav-links">
+      <div class="nav-dd">
+        <button class="nav-dd-trigger">
+          Solutions
+          <svg viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-dd-menu">
+          <div class="nav-dd-label">Regulatory Modules</div>
+          <a href="/solutions/payments" class="nav-dd-item">
+            <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 010-4h14v4"/><path d="M3 5v14a2 2 0 002 2h16v-5"/><path d="M18 12a2 2 0 000 4h4v-4h-4z"/></svg></div>
+            <div><h4>PS25 Safeguarding</h4><p>UK EMI &amp; PI compliance</p></div>
           </a>
-          <p>The global verification layer for client funds. Autonomous compliance infrastructure for regulated finance.</p>
-        </div>
-        <div class="footer-col">
-          <h4>Platform</h4>
-          <a href="/platform">Overview</a>
-          <a href="/platform">Reconciliation</a>
-          <a href="/platform">Breach Detection</a>
-          <a href="/platform">Reporting</a>
-          <a href="/platform">Governance</a>
-        </div>
-        <div class="footer-col">
-          <h4>Solutions</h4>
-          <a href="/solutions/payments">Payments</a>
-          <a href="/solutions/investments">Investments</a>
-          <a href="/solutions/crypto">Crypto</a>
-          <a href="/solutions/stablecoins">Stablecoins</a>
-          <a href="/solutions/mica">MiCA</a>
-          <a href="/solutions/genius-act">GENIUS Act</a>
-          <a href="/solutions/legal">Legal</a>
-          <a href="/solutions/insurance">Insurance</a>
-          <a href="/solutions/gaming">Gaming</a>
-          <a href="/solutions/real-estate">Real Estate</a>
-        </div>
-        <div class="footer-col">
-          <h4>Company</h4>
-          <a href="/about">About</a>
-          <a href="/pricing">Pricing</a>
-          <a href="/contact">Contact</a>
-          <a href="/for-banks">For Banks</a>
-        </div>
-        <div class="footer-col">
-          <h4>Resources</h4>
-          <a href="/docs">Documentation</a>
-          <a href="/api">API Reference</a>
+          <a href="/solutions/investments" class="nav-dd-item">
+            <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+            <div><h4>CASS Compliance</h4><p>Investment firm rules</p></div>
+          </a>
+          <a href="/solutions/crypto" class="nav-dd-item">
+            <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".5"/></svg></div>
+            <div><h4>Crypto Custody</h4><p>On-chain verification</p></div>
+          </a>
+          <a href="/solutions/stablecoins" class="nav-dd-item">
+            <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v12"/><path d="M15 9.5a3.5 3.5 0 00-3-1.5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H9a3.5 3.5 0 01-3-1.5"/></svg></div>
+            <div><h4>Stablecoin Reserves</h4><p>Peg &amp; reserve verification</p></div>
+          </a>
+          <a href="/solutions/mica" class="nav-dd-item">
+            <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+            <div><h4>MiCA Compliance</h4><p>EU crypto regulation</p></div>
+          </a>
+          <a href="/solutions/genius-act" class="nav-dd-item">
+            <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
+            <div><h4>GENIUS Act</h4><p>US stablecoin regulation</p></div>
+          </a>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 Safeheld Ltd. All rights reserved.</p>
-        <div class="footer-bottom-links">
-          <a href="/terms">Terms</a>
-          <a href="/privacy">Privacy</a>
-          <a href="/cookies">Cookies</a>
+      <a href="/platform" class="nav-link">Platform</a>
+      <a href="/for-banks" class="nav-link">For Banks</a>
+      <a href="/pricing" class="nav-link">Pricing</a>
+      <a href="/about" class="nav-link">About</a>
+    </div>
+    <div class="nav-cta">
+      <a href="/login" class="nav-login">Log In</a>
+      <a href="/request-demo" class="btn btn-accent btn-sm">Request a Demo</a>
+    </div>
+    <button class="nav-mobile" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ── Page Header ─────────────────────────────────────────────────────── -->
+<header class="page-header bg-dark dark">
+  <div class="container">
+    <div class="reveal">
+      <p class="t-label">EU REGULATION</p>
+      <h1 class="t-h1">MiCA Compliance Framework</h1>
+      <p class="t-body-lg">EU Markets in Crypto-Assets regulation compliance for Crypto-Asset Service Providers and token issuers. Asset segregation verification, reserve monitoring, and regulatory reporting across EU member states.</p>
+    </div>
+  </div>
+</header>
+
+<!-- ── Overview Section ────────────────────────────────────────────────── -->
+<section class="section bg-white">
+  <div class="container">
+    <div class="sh center reveal">
+      <p class="t-label">Overview</p>
+      <h2 class="t-h2">MiCA Compliance, Automated</h2>
+      <p class="t-body-lg">MiCA introduces comprehensive obligations for CASPs, ART issuers, and EMT issuers across the EU. SafeHeld automates the verification and reporting requirements so you can focus on growth.</p>
+    </div>
+    <div class="grid g3 reveal">
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
+        <h3>CASP Obligations</h3>
+        <p>Automated compliance with CASP prudential requirements, including client asset segregation, capital adequacy monitoring, and operational resilience controls under MiCA Title V.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v12"/><path d="M15 9.5a3.5 3.5 0 00-3-1.5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H9a3.5 3.5 0 01-3-1.5"/></svg>
+        </div>
+        <h3>ART &amp; EMT Reserves</h3>
+        <p>Verify reserve assets for Asset-Referenced Token and E-Money Token issuers, ensuring compliance with MiCA Title III and IV reserve composition and custody requirements.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        </div>
+        <h3>Cross-Border Passporting</h3>
+        <p>Track compliance status across EU member states for passported licences, with jurisdiction-specific reporting requirements and NCA notification support.</p>
       </div>
     </div>
-  </footer>
+  </div>
+</section>
+
+<!-- ── Key Capabilities ────────────────────────────────────────────────── -->
+<section class="section bg-light">
+  <div class="container">
+    <div class="sh center reveal">
+      <p class="t-label">Key Capabilities</p>
+      <h2 class="t-h2">Built for MiCA Requirements</h2>
+      <p class="t-body-lg">Every capability maps directly to specific MiCA articles, covering CASPs, ART issuers, and EMT issuers across the EU regulatory landscape.</p>
+    </div>
+
+    <!-- Feat 1: Asset Segregation -->
+    <div class="feat reveal">
+      <div class="feat-content">
+        <p class="t-label">Title V - CASPs</p>
+        <h3 class="t-h3">Asset Segregation Verification</h3>
+        <p class="t-body">CASPs must segregate client crypto-assets from their own holdings. SafeHeld verifies this segregation on-chain and provides continuous monitoring that client wallets are never commingled with proprietary positions.</p>
+        <ul class="feat-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            On-chain verification of client vs. proprietary wallet segregation
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Client entitlement register maintained in real time
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Custody arrangement documentation and third-party custodian oversight
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Commingling detection alerts with immediate escalation
+          </li>
+        </ul>
+      </div>
+      <div class="feat-visual">
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Segregation visualization -->
+          <text x="200" y="25" text-anchor="middle" font-size="11" font-weight="600" fill="#6B7280">MiCA ASSET SEGREGATION</text>
+          <!-- Client assets -->
+          <rect x="30" y="45" width="155" height="180" rx="8" stroke="#3D3DFF" stroke-width="1.5" fill="rgba(61,61,255,0.02)"/>
+          <text x="107" y="65" text-anchor="middle" font-size="10" font-weight="600" fill="#3D3DFF">Client Assets</text>
+          <rect x="42" y="80" width="130" height="28" rx="6" fill="rgba(16,185,129,0.06)" stroke="rgba(16,185,129,0.2)" stroke-width="1"/>
+          <text x="107" y="98" text-anchor="middle" font-size="8" fill="#374151">Wallet 0x7a...Client-1</text>
+          <rect x="42" y="114" width="130" height="28" rx="6" fill="rgba(16,185,129,0.06)" stroke="rgba(16,185,129,0.2)" stroke-width="1"/>
+          <text x="107" y="132" text-anchor="middle" font-size="8" fill="#374151">Wallet 0x3f...Client-2</text>
+          <rect x="42" y="148" width="130" height="28" rx="6" fill="rgba(16,185,129,0.06)" stroke="rgba(16,185,129,0.2)" stroke-width="1"/>
+          <text x="107" y="166" text-anchor="middle" font-size="8" fill="#374151">Wallet 0xb2...Client-3</text>
+          <circle cx="107" cy="205" r="10" fill="rgba(16,185,129,0.12)"/>
+          <path d="M102 205l3.5 3.5 6-6" stroke="#059669" stroke-width="1.5" fill="none"/>
+          <!-- Segregation barrier -->
+          <line x1="200" y1="45" x2="200" y2="225" stroke="#EF4444" stroke-width="2" stroke-dasharray="6 4"/>
+          <rect x="186" y="230" width="28" height="16" rx="4" fill="rgba(239,68,68,0.1)"/>
+          <text x="200" y="241" text-anchor="middle" font-size="7" font-weight="700" fill="#EF4444">SEG</text>
+          <!-- Proprietary assets -->
+          <rect x="215" y="45" width="155" height="180" rx="8" stroke="#9CA3AF" stroke-width="1.5" fill="rgba(107,114,128,0.02)"/>
+          <text x="292" y="65" text-anchor="middle" font-size="10" font-weight="600" fill="#6B7280">Proprietary</text>
+          <rect x="227" y="80" width="130" height="28" rx="6" fill="rgba(107,114,128,0.06)" stroke="#E5E7EB" stroke-width="1"/>
+          <text x="292" y="98" text-anchor="middle" font-size="8" fill="#6B7280">Wallet 0xc1...Prop-1</text>
+          <rect x="227" y="114" width="130" height="28" rx="6" fill="rgba(107,114,128,0.06)" stroke="#E5E7EB" stroke-width="1"/>
+          <text x="292" y="132" text-anchor="middle" font-size="8" fill="#6B7280">Wallet 0xd4...Prop-2</text>
+          <!-- Summary -->
+          <rect x="70" y="260" width="260" height="28" rx="14" fill="rgba(16,185,129,0.1)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+          <text x="200" y="278" text-anchor="middle" font-size="10" font-weight="600" fill="#059669">No commingling detected</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Feat 2: Reserve Requirements -->
+    <div class="feat reverse reveal">
+      <div class="feat-content">
+        <p class="t-label">Title III &amp; IV</p>
+        <h3 class="t-h3">Reserve Requirements Monitoring</h3>
+        <p class="t-body">MiCA requires ART issuers to hold reserves in qualifying assets and EMT issuers to safeguard funds at credit institutions. SafeHeld monitors reserve composition, adequacy, and custody arrangements continuously.</p>
+        <ul class="feat-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            ART reserve composition tracking against MiCA Article 36 requirements
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            EMT safeguarding verification at authorised credit institutions
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Investment policy compliance monitoring for reserve portfolios
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Significant ART thresholds monitoring (EUR 5B / 10M daily transactions)
+          </li>
+        </ul>
+      </div>
+      <div class="feat-visual">
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- MiCA reserve requirements -->
+          <text x="200" y="25" text-anchor="middle" font-size="11" font-weight="600" fill="#6B7280">MiCA RESERVE COMPLIANCE</text>
+          <!-- Token type selector -->
+          <rect x="110" y="40" width="80" height="26" rx="13" fill="rgba(61,61,255,0.1)" stroke="#3D3DFF" stroke-width="1"/>
+          <text x="150" y="57" text-anchor="middle" font-size="9" font-weight="600" fill="#3D3DFF">ART</text>
+          <rect x="200" y="40" width="80" height="26" rx="13" fill="rgba(107,114,128,0.06)" stroke="#E5E7EB" stroke-width="1"/>
+          <text x="240" y="57" text-anchor="middle" font-size="9" fill="#6B7280">EMT</text>
+          <!-- Requirements checklist -->
+          <rect x="50" y="80" width="300" height="42" rx="6" fill="rgba(16,185,129,0.04)" stroke="rgba(16,185,129,0.2)" stroke-width="1"/>
+          <circle cx="72" cy="101" r="8" fill="rgba(16,185,129,0.12)"/>
+          <path d="M68 101l3 3 5-5" stroke="#059669" stroke-width="1.2" fill="none"/>
+          <text x="88" y="97" font-size="9" font-weight="500" fill="#374151">Low-risk reserve assets (Art. 36)</text>
+          <text x="88" y="111" font-size="8" fill="#6B7280">80% deposits + 20% sovereign bonds</text>
+
+          <rect x="50" y="128" width="300" height="42" rx="6" fill="rgba(16,185,129,0.04)" stroke="rgba(16,185,129,0.2)" stroke-width="1"/>
+          <circle cx="72" cy="149" r="8" fill="rgba(16,185,129,0.12)"/>
+          <path d="M68 149l3 3 5-5" stroke="#059669" stroke-width="1.2" fill="none"/>
+          <text x="88" y="145" font-size="9" font-weight="500" fill="#374151">Custody at authorised providers (Art. 37)</text>
+          <text x="88" y="159" font-size="8" fill="#6B7280">3 custodians verified</text>
+
+          <rect x="50" y="176" width="300" height="42" rx="6" fill="rgba(16,185,129,0.04)" stroke="rgba(16,185,129,0.2)" stroke-width="1"/>
+          <circle cx="72" cy="197" r="8" fill="rgba(16,185,129,0.12)"/>
+          <path d="M68 197l3 3 5-5" stroke="#059669" stroke-width="1.2" fill="none"/>
+          <text x="88" y="193" font-size="9" font-weight="500" fill="#374151">Minimum 2% own funds requirement</text>
+          <text x="88" y="207" font-size="8" fill="#6B7280">Current: 3.2% -- EUR 16M above minimum</text>
+
+          <rect x="50" y="224" width="300" height="42" rx="6" fill="rgba(245,158,11,0.04)" stroke="rgba(245,158,11,0.2)" stroke-width="1"/>
+          <circle cx="72" cy="245" r="8" fill="rgba(245,158,11,0.12)"/>
+          <text x="72" y="249" text-anchor="middle" font-size="9" font-weight="700" fill="#D97706">!</text>
+          <text x="88" y="241" font-size="9" font-weight="500" fill="#374151">Significant ART threshold (Art. 43)</text>
+          <text x="88" y="255" font-size="8" fill="#D97706">Daily volume approaching EUR 10M threshold</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Feat 3: NCA Reporting -->
+    <div class="feat reveal">
+      <div class="feat-content">
+        <p class="t-label">Reporting</p>
+        <h3 class="t-h3">Regulatory Reporting for EU Authorities</h3>
+        <p class="t-body">Generate and submit regulatory reports to National Competent Authorities across EU member states. SafeHeld formats data to meet the specific requirements of each NCA and ESMA reporting templates.</p>
+        <ul class="feat-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            ESMA-aligned regulatory reporting templates
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            NCA-specific formatting for BaFin, AMF, CySEC, and other authorities
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            White paper compliance tracking for token disclosures
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Incident reporting and material change notification workflows
+          </li>
+        </ul>
+      </div>
+      <div class="feat-visual">
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- EU reporting map -->
+          <text x="200" y="25" text-anchor="middle" font-size="11" font-weight="600" fill="#6B7280">CROSS-BORDER REPORTING</text>
+          <!-- Central SafeHeld -->
+          <rect x="140" y="110" width="120" height="50" rx="8" fill="rgba(61,61,255,0.08)" stroke="#3D3DFF" stroke-width="1.5"/>
+          <text x="200" y="133" text-anchor="middle" font-size="10" font-weight="700" fill="#3D3DFF">SafeHeld</text>
+          <text x="200" y="148" text-anchor="middle" font-size="8" fill="#6B7280">Report Engine</text>
+          <!-- ESMA -->
+          <rect x="145" y="40" width="110" height="32" rx="6" fill="rgba(61,61,255,0.04)" stroke="#E5E7EB" stroke-width="1"/>
+          <text x="200" y="60" text-anchor="middle" font-size="9" font-weight="600" fill="#374151">ESMA</text>
+          <line x1="200" y1="72" x2="200" y2="110" stroke="#3D3DFF" stroke-width="1" stroke-dasharray="4 3"/>
+          <!-- BaFin -->
+          <rect x="30" y="60" width="85" height="32" rx="6" fill="rgba(61,61,255,0.04)" stroke="#E5E7EB" stroke-width="1"/>
+          <text x="72" y="80" text-anchor="middle" font-size="9" font-weight="600" fill="#374151">BaFin</text>
+          <line x1="115" y1="76" x2="145" y2="120" stroke="rgba(61,61,255,0.3)" stroke-width="1" stroke-dasharray="4 3"/>
+          <!-- AMF -->
+          <rect x="285" y="60" width="85" height="32" rx="6" fill="rgba(61,61,255,0.04)" stroke="#E5E7EB" stroke-width="1"/>
+          <text x="327" y="80" text-anchor="middle" font-size="9" font-weight="600" fill="#374151">AMF</text>
+          <line x1="285" y1="76" x2="255" y2="120" stroke="rgba(61,61,255,0.3)" stroke-width="1" stroke-dasharray="4 3"/>
+          <!-- CySEC -->
+          <rect x="30" y="180" width="85" height="32" rx="6" fill="rgba(61,61,255,0.04)" stroke="#E5E7EB" stroke-width="1"/>
+          <text x="72" y="200" text-anchor="middle" font-size="9" font-weight="600" fill="#374151">CySEC</text>
+          <line x1="115" y1="196" x2="145" y2="150" stroke="rgba(61,61,255,0.3)" stroke-width="1" stroke-dasharray="4 3"/>
+          <!-- DNB -->
+          <rect x="285" y="180" width="85" height="32" rx="6" fill="rgba(61,61,255,0.04)" stroke="#E5E7EB" stroke-width="1"/>
+          <text x="327" y="200" text-anchor="middle" font-size="9" font-weight="600" fill="#374151">DNB</text>
+          <line x1="285" y1="196" x2="255" y2="150" stroke="rgba(61,61,255,0.3)" stroke-width="1" stroke-dasharray="4 3"/>
+          <!-- Report status -->
+          <rect x="60" y="240" width="280" height="45" rx="8" fill="rgba(61,61,255,0.03)" stroke="#E5E7EB" stroke-width="1"/>
+          <text x="200" y="258" text-anchor="middle" font-size="9" font-weight="600" fill="#374151">Reporting Status: Q1 2026</text>
+          <text x="110" y="275" font-size="8" fill="#059669">3 submitted</text>
+          <text x="200" y="275" font-size="8" fill="#D97706">1 pending review</text>
+          <text x="290" y="275" font-size="8" fill="#6B7280">1 upcoming</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Feat 4: Cross-Border Compliance -->
+    <div class="feat reverse reveal">
+      <div class="feat-content">
+        <p class="t-label">Passporting</p>
+        <h3 class="t-h3">Cross-Border Compliance</h3>
+        <p class="t-body">Manage compliance across multiple EU jurisdictions from a single platform. Track passporting status, jurisdiction-specific requirements, and maintain a unified compliance view for your MiCA obligations.</p>
+        <ul class="feat-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Passporting status tracker across EU member states
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Jurisdiction-specific obligation mapping and deadline tracking
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Unified compliance dashboard with per-jurisdiction drill-down
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            NCA notification workflow for service expansion and changes
+          </li>
+        </ul>
+      </div>
+      <div class="feat-visual">
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Cross-border dashboard -->
+          <text x="200" y="25" text-anchor="middle" font-size="11" font-weight="600" fill="#6B7280">PASSPORTING STATUS</text>
+          <!-- Table -->
+          <rect x="40" y="40" width="320" height="30" rx="6 6 0 0" fill="rgba(61,61,255,0.06)"/>
+          <text x="85" y="59" font-size="8" font-weight="600" fill="#374151">Jurisdiction</text>
+          <text x="170" y="59" font-size="8" font-weight="600" fill="#374151">NCA</text>
+          <text x="245" y="59" font-size="8" font-weight="600" fill="#374151">Services</text>
+          <text x="330" y="59" font-size="8" font-weight="600" fill="#374151">Status</text>
+          <!-- Germany -->
+          <rect x="40" y="72" width="320" height="38" fill="white" stroke="#E5E7EB" stroke-width="0.5"/>
+          <text x="60" y="93" font-size="10" fill="#374151">DE</text>
+          <text x="85" y="93" font-size="9" fill="#374151">Germany</text>
+          <text x="170" y="93" font-size="9" fill="#6B7280">BaFin</text>
+          <text x="245" y="93" font-size="8" fill="#6B7280">Custody, Trading</text>
+          <rect x="312" y="84" width="40" height="18" rx="9" fill="rgba(16,185,129,0.1)"/>
+          <text x="332" y="97" text-anchor="middle" font-size="7" font-weight="600" fill="#059669">Active</text>
+          <!-- France -->
+          <rect x="40" y="112" width="320" height="38" fill="rgba(248,249,251,0.5)" stroke="#E5E7EB" stroke-width="0.5"/>
+          <text x="60" y="133" font-size="10" fill="#374151">FR</text>
+          <text x="85" y="133" font-size="9" fill="#374151">France</text>
+          <text x="170" y="133" font-size="9" fill="#6B7280">AMF</text>
+          <text x="245" y="133" font-size="8" fill="#6B7280">Custody, Exchange</text>
+          <rect x="312" y="124" width="40" height="18" rx="9" fill="rgba(16,185,129,0.1)"/>
+          <text x="332" y="137" text-anchor="middle" font-size="7" font-weight="600" fill="#059669">Active</text>
+          <!-- Netherlands -->
+          <rect x="40" y="152" width="320" height="38" fill="white" stroke="#E5E7EB" stroke-width="0.5"/>
+          <text x="60" y="173" font-size="10" fill="#374151">NL</text>
+          <text x="85" y="173" font-size="9" fill="#374151">Netherlands</text>
+          <text x="170" y="173" font-size="9" fill="#6B7280">DNB</text>
+          <text x="245" y="173" font-size="8" fill="#6B7280">Custody</text>
+          <rect x="306" y="164" width="50" height="18" rx="9" fill="rgba(245,158,11,0.1)"/>
+          <text x="331" y="177" text-anchor="middle" font-size="7" font-weight="600" fill="#D97706">Pending</text>
+          <!-- Cyprus -->
+          <rect x="40" y="192" width="320" height="38" fill="rgba(248,249,251,0.5)" stroke="#E5E7EB" stroke-width="0.5"/>
+          <text x="60" y="213" font-size="10" fill="#374151">CY</text>
+          <text x="85" y="213" font-size="9" fill="#374151">Cyprus</text>
+          <text x="170" y="213" font-size="9" fill="#6B7280">CySEC</text>
+          <text x="245" y="213" font-size="8" fill="#6B7280">All CASP services</text>
+          <rect x="312" y="204" width="40" height="18" rx="9" fill="rgba(16,185,129,0.1)"/>
+          <text x="332" y="217" text-anchor="middle" font-size="7" font-weight="600" fill="#059669">Active</text>
+          <!-- Summary -->
+          <rect x="80" y="250" width="240" height="32" rx="8" fill="rgba(61,61,255,0.04)" stroke="#E5E7EB" stroke-width="1"/>
+          <text x="200" y="270" text-anchor="middle" font-size="9" font-weight="600" fill="#374151">3 active | 1 pending | 27 EU states available</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── How It Works ────────────────────────────────────────────────────── -->
+<section class="section bg-dark dark">
+  <div class="container">
+    <div class="sh center reveal">
+      <p class="t-label">How It Works</p>
+      <h2 class="t-h2">From Authorisation to Ongoing Compliance</h2>
+      <p class="t-body-lg">SafeHeld supports your MiCA compliance journey from initial application through continuous monitoring.</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Map Your Obligations</h3>
+        <p>SafeHeld analyses your CASP licence scope, token types, and jurisdictions to map specific MiCA articles and requirements that apply to your business.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Connect &amp; Monitor</h3>
+        <p>Integrate your custody wallets, reserve accounts, and operational systems. SafeHeld monitors segregation, reserves, and prudential requirements continuously across all jurisdictions.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Report &amp; Passport</h3>
+        <p>Generate NCA-specific regulatory reports, manage passporting notifications, and maintain audit-ready compliance evidence for every EU member state you operate in.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA Section ─────────────────────────────────────────────────────── -->
+<section class="cta-section bg-white">
+  <div class="container reveal">
+    <h2 class="t-h2">Navigate MiCA With Confidence</h2>
+    <p class="t-body-lg" style="max-width:560px;margin:0 auto 32px">Join CASPs and token issuers using SafeHeld to automate MiCA compliance across the European Union.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="/request-demo" class="btn btn-accent btn-lg">Request a Demo</a>
+      <a href="/pricing" class="btn btn-outline btn-lg">View Pricing</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ──────────────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo"><div class="nav-mark">S</div> SafeHeld</div>
+        <p>The verification layer for client funds. Proving safeguarding compliance across every regulated sector.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Solutions</h4>
+        <a href="/solutions/payments">PS25 Safeguarding</a>
+        <a href="/solutions/investments">CASS Compliance</a>
+        <a href="/solutions/crypto">Crypto Custody</a>
+        <a href="/solutions/stablecoins">Stablecoin Reserves</a>
+        <a href="/solutions/mica">MiCA Compliance</a>
+        <a href="/solutions/genius-act">GENIUS Act</a>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="/platform">Overview</a>
+        <a href="/platform#reconciliation">Reconciliation</a>
+        <a href="/platform#monitoring">Monitoring</a>
+        <a href="/platform#reporting">Reporting</a>
+        <a href="/for-banks">For Banks</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/about">About</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/request-demo">Request Demo</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/terms">Terms of Service</a>
+        <a href="/legal/cookies">Cookie Policy</a>
+        <a href="/legal/security">Security</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 SafeHeld Ltd. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="/legal/privacy">Privacy</a>
+        <a href="/legal/terms">Terms</a>
+        <a href="/legal/cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  });
+</script>
 
 </body>
 </html>

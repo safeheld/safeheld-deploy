@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Verification of client account segregation under SRA Accounts Rules for solicitors and regulated legal practices. Client money reconciliation, breach detection, and regulatory reporting.">
-  <title>Legal — Client Money Protection for Law Firms — Safeheld</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233D3DFF'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='white' font-family='Inter,sans-serif' font-weight='800' font-size='20'%3ES%3C/text%3E%3C/svg%3E">
+  <title>SRA Client Money Compliance | Safeheld</title>
+  <meta name="description" content="Automated compliance with Solicitors Regulation Authority client money rules. Safeheld verifies client account reconciliation, interest management, and SRA Accounts Rules adherence.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,230 +13,431 @@
 <body>
 
   <!-- ── Navigation ─────────────────────────────────────────────────────── -->
-  <nav class="nav">
+  <nav class="nav nav-solid">
     <div class="nav-inner">
-      <a href="/" class="nav-logo"><div class="nav-logo-mark">S</div> Safeheld</a>
+      <a href="/" class="nav-logo">
+        <div class="nav-mark">S</div>
+        Safeheld
+      </a>
       <div class="nav-links">
-        <a href="/platform" class="nav-link">Platform</a>
-        <div class="nav-dropdown">
-          <button class="nav-dropdown-trigger active">Solutions <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="nav-dropdown-menu">
-            <div class="nav-dropdown-group-label">Financial Services</div>
-            <a href="/solutions/payments" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><div class="nav-dropdown-item-text"><h4>Payments</h4><p>EMI &amp; PI safeguarding</p></div></a>
-            <a href="/solutions/investments" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="nav-dropdown-item-text"><h4>Investments</h4><p>CASS compliance</p></div></a>
-            <div class="nav-dropdown-group-label">Digital Assets</div>
-            <a href="/solutions/crypto" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></div><div class="nav-dropdown-item-text"><h4>Crypto</h4><p>Wallet reconciliation</p></div></a>
-            <a href="/solutions/stablecoins" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg></div><div class="nav-dropdown-item-text"><h4>Stablecoins</h4><p>Peg &amp; reserve verification</p></div></a>
-            <a href="/solutions/mica" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="nav-dropdown-item-text"><h4>MiCA</h4><p>EU crypto regulation</p></div></a>
-            <a href="/solutions/genius-act" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="nav-dropdown-item-text"><h4>GENIUS Act</h4><p>US stablecoin rules</p></div></a>
-            <div class="nav-dropdown-group-label">Other Sectors</div>
-            <a href="/solutions/legal" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="nav-dropdown-item-text"><h4>Legal</h4><p>SRA client money</p></div></a>
-            <a href="/solutions/insurance" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="nav-dropdown-item-text"><h4>Insurance</h4><p>Client premium rules</p></div></a>
-            <a href="/solutions/gaming" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><circle cx="17" cy="10" r="1"/><circle cx="15" cy="13" r="1"/></svg></div><div class="nav-dropdown-item-text"><h4>Gaming</h4><p>Player fund protection</p></div></a>
-            <a href="/solutions/real-estate" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="nav-dropdown-item-text"><h4>Real Estate</h4><p>Deposit protection</p></div></a>
+        <div class="nav-dd">
+          <div class="nav-dd-trigger">
+            Solutions
+            <svg viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="nav-dd-menu">
+            <div class="nav-dd-label">Regulatory Modules</div>
+            <a href="/solutions/payments" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10h20M2 14h20M6 18h2M12 18h6"/><rect x="2" y="6" width="20" height="14" rx="2"/></svg></div>
+              <div><h4>Payments (PS25)</h4><p>UK EMI &amp; PI safeguarding</p></div>
+            </a>
+            <a href="/solutions/cass" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 3v18"/></svg></div>
+              <div><h4>CASS</h4><p>FCA client assets regime</p></div>
+            </a>
+            <a href="/solutions/crypto" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12h6M12 9v6"/></svg></div>
+              <div><h4>Crypto</h4><p>On-chain wallet reconciliation</p></div>
+            </a>
+            <a href="/solutions/stablecoin" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M8 8h8M8 16h8"/></svg></div>
+              <div><h4>Stablecoin</h4><p>Reserve &amp; peg verification</p></div>
+            </a>
+            <a href="/solutions/mica" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><ellipse cx="12" cy="12" rx="4" ry="10"/></svg></div>
+              <div><h4>MiCA</h4><p>EU crypto regulation</p></div>
+            </a>
+            <a href="/solutions/genius-act" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 4v16"/></svg></div>
+              <div><h4>GENIUS Act</h4><p>US stablecoin regulation</p></div>
+            </a>
+            <div class="nav-dd-label">Sector Solutions</div>
+            <a href="/solutions/legal" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+              <div><h4>Legal</h4><p>SRA client money rules</p></div>
+            </a>
+            <a href="/solutions/insurance" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5.5-3.8 10.7-8 12-4.2-1.3-8-6.5-8-12V6l8-4z"/></svg></div>
+              <div><h4>Insurance</h4><p>FCA CASS 5 compliance</p></div>
+            </a>
+            <a href="/solutions/gaming" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg></div>
+              <div><h4>Gaming</h4><p>Player fund protection</p></div>
+            </a>
+            <a href="/solutions/real-estate" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg></div>
+              <div><h4>Real Estate</h4><p>Client deposit protection</p></div>
+            </a>
           </div>
         </div>
+        <a href="/platform" class="nav-link">Platform</a>
         <a href="/for-banks" class="nav-link">For Banks</a>
         <a href="/pricing" class="nav-link">Pricing</a>
         <a href="/about" class="nav-link">About</a>
       </div>
       <div class="nav-cta">
-        <a href="https://app.safeheld.com" class="nav-login">Log in</a>
-        <a href="/contact" class="btn btn-primary btn-sm">Request a Demo</a>
+        <a href="/login" class="nav-login">Log In</a>
+        <a href="/contact" class="btn btn-accent btn-sm">Request a Demo</a>
       </div>
-      <button class="nav-mobile-toggle" aria-label="Toggle menu">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
+      <button class="nav-mobile" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
-    </div>
-    <div class="nav-mobile-menu" id="mobileMenu">
-      <a href="/platform">Platform</a>
-      <a href="/solutions/payments">Payments</a>
-      <a href="/solutions/investments">Investments</a>
-      <a href="/solutions/crypto">Crypto</a>
-      <a href="/solutions/stablecoins">Stablecoins</a>
-      <a href="/solutions/mica">MiCA</a>
-      <a href="/solutions/genius-act">GENIUS Act</a>
-      <a href="/solutions/legal">Legal</a>
-      <a href="/solutions/insurance">Insurance</a>
-      <a href="/solutions/gaming">Gaming</a>
-      <a href="/solutions/real-estate">Real Estate</a>
-      <a href="/for-banks">For Banks</a>
-      <a href="/pricing">Pricing</a>
-      <a href="/about">About</a>
-      <a href="https://app.safeheld.com">Log in</a>
-      <a href="/contact" class="btn btn-primary" style="margin-top: 16px; text-align: center;">Request a Demo</a>
     </div>
   </nav>
 
-  <!-- ── Page Hero ────────────────────────────────────────────────────────── -->
-  <section class="page-hero bg-white">
-    <div class="page-hero-bg">
-      <div class="hero-grid"></div>
-    </div>
+  <!-- ── Page Header ────────────────────────────────────────────────────── -->
+  <header class="page-header bg-dark dark">
     <div class="container">
-      <span class="superheader">Legal</span>
-      <h1 class="t-h1">Client Money Protection for Law Firms</h1>
-      <p class="t-body-lg">Verification of client account segregation under SRA Accounts Rules for solicitors and regulated legal practices.</p>
+      <div class="reveal">
+        <p class="t-label">LEGAL</p>
+        <h1 class="t-h1">SRA Client Money Compliance</h1>
+        <p class="t-body-lg">Automated compliance with Solicitors Regulation Authority client money rules. Continuously verify that client account balances are reconciled, interest is properly managed, and your firm meets every requirement of the SRA Accounts Rules.</p>
+      </div>
     </div>
-  </section>
+  </header>
 
-  <!-- ── Overview ─────────────────────────────────────────────────────────── -->
-  <section class="section bg-gray">
-    <div class="container-narrow">
-      <p class="t-body-lg">The Solicitors Regulation Authority (SRA) Accounts Rules impose strict obligations on law firms handling client money. Client funds must be kept entirely separate from the firm's own money at all times, with proper accounting records maintained for every transaction.</p>
-      <p class="t-body-lg" style="margin-top: var(--space-md);">Firms are required to perform regular reconciliations of client account balances against bank statements, identify and resolve discrepancies without delay, and maintain a complete audit trail for regulatory inspection. The SRA conducts both routine and risk-based reviews of client money compliance, and failures can result in enforcement action, conditions on practising certificates, or intervention.</p>
-      <p class="t-body-lg" style="margin-top: var(--space-md);">Safeheld provides automated verification infrastructure that enables law firms to demonstrate continuous compliance with these requirements &mdash; replacing manual reconciliation processes with systematic, auditable verification.</p>
-    </div>
-  </section>
-
-  <!-- ── Capabilities ─────────────────────────────────────────────────────── -->
+  <!-- ── Overview Section ───────────────────────────────────────────────── -->
   <section class="section bg-white">
     <div class="container">
-      <div class="section-header">
-        <span class="superheader">Capabilities</span>
-        <h2 class="t-h2">What Safeheld Delivers</h2>
+      <div class="sh center reveal">
+        <p class="t-label">Overview</p>
+        <h2 class="t-h2">Why Law Firms Need Automated Safeguarding</h2>
+        <p class="t-body-lg">The SRA Accounts Rules 2019 require solicitors to keep client money separate, perform five-weekly reconciliations, and maintain accurate records at all times. Manual spreadsheets and quarterly checks leave gaps that put your practising certificate at risk.</p>
       </div>
-      <div class="capability-grid">
-        <div class="capability">
-          <h4>Client Account Reconciliation</h4>
-          <p>Automated matching of client ledger balances against bank statements across all client accounts. Every balance is verified, every discrepancy is identified, and resolution is tracked to completion.</p>
+      <div class="grid g3 reveal">
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <h3>Five-Weekly Reconciliation</h3>
+          <p>SRA Rule 8.3 mandates reconciliation every five weeks. Safeheld automates this cycle so you never miss a deadline or file a late report.</p>
         </div>
-        <div class="capability">
-          <h4>SRA Compliance Monitoring</h4>
-          <p>Continuous verification of compliance with SRA Accounts Rules obligations. The platform monitors segregation requirements, reconciliation schedules, and accounting standards in accordance with regulatory expectations.</p>
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+          </div>
+          <h3>Accounts Rules Compliance</h3>
+          <p>Continuously validate adherence to SRA Accounts Rules 2019, including proper segregation of client and office money, and timely transfers between accounts.</p>
         </div>
-        <div class="capability">
-          <h4>Breach Detection</h4>
-          <p>Immediate identification when client money rules are not met. Automatic severity classification and escalation workflows ensure issues are addressed before they become regulatory failures.</p>
-        </div>
-        <div class="capability">
-          <h4>Reporting and Audit Trail</h4>
-          <p>Regulatory-grade outputs with complete audit evidence for SRA inspections. Every reconciliation event, data source, and calculation is recorded with full data lineage from source through to final figures.</p>
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+          </div>
+          <h3>Full Audit Trail</h3>
+          <p>Every reconciliation, adjustment, and verification decision is logged with timestamps, producing SRA-ready documentation for inspections and compliance audits.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── Key Requirements ─────────────────────────────────────────────────── -->
-  <section class="section bg-gray">
+  <!-- ── Key Capabilities ───────────────────────────────────────────────── -->
+  <section class="section bg-light">
     <div class="container">
-      <div class="section-header">
-        <span class="superheader">Key Requirements</span>
-        <h2 class="t-h2">SRA Accounts Rules Coverage</h2>
-        <p class="t-body-lg">Core obligations that law firms must meet under SRA client money rules.</p>
+      <div class="sh center reveal">
+        <p class="t-label">Key Capabilities</p>
+        <h2 class="t-h2">Built for SRA Accounts Rules</h2>
+        <p class="t-body-lg">Every feature maps directly to specific SRA requirements, giving your COFA confidence that compliance obligations are being met continuously.</p>
       </div>
-      <div class="grid-3">
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="7" height="7"></rect>
-              <rect x="14" y="3" width="7" height="7"></rect>
-              <rect x="3" y="14" width="7" height="7"></rect>
-              <rect x="14" y="14" width="7" height="7"></rect>
-            </svg>
-          </div>
-          <h3>Segregation of Client Funds</h3>
-          <p>Client money held separately from the firm's own funds in designated client accounts at all times, as required by SRA Accounts Rules.</p>
+
+      <!-- Feat Row 1 -->
+      <div class="feat reveal">
+        <div class="feat-content">
+          <p class="t-label">Reconciliation</p>
+          <h3 class="t-h3">Client Account Reconciliation</h3>
+          <p class="t-body">Automatically reconcile client account bank statements against your practice management system records. Safeheld identifies discrepancies between the client ledger, office ledger, and bank balances within minutes, not days.</p>
+          <ul class="feat-list">
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Three-way reconciliation: client ledger vs office ledger vs bank statement
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Automated five-weekly cycle aligned to SRA Rule 8.3 deadlines
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Real-time mismatch alerts sent to the COFA and compliance team
+            </li>
+          </ul>
         </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-            </svg>
-          </div>
-          <h3>Regular Reconciliation</h3>
-          <p>Systematic comparison of client ledger balances against bank statements to verify accuracy and completeness at required intervals.</p>
+        <div class="feat-visual">
+          <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Three-way reconciliation diagram -->
+            <rect x="30" y="20" width="340" height="260" rx="12" fill="#F8F9FB" stroke="#E5E7EB"/>
+            <!-- Client Ledger -->
+            <rect x="60" y="50" width="120" height="44" rx="8" fill="#3D3DFF" fill-opacity="0.08" stroke="#3D3DFF" stroke-opacity="0.3"/>
+            <text x="120" y="68" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#3D3DFF">Client Ledger</text>
+            <text x="120" y="84" text-anchor="middle" font-family="Inter,sans-serif" font-size="14" font-weight="700" fill="#080E2C">$1,247,300</text>
+            <!-- Office Ledger -->
+            <rect x="220" y="50" width="120" height="44" rx="8" fill="#3D3DFF" fill-opacity="0.08" stroke="#3D3DFF" stroke-opacity="0.3"/>
+            <text x="280" y="68" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#3D3DFF">Office Ledger</text>
+            <text x="280" y="84" text-anchor="middle" font-family="Inter,sans-serif" font-size="14" font-weight="700" fill="#080E2C">$1,247,300</text>
+            <!-- Bank Balance -->
+            <rect x="140" y="120" width="120" height="44" rx="8" fill="#080E2C" stroke="#080E2C"/>
+            <text x="200" y="138" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#CBD1E0">Bank Balance</text>
+            <text x="200" y="154" text-anchor="middle" font-family="Inter,sans-serif" font-size="14" font-weight="700" fill="white">$1,247,300</text>
+            <!-- Connecting lines -->
+            <line x1="120" y1="94" x2="170" y2="120" stroke="#3D3DFF" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <line x1="280" y1="94" x2="230" y2="120" stroke="#3D3DFF" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <!-- Status -->
+            <rect x="130" y="185" width="140" height="36" rx="18" fill="#10B981" fill-opacity="0.12" stroke="#10B981" stroke-opacity="0.3"/>
+            <circle cx="155" cy="203" r="5" fill="#10B981"/>
+            <text x="210" y="207" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#059669">Fully Reconciled</text>
+            <!-- Cycle info -->
+            <text x="200" y="248" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#9CA3AF">Five-weekly cycle 14 of 14 | Next: 12 Mar 2026</text>
+            <rect x="120" y="258" width="160" height="4" rx="2" fill="#E5E7EB"/>
+            <rect x="120" y="258" width="160" height="4" rx="2" fill="#3D3DFF"/>
+          </svg>
         </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-              <polyline points="14 2 14 8 20 8"></polyline>
-              <line x1="16" y1="13" x2="8" y2="13"></line>
-              <line x1="16" y1="17" x2="8" y2="17"></line>
-              <polyline points="10 9 9 9 8 9"></polyline>
-            </svg>
-          </div>
-          <h3>Accurate Record Keeping</h3>
-          <p>Complete, accurate accounting records maintained for all client money transactions and movements, available for inspection at any time.</p>
+      </div>
+
+      <!-- Feat Row 2 -->
+      <div class="feat reverse reveal">
+        <div class="feat-content">
+          <p class="t-label">Interest</p>
+          <h3 class="t-h3">Interest Management Verification</h3>
+          <p class="t-body">SRA Rule 7 requires firms to account to clients for a fair sum of interest earned on client money. Safeheld tracks interest accrual across all client accounts and flags cases where interest payments are overdue or below fair thresholds.</p>
+          <ul class="feat-list">
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Monitor interest earned vs interest paid to clients on individual matters
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Flag client accounts where interest has not been paid within policy thresholds
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Produce interest calculation reports for client billing and SRA inspections
+            </li>
+          </ul>
         </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
-              <line x1="4" y1="22" x2="4" y2="15"></line>
-            </svg>
-          </div>
-          <h3>Compliance Reporting</h3>
-          <p>Structured outputs for SRA regulatory submissions with full supporting evidence, data lineage, and audit trail.</p>
+        <div class="feat-visual">
+          <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Interest tracking dashboard -->
+            <rect x="30" y="20" width="340" height="260" rx="12" fill="#F8F9FB" stroke="#E5E7EB"/>
+            <text x="55" y="50" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#080E2C">Interest Tracking</text>
+            <text x="305" y="50" text-anchor="end" font-family="Inter,sans-serif" font-size="10" fill="#9CA3AF">Last 6 months</text>
+            <!-- Bar chart -->
+            <line x1="55" y1="180" x2="345" y2="180" stroke="#E5E7EB" stroke-width="1"/>
+            <rect x="70" y="100" width="30" height="80" rx="4" fill="#3D3DFF" fill-opacity="0.15"/>
+            <rect x="70" y="130" width="30" height="50" rx="4" fill="#3D3DFF"/>
+            <rect x="120" y="90" width="30" height="90" rx="4" fill="#3D3DFF" fill-opacity="0.15"/>
+            <rect x="120" y="125" width="30" height="55" rx="4" fill="#3D3DFF"/>
+            <rect x="170" y="110" width="30" height="70" rx="4" fill="#3D3DFF" fill-opacity="0.15"/>
+            <rect x="170" y="138" width="30" height="42" rx="4" fill="#3D3DFF"/>
+            <rect x="220" y="85" width="30" height="95" rx="4" fill="#3D3DFF" fill-opacity="0.15"/>
+            <rect x="220" y="120" width="30" height="60" rx="4" fill="#3D3DFF"/>
+            <rect x="270" y="95" width="30" height="85" rx="4" fill="#3D3DFF" fill-opacity="0.15"/>
+            <rect x="270" y="128" width="30" height="52" rx="4" fill="#3D3DFF"/>
+            <rect x="320" y="105" width="30" height="75" rx="4" fill="#EF4444" fill-opacity="0.15"/>
+            <rect x="320" y="150" width="30" height="30" rx="4" fill="#EF4444"/>
+            <!-- Labels -->
+            <text x="85" y="195" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#9CA3AF">Oct</text>
+            <text x="135" y="195" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#9CA3AF">Nov</text>
+            <text x="185" y="195" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#9CA3AF">Dec</text>
+            <text x="235" y="195" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#9CA3AF">Jan</text>
+            <text x="285" y="195" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#9CA3AF">Feb</text>
+            <text x="335" y="195" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#9CA3AF">Mar</text>
+            <!-- Legend -->
+            <rect x="55" y="215" width="10" height="10" rx="2" fill="#3D3DFF" fill-opacity="0.15"/>
+            <text x="72" y="224" font-family="Inter,sans-serif" font-size="10" fill="#6B7280">Earned</text>
+            <rect x="120" y="215" width="10" height="10" rx="2" fill="#3D3DFF"/>
+            <text x="137" y="224" font-family="Inter,sans-serif" font-size="10" fill="#6B7280">Paid</text>
+            <rect x="185" y="215" width="10" height="10" rx="2" fill="#EF4444"/>
+            <text x="202" y="224" font-family="Inter,sans-serif" font-size="10" fill="#6B7280">Below threshold</text>
+            <!-- Alert -->
+            <rect x="55" y="240" width="290" height="28" rx="6" fill="#EF4444" fill-opacity="0.08" stroke="#EF4444" stroke-opacity="0.2"/>
+            <text x="70" y="258" font-family="Inter,sans-serif" font-size="10" font-weight="500" fill="#EF4444">1 matter flagged: interest unpaid for 45+ days (Matter #4217)</text>
+          </svg>
         </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <path d="M16 8h-6a2 2 0 100 4h4a2 2 0 110 4H8"></path>
-              <path d="M12 18V6"></path>
-            </svg>
-          </div>
-          <h3>Interest Handling</h3>
-          <p>Proper handling and accounting of interest earned on client funds in accordance with SRA requirements and firm policy obligations.</p>
+      </div>
+
+      <!-- Feat Row 3 -->
+      <div class="feat reveal">
+        <div class="feat-content">
+          <p class="t-label">Compliance</p>
+          <h3 class="t-h3">SRA Accounts Rules Monitoring</h3>
+          <p class="t-body">Safeheld maps every relevant rule from the SRA Accounts Rules 2019 and monitors your firm's adherence in real time. From proper use of client accounts to timely transfers and the prohibition on using client money for firm purposes, every obligation is tracked.</p>
+          <ul class="feat-list">
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Rule-by-rule compliance status dashboard for the COFA
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Automated breach detection with severity classification and remediation guidance
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Evidence collection for SRA Forensic Investigation Unit inspections
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              COFA-ready reports generated for annual compliance certification
+            </li>
+          </ul>
         </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="12" y1="8" x2="12" y2="12"></line>
-              <line x1="12" y1="16" x2="12.01" y2="16"></line>
-            </svg>
-          </div>
-          <h3>Residual Balance Management</h3>
-          <p>Identification and management of unclaimed or residual balances with proper tracking, notification procedures, and resolution workflows.</p>
+        <div class="feat-visual">
+          <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Rules compliance checklist -->
+            <rect x="30" y="20" width="340" height="260" rx="12" fill="#F8F9FB" stroke="#E5E7EB"/>
+            <text x="55" y="50" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#080E2C">SRA Accounts Rules Status</text>
+            <text x="345" y="50" text-anchor="end" font-family="Inter,sans-serif" font-size="10" fill="#10B981">14/15 Compliant</text>
+            <!-- Rule items -->
+            <rect x="55" y="65" width="290" height="32" rx="6" fill="white" stroke="#E5E7EB"/>
+            <circle cx="74" cy="81" r="7" fill="#10B981"/>
+            <path d="M71 81l2 2 4-4" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <text x="90" y="85" font-family="Inter,sans-serif" font-size="11" fill="#374151">Rule 2.1 — Client money kept separate</text>
+
+            <rect x="55" y="103" width="290" height="32" rx="6" fill="white" stroke="#E5E7EB"/>
+            <circle cx="74" cy="119" r="7" fill="#10B981"/>
+            <path d="M71 119l2 2 4-4" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <text x="90" y="123" font-family="Inter,sans-serif" font-size="11" fill="#374151">Rule 4.1 — Client account at approved bank</text>
+
+            <rect x="55" y="141" width="290" height="32" rx="6" fill="white" stroke="#E5E7EB"/>
+            <circle cx="74" cy="157" r="7" fill="#10B981"/>
+            <path d="M71 157l2 2 4-4" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <text x="90" y="161" font-family="Inter,sans-serif" font-size="11" fill="#374151">Rule 7.1 — Fair interest paid to clients</text>
+
+            <rect x="55" y="179" width="290" height="32" rx="6" fill="#FEF2F2" stroke="#FECACA"/>
+            <circle cx="74" cy="195" r="7" fill="#EF4444"/>
+            <text x="72" y="199" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="white">!</text>
+            <text x="90" y="199" font-family="Inter,sans-serif" font-size="11" fill="#991B1B">Rule 8.3 — Reconciliation overdue (2 days)</text>
+
+            <rect x="55" y="217" width="290" height="32" rx="6" fill="white" stroke="#E5E7EB"/>
+            <circle cx="74" cy="233" r="7" fill="#10B981"/>
+            <path d="M71 233l2 2 4-4" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <text x="90" y="237" font-family="Inter,sans-serif" font-size="11" fill="#374151">Rule 8.4 — Central register maintained</text>
+
+            <rect x="55" y="255" width="290" height="16" rx="4" fill="white" stroke="#E5E7EB"/>
+            <text x="200" y="267" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#9CA3AF">+ 10 more rules monitored</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Feat Row 4 -->
+      <div class="feat reverse reveal">
+        <div class="feat-content">
+          <p class="t-label">Automation</p>
+          <h3 class="t-h3">Five-Weekly Reconciliation Automation</h3>
+          <p class="t-body">Stop relying on calendar reminders and manual spreadsheet comparisons. Safeheld automatically ingests bank data and practice management records on a five-weekly cycle, performs the reconciliation, and generates the required compliance report for the COFA to review and sign off.</p>
+          <ul class="feat-list">
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Automatic data ingestion from major UK banking platforms
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Integration with practice management systems (Clio, LEAP, Proclaim)
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3.75 9L7.5 12.75L14.25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              PDF reconciliation reports with digital sign-off workflow for COFA
+            </li>
+          </ul>
+        </div>
+        <div class="feat-visual">
+          <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Automation timeline -->
+            <rect x="30" y="20" width="340" height="260" rx="12" fill="#F8F9FB" stroke="#E5E7EB"/>
+            <text x="55" y="50" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#080E2C">Five-Weekly Reconciliation Cycle</text>
+            <!-- Timeline -->
+            <line x1="80" y1="80" x2="80" y2="250" stroke="#3D3DFF" stroke-width="2" stroke-opacity="0.2"/>
+            <!-- Step 1 -->
+            <circle cx="80" cy="90" r="8" fill="#3D3DFF"/>
+            <text x="77" y="94" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" font-weight="700" fill="white">1</text>
+            <text x="100" y="88" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#080E2C">Bank Data Ingested</text>
+            <text x="100" y="102" font-family="Inter,sans-serif" font-size="10" fill="#9CA3AF">Automatic pull from NatWest, Barclays, HSBC</text>
+            <!-- Step 2 -->
+            <circle cx="80" cy="135" r="8" fill="#3D3DFF"/>
+            <text x="77" y="139" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" font-weight="700" fill="white">2</text>
+            <text x="100" y="133" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#080E2C">PMS Records Matched</text>
+            <text x="100" y="147" font-family="Inter,sans-serif" font-size="10" fill="#9CA3AF">Ledger entries mapped to bank transactions</text>
+            <!-- Step 3 -->
+            <circle cx="80" cy="180" r="8" fill="#3D3DFF"/>
+            <text x="77" y="184" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" font-weight="700" fill="white">3</text>
+            <text x="100" y="178" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#080E2C">Discrepancies Flagged</text>
+            <text x="100" y="192" font-family="Inter,sans-serif" font-size="10" fill="#9CA3AF">3 items require manual review</text>
+            <!-- Step 4 -->
+            <circle cx="80" cy="225" r="8" fill="#10B981"/>
+            <path d="M77 225l2 2 3-3" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <text x="100" y="223" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#080E2C">Report Generated</text>
+            <text x="100" y="237" font-family="Inter,sans-serif" font-size="10" fill="#9CA3AF">COFA sign-off pending</text>
+            <!-- Status badge -->
+            <rect x="240" y="218" width="105" height="24" rx="12" fill="#F59E0B" fill-opacity="0.12" stroke="#F59E0B" stroke-opacity="0.3"/>
+            <text x="292" y="234" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#D97706">Awaiting Sign-off</text>
+          </svg>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── CTA Section ──────────────────────────────────────────────────────── -->
-  <section class="cta-section bg-gradient-navy">
+  <!-- ── How It Works ───────────────────────────────────────────────────── -->
+  <section class="section bg-dark dark">
     <div class="container">
-      <div class="cta-content">
-        <h2 class="t-h2">Verify Your Client Money Compliance</h2>
-        <p class="t-body-lg">See how Safeheld automates client account reconciliation and SRA compliance verification for law firms.</p>
-        <div class="hero-actions" style="justify-content: center;">
-          <a href="/contact" class="btn btn-primary btn-lg">Request a Demo</a>
+      <div class="sh center reveal">
+        <p class="t-label">How It Works</p>
+        <h2 class="t-h2">Three Steps to SRA Compliance</h2>
+        <p class="t-body-lg">From data connection to COFA sign-off, Safeheld transforms your five-weekly reconciliation from a multi-day manual process into an automated workflow.</p>
+      </div>
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Connect Your Accounts</h3>
+          <p>Link your client account bank feeds and practice management system. Safeheld supports all major UK banking platforms and legal PMS providers.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Automatic Reconciliation</h3>
+          <p>Every five weeks, Safeheld performs the three-way reconciliation required by SRA Rule 8.3 and flags any discrepancies for review.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Review &amp; Sign Off</h3>
+          <p>Your COFA reviews the reconciliation report, resolves any flagged items, and digitally signs off. A complete audit trail is maintained for SRA inspections.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── Footer ───────────────────────────────────────────────────────────── -->
+  <!-- ── CTA Section ────────────────────────────────────────────────────── -->
+  <section class="cta-section bg-white">
+    <div class="container reveal">
+      <p class="t-label">Get Started</p>
+      <h2 class="t-h2">Protect Your Practising Certificate</h2>
+      <p class="t-body-lg" style="max-width:560px;margin:0 auto 32px">Join law firms across England and Wales that trust Safeheld to automate SRA client money compliance and eliminate reconciliation risk.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="/contact" class="btn btn-accent btn-lg">Request a Demo</a>
+        <a href="/platform" class="btn btn-outline btn-lg">Explore the Platform</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────────────────────── -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/" class="nav-logo" style="margin-bottom: 4px;"><div class="nav-logo-mark">S</div> Safeheld</a>
-          <p>The global verification layer for client funds. Autonomous compliance infrastructure for regulated finance.</p>
+          <a href="/" class="nav-logo">
+            <div class="nav-mark">S</div>
+            Safeheld
+          </a>
+          <p>The verification layer for client funds. Proving client money is safeguarded across every regulated sector.</p>
         </div>
         <div class="footer-col">
           <h4>Platform</h4>
           <a href="/platform">Overview</a>
-          <a href="/platform">Reconciliation</a>
-          <a href="/platform">Breach Detection</a>
-          <a href="/platform">Reporting</a>
-          <a href="/platform">Governance</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/for-banks">For Banks</a>
+          <a href="/contact">Request a Demo</a>
         </div>
         <div class="footer-col">
           <h4>Solutions</h4>
-          <a href="/solutions/payments">Payments</a>
-          <a href="/solutions/investments">Investments</a>
+          <a href="/solutions/payments">Payments (PS25)</a>
+          <a href="/solutions/cass">CASS</a>
           <a href="/solutions/crypto">Crypto</a>
-          <a href="/solutions/stablecoins">Stablecoins</a>
-          <a href="/solutions/mica">MiCA</a>
-          <a href="/solutions/genius-act">GENIUS Act</a>
+          <a href="/solutions/stablecoin">Stablecoin</a>
           <a href="/solutions/legal">Legal</a>
           <a href="/solutions/insurance">Insurance</a>
           <a href="/solutions/gaming">Gaming</a>
@@ -246,33 +446,36 @@
         <div class="footer-col">
           <h4>Company</h4>
           <a href="/about">About</a>
-          <a href="/pricing">Pricing</a>
           <a href="/contact">Contact</a>
-          <a href="/for-banks">For Banks</a>
         </div>
         <div class="footer-col">
-          <h4>Resources</h4>
-          <a href="/docs">Documentation</a>
-          <a href="/api">API Reference</a>
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2025 Safeheld Ltd. All rights reserved.</p>
-        <div class="footer-bottom-links"><a href="/terms">Terms</a><a href="/privacy">Privacy</a><a href="/cookies">Cookies</a></div>
+        <p>&copy; 2026 Safeheld. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+        </div>
       </div>
     </div>
   </footer>
 
+  <!-- ── Reveal Animation ───────────────────────────────────────────────── -->
   <script>
-    (function () {
-      var toggle = document.querySelector('.nav-mobile-toggle');
-      var menu = document.getElementById('mobileMenu');
-      if (toggle && menu) {
-        toggle.addEventListener('click', function () {
-          menu.classList.toggle('open');
+    document.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
         });
-      }
-    })();
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    });
   </script>
 
 </body>

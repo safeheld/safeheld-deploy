@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Verification infrastructure for electronic money institutions and payment institutions under UK Payment Services Regulations. Daily reconciliation, breach detection, regulatory reporting, and audit trail.">
-  <title>Payments — Client Fund Safeguarding — Safeheld</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233D3DFF'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='white' font-family='Inter,sans-serif' font-weight='800' font-size='20'%3ES%3C/text%3E%3C/svg%3E">
+  <title>PS25 Safeguarding Compliance | SafeHeld</title>
+  <meta name="description" content="Automated safeguarding for UK EMIs and PIs under FCA PS25 requirements. Daily reconciliation, segregation monitoring, and regulatory reporting.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,250 +12,443 @@
 </head>
 <body>
 
-  <!-- ── Navigation ─────────────────────────────────────────────────────── -->
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo">
-        <div class="nav-logo-mark">S</div>
-        Safeheld
-      </a>
-      <div class="nav-links">
-        <a href="/platform" class="nav-link">Platform</a>
-        <div class="nav-dropdown">
-          <button class="nav-dropdown-trigger active">
-            Solutions
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="nav-dropdown-menu">
-            <div class="nav-dropdown-group-label">Financial Services</div>
-            <a href="/solutions/payments" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Payments</h4><p>EMI &amp; PI safeguarding</p></div>
-            </a>
-            <a href="/solutions/investments" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Investments</h4><p>CASS compliance</p></div>
-            </a>
-            <div class="nav-dropdown-group-label">Digital Assets</div>
-            <a href="/solutions/crypto" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Crypto</h4><p>Wallet reconciliation</p></div>
-            </a>
-            <a href="/solutions/stablecoins" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Stablecoins</h4><p>Peg &amp; reserve verification</p></div>
-            </a>
-            <a href="/solutions/mica" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>MiCA</h4><p>EU crypto regulation</p></div>
-            </a>
-            <a href="/solutions/genius-act" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>GENIUS Act</h4><p>US stablecoin rules</p></div>
-            </a>
-            <div class="nav-dropdown-group-label">Other Sectors</div>
-            <a href="/solutions/legal" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Legal</h4><p>SRA client money</p></div>
-            </a>
-            <a href="/solutions/insurance" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Insurance</h4><p>Client premium rules</p></div>
-            </a>
-            <a href="/solutions/gaming" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><circle cx="17" cy="10" r="1"/><circle cx="15" cy="13" r="1"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Gaming</h4><p>Player fund protection</p></div>
-            </a>
-            <a href="/solutions/real-estate" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Real Estate</h4><p>Deposit protection</p></div>
-            </a>
-          </div>
-        </div>
-        <a href="/for-banks" class="nav-link">For Banks</a>
-        <a href="/pricing" class="nav-link">Pricing</a>
-        <a href="/about" class="nav-link">About</a>
-      </div>
-      <div class="nav-cta">
-        <a href="https://app.safeheld.com" class="nav-login">Log in</a>
-        <a href="/contact" class="btn btn-primary btn-sm">Request a Demo</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- ── Page Hero ────────────────────────────────────────────────────────── -->
-  <section class="page-hero bg-white">
-    <div class="container">
-      <span class="superheader">Payments</span>
-      <h1 class="t-h1">Client Fund Safeguarding for Payment Institutions</h1>
-      <p class="t-body-lg">Verification infrastructure for electronic money institutions and payment institutions under UK Payment Services Regulations.</p>
-    </div>
-  </section>
-
-  <!-- ── Overview ──────────────────────────────────────────────────────────── -->
-  <section class="section bg-gray">
-    <div class="container">
-      <div class="section-header">
-        <span class="superheader">Overview</span>
-        <h2 class="t-h2">The Safeguarding Landscape</h2>
-      </div>
-      <div class="grid grid-2">
-        <div>
-          <p class="t-body">The Payment Services Regulations 2017 require electronic money institutions and payment institutions to safeguard relevant funds by the close of the business day following receipt. The FCA's PS 17/19 guidance establishes detailed expectations for how firms implement the segregation method, including requirements for designated safeguarding accounts, acknowledgement letters from credit institutions, and the frequency and scope of reconciliation procedures.</p>
-        </div>
-        <div>
-          <p class="t-body">Safeguarding obligations extend across internal record-keeping, external bank reconciliation, and regulatory reporting through the RMAR. The complexity of maintaining accurate, timely reconciliation across multiple banking relationships and product lines creates significant operational risk. Errors in segregation calculations, missed reconciliation deadlines, and incomplete audit trails are among the most common supervisory findings in this area.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Capabilities ──────────────────────────────────────────────────────── -->
-  <section class="section bg-white">
-    <div class="container">
-      <div class="section-header">
-        <span class="superheader">Capabilities</span>
-        <h2 class="t-h2">Verification Infrastructure</h2>
-      </div>
-      <div class="capability-grid">
-        <div class="capability">
-          <h4>Daily Reconciliation</h4>
-          <p>Matching of client balances against safeguarding accounts across all banking partners on every business day. Configurable tolerance thresholds with break identification and resolution tracking.</p>
-        </div>
-        <div class="capability">
-          <h4>Breach Detection</h4>
-          <p>Continuous monitoring for shortfalls in safeguarded amounts with severity classification and escalation workflows. Real-time identification when segregation requirements are not met.</p>
-        </div>
-        <div class="capability">
-          <h4>Regulatory Reporting</h4>
-          <p>Pre-formatted outputs aligned to FCA expectations, including RMAR safeguarding sections. Complete data lineage from source records through to final report figures.</p>
-        </div>
-        <div class="capability">
-          <h4>Audit Trail</h4>
-          <p>Immutable record of every reconciliation event, data source, and calculation. Timestamped evidence chain for every compliance action, designed for regulatory examination.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Key Requirements ──────────────────────────────────────────────────── -->
-  <section class="section bg-gray">
-    <div class="container">
-      <div class="section-header">
-        <span class="superheader">Requirements</span>
-        <h2 class="t-h2">Key Regulatory Requirements</h2>
-      </div>
-      <div class="grid grid-3">
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <h3 class="t-h4">Segregation by Close of Business</h3>
-          <p>Relevant funds must be placed in a designated safeguarding account by close of the business day following receipt. The segregation method requires funds to be held entirely separate from the firm's own assets.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          </div>
-          <h3 class="t-h4">Acknowledgement Letters</h3>
-          <p>Credit institutions holding safeguarded funds must provide written acknowledgement that they have no recourse over client funds. These letters must be obtained and maintained for each safeguarding account.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </div>
-          <h3 class="t-h4">Internal vs External Reconciliation</h3>
-          <p>Firms must perform both internal reconciliation (matching client entitlements to internal records) and external reconciliation (matching internal records to bank statements) to verify the adequacy of safeguarded amounts.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
-          </div>
-          <h3 class="t-h4">RMAR Safeguarding Sections</h3>
-          <p>Payment institutions must report safeguarding information through the Retail Mediation Activities Return. This includes details on safeguarded amounts, banking arrangements, and reconciliation status.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          </div>
-          <h3 class="t-h4">Adequate Safeguarding Calculation</h3>
-          <p>The total amount held in safeguarding accounts must equal or exceed the total client fund liability at all times. The calculation methodology must account for in-flight transactions, fees, and timing differences.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          </div>
-          <h3 class="t-h4">Reconciliation Records</h3>
-          <p>Firms must maintain detailed records of all reconciliation activity, including source data, matching results, identified breaks, and resolution actions taken. Records must be available for FCA supervisory review.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── CTA Section ──────────────────────────────────────────────────────── -->
-  <section class="bg-gradient-navy cta-section">
-    <div class="container">
-      <h2 class="t-h2">See how Safeheld works for payment institutions</h2>
-      <p class="t-body-lg">Learn how verification infrastructure supports safeguarding compliance under PSR 2017 and FCA guidance.</p>
-      <a href="/contact" class="btn btn-white btn-lg">Request a Demo</a>
-    </div>
-  </section>
-
-  <!-- ── Footer ───────────────────────────────────────────────────────────── -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="/" class="nav-logo">
-            <div class="nav-logo-mark">S</div>
-            Safeheld
+<!-- ── Nav ─────────────────────────────────────────────────────────────── -->
+<nav class="nav nav-solid">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <div class="nav-mark">S</div>
+      SafeHeld
+    </a>
+    <div class="nav-links">
+      <div class="nav-dd">
+        <button class="nav-dd-trigger">
+          Solutions
+          <svg viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-dd-menu">
+          <div class="nav-dd-label">Regulatory Modules</div>
+          <a href="/solutions/payments" class="nav-dd-item">
+            <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 010-4h14v4"/><path d="M3 5v14a2 2 0 002 2h16v-5"/><path d="M18 12a2 2 0 000 4h4v-4h-4z"/></svg></div>
+            <div><h4>PS25 Safeguarding</h4><p>UK EMI &amp; PI compliance</p></div>
           </a>
-          <p>The global verification layer for client funds. Autonomous compliance infrastructure for regulated finance.</p>
-        </div>
-        <div class="footer-col">
-          <h4>Platform</h4>
-          <a href="/platform">Overview</a>
-          <a href="/platform">Reconciliation</a>
-          <a href="/platform">Breach Detection</a>
-          <a href="/platform">Reporting</a>
-          <a href="/platform">Governance</a>
-        </div>
-        <div class="footer-col">
-          <h4>Solutions</h4>
-          <a href="/solutions/payments">Payments</a>
-          <a href="/solutions/investments">Investments</a>
-          <a href="/solutions/crypto">Crypto</a>
-          <a href="/solutions/stablecoins">Stablecoins</a>
-          <a href="/solutions/mica">MiCA</a>
-          <a href="/solutions/genius-act">GENIUS Act</a>
-          <a href="/solutions/legal">Legal</a>
-          <a href="/solutions/insurance">Insurance</a>
-          <a href="/solutions/gaming">Gaming</a>
-          <a href="/solutions/real-estate">Real Estate</a>
-        </div>
-        <div class="footer-col">
-          <h4>Company</h4>
-          <a href="/about">About</a>
-          <a href="/pricing">Pricing</a>
-          <a href="/contact">Contact</a>
-          <a href="/for-banks">For Banks</a>
-        </div>
-        <div class="footer-col">
-          <h4>Resources</h4>
-          <a href="/docs">Documentation</a>
-          <a href="/api">API Reference</a>
+          <a href="/solutions/investments" class="nav-dd-item">
+            <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+            <div><h4>CASS Compliance</h4><p>Investment firm rules</p></div>
+          </a>
+          <a href="/solutions/crypto" class="nav-dd-item">
+            <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".5"/></svg></div>
+            <div><h4>Crypto Custody</h4><p>On-chain verification</p></div>
+          </a>
+          <a href="/solutions/stablecoins" class="nav-dd-item">
+            <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v12"/><path d="M15 9.5a3.5 3.5 0 00-3-1.5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H9a3.5 3.5 0 01-3-1.5"/></svg></div>
+            <div><h4>Stablecoin Reserves</h4><p>Peg &amp; reserve verification</p></div>
+          </a>
+          <a href="/solutions/mica" class="nav-dd-item">
+            <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+            <div><h4>MiCA Compliance</h4><p>EU crypto regulation</p></div>
+          </a>
+          <a href="/solutions/genius-act" class="nav-dd-item">
+            <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
+            <div><h4>GENIUS Act</h4><p>US stablecoin regulation</p></div>
+          </a>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 Safeheld Ltd. All rights reserved.</p>
-        <div class="footer-bottom-links">
-          <a href="/terms">Terms</a>
-          <a href="/privacy">Privacy</a>
-          <a href="/cookies">Cookies</a>
+      <a href="/platform" class="nav-link">Platform</a>
+      <a href="/for-banks" class="nav-link">For Banks</a>
+      <a href="/pricing" class="nav-link">Pricing</a>
+      <a href="/about" class="nav-link">About</a>
+    </div>
+    <div class="nav-cta">
+      <a href="/login" class="nav-login">Log In</a>
+      <a href="/request-demo" class="btn btn-accent btn-sm">Request a Demo</a>
+    </div>
+    <button class="nav-mobile" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ── Page Header ─────────────────────────────────────────────────────── -->
+<header class="page-header bg-dark dark">
+  <div class="container">
+    <div class="reveal">
+      <p class="t-label">PAYMENTS</p>
+      <h1 class="t-h1">PS25 Safeguarding Compliance</h1>
+      <p class="t-body-lg">Automated safeguarding for UK Electronic Money Institutions and Payment Institutions under FCA PS25 requirements. Replace manual spreadsheets with continuous, auditable verification of relevant funds.</p>
+    </div>
+  </div>
+</header>
+
+<!-- ── Overview Section ────────────────────────────────────────────────── -->
+<section class="section bg-white">
+  <div class="container">
+    <div class="sh center reveal">
+      <p class="t-label">Overview</p>
+      <h2 class="t-h2">Why PS25 Changes Everything for Safeguarding</h2>
+      <p class="t-body-lg">The FCA's PS25 policy statement introduces prescriptive safeguarding requirements that demand daily reconciliation, real-time monitoring, and auditable controls across all relevant funds.</p>
+    </div>
+    <div class="grid g3 reveal">
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
+        <h3>Daily Reconciliation</h3>
+        <p>Automated daily comparison of relevant funds held against client liabilities, with full audit trail and exception reporting to meet the FCA's T+1 requirements.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Segregation Monitoring</h3>
+        <p>Continuous verification that safeguarded funds remain properly segregated from operational accounts, with instant alerts on any commingling detected.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <h3>Regulatory Reporting</h3>
+        <p>Pre-formatted reports aligned with FCA expectations, including safeguarding shortfall calculations, resolution pack data, and CASS-style regulatory returns.</p>
       </div>
     </div>
-  </footer>
+  </div>
+</section>
+
+<!-- ── Key Capabilities ────────────────────────────────────────────────── -->
+<section class="section bg-light">
+  <div class="container">
+    <div class="sh center reveal">
+      <p class="t-label">Key Capabilities</p>
+      <h2 class="t-h2">Purpose-Built for PS25</h2>
+      <p class="t-body-lg">Every capability maps directly to the FCA's prescriptive safeguarding requirements for EMIs and PIs.</p>
+    </div>
+
+    <!-- Feat 1: Daily Reconciliation -->
+    <div class="feat reveal">
+      <div class="feat-content">
+        <p class="t-label">Reconciliation</p>
+        <h3 class="t-h3">Daily Relevant Funds Reconciliation</h3>
+        <p class="t-body">Automatically ingest bank statements and transaction records to perform a daily comparison of relevant funds held in designated safeguarding accounts against calculated client liabilities.</p>
+        <ul class="feat-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Automated bank statement ingestion via Open Banking or CSV upload
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            T+1 reconciliation with full transaction-level matching
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Unmatched items flagged and escalated automatically
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Immutable audit trail for every reconciliation cycle
+          </li>
+        </ul>
+      </div>
+      <div class="feat-visual">
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Reconciliation visualization -->
+          <rect x="30" y="40" width="140" height="220" rx="8" stroke="#3D3DFF" stroke-width="1.5" fill="rgba(61,61,255,0.03)"/>
+          <text x="100" y="30" text-anchor="middle" font-size="11" font-weight="600" fill="#6B7280">RELEVANT FUNDS</text>
+          <rect x="45" y="65" width="110" height="24" rx="4" fill="rgba(61,61,255,0.08)"/>
+          <text x="100" y="81" text-anchor="middle" font-size="10" fill="#374151">Account A: &#163;2.4M</text>
+          <rect x="45" y="95" width="110" height="24" rx="4" fill="rgba(61,61,255,0.08)"/>
+          <text x="100" y="111" text-anchor="middle" font-size="10" fill="#374151">Account B: &#163;1.8M</text>
+          <rect x="45" y="125" width="110" height="24" rx="4" fill="rgba(61,61,255,0.08)"/>
+          <text x="100" y="141" text-anchor="middle" font-size="10" fill="#374151">Account C: &#163;3.1M</text>
+          <rect x="45" y="165" width="110" height="24" rx="4" fill="rgba(61,61,255,0.12)"/>
+          <text x="100" y="181" text-anchor="middle" font-size="10" font-weight="600" fill="#3D3DFF">Total: &#163;7.3M</text>
+          <!-- Arrow -->
+          <line x1="185" y1="150" x2="215" y2="150" stroke="#3D3DFF" stroke-width="2" stroke-dasharray="4 3"/>
+          <polygon points="215,145 225,150 215,155" fill="#3D3DFF"/>
+          <!-- Right side: liabilities -->
+          <rect x="230" y="40" width="140" height="220" rx="8" stroke="#3D3DFF" stroke-width="1.5" fill="rgba(61,61,255,0.03)"/>
+          <text x="300" y="30" text-anchor="middle" font-size="11" font-weight="600" fill="#6B7280">CLIENT LIABILITIES</text>
+          <rect x="245" y="65" width="110" height="24" rx="4" fill="rgba(61,61,255,0.08)"/>
+          <text x="300" y="81" text-anchor="middle" font-size="10" fill="#374151">E-money: &#163;5.1M</text>
+          <rect x="245" y="95" width="110" height="24" rx="4" fill="rgba(61,61,255,0.08)"/>
+          <text x="300" y="111" text-anchor="middle" font-size="10" fill="#374151">Payment: &#163;2.1M</text>
+          <rect x="245" y="165" width="110" height="24" rx="4" fill="rgba(61,61,255,0.12)"/>
+          <text x="300" y="181" text-anchor="middle" font-size="10" font-weight="600" fill="#3D3DFF">Total: &#163;7.2M</text>
+          <!-- Match indicator -->
+          <rect x="150" y="220" width="100" height="28" rx="14" fill="rgba(16,185,129,0.1)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+          <text x="200" y="238" text-anchor="middle" font-size="10" font-weight="600" fill="#059669">MATCHED</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Feat 2: Segregation Monitoring -->
+    <div class="feat reverse reveal">
+      <div class="feat-content">
+        <p class="t-label">Segregation</p>
+        <h3 class="t-h3">Safeguarding Segregation Monitoring</h3>
+        <p class="t-body">Monitor that client funds remain in designated safeguarding accounts and are never commingled with the firm's own operational funds, as required by the FCA's segregation rules.</p>
+        <ul class="feat-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Real-time monitoring of designated safeguarding account balances
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Automatic detection of non-client fund transfers
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Account-level tagging and classification enforcement
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Alert escalation to compliance officers and senior management
+          </li>
+        </ul>
+      </div>
+      <div class="feat-visual">
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Segregation visualization -->
+          <rect x="40" y="30" width="320" height="110" rx="8" stroke="#3D3DFF" stroke-width="1.5" fill="rgba(61,61,255,0.02)"/>
+          <text x="200" y="22" text-anchor="middle" font-size="11" font-weight="600" fill="#6B7280">SAFEGUARDING ACCOUNTS</text>
+          <rect x="55" y="50" width="90" height="36" rx="6" fill="rgba(16,185,129,0.08)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+          <text x="100" y="72" text-anchor="middle" font-size="9" font-weight="500" fill="#059669">Designated A</text>
+          <rect x="155" y="50" width="90" height="36" rx="6" fill="rgba(16,185,129,0.08)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+          <text x="200" y="72" text-anchor="middle" font-size="9" font-weight="500" fill="#059669">Designated B</text>
+          <rect x="255" y="50" width="90" height="36" rx="6" fill="rgba(16,185,129,0.08)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+          <text x="300" y="72" text-anchor="middle" font-size="9" font-weight="500" fill="#059669">Designated C</text>
+          <circle cx="100" cy="115" r="8" fill="rgba(16,185,129,0.15)"/>
+          <path d="M96 115l3 3 5-6" stroke="#059669" stroke-width="1.5" fill="none"/>
+          <circle cx="200" cy="115" r="8" fill="rgba(16,185,129,0.15)"/>
+          <path d="M196 115l3 3 5-6" stroke="#059669" stroke-width="1.5" fill="none"/>
+          <circle cx="300" cy="115" r="8" fill="rgba(16,185,129,0.15)"/>
+          <path d="M296 115l3 3 5-6" stroke="#059669" stroke-width="1.5" fill="none"/>
+          <!-- Divider -->
+          <line x1="40" y1="170" x2="360" y2="170" stroke="#E5E7EB" stroke-width="1.5" stroke-dasharray="6 4"/>
+          <text x="200" y="185" text-anchor="middle" font-size="10" fill="#9CA3AF">SEGREGATION BOUNDARY</text>
+          <!-- Operational accounts -->
+          <rect x="40" y="200" width="320" height="70" rx="8" stroke="#E5E7EB" stroke-width="1.5" fill="rgba(0,0,0,0.01)"/>
+          <text x="200" y="195" text-anchor="middle" font-size="11" font-weight="600" fill="#6B7280">OPERATIONAL ACCOUNTS</text>
+          <rect x="75" y="218" width="110" height="32" rx="6" fill="rgba(107,114,128,0.06)" stroke="#E5E7EB" stroke-width="1"/>
+          <text x="130" y="238" text-anchor="middle" font-size="9" fill="#6B7280">Operating Account</text>
+          <rect x="215" y="218" width="110" height="32" rx="6" fill="rgba(107,114,128,0.06)" stroke="#E5E7EB" stroke-width="1"/>
+          <text x="270" y="238" text-anchor="middle" font-size="9" fill="#6B7280">Revenue Account</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Feat 3: Shortfall Detection -->
+    <div class="feat reveal">
+      <div class="feat-content">
+        <p class="t-label">Detection</p>
+        <h3 class="t-h3">Safeguarding Shortfall Detection</h3>
+        <p class="t-body">Instantly identify when the total of relevant funds held falls below client liabilities. PS25 requires firms to top up shortfalls within strict timeframes -- SafeHeld tracks this automatically.</p>
+        <ul class="feat-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Real-time shortfall calculation against safeguarding requirement
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Threshold-based alerts before shortfalls materialise
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Automated top-up amount calculation with remediation timelines
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Historical shortfall trend analysis and root cause tracking
+          </li>
+        </ul>
+      </div>
+      <div class="feat-visual">
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Shortfall gauge -->
+          <text x="200" y="30" text-anchor="middle" font-size="11" font-weight="600" fill="#6B7280">SAFEGUARDING STATUS</text>
+          <!-- Bar chart -->
+          <rect x="60" y="60" width="50" height="160" rx="4" fill="rgba(61,61,255,0.08)" stroke="rgba(61,61,255,0.2)" stroke-width="1"/>
+          <rect x="60" y="80" width="50" height="140" rx="0 0 4 4" fill="rgba(61,61,255,0.15)"/>
+          <text x="85" y="55" text-anchor="middle" font-size="9" fill="#6B7280">Mon</text>
+          <rect x="130" y="60" width="50" height="160" rx="4" fill="rgba(61,61,255,0.08)" stroke="rgba(61,61,255,0.2)" stroke-width="1"/>
+          <rect x="130" y="70" width="50" height="150" rx="0 0 4 4" fill="rgba(61,61,255,0.15)"/>
+          <text x="155" y="55" text-anchor="middle" font-size="9" fill="#6B7280">Tue</text>
+          <rect x="200" y="60" width="50" height="160" rx="4" fill="rgba(239,68,68,0.08)" stroke="rgba(239,68,68,0.3)" stroke-width="1"/>
+          <rect x="200" y="120" width="50" height="100" rx="0 0 4 4" fill="rgba(239,68,68,0.2)"/>
+          <text x="225" y="55" text-anchor="middle" font-size="9" fill="#EF4444">Wed</text>
+          <rect x="270" y="60" width="50" height="160" rx="4" fill="rgba(61,61,255,0.08)" stroke="rgba(61,61,255,0.2)" stroke-width="1"/>
+          <rect x="270" y="75" width="50" height="145" rx="0 0 4 4" fill="rgba(61,61,255,0.15)"/>
+          <text x="295" y="55" text-anchor="middle" font-size="9" fill="#6B7280">Thu</text>
+          <!-- Threshold line -->
+          <line x1="45" y1="100" x2="340" y2="100" stroke="#EF4444" stroke-width="1" stroke-dasharray="4 3"/>
+          <text x="355" y="104" font-size="8" fill="#EF4444">Required</text>
+          <!-- Alert badge -->
+          <rect x="190" y="240" width="70" height="24" rx="12" fill="rgba(239,68,68,0.1)" stroke="rgba(239,68,68,0.3)" stroke-width="1"/>
+          <text x="225" y="256" text-anchor="middle" font-size="9" font-weight="600" fill="#EF4444">SHORTFALL</text>
+          <!-- Resolved badge -->
+          <rect x="270" y="240" width="70" height="24" rx="12" fill="rgba(16,185,129,0.1)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+          <text x="305" y="256" text-anchor="middle" font-size="9" font-weight="600" fill="#059669">TOPPED UP</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Feat 4: Regulatory Reporting -->
+    <div class="feat reverse reveal">
+      <div class="feat-content">
+        <p class="t-label">Reporting</p>
+        <h3 class="t-h3">FCA Regulatory Reporting</h3>
+        <p class="t-body">Generate the regulatory returns and management information required by the FCA under PS25, including safeguarding reports, resolution pack data, and compliance attestations.</p>
+        <ul class="feat-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Pre-formatted FCA-aligned safeguarding reports
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Resolution pack data maintained in real time
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Board and senior management reporting packs
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Exportable PDF and CSV formats for auditors
+          </li>
+        </ul>
+      </div>
+      <div class="feat-visual">
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Report document visualization -->
+          <rect x="100" y="20" width="200" height="260" rx="8" stroke="#3D3DFF" stroke-width="1.5" fill="white"/>
+          <rect x="100" y="20" width="200" height="40" rx="8 8 0 0" fill="rgba(61,61,255,0.06)"/>
+          <text x="200" y="45" text-anchor="middle" font-size="11" font-weight="600" fill="#374151">Safeguarding Report</text>
+          <rect x="120" y="75" width="80" height="8" rx="4" fill="rgba(61,61,255,0.12)"/>
+          <rect x="120" y="93" width="160" height="6" rx="3" fill="#F1F3F7"/>
+          <rect x="120" y="107" width="140" height="6" rx="3" fill="#F1F3F7"/>
+          <rect x="120" y="121" width="155" height="6" rx="3" fill="#F1F3F7"/>
+          <!-- Table rows -->
+          <line x1="120" y1="145" x2="280" y2="145" stroke="#E5E7EB" stroke-width="1"/>
+          <rect x="120" y="152" width="60" height="6" rx="3" fill="#E5E7EB"/>
+          <rect x="230" y="152" width="50" height="6" rx="3" fill="rgba(61,61,255,0.15)"/>
+          <line x1="120" y1="168" x2="280" y2="168" stroke="#E5E7EB" stroke-width="0.5"/>
+          <rect x="120" y="175" width="70" height="6" rx="3" fill="#E5E7EB"/>
+          <rect x="230" y="175" width="50" height="6" rx="3" fill="rgba(61,61,255,0.15)"/>
+          <line x1="120" y1="191" x2="280" y2="191" stroke="#E5E7EB" stroke-width="0.5"/>
+          <rect x="120" y="198" width="55" height="6" rx="3" fill="#E5E7EB"/>
+          <rect x="230" y="198" width="50" height="6" rx="3" fill="rgba(61,61,255,0.15)"/>
+          <!-- Status badge -->
+          <rect x="140" y="230" width="120" height="28" rx="14" fill="rgba(16,185,129,0.1)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+          <text x="200" y="248" text-anchor="middle" font-size="10" font-weight="600" fill="#059669">FCA COMPLIANT</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── How It Works ────────────────────────────────────────────────────── -->
+<section class="section bg-dark dark">
+  <div class="container">
+    <div class="sh center reveal">
+      <p class="t-label">How It Works</p>
+      <h2 class="t-h2">From Data Ingestion to Compliance</h2>
+      <p class="t-body-lg">SafeHeld automates the entire PS25 safeguarding workflow in three steps.</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Connect Your Accounts</h3>
+        <p>Link your safeguarding bank accounts and transaction systems via Open Banking APIs or secure file upload. SafeHeld ingests balances and movements daily.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Automated Reconciliation</h3>
+        <p>SafeHeld performs T+1 reconciliation of relevant funds against client liabilities, flags discrepancies, and monitors segregation boundaries continuously.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Report &amp; Remediate</h3>
+        <p>Receive real-time alerts on shortfalls, generate FCA-aligned regulatory reports, and maintain a complete audit trail for supervisory review.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA Section ─────────────────────────────────────────────────────── -->
+<section class="cta-section bg-white">
+  <div class="container reveal">
+    <h2 class="t-h2">Ready to Automate PS25 Compliance?</h2>
+    <p class="t-body-lg" style="max-width:560px;margin:0 auto 32px">Join the UK payment firms using SafeHeld to meet the FCA's safeguarding requirements with confidence.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="/request-demo" class="btn btn-accent btn-lg">Request a Demo</a>
+      <a href="/pricing" class="btn btn-outline btn-lg">View Pricing</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ──────────────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo"><div class="nav-mark">S</div> SafeHeld</div>
+        <p>The verification layer for client funds. Proving safeguarding compliance across every regulated sector.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Solutions</h4>
+        <a href="/solutions/payments">PS25 Safeguarding</a>
+        <a href="/solutions/investments">CASS Compliance</a>
+        <a href="/solutions/crypto">Crypto Custody</a>
+        <a href="/solutions/stablecoins">Stablecoin Reserves</a>
+        <a href="/solutions/mica">MiCA Compliance</a>
+        <a href="/solutions/genius-act">GENIUS Act</a>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="/platform">Overview</a>
+        <a href="/platform#reconciliation">Reconciliation</a>
+        <a href="/platform#monitoring">Monitoring</a>
+        <a href="/platform#reporting">Reporting</a>
+        <a href="/for-banks">For Banks</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/about">About</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/request-demo">Request Demo</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/terms">Terms of Service</a>
+        <a href="/legal/cookies">Cookie Policy</a>
+        <a href="/legal/security">Security</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 SafeHeld Ltd. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="/legal/privacy">Privacy</a>
+        <a href="/legal/terms">Terms</a>
+        <a href="/legal/cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ── Reveal Animation ────────────────────────────────────────────────── -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  });
+</script>
 
 </body>
 </html>

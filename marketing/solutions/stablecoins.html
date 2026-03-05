@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Continuous peg monitoring, reserve composition analysis, and regulatory attestation for stablecoin issuers. Multi-regime compliance across MiCA, GENIUS Act, and UK FCA frameworks.">
-  <title>Stablecoins — Reserve Verification — Safeheld</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233D3DFF'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='white' font-family='Inter,sans-serif' font-weight='800' font-size='20'%3ES%3C/text%3E%3C/svg%3E">
+  <title>Reserve Verification &amp; Peg Monitoring | SafeHeld</title>
+  <meta name="description" content="Independent verification of stablecoin reserves, peg stability monitoring, and issuer compliance. Prove reserves back every token in circulation.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,250 +12,465 @@
 </head>
 <body>
 
-  <!-- ── Navigation ─────────────────────────────────────────────────────── -->
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo">
-        <div class="nav-logo-mark">S</div>
-        Safeheld
-      </a>
-      <div class="nav-links">
-        <a href="/platform" class="nav-link">Platform</a>
-        <div class="nav-dropdown">
-          <button class="nav-dropdown-trigger active">
-            Solutions
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="nav-dropdown-menu">
-            <div class="nav-dropdown-group-label">Financial Services</div>
-            <a href="/solutions/payments" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Payments</h4><p>EMI &amp; PI safeguarding</p></div>
-            </a>
-            <a href="/solutions/investments" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Investments</h4><p>CASS compliance</p></div>
-            </a>
-            <div class="nav-dropdown-group-label">Digital Assets</div>
-            <a href="/solutions/crypto" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Crypto</h4><p>Wallet reconciliation</p></div>
-            </a>
-            <a href="/solutions/stablecoins" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Stablecoins</h4><p>Peg &amp; reserve verification</p></div>
-            </a>
-            <a href="/solutions/mica" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>MiCA</h4><p>EU crypto regulation</p></div>
-            </a>
-            <a href="/solutions/genius-act" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>GENIUS Act</h4><p>US stablecoin rules</p></div>
-            </a>
-            <div class="nav-dropdown-group-label">Other Sectors</div>
-            <a href="/solutions/legal" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Legal</h4><p>SRA client money</p></div>
-            </a>
-            <a href="/solutions/insurance" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Insurance</h4><p>Client premium rules</p></div>
-            </a>
-            <a href="/solutions/gaming" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><circle cx="17" cy="10" r="1"/><circle cx="15" cy="13" r="1"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Gaming</h4><p>Player fund protection</p></div>
-            </a>
-            <a href="/solutions/real-estate" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-              <div class="nav-dropdown-item-text"><h4>Real Estate</h4><p>Deposit protection</p></div>
-            </a>
-          </div>
-        </div>
-        <a href="/for-banks" class="nav-link">For Banks</a>
-        <a href="/pricing" class="nav-link">Pricing</a>
-        <a href="/about" class="nav-link">About</a>
-      </div>
-      <div class="nav-cta">
-        <a href="https://app.safeheld.com" class="nav-login">Log in</a>
-        <a href="/contact" class="btn btn-primary btn-sm">Request a Demo</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- ── Page Hero ────────────────────────────────────────────────────────── -->
-  <section class="page-hero bg-white">
-    <div class="container">
-      <span class="superheader">Stablecoins</span>
-      <h1 class="t-h1">Stablecoin Reserve Verification</h1>
-      <p class="t-body-lg">Continuous peg monitoring, reserve composition analysis, and regulatory attestation for stablecoin issuers.</p>
-    </div>
-  </section>
-
-  <!-- ── Overview ──────────────────────────────────────────────────────────── -->
-  <section class="section bg-gray">
-    <div class="container">
-      <div class="section-header">
-        <span class="superheader">Overview</span>
-        <h2 class="t-h2">The Reserve Verification Landscape</h2>
-      </div>
-      <div class="grid grid-2">
-        <div>
-          <p class="t-body">Stablecoin issuers face increasing regulatory pressure to demonstrate that circulating tokens are fully backed by qualifying reserve assets at all times. The EU Markets in Crypto-Assets Regulation requires EMT and ART issuers to maintain verifiable reserves. The US GENIUS Act mandates dollar-for-dollar backing with narrow categories of qualifying assets. The UK FCA is developing its own stablecoin framework with similar reserve adequacy expectations.</p>
-        </div>
-        <div>
-          <p class="t-body">Beyond reserve adequacy, regulators expect continuous peg stability monitoring, transparent reserve composition disclosure, and periodic attestation by independent parties. The operational challenge is that reserve assets span multiple custodians, asset classes, and jurisdictions. Issuers must reconcile on-chain supply data against off-chain reserve holdings and produce attestation-ready outputs that meet the specific requirements of each applicable regulatory regime.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Capabilities ──────────────────────────────────────────────────────── -->
-  <section class="section bg-white">
-    <div class="container">
-      <div class="section-header">
-        <span class="superheader">Capabilities</span>
-        <h2 class="t-h2">Verification Infrastructure</h2>
-      </div>
-      <div class="capability-grid">
-        <div class="capability">
-          <h4>Peg Monitoring</h4>
-          <p>Continuous tracking of stablecoin market price against the target peg value. Deviation classification from minor fluctuation through material depeg, with configurable alert thresholds.</p>
-        </div>
-        <div class="capability">
-          <h4>Reserve Composition Analysis</h4>
-          <p>Breakdown and verification of reserve asset holdings by category: cash deposits, government securities, money market instruments, and other qualifying assets. Coverage ratio calculation against circulating supply.</p>
-        </div>
-        <div class="capability">
-          <h4>Attestation Generation</h4>
-          <p>Structured data outputs and report generation to support periodic attestation requirements. SHA-256 hashed reserve proofs with complete data lineage from source records through to attestation figures.</p>
-        </div>
-        <div class="capability">
-          <h4>Multi-Regime Compliance</h4>
-          <p>Configurable compliance outputs aligned to MiCA reserve requirements, GENIUS Act backing mandates, and UK FCA expectations. Jurisdiction-specific reporting mapped to each regime's distinct obligations.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Key Requirements ──────────────────────────────────────────────────── -->
-  <section class="section bg-gray">
-    <div class="container">
-      <div class="section-header">
-        <span class="superheader">Requirements</span>
-        <h2 class="t-h2">Key Regulatory Requirements</h2>
-      </div>
-      <div class="grid grid-3">
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
-          </div>
-          <h3 class="t-h4">1:1 Reserve Backing</h3>
-          <p>Stablecoin issuers must maintain reserve assets with a value equal to or exceeding the total circulating supply at all times. Any shortfall constitutes a regulatory breach requiring immediate remediation.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
-          </div>
-          <h3 class="t-h4">Qualifying Asset Verification</h3>
-          <p>Reserve assets must fall within defined qualifying categories that vary by jurisdiction. These typically include cash, short-term government securities, and central bank deposits. Non-qualifying assets must be identified and excluded.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          </div>
-          <h3 class="t-h4">Peg Deviation Detection</h3>
-          <p>Material deviations from the target peg value must be detected and reported. Regulators expect issuers to monitor peg stability continuously and to have documented procedures for responding to depeg events.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-          </div>
-          <h3 class="t-h4">Monthly Attestation</h3>
-          <p>Most regulatory frameworks require periodic attestation of reserve adequacy, typically on a monthly basis. Attestation reports must be produced by or supported by independent parties and made publicly available.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </div>
-          <h3 class="t-h4">Redemption Compliance</h3>
-          <p>Stablecoin holders must be able to redeem tokens at par value within specified timeframes. Issuers must maintain sufficient liquid reserves to meet redemption demand without delay or discount.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <h3 class="t-h4">Issuer Prudential Requirements</h3>
-          <p>Stablecoin issuers are subject to prudential requirements including minimum capital, governance arrangements, and risk management frameworks. These obligations vary by jurisdiction and issuer classification.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── CTA Section ──────────────────────────────────────────────────────── -->
-  <section class="bg-gradient-navy cta-section">
-    <div class="container">
-      <h2 class="t-h2">See how Safeheld works for stablecoin issuers</h2>
-      <p class="t-body-lg">Learn how verification infrastructure supports reserve monitoring, peg tracking, and regulatory attestation.</p>
-      <a href="/contact" class="btn btn-white btn-lg">Request a Demo</a>
-    </div>
-  </section>
-
-  <!-- ── Footer ───────────────────────────────────────────────────────────── -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="/" class="nav-logo">
-            <div class="nav-logo-mark">S</div>
-            Safeheld
+<!-- ── Nav ─────────────────────────────────────────────────────────────── -->
+<nav class="nav nav-solid">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <div class="nav-mark">S</div>
+      SafeHeld
+    </a>
+    <div class="nav-links">
+      <div class="nav-dd">
+        <button class="nav-dd-trigger">
+          Solutions
+          <svg viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-dd-menu">
+          <div class="nav-dd-label">Regulatory Modules</div>
+          <a href="/solutions/payments" class="nav-dd-item">
+            <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 010-4h14v4"/><path d="M3 5v14a2 2 0 002 2h16v-5"/><path d="M18 12a2 2 0 000 4h4v-4h-4z"/></svg></div>
+            <div><h4>PS25 Safeguarding</h4><p>UK EMI &amp; PI compliance</p></div>
           </a>
-          <p>The global verification layer for client funds. Autonomous compliance infrastructure for regulated finance.</p>
-        </div>
-        <div class="footer-col">
-          <h4>Platform</h4>
-          <a href="/platform">Overview</a>
-          <a href="/platform">Reconciliation</a>
-          <a href="/platform">Breach Detection</a>
-          <a href="/platform">Reporting</a>
-          <a href="/platform">Governance</a>
-        </div>
-        <div class="footer-col">
-          <h4>Solutions</h4>
-          <a href="/solutions/payments">Payments</a>
-          <a href="/solutions/investments">Investments</a>
-          <a href="/solutions/crypto">Crypto</a>
-          <a href="/solutions/stablecoins">Stablecoins</a>
-          <a href="/solutions/mica">MiCA</a>
-          <a href="/solutions/genius-act">GENIUS Act</a>
-          <a href="/solutions/legal">Legal</a>
-          <a href="/solutions/insurance">Insurance</a>
-          <a href="/solutions/gaming">Gaming</a>
-          <a href="/solutions/real-estate">Real Estate</a>
-        </div>
-        <div class="footer-col">
-          <h4>Company</h4>
-          <a href="/about">About</a>
-          <a href="/pricing">Pricing</a>
-          <a href="/contact">Contact</a>
-          <a href="/for-banks">For Banks</a>
-        </div>
-        <div class="footer-col">
-          <h4>Resources</h4>
-          <a href="/docs">Documentation</a>
-          <a href="/api">API Reference</a>
+          <a href="/solutions/investments" class="nav-dd-item">
+            <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+            <div><h4>CASS Compliance</h4><p>Investment firm rules</p></div>
+          </a>
+          <a href="/solutions/crypto" class="nav-dd-item">
+            <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".5"/></svg></div>
+            <div><h4>Crypto Custody</h4><p>On-chain verification</p></div>
+          </a>
+          <a href="/solutions/stablecoins" class="nav-dd-item">
+            <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v12"/><path d="M15 9.5a3.5 3.5 0 00-3-1.5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H9a3.5 3.5 0 01-3-1.5"/></svg></div>
+            <div><h4>Stablecoin Reserves</h4><p>Peg &amp; reserve verification</p></div>
+          </a>
+          <a href="/solutions/mica" class="nav-dd-item">
+            <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+            <div><h4>MiCA Compliance</h4><p>EU crypto regulation</p></div>
+          </a>
+          <a href="/solutions/genius-act" class="nav-dd-item">
+            <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
+            <div><h4>GENIUS Act</h4><p>US stablecoin regulation</p></div>
+          </a>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 Safeheld Ltd. All rights reserved.</p>
-        <div class="footer-bottom-links">
-          <a href="/terms">Terms</a>
-          <a href="/privacy">Privacy</a>
-          <a href="/cookies">Cookies</a>
+      <a href="/platform" class="nav-link">Platform</a>
+      <a href="/for-banks" class="nav-link">For Banks</a>
+      <a href="/pricing" class="nav-link">Pricing</a>
+      <a href="/about" class="nav-link">About</a>
+    </div>
+    <div class="nav-cta">
+      <a href="/login" class="nav-login">Log In</a>
+      <a href="/request-demo" class="btn btn-accent btn-sm">Request a Demo</a>
+    </div>
+    <button class="nav-mobile" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ── Page Header ─────────────────────────────────────────────────────── -->
+<header class="page-header bg-dark dark">
+  <div class="container">
+    <div class="reveal">
+      <p class="t-label">STABLECOINS</p>
+      <h1 class="t-h1">Reserve Verification &amp; Peg Monitoring</h1>
+      <p class="t-body-lg">Independent verification of stablecoin reserves, peg stability monitoring, and issuer compliance. Prove that every token in circulation is backed by qualifying reserve assets.</p>
+    </div>
+  </div>
+</header>
+
+<!-- ── Overview Section ────────────────────────────────────────────────── -->
+<section class="section bg-white">
+  <div class="container">
+    <div class="sh center reveal">
+      <p class="t-label">Overview</p>
+      <h2 class="t-h2">The Trust Infrastructure for Stablecoins</h2>
+      <p class="t-body-lg">Stablecoin holders need to know their tokens are backed. Regulators demand proof. SafeHeld provides the independent verification layer that bridges the gap.</p>
+    </div>
+    <div class="grid g3 reveal">
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
         </div>
+        <h3>Reserve Matching</h3>
+        <p>Continuously verify that total reserve assets match or exceed the total supply of tokens in circulation, across all chains and issuance addresses.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <h3>Peg Monitoring</h3>
+        <p>Track the stablecoin's market price against its target peg across major exchanges and DEXs, with alerts when deviations exceed configurable thresholds.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Issuer Compliance</h3>
+        <p>Monitor reserve composition against regulatory requirements, track redemption capacity, and generate attestation reports for auditors and regulators.</p>
       </div>
     </div>
-  </footer>
+  </div>
+</section>
+
+<!-- ── Key Capabilities ────────────────────────────────────────────────── -->
+<section class="section bg-light">
+  <div class="container">
+    <div class="sh center reveal">
+      <p class="t-label">Key Capabilities</p>
+      <h2 class="t-h2">Stablecoin Verification Engine</h2>
+      <p class="t-body-lg">Purpose-built for the unique verification challenges of stablecoin reserves, peg stability, and redemption readiness.</p>
+    </div>
+
+    <!-- Feat 1: Reserve-to-Liability Matching -->
+    <div class="feat reveal">
+      <div class="feat-content">
+        <p class="t-label">Reserves</p>
+        <h3 class="t-h3">Reserve-to-Liability Matching</h3>
+        <p class="t-body">Reconcile the total supply of stablecoins on-chain against the reserve assets held by the issuer. SafeHeld verifies reserves across bank deposits, T-bills, money market funds, and other qualifying assets.</p>
+        <ul class="feat-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Multi-chain token supply aggregation across all issuance addresses
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Reserve asset verification via bank feeds and custodian statements
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Real-time reserve ratio calculation (reserves / circulating supply)
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Reserve composition breakdown by asset class and maturity
+          </li>
+        </ul>
+      </div>
+      <div class="feat-visual">
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Reserve matching -->
+          <text x="200" y="25" text-anchor="middle" font-size="11" font-weight="600" fill="#6B7280">RESERVE-TO-LIABILITY MATCH</text>
+          <!-- Left: Reserves -->
+          <rect x="30" y="45" width="155" height="195" rx="8" stroke="#3D3DFF" stroke-width="1.5" fill="rgba(61,61,255,0.02)"/>
+          <text x="107" y="68" text-anchor="middle" font-size="10" font-weight="600" fill="#374151">Reserve Assets</text>
+          <rect x="42" y="82" width="130" height="24" rx="4" fill="rgba(61,61,255,0.06)"/>
+          <text x="50" y="98" font-size="8" fill="#374151">US T-Bills</text>
+          <text x="165" y="98" text-anchor="end" font-size="8" font-weight="600" fill="#374151">$6.2B</text>
+          <rect x="42" y="112" width="130" height="24" rx="4" fill="rgba(61,61,255,0.06)"/>
+          <text x="50" y="128" font-size="8" fill="#374151">Bank Deposits</text>
+          <text x="165" y="128" text-anchor="end" font-size="8" font-weight="600" fill="#374151">$2.8B</text>
+          <rect x="42" y="142" width="130" height="24" rx="4" fill="rgba(61,61,255,0.06)"/>
+          <text x="50" y="158" font-size="8" fill="#374151">Money Market</text>
+          <text x="165" y="158" text-anchor="end" font-size="8" font-weight="600" fill="#374151">$1.1B</text>
+          <rect x="42" y="182" width="130" height="28" rx="6" fill="rgba(16,185,129,0.08)" stroke="rgba(16,185,129,0.25)" stroke-width="1"/>
+          <text x="107" y="200" text-anchor="middle" font-size="10" font-weight="700" fill="#059669">$10.1B</text>
+          <!-- Arrow -->
+          <line x1="195" y1="150" x2="215" y2="150" stroke="#3D3DFF" stroke-width="2" stroke-dasharray="4 3"/>
+          <polygon points="215,145 225,150 215,155" fill="#3D3DFF"/>
+          <!-- Right: Liabilities -->
+          <rect x="230" y="45" width="140" height="195" rx="8" stroke="#3D3DFF" stroke-width="1.5" fill="rgba(61,61,255,0.02)"/>
+          <text x="300" y="68" text-anchor="middle" font-size="10" font-weight="600" fill="#374151">Token Supply</text>
+          <rect x="242" y="82" width="116" height="24" rx="4" fill="rgba(61,61,255,0.06)"/>
+          <text x="250" y="98" font-size="8" fill="#374151">Ethereum</text>
+          <text x="350" y="98" text-anchor="end" font-size="8" font-weight="600" fill="#374151">$5.8B</text>
+          <rect x="242" y="112" width="116" height="24" rx="4" fill="rgba(61,61,255,0.06)"/>
+          <text x="250" y="128" font-size="8" fill="#374151">Solana</text>
+          <text x="350" y="128" text-anchor="end" font-size="8" font-weight="600" fill="#374151">$2.4B</text>
+          <rect x="242" y="142" width="116" height="24" rx="4" fill="rgba(61,61,255,0.06)"/>
+          <text x="250" y="158" font-size="8" fill="#374151">Other Chains</text>
+          <text x="350" y="158" text-anchor="end" font-size="8" font-weight="600" fill="#374151">$1.8B</text>
+          <rect x="242" y="182" width="116" height="28" rx="6" fill="rgba(61,61,255,0.08)" stroke="rgba(61,61,255,0.25)" stroke-width="1"/>
+          <text x="300" y="200" text-anchor="middle" font-size="10" font-weight="700" fill="#3D3DFF">$10.0B</text>
+          <!-- Ratio badge -->
+          <rect x="130" y="258" width="140" height="28" rx="14" fill="rgba(16,185,129,0.1)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+          <text x="200" y="276" text-anchor="middle" font-size="10" font-weight="600" fill="#059669">Ratio: 101.0%</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Feat 2: Peg Deviation Alerts -->
+    <div class="feat reverse reveal">
+      <div class="feat-content">
+        <p class="t-label">Peg Stability</p>
+        <h3 class="t-h3">Peg Deviation Alerts</h3>
+        <p class="t-body">Monitor your stablecoin's price across centralised and decentralised exchanges in real time. Detect depegging events early with configurable alert thresholds and escalation chains.</p>
+        <ul class="feat-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Multi-venue price aggregation (CEX and DEX feeds)
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Configurable deviation thresholds (e.g. 0.5%, 1%, 2%)
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Volume-weighted price calculation to filter noise
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Historical peg deviation analysis and trend reporting
+          </li>
+        </ul>
+      </div>
+      <div class="feat-visual">
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Peg chart -->
+          <text x="200" y="25" text-anchor="middle" font-size="11" font-weight="600" fill="#6B7280">PEG STABILITY MONITOR</text>
+          <!-- Chart area -->
+          <rect x="50" y="40" width="300" height="180" rx="8" fill="rgba(61,61,255,0.02)" stroke="#E5E7EB" stroke-width="1"/>
+          <!-- Grid lines -->
+          <line x1="50" y1="90" x2="350" y2="90" stroke="#F1F3F7" stroke-width="1"/>
+          <line x1="50" y1="130" x2="350" y2="130" stroke="#3D3DFF" stroke-width="0.5" stroke-dasharray="4 3"/>
+          <line x1="50" y1="170" x2="350" y2="170" stroke="#F1F3F7" stroke-width="1"/>
+          <!-- Labels -->
+          <text x="44" y="94" text-anchor="end" font-size="7" fill="#9CA3AF">$1.02</text>
+          <text x="44" y="134" text-anchor="end" font-size="7" font-weight="600" fill="#3D3DFF">$1.00</text>
+          <text x="44" y="174" text-anchor="end" font-size="7" fill="#9CA3AF">$0.98</text>
+          <!-- Price line - mostly stable with a dip -->
+          <polyline points="60,128 80,129 100,130 120,129 140,131 160,130 180,128 200,130 220,145 240,155 260,148 280,135 300,131 320,130 340,129" stroke="#3D3DFF" stroke-width="2" fill="none"/>
+          <!-- Deviation zone -->
+          <rect x="210" y="90" width="70" height="80" fill="rgba(239,68,68,0.05)" stroke="none"/>
+          <!-- Threshold bands -->
+          <line x1="50" y1="110" x2="350" y2="110" stroke="rgba(245,158,11,0.3)" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="50" y1="150" x2="350" y2="150" stroke="rgba(245,158,11,0.3)" stroke-width="1" stroke-dasharray="3 3"/>
+          <text x="355" y="114" font-size="6" fill="#D97706">+1%</text>
+          <text x="355" y="154" font-size="6" fill="#D97706">-1%</text>
+          <!-- Alert marker -->
+          <circle cx="240" cy="155" r="5" fill="rgba(239,68,68,0.2)" stroke="#EF4444" stroke-width="1"/>
+          <text x="240" y="175" text-anchor="middle" font-size="7" fill="#EF4444">-2.1% deviation</text>
+          <!-- Current price -->
+          <rect x="120" y="240" width="160" height="36" rx="8" fill="rgba(61,61,255,0.04)" stroke="#E5E7EB" stroke-width="1"/>
+          <text x="200" y="256" text-anchor="middle" font-size="9" font-weight="600" fill="#374151">Current: $1.0002</text>
+          <text x="200" y="270" text-anchor="middle" font-size="8" fill="#059669">Within peg tolerance</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Feat 3: Issuer Compliance Reporting -->
+    <div class="feat reveal">
+      <div class="feat-content">
+        <p class="t-label">Compliance</p>
+        <h3 class="t-h3">Issuer Compliance Reporting</h3>
+        <p class="t-body">Generate the attestation reports and compliance documentation required by regulators, auditors, and institutional counterparties. Track reserve composition against permitted asset requirements.</p>
+        <ul class="feat-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Monthly and quarterly attestation report generation
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Reserve composition validation against permitted asset lists
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Auditor access portal with read-only data export
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Public transparency page for token holder confidence
+          </li>
+        </ul>
+      </div>
+      <div class="feat-visual">
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Compliance report -->
+          <text x="200" y="25" text-anchor="middle" font-size="11" font-weight="600" fill="#6B7280">ATTESTATION REPORT</text>
+          <rect x="80" y="38" width="240" height="240" rx="8" stroke="#3D3DFF" stroke-width="1.5" fill="white"/>
+          <rect x="80" y="38" width="240" height="42" rx="8 8 0 0" fill="rgba(61,61,255,0.06)"/>
+          <text x="200" y="58" text-anchor="middle" font-size="10" font-weight="700" fill="#374151">Reserve Attestation</text>
+          <text x="200" y="72" text-anchor="middle" font-size="8" fill="#6B7280">March 2026 | Independent Verification</text>
+          <!-- Reserve composition pie chart representation -->
+          <circle cx="150" cy="130" r="35" fill="none" stroke="#E5E7EB" stroke-width="8"/>
+          <circle cx="150" cy="130" r="35" fill="none" stroke="#3D3DFF" stroke-width="8" stroke-dasharray="138 82" stroke-dashoffset="0"/>
+          <circle cx="150" cy="130" r="35" fill="none" stroke="rgba(61,61,255,0.5)" stroke-width="8" stroke-dasharray="55 165" stroke-dashoffset="-138"/>
+          <circle cx="150" cy="130" r="35" fill="none" stroke="rgba(61,61,255,0.25)" stroke-width="8" stroke-dasharray="27 193" stroke-dashoffset="-193"/>
+          <!-- Legend -->
+          <rect x="210" y="105" width="8" height="8" rx="2" fill="#3D3DFF"/>
+          <text x="224" y="113" font-size="8" fill="#374151">T-Bills: 62%</text>
+          <rect x="210" y="120" width="8" height="8" rx="2" fill="rgba(61,61,255,0.5)"/>
+          <text x="224" y="128" font-size="8" fill="#374151">Bank Dep: 25%</text>
+          <rect x="210" y="135" width="8" height="8" rx="2" fill="rgba(61,61,255,0.25)"/>
+          <text x="224" y="143" font-size="8" fill="#374151">MM Funds: 13%</text>
+          <!-- Metrics -->
+          <line x1="95" y1="180" x2="305" y2="180" stroke="#E5E7EB" stroke-width="1"/>
+          <text x="100" y="200" font-size="8" fill="#6B7280">Total Supply</text>
+          <text x="300" y="200" text-anchor="end" font-size="8" font-weight="600" fill="#374151">10,042,318,500</text>
+          <text x="100" y="218" font-size="8" fill="#6B7280">Total Reserves</text>
+          <text x="300" y="218" text-anchor="end" font-size="8" font-weight="600" fill="#059669">$10,143,200,000</text>
+          <text x="100" y="236" font-size="8" fill="#6B7280">Reserve Ratio</text>
+          <text x="300" y="236" text-anchor="end" font-size="8" font-weight="600" fill="#059669">101.0%</text>
+          <!-- Verified badge -->
+          <rect x="130" y="250" width="140" height="22" rx="11" fill="rgba(16,185,129,0.1)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+          <text x="200" y="265" text-anchor="middle" font-size="9" font-weight="600" fill="#059669">INDEPENDENTLY VERIFIED</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Feat 4: Redemption Capacity -->
+    <div class="feat reverse reveal">
+      <div class="feat-content">
+        <p class="t-label">Redemption</p>
+        <h3 class="t-h3">Redemption Capacity Verification</h3>
+        <p class="t-body">Verify that the issuer can honour redemption requests within required timeframes. SafeHeld tracks reserve liquidity, maturity profiles, and stress-tests redemption capacity under adverse scenarios.</p>
+        <ul class="feat-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Reserve liquidity assessment by asset maturity profile
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Stress testing under 10%, 25%, and 50% redemption scenarios
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Redemption queue monitoring and fulfilment tracking
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Counterparty concentration risk analysis for reserve holdings
+          </li>
+        </ul>
+      </div>
+      <div class="feat-visual">
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Redemption capacity -->
+          <text x="200" y="25" text-anchor="middle" font-size="11" font-weight="600" fill="#6B7280">REDEMPTION CAPACITY</text>
+          <!-- Liquidity bars -->
+          <text x="55" y="55" font-size="8" font-weight="600" fill="#374151">Same-day liquid</text>
+          <rect x="55" y="60" width="290" height="24" rx="4" fill="#E5E7EB"/>
+          <rect x="55" y="60" width="232" height="24" rx="4" fill="rgba(16,185,129,0.25)"/>
+          <text x="165" y="76" font-size="9" font-weight="600" fill="#059669">$8.1B (80%)</text>
+
+          <text x="55" y="105" font-size="8" font-weight="600" fill="#374151">T+1 liquid</text>
+          <rect x="55" y="110" width="290" height="24" rx="4" fill="#E5E7EB"/>
+          <rect x="55" y="110" width="269" height="24" rx="4" fill="rgba(61,61,255,0.2)"/>
+          <text x="185" y="126" font-size="9" font-weight="600" fill="#3D3DFF">$9.3B (93%)</text>
+
+          <text x="55" y="155" font-size="8" font-weight="600" fill="#374151">T+5 liquid</text>
+          <rect x="55" y="160" width="290" height="24" rx="4" fill="#E5E7EB"/>
+          <rect x="55" y="160" width="290" height="24" rx="4" fill="rgba(61,61,255,0.12)"/>
+          <text x="200" y="176" font-size="9" font-weight="600" fill="#374151">$10.1B (100%)</text>
+          <!-- Stress test results -->
+          <rect x="55" y="205" width="290" height="80" rx="8" fill="rgba(61,61,255,0.03)" stroke="#E5E7EB" stroke-width="1"/>
+          <text x="200" y="225" text-anchor="middle" font-size="9" font-weight="600" fill="#374151">Stress Test Results</text>
+          <text x="100" y="248" font-size="8" fill="#6B7280">10% run:</text>
+          <text x="155" y="248" font-size="8" font-weight="600" fill="#059669">Pass</text>
+          <text x="200" y="248" font-size="8" fill="#6B7280">25% run:</text>
+          <text x="255" y="248" font-size="8" font-weight="600" fill="#059669">Pass</text>
+          <text x="135" y="268" font-size="8" fill="#6B7280">50% run:</text>
+          <text x="190" y="268" font-size="8" font-weight="600" fill="#D97706">Partial (T+3)</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── How It Works ────────────────────────────────────────────────────── -->
+<section class="section bg-dark dark">
+  <div class="container">
+    <div class="sh center reveal">
+      <p class="t-label">How It Works</p>
+      <h2 class="t-h2">Continuous Reserve Verification</h2>
+      <p class="t-body-lg">From token supply tracking to public attestation in three steps.</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Connect Reserve Data</h3>
+        <p>Integrate reserve asset feeds from banks, custodians, and money market accounts. Register all token issuance and burn addresses across supported chains.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Continuous Matching</h3>
+        <p>SafeHeld continuously reconciles total token supply against reserve assets, monitors peg stability across venues, and tests redemption capacity under stress scenarios.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Attest &amp; Publish</h3>
+        <p>Generate monthly attestation reports, provide auditor access portals, and publish a public transparency page showing reserve backing in real time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA Section ─────────────────────────────────────────────────────── -->
+<section class="cta-section bg-white">
+  <div class="container reveal">
+    <h2 class="t-h2">Prove Every Token Is Backed</h2>
+    <p class="t-body-lg" style="max-width:560px;margin:0 auto 32px">Join stablecoin issuers using SafeHeld for independent, continuous reserve verification and peg monitoring.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="/request-demo" class="btn btn-accent btn-lg">Request a Demo</a>
+      <a href="/pricing" class="btn btn-outline btn-lg">View Pricing</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ──────────────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo"><div class="nav-mark">S</div> SafeHeld</div>
+        <p>The verification layer for client funds. Proving safeguarding compliance across every regulated sector.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Solutions</h4>
+        <a href="/solutions/payments">PS25 Safeguarding</a>
+        <a href="/solutions/investments">CASS Compliance</a>
+        <a href="/solutions/crypto">Crypto Custody</a>
+        <a href="/solutions/stablecoins">Stablecoin Reserves</a>
+        <a href="/solutions/mica">MiCA Compliance</a>
+        <a href="/solutions/genius-act">GENIUS Act</a>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="/platform">Overview</a>
+        <a href="/platform#reconciliation">Reconciliation</a>
+        <a href="/platform#monitoring">Monitoring</a>
+        <a href="/platform#reporting">Reporting</a>
+        <a href="/for-banks">For Banks</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/about">About</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/request-demo">Request Demo</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/terms">Terms of Service</a>
+        <a href="/legal/cookies">Cookie Policy</a>
+        <a href="/legal/security">Security</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 SafeHeld Ltd. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="/legal/privacy">Privacy</a>
+        <a href="/legal/terms">Terms</a>
+        <a href="/legal/cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  });
+</script>
 
 </body>
 </html>

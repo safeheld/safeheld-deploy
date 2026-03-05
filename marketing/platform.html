@@ -3,362 +3,537 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Safeheld Platform — unified verification infrastructure that connects to financial systems, reconciles client fund positions, and generates regulatory-grade outputs.">
   <title>Platform — Safeheld</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233D3DFF'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='white' font-family='Inter,sans-serif' font-weight='800' font-size='20'%3ES%3C/text%3E%3C/svg%3E">
+  <meta name="description" content="The autonomous compliance engine for client fund safeguarding. Reconciliation, breach detection, audit trails, and reporting — all in one platform.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- ── Navigation ─────────────────────────────────────────────────────── -->
-  <nav class="nav">
+  <!-- ═══ Navigation ═══ -->
+  <nav class="nav nav-solid" id="nav">
     <div class="nav-inner">
-      <a href="/" class="nav-logo"><div class="nav-logo-mark">S</div>Safeheld</a>
+      <a href="/" class="nav-logo">
+        <div class="nav-mark">S</div>
+        Safeheld
+      </a>
+
       <div class="nav-links">
-        <a href="/platform" class="nav-link active">Platform</a>
-        <div class="nav-dropdown">
-          <button class="nav-dropdown-trigger">Solutions <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="nav-dropdown-menu">
-            <div class="nav-dropdown-group-label">Financial Services</div>
-            <a href="/solutions/payments" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><div class="nav-dropdown-item-text"><h4>Payments</h4><p>EMI &amp; PI safeguarding</p></div></a>
-            <a href="/solutions/investments" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="nav-dropdown-item-text"><h4>Investments</h4><p>CASS compliance</p></div></a>
-            <div class="nav-dropdown-group-label">Digital Assets</div>
-            <a href="/solutions/crypto" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></div><div class="nav-dropdown-item-text"><h4>Crypto</h4><p>Custody verification</p></div></a>
-            <a href="/solutions/stablecoins" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg></div><div class="nav-dropdown-item-text"><h4>Stablecoins</h4><p>Reserve attestation</p></div></a>
-            <a href="/solutions/mica" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="nav-dropdown-item-text"><h4>MiCA</h4><p>EU regulation</p></div></a>
-            <a href="/solutions/genius-act" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="nav-dropdown-item-text"><h4>GENIUS Act</h4><p>US compliance</p></div></a>
-            <div class="nav-dropdown-group-label">Other Sectors</div>
-            <a href="/solutions/legal" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="nav-dropdown-item-text"><h4>Legal</h4><p>SRA client money</p></div></a>
-            <a href="/solutions/insurance" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="nav-dropdown-item-text"><h4>Insurance</h4><p>Premium protection</p></div></a>
-            <a href="/solutions/gaming" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><circle cx="17" cy="10" r="1"/><circle cx="15" cy="13" r="1"/></svg></div><div class="nav-dropdown-item-text"><h4>Gaming</h4><p>Player fund rules</p></div></a>
-            <a href="/solutions/real-estate" class="nav-dropdown-item"><div class="nav-dropdown-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="nav-dropdown-item-text"><h4>Real Estate</h4><p>Deposit protection</p></div></a>
+        <!-- Solutions Dropdown -->
+        <div class="nav-dd">
+          <button class="nav-dd-trigger">
+            Solutions
+            <svg viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="nav-dd-menu">
+            <!-- Regulated Sectors -->
+            <div class="nav-dd-label">Regulated Sectors</div>
+            <a href="/solutions/payments" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div>
+              <div><h4>Payments</h4><p>EMI &amp; PI safeguarding compliance</p></div>
+            </a>
+            <a href="/solutions/investments" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+              <div><h4>Investments</h4><p>CASS custody &amp; client money rules</p></div>
+            </a>
+            <a href="/solutions/legal" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+              <div><h4>Legal</h4><p>SRA client account compliance</p></div>
+            </a>
+            <a href="/solutions/insurance" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <div><h4>Insurance</h4><p>Client premium fund protection</p></div>
+            </a>
+            <a href="/solutions/gaming" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4"/><circle cx="17" cy="10" r="1"/><circle cx="15" cy="14" r="1"/></svg></div>
+              <div><h4>Gaming</h4><p>Player fund safeguarding</p></div>
+            </a>
+            <a href="/solutions/real-estate" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+              <div><h4>Real Estate</h4><p>Client deposit protection</p></div>
+            </a>
+
+            <!-- Emerging Markets -->
+            <div class="nav-dd-label">Emerging Markets</div>
+            <a href="/solutions/crypto" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".5"/></svg></div>
+              <div><h4>Crypto</h4><p>On-chain wallet reconciliation</p></div>
+            </a>
+            <a href="/solutions/stablecoins" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M8 8h7a2 2 0 010 4H8m0 0h8a2 2 0 010 4H8"/></svg></div>
+              <div><h4>Stablecoins</h4><p>Reserve proof &amp; peg verification</p></div>
+            </a>
+            <a href="/solutions/mica" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+              <div><h4>MiCA</h4><p>EU crypto regulatory compliance</p></div>
+            </a>
+            <a href="/solutions/genius-act" class="nav-dd-item">
+              <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></div>
+              <div><h4>GENIUS Act</h4><p>US stablecoin regulation framework</p></div>
+            </a>
           </div>
         </div>
+
+        <a href="/platform" class="nav-link active">Platform</a>
         <a href="/for-banks" class="nav-link">For Banks</a>
         <a href="/pricing" class="nav-link">Pricing</a>
         <a href="/about" class="nav-link">About</a>
       </div>
+
       <div class="nav-cta">
-        <a href="https://app.safeheld.com" class="nav-login">Log in</a>
-        <a href="/contact" class="btn btn-primary btn-sm">Request a Demo</a>
+        <a href="/login" class="nav-login">Log In</a>
+        <a href="/contact" class="btn btn-accent btn-sm">Request a Demo</a>
       </div>
+
+      <button class="nav-mobile" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
     </div>
   </nav>
 
-
-  <!-- ── Page Hero ──────────────────────────────────────────────────────── -->
-  <section class="page-hero bg-white">
+  <!-- ═══ Page Header ═══ -->
+  <header class="bg-dark dark page-header">
     <div class="container">
-      <span class="superheader">Platform</span>
-      <h1 class="t-h1">The Autonomous Compliance Engine</h1>
-      <p class="t-body-lg">Unified verification infrastructure that connects to financial systems, reconciles client fund positions, and generates regulatory-grade outputs.</p>
+      <p class="t-label reveal">PLATFORM</p>
+      <h1 class="t-h1 reveal">The Autonomous Compliance Engine</h1>
+      <p class="t-body-lg reveal">Safeheld replaces the spreadsheets, the manual checks, and the guesswork. A single platform that reconciles, monitors, detects, and reports — continuously and autonomously — so your compliance team can focus on decisions, not data entry.</p>
     </div>
-  </section>
+  </header>
 
-
-  <!-- ── Core Capabilities ──────────────────────────────────────────────── -->
-  <section class="section bg-gray">
+  <!-- ═══ Section 1: Core Engine ═══ -->
+  <section class="bg-white section">
     <div class="container">
-      <div class="section-header center">
-        <span class="superheader">Capabilities</span>
-        <h2 class="t-h2">Platform Architecture</h2>
+      <div class="sh reveal">
+        <p class="t-label">CORE ENGINE</p>
+        <h2 class="t-h2">Everything You Need, Nothing You Don't</h2>
+        <p class="t-body-lg">Three interconnected engines working together to keep your client funds provably safe — every day, without manual intervention.</p>
       </div>
 
-      <div class="grid grid-3">
-
-        <!-- Reconciliation Engine -->
-        <div class="card anim">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </div>
-          <h3 class="t-h4">Reconciliation Engine</h3>
-          <p>Automated matching of internal records against external sources. Configurable tolerances, break management, and resolution tracking.</p>
-        </div>
-
-        <!-- Breach Detection -->
-        <div class="card anim">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          </div>
-          <h3 class="t-h4">Breach Detection</h3>
-          <p>Continuous monitoring for safeguarding shortfalls. Severity classification, escalation workflows, regulatory notification triggers.</p>
-        </div>
-
-        <!-- Regulatory Reporting -->
-        <div class="card anim">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-          </div>
-          <h3 class="t-h4">Regulatory Reporting</h3>
-          <p>CMAR, MiCA attestation, and custom regulatory report generation. Full audit trail and data lineage on every output.</p>
-        </div>
-
-        <!-- Governance Framework -->
-        <div class="card anim">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
-          </div>
-          <h3 class="t-h4">Governance Framework</h3>
-          <p>Rule-based compliance policies, attestation workflows, approval chains, and automated evidence collection.</p>
-        </div>
-
-        <!-- Audit Trail -->
-        <div class="card anim">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          </div>
-          <h3 class="t-h4">Audit Trail</h3>
-          <p>Immutable, timestamped record of every action, data change, and system event. Designed for regulatory examination.</p>
-        </div>
-
-        <!-- Bank Dashboard -->
-        <div class="card anim">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          </div>
-          <h3 class="t-h4">Bank Dashboard</h3>
-          <p>Dedicated read-only view for institutions holding client funds. Real-time visibility into segregation status.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ── Feature Rows ───────────────────────────────────────────────────── -->
-  <section class="section bg-white">
-    <div class="container">
-
-      <!-- Row 1: Data Integration -->
-      <div class="feature-row anim">
-        <div class="feature-content">
-          <span class="superheader">Integration</span>
-          <h3 class="t-h3">Connect Any Data Source</h3>
-          <p class="t-body">API-first architecture with support for bank feeds, custodian reports, on-chain data, and structured uploads.</p>
-          <ul class="feature-list">
+      <!-- Feature 1: Reconciliation Engine -->
+      <div class="feat reveal">
+        <div class="feat-content">
+          <p class="t-label">Reconciliation Engine</p>
+          <h3 class="t-h3">Automated Matching, Zero Spreadsheets</h3>
+          <p class="t-body">Upload your ledger and bank data, and Safeheld automatically matches every transaction. Discrepancies are flagged instantly, with full audit context for every line.</p>
+          <ul class="feat-list">
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              REST API with webhook notifications
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3 9.5L7 13.5L15 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Multi-source data ingestion (CSV, API, bank feeds)
             </li>
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Bulk CSV and Excel upload with validation
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3 9.5L7 13.5L15 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Intelligent transaction matching with fuzzy tolerance
             </li>
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Multi-format data normalisation
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3 9.5L7 13.5L15 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Daily automated reconciliation runs
             </li>
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Real-time and batch processing
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3 9.5L7 13.5L15 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Unmatched item tracking with resolution workflows
             </li>
           </ul>
         </div>
-        <div class="feature-visual">
-          <div class="feature-visual-inner">
-            <div class="mock-ui">
-              <div class="mock-ui-header">
-                <span class="mock-ui-dot"></span>
-                <span class="mock-ui-dot"></span>
-                <span class="mock-ui-dot"></span>
-                <span style="font-size:11px;color:var(--text-muted);margin-left:8px;">Data Sources</span>
-              </div>
-              <div class="mock-ui-body">
-                <div class="mock-ui-row">
-                  <span class="mock-ui-badge blue">API</span>
-                  <span class="mock-ui-bar" style="flex:1;height:6px;"></span>
-                  <span class="mock-ui-badge green">Connected</span>
-                </div>
-                <div class="mock-ui-row">
-                  <span class="mock-ui-badge blue">SFTP</span>
-                  <span class="mock-ui-bar" style="flex:1;height:6px;"></span>
-                  <span class="mock-ui-badge green">Connected</span>
-                </div>
-                <div class="mock-ui-row">
-                  <span class="mock-ui-badge blue">CSV</span>
-                  <span class="mock-ui-bar accent" style="flex:1;height:6px;"></span>
-                  <span class="mock-ui-badge green">Validated</span>
-                </div>
-                <div class="mock-ui-row">
-                  <span class="mock-ui-badge blue">Chain</span>
-                  <span class="mock-ui-bar" style="flex:1;height:6px;"></span>
-                  <span class="mock-ui-badge green">Synced</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="feat-visual">
+          <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Left column: Ledger data -->
+            <rect x="20" y="30" width="150" height="24" rx="4" fill="#E5E7EB"/>
+            <text x="95" y="46" text-anchor="middle" font-size="10" font-weight="600" fill="#374151">Client Ledger</text>
+            <rect x="20" y="64" width="150" height="18" rx="3" fill="#F1F3F7" stroke="#E5E7EB" stroke-width="1"/>
+            <text x="30" y="76" font-size="8" fill="#6B7280">TXN-001  +$12,400</text>
+            <rect x="20" y="86" width="150" height="18" rx="3" fill="#F1F3F7" stroke="#E5E7EB" stroke-width="1"/>
+            <text x="30" y="98" font-size="8" fill="#6B7280">TXN-002  +$8,750</text>
+            <rect x="20" y="108" width="150" height="18" rx="3" fill="#F1F3F7" stroke="#E5E7EB" stroke-width="1"/>
+            <text x="30" y="120" font-size="8" fill="#6B7280">TXN-003  -$3,200</text>
+            <rect x="20" y="130" width="150" height="18" rx="3" fill="#F1F3F7" stroke="#E5E7EB" stroke-width="1"/>
+            <text x="30" y="142" font-size="8" fill="#6B7280">TXN-004  +$45,000</text>
+            <rect x="20" y="152" width="150" height="18" rx="3" fill="#F1F3F7" stroke="#E5E7EB" stroke-width="1"/>
+            <text x="30" y="164" font-size="8" fill="#6B7280">TXN-005  +$6,100</text>
+
+            <!-- Right column: Bank statement -->
+            <rect x="230" y="30" width="150" height="24" rx="4" fill="#E5E7EB"/>
+            <text x="305" y="46" text-anchor="middle" font-size="10" font-weight="600" fill="#374151">Bank Statement</text>
+            <rect x="230" y="64" width="150" height="18" rx="3" fill="#F1F3F7" stroke="#E5E7EB" stroke-width="1"/>
+            <text x="240" y="76" font-size="8" fill="#6B7280">REF-A01  +$12,400</text>
+            <rect x="230" y="86" width="150" height="18" rx="3" fill="#F1F3F7" stroke="#E5E7EB" stroke-width="1"/>
+            <text x="240" y="98" font-size="8" fill="#6B7280">REF-A02  +$8,750</text>
+            <rect x="230" y="108" width="150" height="18" rx="3" fill="#F1F3F7" stroke="#E5E7EB" stroke-width="1"/>
+            <text x="240" y="120" font-size="8" fill="#6B7280">REF-A03  -$3,200</text>
+            <rect x="230" y="130" width="150" height="18" rx="3" fill="#F1F3F7" stroke="#E5E7EB" stroke-width="1"/>
+            <text x="240" y="142" font-size="8" fill="#6B7280">REF-A04  +$45,000</text>
+            <rect x="230" y="152" width="150" height="18" rx="3" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+            <text x="240" y="164" font-size="8" fill="#92400E">REF-A05  +$6,150</text>
+
+            <!-- Matching lines -->
+            <line x1="170" y1="73" x2="230" y2="73" stroke="#3D3DFF" stroke-width="1.5" stroke-dasharray="4 2"/>
+            <line x1="170" y1="95" x2="230" y2="95" stroke="#3D3DFF" stroke-width="1.5" stroke-dasharray="4 2"/>
+            <line x1="170" y1="117" x2="230" y2="117" stroke="#3D3DFF" stroke-width="1.5" stroke-dasharray="4 2"/>
+            <line x1="170" y1="139" x2="230" y2="139" stroke="#3D3DFF" stroke-width="1.5" stroke-dasharray="4 2"/>
+            <line x1="170" y1="161" x2="230" y2="161" stroke="#F59E0B" stroke-width="1.5" stroke-dasharray="4 2"/>
+
+            <!-- Match icons -->
+            <circle cx="200" cy="73" r="8" fill="#10B981" opacity="0.15"/>
+            <path d="M196 73l3 3 5-5" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="200" cy="95" r="8" fill="#10B981" opacity="0.15"/>
+            <path d="M196 95l3 3 5-5" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="200" cy="117" r="8" fill="#10B981" opacity="0.15"/>
+            <path d="M196 117l3 3 5-5" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="200" cy="139" r="8" fill="#10B981" opacity="0.15"/>
+            <path d="M196 139l3 3 5-5" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="200" cy="161" r="8" fill="#F59E0B" opacity="0.15"/>
+            <text x="200" y="164" text-anchor="middle" font-size="10" font-weight="700" fill="#F59E0B">!</text>
+
+            <!-- Summary bar -->
+            <rect x="20" y="195" width="360" height="40" rx="8" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1"/>
+            <circle cx="44" cy="215" r="10" fill="#10B981" opacity="0.2"/>
+            <path d="M40 215l3 3 5-5" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="62" y="212" font-size="9" font-weight="600" fill="#166534">4 of 5 matched</text>
+            <text x="62" y="224" font-size="8" fill="#15803D">1 discrepancy flagged: $50 variance on TXN-005</text>
+
+            <!-- Safeheld engine label -->
+            <rect x="135" y="255" width="130" height="26" rx="13" fill="#3D3DFF" opacity="0.08"/>
+            <text x="200" y="272" text-anchor="middle" font-size="9" font-weight="600" fill="#3D3DFF">Safeheld Reconciliation</text>
+          </svg>
         </div>
       </div>
 
-      <!-- Row 2: Multi-Jurisdictional (reverse) -->
-      <div class="feature-row reverse anim">
-        <div class="feature-content">
-          <span class="superheader">Jurisdictions</span>
-          <h3 class="t-h3">Global Regulatory Coverage</h3>
-          <p class="t-body">Modular regulatory overlays that adapt to jurisdiction-specific requirements. One platform, every framework.</p>
-          <ul class="feature-list">
+      <!-- Feature 2: Breach Detection -->
+      <div class="feat reverse reveal">
+        <div class="feat-content">
+          <p class="t-label">Breach Detection</p>
+          <h3 class="t-h3">Real-Time Monitoring, Instant Alerts</h3>
+          <p class="t-body">Safeheld continuously monitors fund balances against regulatory thresholds. The moment a shortfall or anomaly is detected, alerts fire to your compliance team and your safeguarding bank.</p>
+          <ul class="feat-list">
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              UK FCA &mdash; CASS and Payment Services
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3 9.5L7 13.5L15 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Continuous balance monitoring against obligations
             </li>
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              EU MiCA &mdash; CASPs and token issuers
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3 9.5L7 13.5L15 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Multi-channel alerts (email, dashboard, webhook)
             </li>
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              US GENIUS Act &mdash; stablecoin regulation
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3 9.5L7 13.5L15 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Configurable breach thresholds and severity levels
             </li>
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Extensible to any regulatory regime
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3 9.5L7 13.5L15 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Automated escalation and resolution tracking
             </li>
           </ul>
         </div>
-        <div class="feature-visual">
-          <div class="feature-visual-inner">
-            <div class="mock-ui">
-              <div class="mock-ui-header">
-                <span class="mock-ui-dot"></span>
-                <span class="mock-ui-dot"></span>
-                <span class="mock-ui-dot"></span>
-                <span style="font-size:11px;color:var(--text-muted);margin-left:8px;">Jurisdictions</span>
-              </div>
-              <div class="mock-ui-body">
-                <div class="mock-ui-row">
-                  <span class="mock-ui-label">UK FCA</span>
-                  <span class="mock-ui-bar accent" style="flex:1;height:6px;"></span>
-                  <span class="mock-ui-badge green">Active</span>
-                </div>
-                <div class="mock-ui-row">
-                  <span class="mock-ui-label">EU MiCA</span>
-                  <span class="mock-ui-bar accent" style="flex:1;height:6px;"></span>
-                  <span class="mock-ui-badge green">Active</span>
-                </div>
-                <div class="mock-ui-row">
-                  <span class="mock-ui-label">US GENIUS</span>
-                  <span class="mock-ui-bar accent" style="flex:1;height:6px;"></span>
-                  <span class="mock-ui-badge green">Active</span>
-                </div>
-                <div class="mock-ui-row">
-                  <span class="mock-ui-label">Custom</span>
-                  <span class="mock-ui-bar" style="flex:1;height:6px;"></span>
-                  <span class="mock-ui-badge blue">Configure</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="feat-visual">
+          <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Chart background -->
+            <rect x="40" y="20" width="340" height="180" rx="8" fill="#FAFBFC"/>
+            <!-- Grid lines -->
+            <line x1="40" y1="60" x2="380" y2="60" stroke="#F1F3F7" stroke-width="1"/>
+            <line x1="40" y1="100" x2="380" y2="100" stroke="#F1F3F7" stroke-width="1"/>
+            <line x1="40" y1="140" x2="380" y2="140" stroke="#F1F3F7" stroke-width="1"/>
+            <line x1="40" y1="180" x2="380" y2="180" stroke="#F1F3F7" stroke-width="1"/>
+
+            <!-- Threshold line -->
+            <line x1="40" y1="120" x2="380" y2="120" stroke="#EF4444" stroke-width="1.5" stroke-dasharray="6 4"/>
+            <rect x="330" y="110" width="52" height="16" rx="3" fill="#FEE2E2"/>
+            <text x="356" y="121" text-anchor="middle" font-size="7" font-weight="600" fill="#DC2626">Threshold</text>
+
+            <!-- Balance line (going up and down, with one dip below threshold) -->
+            <polyline points="50,70 90,65 130,75 170,68 210,90 240,115 260,130 280,110 310,80 350,60 370,55" fill="none" stroke="#3D3DFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Fill area under the line -->
+            <polyline points="50,70 90,65 130,75 170,68 210,90 240,115 260,130 280,110 310,80 350,60 370,55 370,200 50,200" fill="#3D3DFF" opacity="0.04"/>
+
+            <!-- Breach zone highlight -->
+            <rect x="230" y="120" width="60" height="15" rx="0" fill="#EF4444" opacity="0.08"/>
+
+            <!-- Breach marker -->
+            <circle cx="260" cy="130" r="6" fill="#EF4444" opacity="0.2"/>
+            <circle cx="260" cy="130" r="3" fill="#EF4444"/>
+
+            <!-- Y-axis labels -->
+            <text x="32" y="64" text-anchor="end" font-size="7" fill="#9CA3AF">$5M</text>
+            <text x="32" y="104" text-anchor="end" font-size="7" fill="#9CA3AF">$3M</text>
+            <text x="32" y="124" text-anchor="end" font-size="7" fill="#EF4444">$2M</text>
+            <text x="32" y="144" text-anchor="end" font-size="7" fill="#9CA3AF">$1M</text>
+            <text x="32" y="184" text-anchor="end" font-size="7" fill="#9CA3AF">$0</text>
+
+            <!-- Alert panel -->
+            <rect x="40" y="220" width="340" height="60" rx="8" fill="#FEF2F2" stroke="#FECACA" stroke-width="1"/>
+            <circle cx="64" cy="244" r="12" fill="#EF4444" opacity="0.15"/>
+            <svg x="56" y="236" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <text x="84" y="238" font-size="9" font-weight="600" fill="#991B1B">Breach Detected</text>
+            <text x="84" y="250" font-size="8" fill="#B91C1C">Safeguarded balance fell below threshold by $142,000</text>
+            <text x="84" y="262" font-size="7" fill="#DC2626">Alert sent to 3 recipients at 09:14 UTC | Auto-escalated</text>
+          </svg>
         </div>
       </div>
 
-      <!-- Row 3: Security -->
-      <div class="feature-row anim">
-        <div class="feature-content">
-          <span class="superheader">Infrastructure</span>
-          <h3 class="t-h3">Enterprise-Grade Security</h3>
-          <p class="t-body">Hardened infrastructure with encryption at rest and in transit, role-based access control, and comprehensive audit logging.</p>
-          <ul class="feature-list">
+      <!-- Feature 3: Audit Trail -->
+      <div class="feat reveal">
+        <div class="feat-content">
+          <p class="t-label">Audit Trail</p>
+          <h3 class="t-h3">Immutable Logging, Complete Transparency</h3>
+          <p class="t-body">Every action, decision, and data change in Safeheld is recorded with an immutable, timestamped audit trail. When your regulator asks questions, the answers are already documented.</p>
+          <ul class="feat-list">
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              AES-256 encryption
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3 9.5L7 13.5L15 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Tamper-proof event logging with hash chains
             </li>
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Role-based access with MFA
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3 9.5L7 13.5L15 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Full user action traceability (who, what, when)
             </li>
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              SOC 2 aligned controls
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3 9.5L7 13.5L15 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Searchable audit log with advanced filtering
             </li>
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              99.9% uptime SLA
+              <svg viewBox="0 0 18 18" fill="none"><path d="M3 9.5L7 13.5L15 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Exportable evidence packs for regulatory inquiries
             </li>
           </ul>
         </div>
-        <div class="feature-visual">
-          <div class="feature-visual-inner">
-            <div class="mock-ui">
-              <div class="mock-ui-header">
-                <span class="mock-ui-dot"></span>
-                <span class="mock-ui-dot"></span>
-                <span class="mock-ui-dot"></span>
-                <span style="font-size:11px;color:var(--text-muted);margin-left:8px;">Security Status</span>
-              </div>
-              <div class="mock-ui-body">
-                <div class="mock-ui-row">
-                  <span class="mock-ui-label">Encryption</span>
-                  <span class="mock-ui-bar accent" style="flex:1;height:6px;"></span>
-                  <span class="mock-ui-badge green">AES-256</span>
-                </div>
-                <div class="mock-ui-row">
-                  <span class="mock-ui-label">Auth</span>
-                  <span class="mock-ui-bar accent" style="flex:1;height:6px;"></span>
-                  <span class="mock-ui-badge green">MFA Active</span>
-                </div>
-                <div class="mock-ui-row">
-                  <span class="mock-ui-label">Audit Log</span>
-                  <span class="mock-ui-bar accent" style="flex:1;height:6px;"></span>
-                  <span class="mock-ui-badge green">Immutable</span>
-                </div>
-                <div class="mock-ui-row">
-                  <span class="mock-ui-label">Uptime</span>
-                  <span class="mock-ui-bar accent" style="flex:1;height:6px;"></span>
-                  <span class="mock-ui-badge green">99.9%</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="feat-visual">
+          <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Audit log entries -->
+            <rect x="30" y="20" width="340" height="260" rx="8" fill="#FAFBFC" stroke="#E5E7EB" stroke-width="1"/>
+            <text x="50" y="44" font-size="10" font-weight="600" fill="#374151">Audit Log</text>
+            <rect x="280" y="32" width="72" height="18" rx="9" fill="#F1F3F7"/>
+            <text x="316" y="44" text-anchor="middle" font-size="7" font-weight="500" fill="#6B7280">142 events</text>
+
+            <!-- Entry 1 -->
+            <line x1="30" y1="56" x2="370" y2="56" stroke="#E5E7EB" stroke-width="1"/>
+            <circle cx="50" cy="76" r="4" fill="#10B981"/>
+            <text x="62" y="73" font-size="8" font-weight="600" fill="#374151">Reconciliation completed</text>
+            <text x="62" y="84" font-size="7" fill="#9CA3AF">Sarah Chen | 2026-03-05 09:14:22 UTC</text>
+            <rect x="300" y="66" width="58" height="16" rx="3" fill="#F0FDF4"/>
+            <text x="329" y="77" text-anchor="middle" font-size="7" font-weight="500" fill="#166534">Matched</text>
+
+            <!-- Entry 2 -->
+            <line x1="30" y1="96" x2="370" y2="96" stroke="#E5E7EB" stroke-width="1"/>
+            <circle cx="50" cy="116" r="4" fill="#F59E0B"/>
+            <text x="62" y="113" font-size="8" font-weight="600" fill="#374151">Breach alert triggered</text>
+            <text x="62" y="124" font-size="7" fill="#9CA3AF">System | 2026-03-05 08:02:11 UTC</text>
+            <rect x="300" y="106" width="58" height="16" rx="3" fill="#FEF3C7"/>
+            <text x="329" y="117" text-anchor="middle" font-size="7" font-weight="500" fill="#92400E">Warning</text>
+
+            <!-- Entry 3 -->
+            <line x1="30" y1="136" x2="370" y2="136" stroke="#E5E7EB" stroke-width="1"/>
+            <circle cx="50" cy="156" r="4" fill="#3D3DFF"/>
+            <text x="62" y="153" font-size="8" font-weight="600" fill="#374151">Report exported (PDF)</text>
+            <text x="62" y="164" font-size="7" fill="#9CA3AF">James Wright | 2026-03-04 17:45:03 UTC</text>
+            <rect x="300" y="146" width="58" height="16" rx="3" fill="#EEF2FF"/>
+            <text x="329" y="157" text-anchor="middle" font-size="7" font-weight="500" fill="#3730A3">Export</text>
+
+            <!-- Entry 4 -->
+            <line x1="30" y1="176" x2="370" y2="176" stroke="#E5E7EB" stroke-width="1"/>
+            <circle cx="50" cy="196" r="4" fill="#10B981"/>
+            <text x="62" y="193" font-size="8" font-weight="600" fill="#374151">Breach resolved</text>
+            <text x="62" y="204" font-size="7" fill="#9CA3AF">Sarah Chen | 2026-03-04 15:30:18 UTC</text>
+            <rect x="300" y="186" width="58" height="16" rx="3" fill="#F0FDF4"/>
+            <text x="329" y="197" text-anchor="middle" font-size="7" font-weight="500" fill="#166534">Resolved</text>
+
+            <!-- Entry 5 -->
+            <line x1="30" y1="216" x2="370" y2="216" stroke="#E5E7EB" stroke-width="1"/>
+            <circle cx="50" cy="236" r="4" fill="#6B7280"/>
+            <text x="62" y="233" font-size="8" font-weight="600" fill="#374151">Data file uploaded</text>
+            <text x="62" y="244" font-size="7" fill="#9CA3AF">Admin | 2026-03-04 14:12:55 UTC</text>
+            <rect x="300" y="226" width="58" height="16" rx="3" fill="#F1F3F7"/>
+            <text x="329" y="237" text-anchor="middle" font-size="7" font-weight="500" fill="#6B7280">Upload</text>
+
+            <!-- Hash chain illustration -->
+            <rect x="50" y="258" width="300" height="14" rx="3" fill="#F8F9FB"/>
+            <text x="200" y="268" text-anchor="middle" font-size="6" font-family="monospace" fill="#9CA3AF">sha256: 4a8f...c2d1 | prev: 9b3e...7f04 | chain: verified</text>
+          </svg>
         </div>
       </div>
-
     </div>
   </section>
 
-
-  <!-- ── CTA Section ────────────────────────────────────────────────────── -->
-  <section class="bg-gradient-navy cta-section">
+  <!-- ═══ Section 2: Architecture ═══ -->
+  <section class="bg-dark dark section">
     <div class="container">
-      <h2 class="t-h2">See the platform</h2>
-      <p class="t-body-lg">Request a demonstration to see how Safeheld operates across your regulatory requirements.</p>
-      <a href="/contact" class="btn btn-white btn-lg">Request a Demo</a>
+      <div class="sh center reveal">
+        <p class="t-label">ARCHITECTURE</p>
+        <h2 class="t-h2">Built for Scale and Security</h2>
+        <p class="t-body-lg">A three-layer architecture designed for regulated financial services — from data ingestion to boardroom-ready reporting.</p>
+      </div>
+
+      <!-- Steps -->
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Data Ingestion</h3>
+          <p>Ingest data from bank feeds, CSV uploads, APIs, and on-chain sources. Normalised and validated before processing.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Processing Engine</h3>
+          <p>Automated reconciliation, breach detection, and compliance checks run continuously against your live data.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Reporting Layer</h3>
+          <p>Audit-ready reports generated on demand or on schedule. PDF exports, dashboards, and regulatory submissions.</p>
+        </div>
+      </div>
+
+      <!-- Capabilities grid -->
+      <div class="cap-grid mt-lg reveal" style="margin-top:80px;">
+        <div class="cap">
+          <h4>Bank-Grade Security</h4>
+          <p>AES-256 encryption at rest, TLS 1.3 in transit. SOC 2 aligned controls with role-based access and MFA enforcement across every user.</p>
+        </div>
+        <div class="cap">
+          <h4>Multi-Tenancy</h4>
+          <p>Each firm operates in a logically isolated environment. Data never leaks across boundaries, and banks get aggregate views without accessing firm-level detail.</p>
+        </div>
+        <div class="cap">
+          <h4>API-First</h4>
+          <p>RESTful API with webhook support for every event. Integrate Safeheld into your existing tech stack or build custom workflows on top of the platform.</p>
+        </div>
+        <div class="cap">
+          <h4>Real-Time Processing</h4>
+          <p>Data changes trigger immediate recalculation. No batch jobs, no overnight delays. Your compliance status is always current.</p>
+        </div>
+      </div>
     </div>
   </section>
 
+  <!-- ═══ Section 3: Reporting ═══ -->
+  <section class="bg-white section">
+    <div class="container">
+      <div class="sh reveal">
+        <p class="t-label">REPORTING</p>
+        <h2 class="t-h2">Audit-Ready at Any Moment</h2>
+        <p class="t-body-lg">Generate comprehensive compliance reports on demand, schedule them weekly, or let Safeheld produce them automatically when it matters most.</p>
+      </div>
 
-  <!-- ── Footer ─────────────────────────────────────────────────────────── -->
+      <p class="t-body reveal" style="max-width:700px;margin-bottom:48px;">Every reconciliation, every breach, every resolution — documented and exportable as a professional PDF report. Safeheld creates the evidence trail that auditors and regulators expect, without you lifting a finger.</p>
+
+      <div class="grid g3 reveal">
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <h3>Reconciliation Reports</h3>
+          <p>Detailed matched and unmatched transaction breakdowns with variance analysis. Includes full source data references and timestamps for every line.</p>
+          <a href="/contact" class="card-link">
+            Learn more
+            <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <h3>Breach Reports</h3>
+          <p>Complete breach event timelines from detection to resolution. Captures root cause analysis, remediation steps, and sign-off from responsible officers.</p>
+          <a href="/contact" class="card-link">
+            Learn more
+            <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          </div>
+          <h3>Governance Reports</h3>
+          <p>Board-level summaries of safeguarding status, trends over time, and regulatory compliance posture. Scheduled weekly, monthly, or on demand.</p>
+          <a href="/contact" class="card-link">
+            Learn more
+            <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA Section ═══ -->
+  <section class="bg-gradient cta-section">
+    <div class="container">
+      <h2 class="t-h2 reveal">See Safeheld in Action</h2>
+      <p class="t-body-lg reveal" style="max-width:520px;margin:0 auto 32px;">Book a personalised demo and see how Safeheld can automate your client fund safeguarding from day one.</p>
+      <a href="/contact" class="btn btn-accent btn-lg reveal">Request a Demo</a>
+    </div>
+  </section>
+
+  <!-- ═══ Footer ═══ -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
-        <div class="footer-brand"><a href="/" class="nav-logo"><div class="nav-logo-mark">S</div>Safeheld</a><p>The global verification layer for client funds.</p></div>
-        <div class="footer-col"><h4>Platform</h4><a href="/platform">Overview</a><a href="/platform">Reconciliation</a><a href="/platform">Breach Detection</a><a href="/platform">Reporting</a><a href="/platform">Governance</a></div>
-        <div class="footer-col"><h4>Solutions</h4><a href="/solutions/payments">Payments</a><a href="/solutions/investments">Investments</a><a href="/solutions/crypto">Crypto</a><a href="/solutions/stablecoins">Stablecoins</a><a href="/solutions/mica">MiCA</a><a href="/solutions/genius-act">GENIUS Act</a><a href="/solutions/legal">Legal</a><a href="/solutions/insurance">Insurance</a><a href="/solutions/gaming">Gaming</a><a href="/solutions/real-estate">Real Estate</a></div>
-        <div class="footer-col"><h4>Company</h4><a href="/about">About</a><a href="/pricing">Pricing</a><a href="/contact">Contact</a><a href="/for-banks">For Banks</a></div>
-        <div class="footer-col"><h4>Resources</h4><a href="/docs">Documentation</a><a href="/api">API Reference</a></div>
+        <div class="footer-brand">
+          <a href="/" class="nav-logo">
+            <div class="nav-mark">S</div>
+            Safeheld
+          </a>
+          <p>The verification layer for client funds. Proving safeguarding compliance across every regulated sector.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Solutions</h4>
+          <a href="/solutions/payments">Payments</a>
+          <a href="/solutions/investments">Investments</a>
+          <a href="/solutions/crypto">Crypto</a>
+          <a href="/solutions/stablecoins">Stablecoins</a>
+          <a href="/solutions/mica">MiCA</a>
+          <a href="/solutions/genius-act">GENIUS Act</a>
+        </div>
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <a href="/platform">Overview</a>
+          <a href="/platform#reconciliation">Reconciliation</a>
+          <a href="/platform#breach-detection">Breach Detection</a>
+          <a href="/platform#audit-trail">Audit Trail</a>
+          <a href="/platform#reporting">Reporting</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="/about">About</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/for-banks">For Banks</a>
+          <a href="/contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="/cookies">Cookie Policy</a>
+        </div>
       </div>
-      <div class="footer-bottom"><p>&copy; 2026 Safeheld Ltd. All rights reserved.</p><div class="footer-bottom-links"><a href="/terms">Terms</a><a href="/privacy">Privacy</a><a href="/cookies">Cookies</a></div></div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Safeheld. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+          <a href="/cookies">Cookies</a>
+        </div>
+      </div>
     </div>
   </footer>
 
-
-  <!-- ── Scroll Animation ───────────────────────────────────────────────── -->
+  <!-- ═══ Scripts ═══ -->
   <script>
-    (function () {
-      var els = document.querySelectorAll('.anim');
-      if (!els.length) return;
-      var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.15 });
-      els.forEach(function (el) { observer.observe(el); });
-    })();
+    // IntersectionObserver for .reveal animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Nav scroll behaviour (starts solid for non-hero pages)
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 10) {
+        nav.style.boxShadow = '0 1px 8px rgba(0,0,0,0.08)';
+      } else {
+        nav.style.boxShadow = '0 1px 3px rgba(0,0,0,0.04)';
+      }
+    });
   </script>
 
 </body>

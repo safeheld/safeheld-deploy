@@ -3,663 +3,894 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Safeheld is the global verification layer for client funds. Autonomous verification infrastructure that proves client money is safeguarded across every regulated sector and jurisdiction.">
-  <meta name="theme-color" content="#080E2C">
-  <meta property="og:title" content="Safeheld — The Global Verification Layer for Client Funds">
-  <meta property="og:description" content="Autonomous verification infrastructure that proves client money is safeguarded across every regulated sector and jurisdiction.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://safeheld.com">
-  <title>Safeheld — The Global Verification Layer for Client Funds</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233D3DFF'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='white' font-family='Inter,sans-serif' font-weight='800' font-size='20'%3ES%3C/text%3E%3C/svg%3E">
+  <title>Safeheld — The Verification Layer for Client Funds</title>
+  <meta name="description" content="Autonomous compliance engine that reconciles, monitors, and proves client money is safeguarded — across every regulated sector and jurisdiction.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 
-  <!-- ═══════════════════════════════════════════════════════════════════════
-       Navigation
-       ═══════════════════════════════════════════════════════════════════════ -->
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo">
-        <div class="nav-logo-mark">S</div>
-        Safeheld
-      </a>
+<!-- ═══════════════════════════════════════════════════════════════════════
+     Navigation
+     ═══════════════════════════════════════════════════════════════════════ -->
+<nav class="nav nav-transparent" id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <div class="nav-mark">S</div>
+      Safeheld
+    </a>
 
-      <div class="nav-links">
-        <a href="/platform" class="nav-link">Platform</a>
-
-        <!-- Solutions Dropdown -->
-        <div class="nav-dropdown">
-          <button class="nav-dropdown-trigger">
-            Solutions
-            <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="nav-dropdown-menu">
-
-            <!-- Financial Services -->
-            <div class="nav-dropdown-group-label">Financial Services</div>
-            <a href="/solutions/payments" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-              </div>
-              <div class="nav-dropdown-item-text">
-                <h4>Payments</h4>
-                <p>EMI &amp; PI safeguarding</p>
-              </div>
-            </a>
-            <a href="/solutions/investments" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-              </div>
-              <div class="nav-dropdown-item-text">
-                <h4>Investments</h4>
-                <p>CASS compliance</p>
-              </div>
-            </a>
-
-            <!-- Digital Assets -->
-            <div class="nav-dropdown-group-label">Digital Assets</div>
-            <a href="/solutions/crypto" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-              </div>
-              <div class="nav-dropdown-item-text">
-                <h4>Crypto</h4>
-                <p>Custody verification</p>
-              </div>
-            </a>
-            <a href="/solutions/stablecoins" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
-              </div>
-              <div class="nav-dropdown-item-text">
-                <h4>Stablecoins</h4>
-                <p>Reserve attestation</p>
-              </div>
-            </a>
-            <a href="/solutions/mica" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
-              </div>
-              <div class="nav-dropdown-item-text">
-                <h4>MiCA</h4>
-                <p>EU regulation</p>
-              </div>
-            </a>
-            <a href="/solutions/genius-act" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              </div>
-              <div class="nav-dropdown-item-text">
-                <h4>GENIUS Act</h4>
-                <p>US compliance</p>
-              </div>
-            </a>
-
-            <!-- Other Sectors -->
-            <div class="nav-dropdown-group-label">Other Sectors</div>
-            <a href="/solutions/legal" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1L1 7l11 6 11-6-11-6z"/><path d="M1 17l11 6 11-6"/><path d="M1 12l11 6 11-6"/></svg>
-              </div>
-              <div class="nav-dropdown-item-text">
-                <h4>Legal</h4>
-                <p>SRA client money</p>
-              </div>
-            </a>
-            <a href="/solutions/insurance" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-              </div>
-              <div class="nav-dropdown-item-text">
-                <h4>Insurance</h4>
-                <p>Premium protection</p>
-              </div>
-            </a>
-            <a href="/solutions/gaming" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
-              </div>
-              <div class="nav-dropdown-item-text">
-                <h4>Gaming</h4>
-                <p>Player fund rules</p>
-              </div>
-            </a>
-            <a href="/solutions/real-estate" class="nav-dropdown-item">
-              <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-              </div>
-              <div class="nav-dropdown-item-text">
-                <h4>Real Estate</h4>
-                <p>Deposit protection</p>
-              </div>
-            </a>
-          </div>
+    <div class="nav-links">
+      <!-- Solutions Dropdown -->
+      <div class="nav-dd">
+        <div class="nav-dd-trigger">
+          Solutions
+          <svg viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
+        <div class="nav-dd-menu">
+          <div class="nav-dd-label">Regulated Sectors</div>
 
-        <a href="/for-banks" class="nav-link">For Banks</a>
-        <a href="/pricing" class="nav-link">Pricing</a>
-        <a href="/about" class="nav-link">About</a>
-      </div>
-
-      <div class="nav-cta">
-        <a href="https://app.safeheld.com" class="nav-login">Log in</a>
-        <a href="/contact" class="btn btn-primary btn-sm">Request a Demo</a>
-      </div>
-
-      <button class="nav-mobile-toggle" aria-label="Open menu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-      </button>
-    </div>
-  </nav>
-
-
-  <!-- ═══════════════════════════════════════════════════════════════════════
-       Hero
-       ═══════════════════════════════════════════════════════════════════════ -->
-  <section class="hero bg-white">
-    <div class="hero-bg">
-      <div class="hero-grid"></div>
-    </div>
-    <div class="hero-content container text-center">
-      <h1 class="t-display">The Global Verification Layer<br>for Client Funds</h1>
-      <p class="hero-subtitle">Autonomous verification infrastructure that proves client money is safeguarded — across every regulated sector and jurisdiction.</p>
-      <div class="hero-actions">
-        <a href="/contact" class="btn btn-primary btn-lg">Request a Demo</a>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════════════════════════════════════
-       Modules Grid
-       ═══════════════════════════════════════════════════════════════════════ -->
-  <section class="section bg-gray anim">
-    <div class="container">
-      <div class="section-header center">
-        <span class="superheader">Modules</span>
-        <h2 class="t-h2">One Platform. Every Regulation.</h2>
-        <p class="t-body-lg">Modular regulatory overlays that adapt to jurisdiction-specific requirements.</p>
-      </div>
-
-      <!-- Primary modules — grid of 6 -->
-      <div class="grid grid-3">
-
-        <!-- Payments (PS25) -->
-        <a href="/solutions/payments" class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-          </div>
-          <h3>Payments</h3>
-          <p>Client fund segregation verification for UK payment institutions and e-money firms.</p>
-          <span class="card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-        </a>
-
-        <!-- Investments (CASS) -->
-        <a href="/solutions/investments" class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </div>
-          <h3>Investments</h3>
-          <p>CASS 6, 7, and 10 compliance with automated CMAR generation for investment firms.</p>
-          <span class="card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-        </a>
-
-        <!-- Crypto Custody -->
-        <a href="/solutions/crypto" class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-          </div>
-          <h3>Crypto Custody</h3>
-          <p>On-chain wallet reconciliation, proof of reserves, and custody verification.</p>
-          <span class="card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-        </a>
-
-        <!-- Stablecoins -->
-        <a href="/solutions/stablecoins" class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
-          </div>
-          <h3>Stablecoins</h3>
-          <p>Peg monitoring, reserve verification, and regulatory attestation for issuers.</p>
-          <span class="card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-        </a>
-
-        <!-- MiCA -->
-        <a href="/solutions/mica" class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
-          </div>
-          <h3>MiCA</h3>
-          <p>EU Markets in Crypto-Assets compliance for CASPs and token issuers.</p>
-          <span class="card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-        </a>
-
-        <!-- GENIUS Act -->
-        <a href="/solutions/genius-act" class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <h3>GENIUS Act</h3>
-          <p>US stablecoin regulatory compliance and reserve reporting.</p>
-          <span class="card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-        </a>
-
-      </div>
-
-      <!-- Secondary modules — grid of 4 -->
-      <div class="grid grid-4 mt-lg">
-
-        <!-- Legal -->
-        <a href="/solutions/legal" class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1L1 7l11 6 11-6-11-6z"/><path d="M1 17l11 6 11-6"/><path d="M1 12l11 6 11-6"/></svg>
-          </div>
-          <h3>Legal</h3>
-          <p>SRA client account rules for law firms.</p>
-          <span class="card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-        </a>
-
-        <!-- Insurance -->
-        <a href="/solutions/insurance" class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-          </div>
-          <h3>Insurance</h3>
-          <p>FCA client premium protection for intermediaries.</p>
-          <span class="card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-        </a>
-
-        <!-- Gaming -->
-        <a href="/solutions/gaming" class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
-          </div>
-          <h3>Gaming</h3>
-          <p>Gambling Commission player fund protection.</p>
-          <span class="card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-        </a>
-
-        <!-- Real Estate -->
-        <a href="/solutions/real-estate" class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          </div>
-          <h3>Real Estate</h3>
-          <p>Client deposit protection for property transactions.</p>
-          <span class="card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════════════════════════════════════
-       How It Works — Architecture
-       ═══════════════════════════════════════════════════════════════════════ -->
-  <section class="section bg-white anim">
-    <div class="container">
-      <div class="section-header center">
-        <span class="superheader">Architecture</span>
-        <h2 class="t-h2">Verification Infrastructure</h2>
-        <p class="t-body-lg">From data ingestion to regulatory-grade output. The entire verification pipeline runs autonomously.</p>
-      </div>
-
-      <div class="arch-diagram">
-
-        <!-- Step 1: Connect -->
-        <div class="arch-step">
-          <div class="arch-step-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          </div>
-          <div class="arch-step-title">Connect</div>
-          <div class="arch-step-desc">Integrate financial systems via API or structured data upload</div>
-        </div>
-
-        <!-- Connector -->
-        <div class="arch-connector"></div>
-
-        <!-- Step 2: Verify -->
-        <div class="arch-step">
-          <div class="arch-step-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-          </div>
-          <div class="arch-step-title">Verify</div>
-          <div class="arch-step-desc">Autonomous reconciliation engine matches every position</div>
-        </div>
-
-        <!-- Connector -->
-        <div class="arch-connector"></div>
-
-        <!-- Step 3: Report -->
-        <div class="arch-step">
-          <div class="arch-step-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          </div>
-          <div class="arch-step-title">Report</div>
-          <div class="arch-step-desc">Regulatory-grade outputs with complete audit trail</div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════════════════════════════════════
-       Platform Capabilities
-       ═══════════════════════════════════════════════════════════════════════ -->
-  <section class="section bg-gray anim">
-    <div class="container">
-      <div class="section-header center">
-        <span class="superheader">Platform</span>
-        <h2 class="t-h2">Core Capabilities</h2>
-      </div>
-
-      <!-- Row 1: Reconciliation Engine -->
-      <div class="feature-row">
-        <div class="feature-content">
-          <h3 class="t-h3">Reconciliation Engine</h3>
-          <p class="t-body">Automated matching of internal records against bank statements, custodian reports, and on-chain data. Configurable tolerance thresholds with automated break resolution and escalation.</p>
-          <ul class="feature-list">
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Multi-source data matching across banks, custodians, and chains
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Configurable tolerance thresholds per account and entity
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Automated break resolution with escalation workflows
-            </li>
-          </ul>
-        </div>
-        <div class="feature-visual">
-          <div class="feature-visual-inner">
-            <div class="mock-ui">
-              <div class="mock-ui-header">
-                <span class="mock-ui-dot"></span>
-                <span class="mock-ui-dot"></span>
-                <span class="mock-ui-dot"></span>
-              </div>
-              <div class="mock-ui-body">
-                <div class="mock-ui-row">
-                  <span class="mock-ui-label">Account A</span>
-                  <div class="mock-ui-bar" style="width:35%; flex:none;"></div>
-                  <div class="mock-ui-bar accent" style="width:35%; flex:none;"></div>
-                  <span class="mock-ui-badge green">Matched</span>
-                </div>
-                <div class="mock-ui-row">
-                  <span class="mock-ui-label">Account B</span>
-                  <div class="mock-ui-bar" style="width:28%; flex:none;"></div>
-                  <div class="mock-ui-bar accent" style="width:28%; flex:none;"></div>
-                  <span class="mock-ui-badge green">Matched</span>
-                </div>
-                <div class="mock-ui-row">
-                  <span class="mock-ui-label">Account C</span>
-                  <div class="mock-ui-bar" style="width:40%; flex:none;"></div>
-                  <div class="mock-ui-bar accent" style="width:22%; flex:none;"></div>
-                  <span class="mock-ui-badge red">Break</span>
-                </div>
-                <div class="mock-ui-row">
-                  <span class="mock-ui-label">Account D</span>
-                  <div class="mock-ui-bar" style="width:32%; flex:none;"></div>
-                  <div class="mock-ui-bar accent" style="width:32%; flex:none;"></div>
-                  <span class="mock-ui-badge green">Matched</span>
-                </div>
-                <div class="mock-ui-row">
-                  <span class="mock-ui-label">Account E</span>
-                  <div class="mock-ui-bar" style="width:26%; flex:none;"></div>
-                  <div class="mock-ui-bar accent" style="width:26%; flex:none;"></div>
-                  <span class="mock-ui-badge green">Matched</span>
-                </div>
-              </div>
+          <a href="/solutions/payments" class="nav-dd-item">
+            <div class="nav-dd-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Row 2: Breach Detection (reverse) -->
-      <div class="feature-row reverse">
-        <div class="feature-content">
-          <h3 class="t-h3">Breach Detection</h3>
-          <p class="t-body">Continuous monitoring for safeguarding breaches. Automatic severity classification, escalation workflows, and regulatory notification triggers.</p>
-          <ul class="feature-list">
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Real-time shortfall and surplus detection
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Automatic severity classification with escalation paths
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Regulatory notification triggers with audit trail
-            </li>
-          </ul>
-        </div>
-        <div class="feature-visual">
-          <div class="feature-visual-inner">
-            <div class="mock-ui">
-              <div class="mock-ui-header">
-                <span class="mock-ui-dot"></span>
-                <span class="mock-ui-dot"></span>
-                <span class="mock-ui-dot"></span>
-              </div>
-              <div class="mock-ui-body">
-                <div class="mock-ui-row">
-                  <span class="mock-ui-label">Segregated 1</span>
-                  <span class="mock-ui-value">No breach detected</span>
-                  <span class="mock-ui-badge green">Clear</span>
-                </div>
-                <div class="mock-ui-row">
-                  <span class="mock-ui-label">Segregated 2</span>
-                  <span class="mock-ui-value">Shortfall identified</span>
-                  <span class="mock-ui-badge red">Breach</span>
-                </div>
-                <div class="mock-ui-row">
-                  <span class="mock-ui-label">Segregated 3</span>
-                  <span class="mock-ui-value">No breach detected</span>
-                  <span class="mock-ui-badge green">Clear</span>
-                </div>
-                <div class="mock-ui-row">
-                  <span class="mock-ui-label">Custody A</span>
-                  <span class="mock-ui-value">Surplus position</span>
-                  <span class="mock-ui-badge blue">Surplus</span>
-                </div>
-                <div class="mock-ui-row">
-                  <span class="mock-ui-label">Custody B</span>
-                  <span class="mock-ui-value">No breach detected</span>
-                  <span class="mock-ui-badge green">Clear</span>
-                </div>
-              </div>
+            <div>
+              <h4>Payments (PS25)</h4>
+              <p>UK EMI and PI safeguarding compliance</p>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Row 3: Regulatory Reporting -->
-      <div class="feature-row">
-        <div class="feature-content">
-          <h3 class="t-h3">Regulatory Reporting</h3>
-          <p class="t-body">Regulatory-grade outputs including CMAR, MiCA attestation reports, and custom formats. Every report carries full audit trail and data lineage.</p>
-          <ul class="feature-list">
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              CMAR, MiCA attestation, and jurisdiction-specific formats
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Complete data lineage from source to submission
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Governance sign-off workflows and version control
-            </li>
-          </ul>
-        </div>
-        <div class="feature-visual">
-          <div class="feature-visual-inner">
-            <div class="mock-ui">
-              <div class="mock-ui-header">
-                <span class="mock-ui-dot"></span>
-                <span class="mock-ui-dot"></span>
-                <span class="mock-ui-dot"></span>
-              </div>
-              <div class="mock-ui-body">
-                <div class="mock-ui-row">
-                  <span class="mock-ui-label">CMAR Q1</span>
-                  <span class="mock-ui-value">Submitted 01 Apr 2026</span>
-                  <span class="mock-ui-badge green">Filed</span>
-                </div>
-                <div class="mock-ui-row">
-                  <span class="mock-ui-label">CMAR Q4</span>
-                  <span class="mock-ui-value">Submitted 02 Jan 2026</span>
-                  <span class="mock-ui-badge green">Filed</span>
-                </div>
-                <div class="mock-ui-row">
-                  <span class="mock-ui-label">MiCA Art. 36</span>
-                  <span class="mock-ui-value">Awaiting sign-off</span>
-                  <span class="mock-ui-badge blue">Pending</span>
-                </div>
-                <div class="mock-ui-row">
-                  <span class="mock-ui-label">PS25 Monthly</span>
-                  <span class="mock-ui-value">Submitted 01 Mar 2026</span>
-                  <span class="mock-ui-badge green">Filed</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════════════════════════════════════
-       For Banks
-       ═══════════════════════════════════════════════════════════════════════ -->
-  <section class="section bg-navy anim">
-    <div class="container text-center">
-      <span class="superheader">For Banks</span>
-      <h2 class="t-h2">Institutional Oversight</h2>
-      <p class="t-body-lg" style="max-width:600px;margin:0 auto var(--space-lg);">Dedicated dashboard for banks and custodians. Aggregate visibility across all firms safeguarding client funds at your institution.</p>
-      <a href="/for-banks" class="btn btn-white btn-lg">Learn More</a>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════════════════════════════════════
-       CTA Section
-       ═══════════════════════════════════════════════════════════════════════ -->
-  <section class="section cta-section bg-gradient-navy anim">
-    <div class="container text-center">
-      <h2 class="t-h2">Verification infrastructure for regulated finance</h2>
-      <p class="t-body-lg">Institutional-grade compliance infrastructure deployed across payments, investments, and digital assets.</p>
-      <a href="/contact" class="btn btn-white btn-lg">Request a Demo</a>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════════════════════════════════════
-       Footer
-       ═══════════════════════════════════════════════════════════════════════ -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-
-        <!-- Brand -->
-        <div class="footer-brand">
-          <a href="/" class="nav-logo">
-            <div class="nav-logo-mark">S</div>
-            Safeheld
           </a>
-          <p>The global verification layer for client funds.</p>
-        </div>
 
-        <!-- Platform -->
-        <div class="footer-col">
-          <h4>Platform</h4>
-          <a href="/platform">Overview</a>
-          <a href="/platform">Reconciliation</a>
-          <a href="/platform">Breach Detection</a>
-          <a href="/platform">Reporting</a>
-          <a href="/platform">Governance</a>
-        </div>
+          <a href="/solutions/investments" class="nav-dd-item">
+            <div class="nav-dd-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <h4>Investments (CASS)</h4>
+              <p>FCA CASS 6, 7 and 10 compliance</p>
+            </div>
+          </a>
 
-        <!-- Solutions -->
-        <div class="footer-col">
-          <h4>Solutions</h4>
-          <a href="/solutions/payments">Payments</a>
-          <a href="/solutions/investments">Investments</a>
-          <a href="/solutions/crypto">Crypto</a>
-          <a href="/solutions/stablecoins">Stablecoins</a>
-          <a href="/solutions/mica">MiCA</a>
-          <a href="/solutions/genius-act">GENIUS Act</a>
-          <a href="/solutions/legal">Legal</a>
-          <a href="/solutions/insurance">Insurance</a>
-          <a href="/solutions/gaming">Gaming</a>
-          <a href="/solutions/real-estate">Real Estate</a>
-        </div>
+          <a href="/solutions/legal" class="nav-dd-item">
+            <div class="nav-dd-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <div>
+              <h4>Legal</h4>
+              <p>SRA client account rules</p>
+            </div>
+          </a>
 
-        <!-- Company -->
-        <div class="footer-col">
-          <h4>Company</h4>
-          <a href="/about">About</a>
-          <a href="/pricing">Pricing</a>
-          <a href="/contact">Contact</a>
-          <a href="/for-banks">For Banks</a>
-        </div>
+          <a href="/solutions/insurance" class="nav-dd-item">
+            <div class="nav-dd-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <h4>Insurance</h4>
+              <p>FCA client premium protection</p>
+            </div>
+          </a>
 
-        <!-- Resources -->
-        <div class="footer-col">
-          <h4>Resources</h4>
-          <a href="/docs">Documentation</a>
-          <a href="/api">API Reference</a>
-        </div>
+          <a href="/solutions/gaming" class="nav-dd-item">
+            <div class="nav-dd-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+            </div>
+            <div>
+              <h4>Gaming</h4>
+              <p>Player fund segregation compliance</p>
+            </div>
+          </a>
 
+          <a href="/solutions/real-estate" class="nav-dd-item">
+            <div class="nav-dd-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div>
+              <h4>Real Estate</h4>
+              <p>Client deposit protection</p>
+            </div>
+          </a>
+
+          <div class="nav-dd-label">Emerging Markets</div>
+
+          <a href="/solutions/crypto" class="nav-dd-item">
+            <div class="nav-dd-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.5 8h5c1.1 0 2 .9 2 2s-.9 2-2 2h-5"/><path d="M9.5 12h5.5c1.1 0 2 .9 2 2s-.9 2-2 2H9.5"/><path d="M12 6v2"/><path d="M12 16v2"/></svg>
+            </div>
+            <div>
+              <h4>Crypto</h4>
+              <p>On-chain reconciliation and proof of reserves</p>
+            </div>
+          </a>
+
+          <a href="/solutions/stablecoins" class="nav-dd-item">
+            <div class="nav-dd-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M8 8h8"/></svg>
+            </div>
+            <div>
+              <h4>Stablecoins</h4>
+              <p>Peg verification and reserve proof</p>
+            </div>
+          </a>
+
+          <a href="/solutions/mica" class="nav-dd-item">
+            <div class="nav-dd-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/></svg>
+            </div>
+            <div>
+              <h4>MiCA</h4>
+              <p>EU Markets in Crypto-Assets compliance</p>
+            </div>
+          </a>
+
+          <a href="/solutions/genius-act" class="nav-dd-item">
+            <div class="nav-dd-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+            </div>
+            <div>
+              <h4>GENIUS Act</h4>
+              <p>US stablecoin regulatory framework</p>
+            </div>
+          </a>
+        </div>
       </div>
 
-      <div class="footer-bottom">
-        <p>&copy; 2026 Safeheld Ltd. All rights reserved.</p>
-        <div class="footer-bottom-links">
-          <a href="/terms">Terms</a>
-          <a href="/privacy">Privacy</a>
-          <a href="/cookies">Cookies</a>
-        </div>
+      <a href="/platform" class="nav-link">Platform</a>
+      <a href="/for-banks" class="nav-link">For Banks</a>
+      <a href="/pricing" class="nav-link">Pricing</a>
+      <a href="/about" class="nav-link">About</a>
+    </div>
+
+    <div class="nav-cta">
+      <a href="https://app.safeheld.com" class="nav-login">Log In</a>
+      <a href="/contact" class="btn btn-accent btn-sm">Request a Demo</a>
+    </div>
+
+    <button class="nav-mobile" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     Section 1 — Hero
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="hero bg-dark dark">
+  <div class="hero-bg">
+    <svg viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Network mesh background — nodes and connections -->
+      <!-- Connection lines -->
+      <line x1="120" y1="180" x2="320" y2="120" stroke="rgba(61,61,255,0.15)" stroke-width="1"/>
+      <line x1="320" y1="120" x2="540" y2="200" stroke="rgba(61,61,255,0.15)" stroke-width="1"/>
+      <line x1="540" y1="200" x2="720" y2="100" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+      <line x1="720" y1="100" x2="960" y2="180" stroke="rgba(61,61,255,0.15)" stroke-width="1"/>
+      <line x1="960" y1="180" x2="1150" y2="90" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+      <line x1="1150" y1="90" x2="1340" y2="200" stroke="rgba(61,61,255,0.15)" stroke-width="1"/>
+      <line x1="120" y1="180" x2="260" y2="360" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+      <line x1="260" y1="360" x2="540" y2="200" stroke="rgba(61,61,255,0.15)" stroke-width="1"/>
+      <line x1="260" y1="360" x2="480" y2="450" stroke="rgba(61,61,255,0.15)" stroke-width="1"/>
+      <line x1="480" y1="450" x2="720" y2="380" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+      <line x1="720" y1="380" x2="540" y2="200" stroke="rgba(61,61,255,0.12)" stroke-width="1"/>
+      <line x1="720" y1="380" x2="960" y2="420" stroke="rgba(61,61,255,0.15)" stroke-width="1"/>
+      <line x1="960" y1="420" x2="960" y2="180" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+      <line x1="960" y1="420" x2="1180" y2="360" stroke="rgba(61,61,255,0.15)" stroke-width="1"/>
+      <line x1="1180" y1="360" x2="1150" y2="90" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+      <line x1="1180" y1="360" x2="1340" y2="200" stroke="rgba(61,61,255,0.12)" stroke-width="1"/>
+      <line x1="320" y1="120" x2="720" y2="100" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+      <line x1="720" y1="100" x2="1150" y2="90" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+      <line x1="480" y1="450" x2="320" y2="580" stroke="rgba(61,61,255,0.15)" stroke-width="1"/>
+      <line x1="320" y1="580" x2="160" y2="540" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+      <line x1="160" y1="540" x2="120" y2="180" stroke="rgba(61,61,255,0.12)" stroke-width="1"/>
+      <line x1="160" y1="540" x2="260" y2="360" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+      <line x1="320" y1="580" x2="560" y2="640" stroke="rgba(61,61,255,0.15)" stroke-width="1"/>
+      <line x1="560" y1="640" x2="480" y2="450" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+      <line x1="560" y1="640" x2="800" y2="600" stroke="rgba(61,61,255,0.15)" stroke-width="1"/>
+      <line x1="800" y1="600" x2="720" y2="380" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+      <line x1="800" y1="600" x2="1040" y2="640" stroke="rgba(61,61,255,0.15)" stroke-width="1"/>
+      <line x1="1040" y1="640" x2="960" y2="420" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+      <line x1="1040" y1="640" x2="1260" y2="560" stroke="rgba(61,61,255,0.12)" stroke-width="1"/>
+      <line x1="1260" y1="560" x2="1180" y2="360" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+      <line x1="1260" y1="560" x2="1380" y2="480" stroke="rgba(61,61,255,0.15)" stroke-width="1"/>
+      <line x1="1380" y1="480" x2="1340" y2="200" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+      <line x1="720" y1="100" x2="720" y2="380" stroke="rgba(61,61,255,0.08)" stroke-width="1"/>
+      <line x1="960" y1="180" x2="1180" y2="360" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+      <line x1="260" y1="360" x2="480" y2="200" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+      <line x1="560" y1="640" x2="320" y2="720" stroke="rgba(61,61,255,0.12)" stroke-width="1"/>
+      <line x1="800" y1="600" x2="720" y2="760" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+      <line x1="1040" y1="640" x2="1100" y2="780" stroke="rgba(61,61,255,0.1)" stroke-width="1"/>
+      <line x1="320" y1="720" x2="720" y2="760" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+      <line x1="720" y1="760" x2="1100" y2="780" stroke="rgba(61,61,255,0.08)" stroke-width="1"/>
+      <line x1="160" y1="540" x2="320" y2="720" stroke="rgba(61,61,255,0.1)" stroke-width="1"/>
+      <line x1="1260" y1="560" x2="1100" y2="780" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+
+      <!-- Primary nodes -->
+      <circle cx="120" cy="180" r="5" fill="rgba(61,61,255,0.35)"/>
+      <circle cx="120" cy="180" r="2" fill="rgba(61,61,255,0.8)"/>
+      <circle cx="320" cy="120" r="4" fill="rgba(61,61,255,0.3)"/>
+      <circle cx="320" cy="120" r="1.5" fill="rgba(61,61,255,0.7)"/>
+      <circle cx="540" cy="200" r="6" fill="rgba(61,61,255,0.35)"/>
+      <circle cx="540" cy="200" r="2.5" fill="rgba(61,61,255,0.8)"/>
+      <circle cx="720" cy="100" r="5" fill="rgba(61,61,255,0.3)"/>
+      <circle cx="720" cy="100" r="2" fill="rgba(61,61,255,0.7)"/>
+      <circle cx="960" cy="180" r="7" fill="rgba(61,61,255,0.35)"/>
+      <circle cx="960" cy="180" r="3" fill="rgba(61,61,255,0.8)"/>
+      <circle cx="1150" cy="90" r="4" fill="rgba(61,61,255,0.3)"/>
+      <circle cx="1150" cy="90" r="1.5" fill="rgba(61,61,255,0.7)"/>
+      <circle cx="1340" cy="200" r="5" fill="rgba(61,61,255,0.35)"/>
+      <circle cx="1340" cy="200" r="2" fill="rgba(61,61,255,0.8)"/>
+
+      <!-- Secondary nodes -->
+      <circle cx="260" cy="360" r="5" fill="rgba(61,61,255,0.3)"/>
+      <circle cx="260" cy="360" r="2" fill="rgba(61,61,255,0.7)"/>
+      <circle cx="480" cy="450" r="6" fill="rgba(61,61,255,0.35)"/>
+      <circle cx="480" cy="450" r="2.5" fill="rgba(61,61,255,0.8)"/>
+      <circle cx="720" cy="380" r="8" fill="rgba(61,61,255,0.4)"/>
+      <circle cx="720" cy="380" r="3.5" fill="rgba(61,61,255,0.9)"/>
+      <circle cx="960" cy="420" r="5" fill="rgba(61,61,255,0.3)"/>
+      <circle cx="960" cy="420" r="2" fill="rgba(61,61,255,0.7)"/>
+      <circle cx="1180" cy="360" r="6" fill="rgba(61,61,255,0.35)"/>
+      <circle cx="1180" cy="360" r="2.5" fill="rgba(61,61,255,0.8)"/>
+
+      <!-- Tertiary nodes -->
+      <circle cx="160" cy="540" r="4" fill="rgba(61,61,255,0.25)"/>
+      <circle cx="160" cy="540" r="1.5" fill="rgba(61,61,255,0.6)"/>
+      <circle cx="320" cy="580" r="5" fill="rgba(61,61,255,0.3)"/>
+      <circle cx="320" cy="580" r="2" fill="rgba(61,61,255,0.7)"/>
+      <circle cx="560" cy="640" r="4" fill="rgba(61,61,255,0.25)"/>
+      <circle cx="560" cy="640" r="1.5" fill="rgba(61,61,255,0.6)"/>
+      <circle cx="800" cy="600" r="6" fill="rgba(61,61,255,0.35)"/>
+      <circle cx="800" cy="600" r="2.5" fill="rgba(61,61,255,0.8)"/>
+      <circle cx="1040" cy="640" r="5" fill="rgba(61,61,255,0.3)"/>
+      <circle cx="1040" cy="640" r="2" fill="rgba(61,61,255,0.7)"/>
+      <circle cx="1260" cy="560" r="4" fill="rgba(61,61,255,0.25)"/>
+      <circle cx="1260" cy="560" r="1.5" fill="rgba(61,61,255,0.6)"/>
+      <circle cx="1380" cy="480" r="5" fill="rgba(61,61,255,0.3)"/>
+      <circle cx="1380" cy="480" r="2" fill="rgba(61,61,255,0.7)"/>
+
+      <!-- Bottom row nodes -->
+      <circle cx="320" cy="720" r="4" fill="rgba(61,61,255,0.2)"/>
+      <circle cx="320" cy="720" r="1.5" fill="rgba(61,61,255,0.5)"/>
+      <circle cx="720" cy="760" r="5" fill="rgba(61,61,255,0.25)"/>
+      <circle cx="720" cy="760" r="2" fill="rgba(61,61,255,0.6)"/>
+      <circle cx="1100" cy="780" r="4" fill="rgba(61,61,255,0.2)"/>
+      <circle cx="1100" cy="780" r="1.5" fill="rgba(61,61,255,0.5)"/>
+
+      <!-- Subtle pulsing rings on key nodes -->
+      <circle cx="720" cy="380" r="16" fill="none" stroke="rgba(61,61,255,0.08)" stroke-width="1"/>
+      <circle cx="960" cy="180" r="14" fill="none" stroke="rgba(61,61,255,0.06)" stroke-width="1"/>
+      <circle cx="480" cy="450" r="12" fill="none" stroke="rgba(61,61,255,0.06)" stroke-width="1"/>
+      <circle cx="800" cy="600" r="12" fill="none" stroke="rgba(61,61,255,0.06)" stroke-width="1"/>
+      <circle cx="540" cy="200" r="12" fill="none" stroke="rgba(61,61,255,0.05)" stroke-width="1"/>
+      <circle cx="1180" cy="360" r="12" fill="none" stroke="rgba(61,61,255,0.05)" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <div class="container">
+    <div class="hero-content">
+      <p class="t-label">CLIENT FUNDS VERIFICATION</p>
+      <h1 class="t-hero">The Verification Layer for Client Funds</h1>
+      <p class="hero-sub">Autonomous compliance engine that reconciles, monitors, and proves client money is safeguarded — across every regulated sector and jurisdiction.</p>
+      <div class="hero-actions">
+        <a href="/contact" class="btn btn-accent btn-lg">Request a Demo</a>
+        <a href="/platform" class="btn btn-outline-white btn-lg">See the Platform</a>
       </div>
     </div>
-  </footer>
+  </div>
+</section>
 
+<!-- ═══════════════════════════════════════════════════════════════════════
+     Section 2 — Regulatory Modules
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="section bg-white">
+  <div class="container">
+    <div class="sh center">
+      <p class="t-label">SOLUTIONS</p>
+      <h2 class="t-h2">One Engine, Every Regulatory Framework</h2>
+      <p class="t-body-lg">Modular compliance overlays that adapt Safeheld's core engine to the specific rules of your sector and jurisdiction.</p>
+    </div>
 
-  <!-- ═══════════════════════════════════════════════════════════════════════
-       Scroll Animation
-       ═══════════════════════════════════════════════════════════════════════ -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var els = document.querySelectorAll('.anim');
-      if ('IntersectionObserver' in window) {
-        var observer = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.1 });
-        els.forEach(function (el) { observer.observe(el); });
-      } else {
-        els.forEach(function (el) { el.classList.add('visible'); });
+    <div class="grid g2 gap-lg">
+
+      <!-- Payments (PS25) -->
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        </div>
+        <h3>Payments (PS25)</h3>
+        <p>Automated safeguarding reconciliation for UK electronic money institutions and payment institutions under PS25 requirements.</p>
+        <a href="/solutions/payments" class="card-link">Learn more <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2.5M13 7l-5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <!-- Investments (CASS) -->
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3>Investments (CASS)</h3>
+        <p>Continuous client money and asset compliance for CASS 6, 7, and 10, including automated CMAR reporting.</p>
+        <a href="/solutions/investments" class="card-link">Learn more <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2.5M13 7l-5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <!-- Crypto -->
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.5 8h5c1.1 0 2 .9 2 2s-.9 2-2 2h-5"/><path d="M9.5 12h5.5c1.1 0 2 .9 2 2s-.9 2-2 2H9.5"/><path d="M12 6v2"/><path d="M12 16v2"/></svg>
+        </div>
+        <h3>Crypto</h3>
+        <p>On-chain wallet reconciliation, proof of reserves, and hot/cold wallet monitoring for digital asset custodians.</p>
+        <a href="/solutions/crypto" class="card-link">Learn more <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2.5M13 7l-5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <!-- Stablecoins -->
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M8 8h8"/></svg>
+        </div>
+        <h3>Stablecoins</h3>
+        <p>Real-time peg verification, reserve attestation, and issuer compliance monitoring for stablecoin operators.</p>
+        <a href="/solutions/stablecoins" class="card-link">Learn more <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2.5M13 7l-5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <!-- MiCA -->
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/></svg>
+        </div>
+        <h3>MiCA</h3>
+        <p>Full compliance with EU Markets in Crypto-Assets regulation, covering reserve requirements and prudential safeguards.</p>
+        <a href="/solutions/mica" class="card-link">Learn more <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2.5M13 7l-5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <!-- GENIUS Act -->
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+        </div>
+        <h3>GENIUS Act</h3>
+        <p>US stablecoin regulatory compliance with reserve verification, issuer reporting, and federal oversight requirements.</p>
+        <a href="/solutions/genius-act" class="card-link">Learn more <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2.5M13 7l-5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <!-- Legal -->
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>Legal</h3>
+        <p>Automated SRA client account compliance, ensuring solicitor trust money is properly segregated and reconciled.</p>
+        <a href="/solutions/legal" class="card-link">Learn more <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2.5M13 7l-5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <!-- Insurance -->
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Insurance</h3>
+        <p>FCA client premium protection compliance for insurance brokers, ensuring proper segregation and trust account management.</p>
+        <a href="/solutions/insurance" class="card-link">Learn more <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2.5M13 7l-5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <!-- Gaming -->
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+        </div>
+        <h3>Gaming</h3>
+        <p>Gambling Commission player fund protection, verifying segregation of customer balances and operator compliance.</p>
+        <a href="/solutions/gaming" class="card-link">Learn more <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2.5M13 7l-5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <!-- Real Estate -->
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3>Real Estate</h3>
+        <p>Client deposit protection for property transactions, with automated reconciliation of escrow and trust accounts.</p>
+        <a href="/solutions/real-estate" class="card-link">Learn more <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2.5M13 7l-5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     Section 3 — How It Works
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="section bg-dark dark">
+  <div class="container">
+    <div class="sh center">
+      <p class="t-label">HOW IT WORKS</p>
+      <h2 class="t-h2">Three Steps to Continuous Compliance</h2>
+    </div>
+
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <h3>Connect</h3>
+        <p>Integrate your bank feeds, ledgers, and custodian data through secure API connections or file uploads.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">2</div>
+        <h3>Verify</h3>
+        <p>Our engine reconciles client funds against obligations in real-time, detecting shortfalls and breaches automatically.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">3</div>
+        <h3>Prove</h3>
+        <p>Generate audit-ready reports and provide regulators, auditors, and banks with continuous proof of compliance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     Section 4 — Platform Capabilities
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="section bg-white">
+  <div class="container">
+    <div class="sh center">
+      <p class="t-label">PLATFORM</p>
+      <h2 class="t-h2">Built for Regulated Firms</h2>
+    </div>
+
+    <!-- Feature 1: Real-time Reconciliation -->
+    <div class="feat reveal">
+      <div class="feat-content">
+        <p class="t-label">RECONCILIATION</p>
+        <h3 class="t-h3">Real-time Reconciliation</h3>
+        <p class="t-body">Continuously match bank balances against client liabilities. Safeheld ingests transaction data from multiple sources and performs automatic three-way reconciliation, surfacing discrepancies the moment they occur.</p>
+        <ul class="feat-list">
+          <li>
+            <svg viewBox="0 0 18 18" fill="none"><path d="M15 4.5L6.75 12.75L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Multi-source data ingestion via API or file upload
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none"><path d="M15 4.5L6.75 12.75L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Sub-second matching across millions of transactions
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none"><path d="M15 4.5L6.75 12.75L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Automated discrepancy detection and flagging
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none"><path d="M15 4.5L6.75 12.75L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Historical audit trail for every reconciliation run
+          </li>
+        </ul>
+      </div>
+      <div class="feat-visual">
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Data flow / matching visualization -->
+          <!-- Left source nodes -->
+          <rect x="20" y="60" width="100" height="32" rx="6" fill="rgba(61,61,255,0.08)" stroke="rgba(61,61,255,0.2)" stroke-width="1"/>
+          <rect x="20" y="108" width="100" height="32" rx="6" fill="rgba(61,61,255,0.08)" stroke="rgba(61,61,255,0.2)" stroke-width="1"/>
+          <rect x="20" y="156" width="100" height="32" rx="6" fill="rgba(61,61,255,0.08)" stroke="rgba(61,61,255,0.2)" stroke-width="1"/>
+          <rect x="20" y="204" width="100" height="32" rx="6" fill="rgba(61,61,255,0.08)" stroke="rgba(61,61,255,0.2)" stroke-width="1"/>
+          <!-- Source labels -->
+          <text x="70" y="80" text-anchor="middle" fill="#6B7280" font-size="9" font-family="Inter">Bank Feed A</text>
+          <text x="70" y="128" text-anchor="middle" fill="#6B7280" font-size="9" font-family="Inter">Bank Feed B</text>
+          <text x="70" y="176" text-anchor="middle" fill="#6B7280" font-size="9" font-family="Inter">Ledger</text>
+          <text x="70" y="224" text-anchor="middle" fill="#6B7280" font-size="9" font-family="Inter">Custodian</text>
+
+          <!-- Connecting lines to center -->
+          <line x1="120" y1="76" x2="170" y2="148" stroke="rgba(61,61,255,0.2)" stroke-width="1" stroke-dasharray="4 3"/>
+          <line x1="120" y1="124" x2="170" y2="148" stroke="rgba(61,61,255,0.2)" stroke-width="1" stroke-dasharray="4 3"/>
+          <line x1="120" y1="172" x2="170" y2="152" stroke="rgba(61,61,255,0.2)" stroke-width="1" stroke-dasharray="4 3"/>
+          <line x1="120" y1="220" x2="170" y2="155" stroke="rgba(61,61,255,0.2)" stroke-width="1" stroke-dasharray="4 3"/>
+
+          <!-- Central engine -->
+          <rect x="170" y="120" width="60" height="60" rx="12" fill="rgba(61,61,255,0.12)" stroke="rgba(61,61,255,0.3)" stroke-width="1.5"/>
+          <circle cx="200" cy="150" r="12" fill="none" stroke="rgba(61,61,255,0.4)" stroke-width="1.5"/>
+          <path d="M194 150l4 4 8-8" stroke="rgba(61,61,255,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+          <!-- Output lines -->
+          <line x1="230" y1="140" x2="280" y2="90" stroke="rgba(61,61,255,0.2)" stroke-width="1" stroke-dasharray="4 3"/>
+          <line x1="230" y1="150" x2="280" y2="150" stroke="rgba(61,61,255,0.2)" stroke-width="1" stroke-dasharray="4 3"/>
+          <line x1="230" y1="160" x2="280" y2="210" stroke="rgba(61,61,255,0.2)" stroke-width="1" stroke-dasharray="4 3"/>
+
+          <!-- Right result nodes -->
+          <rect x="280" y="72" width="100" height="36" rx="6" fill="rgba(16,185,129,0.08)" stroke="rgba(16,185,129,0.25)" stroke-width="1"/>
+          <circle cx="296" cy="90" r="5" fill="rgba(16,185,129,0.3)"/><path d="M294 90l1.5 1.5 3-3" stroke="rgba(16,185,129,0.7)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="340" y="94" text-anchor="middle" fill="#6B7280" font-size="9" font-family="Inter">Matched</text>
+
+          <rect x="280" y="132" width="100" height="36" rx="6" fill="rgba(16,185,129,0.08)" stroke="rgba(16,185,129,0.25)" stroke-width="1"/>
+          <circle cx="296" cy="150" r="5" fill="rgba(16,185,129,0.3)"/><path d="M294 150l1.5 1.5 3-3" stroke="rgba(16,185,129,0.7)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="340" y="154" text-anchor="middle" fill="#6B7280" font-size="9" font-family="Inter">Reconciled</text>
+
+          <rect x="280" y="192" width="100" height="36" rx="6" fill="rgba(239,68,68,0.08)" stroke="rgba(239,68,68,0.25)" stroke-width="1"/>
+          <circle cx="296" cy="210" r="5" fill="rgba(239,68,68,0.3)"/>
+          <text x="297" y="213" text-anchor="middle" fill="rgba(239,68,68,0.7)" font-size="8" font-weight="bold" font-family="Inter">!</text>
+          <text x="340" y="214" text-anchor="middle" fill="#6B7280" font-size="9" font-family="Inter">Flagged</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Feature 2: Breach Detection (reversed) -->
+    <div class="feat reverse reveal">
+      <div class="feat-content">
+        <p class="t-label">MONITORING</p>
+        <h3 class="t-h3">Breach Detection &amp; Response</h3>
+        <p class="t-body">Automated monitoring that catches shortfalls before they become regulatory breaches. Safeheld continuously evaluates compliance thresholds and triggers instant alerts when remediation is needed.</p>
+        <ul class="feat-list">
+          <li>
+            <svg viewBox="0 0 18 18" fill="none"><path d="M15 4.5L6.75 12.75L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Configurable breach thresholds per regulation
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none"><path d="M15 4.5L6.75 12.75L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Instant alerts via email, webhook, and in-app
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none"><path d="M15 4.5L6.75 12.75L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Guided remediation workflows with audit trail
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none"><path d="M15 4.5L6.75 12.75L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Escalation paths and notification routing
+          </li>
+        </ul>
+      </div>
+      <div class="feat-visual">
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Alert / monitoring visualization -->
+          <!-- Monitoring timeline baseline -->
+          <line x1="40" y1="200" x2="360" y2="200" stroke="rgba(61,61,255,0.15)" stroke-width="1"/>
+
+          <!-- Threshold line -->
+          <line x1="40" y1="100" x2="360" y2="100" stroke="rgba(239,68,68,0.25)" stroke-width="1" stroke-dasharray="6 4"/>
+          <text x="362" y="104" fill="rgba(239,68,68,0.5)" font-size="8" font-family="Inter">Threshold</text>
+
+          <!-- Safe zone fill -->
+          <rect x="40" y="100" width="320" height="100" fill="rgba(16,185,129,0.03)"/>
+
+          <!-- Data line -->
+          <polyline points="40,180 80,170 120,165 160,155 200,140 220,120 240,85 260,90 280,130 320,145 360,150" fill="none" stroke="rgba(61,61,255,0.4)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+          <!-- Breach zone highlight -->
+          <rect x="225" y="60" width="50" height="40" rx="4" fill="rgba(239,68,68,0.06)" stroke="rgba(239,68,68,0.15)" stroke-width="1"/>
+
+          <!-- Breach alert -->
+          <circle cx="240" cy="85" r="8" fill="rgba(239,68,68,0.15)" stroke="rgba(239,68,68,0.4)" stroke-width="1.5"/>
+          <text x="240" y="89" text-anchor="middle" fill="rgba(239,68,68,0.8)" font-size="10" font-weight="bold" font-family="Inter">!</text>
+
+          <!-- Alert notification popup -->
+          <rect x="255" y="50" width="90" height="36" rx="6" fill="white" stroke="rgba(239,68,68,0.3)" stroke-width="1"/>
+          <circle cx="268" cy="63" r="4" fill="rgba(239,68,68,0.2)"/>
+          <text x="269" y="66" text-anchor="middle" fill="rgba(239,68,68,0.7)" font-size="6" font-weight="bold" font-family="Inter">!</text>
+          <text x="300" y="65" text-anchor="middle" fill="#374151" font-size="7" font-weight="600" font-family="Inter">Breach Alert</text>
+          <text x="300" y="77" text-anchor="middle" fill="#9CA3AF" font-size="6" font-family="Inter">Shortfall detected</text>
+
+          <!-- Recovery arrow -->
+          <path d="M260 92 Q270 110 280 130" fill="none" stroke="rgba(16,185,129,0.4)" stroke-width="1.5" stroke-dasharray="3 2"/>
+          <text x="290" y="118" fill="rgba(16,185,129,0.6)" font-size="7" font-family="Inter">Recovery</text>
+
+          <!-- Data point dots -->
+          <circle cx="40" cy="180" r="3" fill="rgba(61,61,255,0.3)"/>
+          <circle cx="80" cy="170" r="3" fill="rgba(61,61,255,0.3)"/>
+          <circle cx="120" cy="165" r="3" fill="rgba(61,61,255,0.3)"/>
+          <circle cx="160" cy="155" r="3" fill="rgba(61,61,255,0.3)"/>
+          <circle cx="200" cy="140" r="3" fill="rgba(61,61,255,0.3)"/>
+          <circle cx="280" cy="130" r="3" fill="rgba(16,185,129,0.4)"/>
+          <circle cx="320" cy="145" r="3" fill="rgba(61,61,255,0.3)"/>
+          <circle cx="360" cy="150" r="3" fill="rgba(61,61,255,0.3)"/>
+
+          <!-- Y-axis labels -->
+          <text x="35" y="204" text-anchor="end" fill="#9CA3AF" font-size="7" font-family="Inter">0%</text>
+          <text x="35" y="104" text-anchor="end" fill="#9CA3AF" font-size="7" font-family="Inter">100%</text>
+          <text x="35" y="155" text-anchor="end" fill="#9CA3AF" font-size="7" font-family="Inter">50%</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Feature 3: Regulatory Reporting -->
+    <div class="feat reveal">
+      <div class="feat-content">
+        <p class="t-label">REPORTING</p>
+        <h3 class="t-h3">Regulatory Reporting</h3>
+        <p class="t-body">Generate audit-ready reports at the click of a button. From daily internal reconciliation summaries to regulator-specific filings, every document is backed by a complete, immutable audit trail.</p>
+        <ul class="feat-list">
+          <li>
+            <svg viewBox="0 0 18 18" fill="none"><path d="M15 4.5L6.75 12.75L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            One-click report generation in PDF and CSV
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none"><path d="M15 4.5L6.75 12.75L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Regulation-specific templates (CMAR, PS25, MiCA)
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none"><path d="M15 4.5L6.75 12.75L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Immutable audit trail for every generated report
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none"><path d="M15 4.5L6.75 12.75L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Scheduled generation and automated distribution
+          </li>
+        </ul>
+      </div>
+      <div class="feat-visual">
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Document / report generation visualization -->
+          <!-- Main document -->
+          <rect x="120" y="40" width="160" height="210" rx="8" fill="white" stroke="rgba(61,61,255,0.2)" stroke-width="1.5"/>
+
+          <!-- Document header bar -->
+          <rect x="120" y="40" width="160" height="36" rx="8" fill="rgba(61,61,255,0.06)"/>
+          <rect x="120" y="68" width="160" height="8" fill="rgba(61,61,255,0.06)"/>
+          <circle cx="140" cy="58" r="6" fill="rgba(61,61,255,0.15)"/>
+          <text x="140" y="61" text-anchor="middle" fill="rgba(61,61,255,0.5)" font-size="7" font-weight="bold" font-family="Inter">S</text>
+          <text x="200" y="62" text-anchor="middle" fill="#374151" font-size="9" font-weight="600" font-family="Inter">Compliance Report</text>
+
+          <!-- Document content lines -->
+          <rect x="140" y="92" width="120" height="4" rx="2" fill="rgba(61,61,255,0.08)"/>
+          <rect x="140" y="104" width="100" height="4" rx="2" fill="rgba(61,61,255,0.06)"/>
+          <rect x="140" y="116" width="110" height="4" rx="2" fill="rgba(61,61,255,0.06)"/>
+
+          <!-- Status rows -->
+          <rect x="140" y="134" width="120" height="20" rx="4" fill="rgba(16,185,129,0.06)" stroke="rgba(16,185,129,0.15)" stroke-width="0.5"/>
+          <circle cx="150" cy="144" r="3" fill="rgba(16,185,129,0.4)"/>
+          <text x="168" y="147" fill="#6B7280" font-size="7" font-family="Inter">Reconciliation: Pass</text>
+
+          <rect x="140" y="160" width="120" height="20" rx="4" fill="rgba(16,185,129,0.06)" stroke="rgba(16,185,129,0.15)" stroke-width="0.5"/>
+          <circle cx="150" cy="170" r="3" fill="rgba(16,185,129,0.4)"/>
+          <text x="168" y="173" fill="#6B7280" font-size="7" font-family="Inter">Segregation: Pass</text>
+
+          <rect x="140" y="186" width="120" height="20" rx="4" fill="rgba(16,185,129,0.06)" stroke="rgba(16,185,129,0.15)" stroke-width="0.5"/>
+          <circle cx="150" cy="196" r="3" fill="rgba(16,185,129,0.4)"/>
+          <text x="168" y="199" fill="#6B7280" font-size="7" font-family="Inter">Surplus: Verified</text>
+
+          <!-- Signature / stamp -->
+          <rect x="140" y="218" width="60" height="18" rx="4" fill="rgba(61,61,255,0.08)" stroke="rgba(61,61,255,0.2)" stroke-width="0.5"/>
+          <text x="170" y="230" text-anchor="middle" fill="rgba(61,61,255,0.5)" font-size="7" font-weight="600" font-family="Inter">Verified</text>
+
+          <!-- Secondary documents (stacked) -->
+          <rect x="290" y="80" width="80" height="100" rx="6" fill="white" stroke="rgba(61,61,255,0.12)" stroke-width="1" opacity="0.8"/>
+          <rect x="300" y="94" width="60" height="3" rx="1.5" fill="rgba(61,61,255,0.08)"/>
+          <rect x="300" y="102" width="50" height="3" rx="1.5" fill="rgba(61,61,255,0.06)"/>
+          <rect x="300" y="110" width="55" height="3" rx="1.5" fill="rgba(61,61,255,0.06)"/>
+          <rect x="300" y="124" width="60" height="3" rx="1.5" fill="rgba(61,61,255,0.06)"/>
+          <rect x="300" y="132" width="45" height="3" rx="1.5" fill="rgba(61,61,255,0.06)"/>
+          <text x="330" y="90" text-anchor="middle" fill="#9CA3AF" font-size="6" font-family="Inter">CMAR</text>
+
+          <rect x="295" y="190" width="80" height="55" rx="6" fill="white" stroke="rgba(61,61,255,0.12)" stroke-width="1" opacity="0.6"/>
+          <rect x="305" y="204" width="60" height="3" rx="1.5" fill="rgba(61,61,255,0.06)"/>
+          <rect x="305" y="212" width="50" height="3" rx="1.5" fill="rgba(61,61,255,0.04)"/>
+          <text x="335" y="200" text-anchor="middle" fill="#9CA3AF" font-size="6" font-family="Inter">Audit Log</text>
+
+          <!-- Connection arrows from main doc to secondary -->
+          <line x1="280" y1="120" x2="290" y2="120" stroke="rgba(61,61,255,0.2)" stroke-width="1" stroke-dasharray="3 2"/>
+          <line x1="280" y1="200" x2="295" y2="210" stroke="rgba(61,61,255,0.15)" stroke-width="1" stroke-dasharray="3 2"/>
+
+          <!-- Decorative network nodes -->
+          <circle cx="50" cy="80" r="3" fill="rgba(61,61,255,0.15)"/>
+          <circle cx="70" cy="140" r="4" fill="rgba(61,61,255,0.1)"/>
+          <circle cx="40" cy="200" r="3" fill="rgba(61,61,255,0.12)"/>
+          <line x1="50" y1="80" x2="70" y2="140" stroke="rgba(61,61,255,0.08)" stroke-width="1"/>
+          <line x1="70" y1="140" x2="40" y2="200" stroke="rgba(61,61,255,0.08)" stroke-width="1"/>
+          <line x1="70" y1="140" x2="120" y2="150" stroke="rgba(61,61,255,0.06)" stroke-width="1"/>
+        </svg>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     Section 5 — For Banks
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="section bg-dark dark">
+  <div class="container">
+    <div class="sh center">
+      <p class="t-label">FOR BANKS</p>
+      <h2 class="t-h2">Institutional Oversight, Simplified</h2>
+      <p class="t-body-lg">A single dashboard that gives safeguarding banks real-time visibility into the compliance status of every firm they hold client funds for — replacing spreadsheets and manual attestations with continuous, verified data.</p>
+    </div>
+
+    <!-- Hub-and-spoke SVG diagram -->
+    <div style="text-align:center;margin-bottom:64px">
+      <svg viewBox="0 0 600 400" width="600" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width:100%">
+        <!-- Spoke lines (drawn first so nodes sit on top) -->
+        <line x1="300" y1="200" x2="120" y2="80" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+        <line x1="300" y1="200" x2="480" y2="80" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+        <line x1="300" y1="200" x2="80" y2="200" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+        <line x1="300" y1="200" x2="520" y2="200" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+        <line x1="300" y1="200" x2="120" y2="320" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+        <line x1="300" y1="200" x2="480" y2="320" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+        <line x1="300" y1="200" x2="300" y2="60" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+        <line x1="300" y1="200" x2="300" y2="360" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+
+        <!-- Outer ring (subtle) -->
+        <circle cx="300" cy="200" r="160" fill="none" stroke="rgba(61,61,255,0.06)" stroke-width="1" stroke-dasharray="4 6"/>
+        <circle cx="300" cy="200" r="100" fill="none" stroke="rgba(61,61,255,0.04)" stroke-width="1" stroke-dasharray="4 6"/>
+
+        <!-- Central Bank node -->
+        <circle cx="300" cy="200" r="44" fill="rgba(61,61,255,0.15)" stroke="rgba(61,61,255,0.4)" stroke-width="2"/>
+        <circle cx="300" cy="200" r="32" fill="rgba(61,61,255,0.2)"/>
+        <text x="300" y="196" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Inter">Bank</text>
+        <text x="300" y="212" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="8" font-family="Inter">Dashboard</text>
+
+        <!-- Firm nodes -->
+        <!-- Top -->
+        <circle cx="300" cy="60" r="22" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+        <text x="300" y="64" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9" font-weight="500" font-family="Inter">Firm A</text>
+
+        <!-- Top-right -->
+        <circle cx="480" cy="80" r="22" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+        <text x="480" y="84" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9" font-weight="500" font-family="Inter">Firm B</text>
+
+        <!-- Right -->
+        <circle cx="520" cy="200" r="22" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+        <text x="520" y="204" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9" font-weight="500" font-family="Inter">Firm C</text>
+
+        <!-- Bottom-right -->
+        <circle cx="480" cy="320" r="22" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+        <text x="480" y="324" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9" font-weight="500" font-family="Inter">Firm D</text>
+
+        <!-- Bottom -->
+        <circle cx="300" cy="360" r="22" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+        <text x="300" y="364" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9" font-weight="500" font-family="Inter">Firm E</text>
+
+        <!-- Bottom-left -->
+        <circle cx="120" cy="320" r="22" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+        <text x="120" y="324" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9" font-weight="500" font-family="Inter">Firm F</text>
+
+        <!-- Left -->
+        <circle cx="80" cy="200" r="22" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+        <text x="80" y="204" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9" font-weight="500" font-family="Inter">Firm G</text>
+
+        <!-- Top-left -->
+        <circle cx="120" cy="80" r="22" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+        <text x="120" y="84" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9" font-weight="500" font-family="Inter">Firm H</text>
+
+        <!-- Status indicators on spokes -->
+        <circle cx="210" cy="140" r="4" fill="rgba(16,185,129,0.6)"/>
+        <circle cx="390" cy="140" r="4" fill="rgba(16,185,129,0.6)"/>
+        <circle cx="190" cy="200" r="4" fill="rgba(16,185,129,0.6)"/>
+        <circle cx="410" cy="200" r="4" fill="rgba(239,68,68,0.6)"/>
+        <circle cx="210" cy="260" r="4" fill="rgba(16,185,129,0.6)"/>
+        <circle cx="390" cy="260" r="4" fill="rgba(245,158,11,0.6)"/>
+        <circle cx="300" cy="130" r="4" fill="rgba(16,185,129,0.6)"/>
+        <circle cx="300" cy="280" r="4" fill="rgba(16,185,129,0.6)"/>
+      </svg>
+    </div>
+
+    <div class="cap-grid">
+      <div class="cap reveal">
+        <h4>Real-time Monitoring</h4>
+        <p>Live visibility into reconciliation status, fund balances, and compliance health across your entire portfolio of safeguarded firms.</p>
+      </div>
+      <div class="cap reveal">
+        <h4>Portfolio Risk View</h4>
+        <p>Aggregate risk scoring and trend analysis that highlights firms requiring attention before issues escalate into breaches.</p>
+      </div>
+      <div class="cap reveal">
+        <h4>Automated Alerts</h4>
+        <p>Configurable notifications for breaches, shortfalls, and anomalies — delivered instantly via your preferred channel.</p>
+      </div>
+      <div class="cap reveal">
+        <h4>Compliance Reporting</h4>
+        <p>Pre-built and custom report templates that satisfy regulatory requirements and simplify board-level oversight reporting.</p>
+      </div>
+    </div>
+
+    <div class="text-center mt-lg">
+      <a href="/for-banks" class="btn btn-accent btn-lg">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     Section 6 — CTA
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="section bg-gradient">
+  <div class="container">
+    <div class="cta-section">
+      <h2 class="t-h2">Ready to automate your safeguarding compliance?</h2>
+      <a href="/contact" class="btn btn-accent btn-lg">Request a Demo</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     Footer
+     ═══════════════════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a href="/" class="nav-logo">
+          <div class="nav-mark">S</div>
+          Safeheld
+        </a>
+        <p>The global verification layer for client funds.</p>
+      </div>
+
+      <!-- Solutions -->
+      <div class="footer-col">
+        <h4>Solutions</h4>
+        <a href="/solutions/payments">Payments (PS25)</a>
+        <a href="/solutions/investments">Investments (CASS)</a>
+        <a href="/solutions/crypto">Crypto</a>
+        <a href="/solutions/stablecoins">Stablecoins</a>
+        <a href="/solutions/mica">MiCA</a>
+        <a href="/solutions/genius-act">GENIUS Act</a>
+        <a href="/solutions/legal">Legal</a>
+        <a href="/solutions/insurance">Insurance</a>
+        <a href="/solutions/gaming">Gaming</a>
+        <a href="/solutions/real-estate">Real Estate</a>
+      </div>
+
+      <!-- Platform -->
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="/platform">Platform</a>
+        <a href="/for-banks">For Banks</a>
+        <a href="/pricing">Pricing</a>
+      </div>
+
+      <!-- Company -->
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/docs">Docs</a>
+        <a href="/api-reference">API Reference</a>
+      </div>
+
+      <!-- Legal -->
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/terms">Terms</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/cookies">Cookies</a>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Safeheld Ltd. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="/terms">Terms</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     JavaScript
+     ═══════════════════════════════════════════════════════════════════════ -->
+<script>
+  // Scroll reveal animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
       }
     });
-  </script>
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+  // Nav scroll handler
+  const nav = document.getElementById('nav');
+  function updateNav() {
+    if (window.scrollY > 50) {
+      nav.classList.add('nav-solid');
+      nav.classList.remove('nav-transparent');
+    } else {
+      nav.classList.add('nav-transparent');
+      nav.classList.remove('nav-solid');
+    }
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+</script>
 
 </body>
 </html>
