@@ -159,7 +159,7 @@ export default function UploadPage() {
                 </span>
               ) : '\u2014',
             },
-            { key: 'createdAt', header: 'Uploaded', render: r => format(new Date(r.createdAt), 'dd MMM yyyy HH:mm'), width: '160px' },
+            { key: 'createdAt', header: 'Uploaded', render: (r: any) => format(new Date(r.createdAt), 'dd MMM yyyy HH:mm'), width: '160px' },
           ]}
           emptyMessage="No uploads yet. Upload a CSV file to get started."
         />
