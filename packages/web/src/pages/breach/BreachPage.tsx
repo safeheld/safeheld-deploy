@@ -14,7 +14,7 @@ export default function BreachPage() {
 
   const [page, setPage] = useState(1);
   const [statusFilter, setStatusFilter] = useState('');
-  const [selectedBreach, setSelectedBreach] = useState<Breach | null>(null);
+  const [selectedBreach, setSelectedBreach] = useState<any>(null);
   const [showAckModal, setShowAckModal] = useState(false);
   const [showStatusModal, setShowStatusModal] = useState(false);
   const [showFcaModal, setShowFcaModal] = useState(false);
