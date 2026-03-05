@@ -25,6 +25,7 @@ import { monitoringRouter } from './modules/monitoring/routes';
 import { bankDashboardRouter } from './modules/bank-dashboard/routes';
 import { cassRouter } from './modules/cass/routes';
 import { cryptoRouter } from './modules/crypto/routes';
+import { stablecoinRouter } from './modules/stablecoin/routes';
 
 // Ensure Bull queues are registered
 import './modules/ingestion/queue';
@@ -137,6 +138,7 @@ app.use('/api/v1/firms', generalLimiter, governanceRouter);
 app.use('/api/v1', generalLimiter, monitoringRouter);
 app.use('/api/v1/firms', generalLimiter, cassRouter);
 app.use('/api/v1/firms', generalLimiter, cryptoRouter);
+app.use('/api/v1/firms', generalLimiter, stablecoinRouter);
 app.use('/api/v1/bank-dashboard', generalLimiter, bankDashboardRouter);
 
 // ─── Error Handling ───────────────────────────────────────────────────────────

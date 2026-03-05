@@ -61,6 +61,11 @@ const icons: Record<string, React.ReactNode> = {
       <circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /><path d="M12 17h.01" />
     </svg>
   ),
+  stablecoin: (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10" /><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8" /><path d="M12 18V6" />
+    </svg>
+  ),
   admin: (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="12" cy="12" r="3" />
@@ -85,6 +90,7 @@ const navItems: NavItem[] = [
   { path: '/governance', label: 'Governance', icon: 'governance', roles: ['COMPLIANCE_OFFICER', 'FINANCE_OPS', 'AUDITOR', 'ADMIN'] },
   { path: '/cass', label: 'CASS', icon: 'cass', roles: ['COMPLIANCE_OFFICER', 'FINANCE_OPS', 'AUDITOR', 'ADMIN'] },
   { path: '/crypto', label: 'Crypto', icon: 'crypto', roles: ['COMPLIANCE_OFFICER', 'FINANCE_OPS', 'AUDITOR', 'ADMIN'] },
+  { path: '/stablecoin', label: 'Stablecoin', icon: 'stablecoin', roles: ['COMPLIANCE_OFFICER', 'FINANCE_OPS', 'AUDITOR', 'ADMIN'] },
   { path: '/audit', label: 'Audit Log', icon: 'audit', roles: ['COMPLIANCE_OFFICER', 'ADMIN', 'AUDITOR'] },
   { path: '/bank-dashboard', label: 'Bank Dashboard', icon: 'bank', roles: ['BANK_VIEWER'] },
   { path: '/admin', label: 'Admin', icon: 'admin', roles: ['ADMIN'] },

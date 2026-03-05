@@ -531,6 +531,10 @@ model Firm {
   riskControls                    RiskControl[]
   regulatoryUpdates               RegulatoryUpdate[]
   impactAssessments               ImpactAssessment[]
+  stablecoinTokens                StablecoinToken[]
+  pegSnapshots                    PegSnapshot[]
+  reserveAssets                   ReserveAsset[]
+  reserveAttestations             ReserveAttestation[]
 
   @@map("firms")
 }
@@ -1403,6 +1407,146 @@ model ProofOfReserves {
 
   @@index([firmId, snapshotDate])
   @@map("proof_of_reserves")
+}
+
+// ─── Stablecoin Enums ─────────────────────────────────────────────────────────
+
+enum StablecoinPegStatus {
+  ON_PEG
+  MINOR_DEVIATION
+  MAJOR_DEVIATION
+  DEPEGGED
+}
+
+enum ReserveAssetType {
+  CASH
+  TREASURY_BILL
+  GOVERNMENT_BOND
+  MONEY_MARKET_FUND
+  COMMERCIAL_PAPER
+  CERTIFICATE_OF_DEPOSIT
+  CRYPTO_COLLATERAL
+  OTHER
+}
+
+enum ReserveAssetStatus {
+  ACTIVE
+  MATURING
+  REDEEMED
+  SOLD
+}
+
+enum AttestationStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  FAILED
+}
+
+enum StablecoinRegime {
+  MICA
+  GENIUS_ACT
+  UK_FCA
+  UNREGULATED
+  OTHER
+}
+
+// ─── Stablecoin Models ────────────────────────────────────────────────────────
+
+model StablecoinToken {
+  id                    String              @id @default(uuid()) @db.Uuid
+  firmId                String              @db.Uuid @map("firm_id")
+  symbol                String              @db.VarChar(20)
+  name                  String              @db.VarChar(255)
+  contractAddress       String?             @db.VarChar(255) @map("contract_address")
+  network               BlockchainNetwork
+  pegCurrency           String              @db.Char(3) @map("peg_currency")
+  pegTarget             Decimal             @default(1.0) @db.Decimal(18, 8) @map("peg_target")
+  currentPrice          Decimal?            @db.Decimal(18, 8) @map("current_price")
+  pegStatus             StablecoinPegStatus @default(ON_PEG) @map("peg_status")
+  totalSupply           Decimal?            @db.Decimal(36, 18) @map("total_supply")
+  circulatingSupply     Decimal?            @db.Decimal(36, 18) @map("circulating_supply")
+  regime                StablecoinRegime    @default(UNREGULATED)
+  issuerName            String?             @db.VarChar(255) @map("issuer_name")
+  notes                 String?             @db.Text
+  createdAt             DateTime            @default(now()) @map("created_at")
+  updatedAt             DateTime            @updatedAt @map("updated_at")
+
+  firm                  Firm                @relation(fields: [firmId], references: [id])
+  pegSnapshots          PegSnapshot[]
+  reserveAssets         ReserveAsset[]
+  attestations          ReserveAttestation[]
+
+  @@index([firmId, symbol])
+  @@map("stablecoin_tokens")
+}
+
+model PegSnapshot {
+  id                    String              @id @default(uuid()) @db.Uuid
+  firmId                String              @db.Uuid @map("firm_id")
+  tokenId               String              @db.Uuid @map("token_id")
+  price                 Decimal             @db.Decimal(18, 8)
+  pegTarget             Decimal             @db.Decimal(18, 8) @map("peg_target")
+  deviationPct          Decimal             @db.Decimal(8, 4) @map("deviation_pct")
+  pegStatus             StablecoinPegStatus @map("peg_status")
+  totalSupply           Decimal?            @db.Decimal(36, 18) @map("total_supply")
+  marketCap             Decimal?            @db.Decimal(18, 2) @map("market_cap")
+  volume24h             Decimal?            @db.Decimal(18, 2) @map("volume_24h")
+  snapshotAt            DateTime            @map("snapshot_at")
+  createdAt             DateTime            @default(now()) @map("created_at")
+
+  firm                  Firm                @relation(fields: [firmId], references: [id])
+  token                 StablecoinToken     @relation(fields: [tokenId], references: [id])
+
+  @@index([firmId, tokenId, snapshotAt])
+  @@map("peg_snapshots")
+}
+
+model ReserveAsset {
+  id                    String              @id @default(uuid()) @db.Uuid
+  firmId                String              @db.Uuid @map("firm_id")
+  tokenId               String              @db.Uuid @map("token_id")
+  assetType             ReserveAssetType    @map("asset_type")
+  description           String              @db.VarChar(500)
+  custodian             String?             @db.VarChar(255)
+  faceValue             Decimal             @db.Decimal(18, 2) @map("face_value")
+  marketValue           Decimal?            @db.Decimal(18, 2) @map("market_value")
+  currency              String              @db.Char(3)
+  maturityDate          DateTime?           @db.Date @map("maturity_date")
+  status                ReserveAssetStatus  @default(ACTIVE)
+  isin                  String?             @db.VarChar(12)
+  notes                 String?             @db.Text
+  recordDate            DateTime            @db.Date @map("record_date")
+  createdAt             DateTime            @default(now()) @map("created_at")
+
+  firm                  Firm                @relation(fields: [firmId], references: [id])
+  token                 StablecoinToken     @relation(fields: [tokenId], references: [id])
+
+  @@index([firmId, tokenId, recordDate])
+  @@map("reserve_assets")
+}
+
+model ReserveAttestation {
+  id                    String              @id @default(uuid()) @db.Uuid
+  firmId                String              @db.Uuid @map("firm_id")
+  tokenId               String              @db.Uuid @map("token_id")
+  snapshotDate          DateTime            @db.Date @map("snapshot_date")
+  totalReserveValue     Decimal             @db.Decimal(18, 2) @map("total_reserve_value")
+  totalCirculatingValue Decimal             @db.Decimal(18, 2) @map("total_circulating_value")
+  coverageRatio         Decimal             @db.Decimal(8, 4) @map("coverage_ratio")
+  status                AttestationStatus   @default(PENDING)
+  assetBreakdown        Json                @map("asset_breakdown")
+  attestationHash       String?             @db.VarChar(128) @map("attestation_hash")
+  auditorName           String?             @db.VarChar(255) @map("auditor_name")
+  generatedBy           String?             @db.Uuid @map("generated_by")
+  completedAt           DateTime?           @map("completed_at")
+  createdAt             DateTime            @default(now()) @map("created_at")
+
+  firm                  Firm                @relation(fields: [firmId], references: [id])
+  token                 StablecoinToken     @relation(fields: [tokenId], references: [id])
+
+  @@index([firmId, tokenId, snapshotDate])
+  @@map("reserve_attestations")
 }
 
 model DataLineageEvent {

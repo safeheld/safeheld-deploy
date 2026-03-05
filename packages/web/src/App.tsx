@@ -17,6 +17,7 @@ import AuditPage from './pages/audit/AuditPage';
 import BankDashboardPage from './pages/bank-dashboard/BankDashboardPage';
 import CassPage from './pages/cass/CassPage';
 import CryptoPage from './pages/crypto/CryptoPage';
+import StablecoinPage from './pages/stablecoin/StablecoinPage';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, isLoading } = useAuth();
@@ -79,6 +80,7 @@ export default function App() {
         <Route path="governance" element={<FirmRoute><GovernancePage /></FirmRoute>} />
         <Route path="cass" element={<FirmRoute><CassPage /></FirmRoute>} />
         <Route path="crypto" element={<FirmRoute><CryptoPage /></FirmRoute>} />
+        <Route path="stablecoin" element={<FirmRoute><StablecoinPage /></FirmRoute>} />
         <Route path="audit" element={<FirmRoute><AuditPage /></FirmRoute>} />
         <Route
           path="bank-dashboard"

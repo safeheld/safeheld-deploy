@@ -242,6 +242,35 @@ export const cassApi = {
     apiClient.put(`/firms/${firmId}/cass/impact-assessments/${assessmentId}`, data).then(r => r.data.data),
 };
 
+// ─── Stablecoin ──────────────────────────────────────────────────────────
+
+export const stablecoinApi = {
+  getDashboard: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/stablecoin/dashboard`).then(r => r.data.data),
+  // Tokens
+  getTokens: (firmId: string, params?: Record<string, string>) =>
+    apiClient.get(`/firms/${firmId}/stablecoin/tokens`, { params }).then(r => r.data),
+  createToken: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/stablecoin/tokens`, data).then(r => r.data.data),
+  updateToken: (firmId: string, tokenId: string, data: object) =>
+    apiClient.put(`/firms/${firmId}/stablecoin/tokens/${tokenId}`, data).then(r => r.data.data),
+  // Peg Snapshots
+  getPegSnapshots: (firmId: string, params?: Record<string, string>) =>
+    apiClient.get(`/firms/${firmId}/stablecoin/peg-snapshots`, { params }).then(r => r.data),
+  createPegSnapshot: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/stablecoin/peg-snapshots`, data).then(r => r.data.data),
+  // Reserve Assets
+  getReserveAssets: (firmId: string, params?: Record<string, string>) =>
+    apiClient.get(`/firms/${firmId}/stablecoin/reserve-assets`, { params }).then(r => r.data),
+  createReserveAsset: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/stablecoin/reserve-assets`, data).then(r => r.data.data),
+  // Attestations
+  getAttestations: (firmId: string, params?: Record<string, string>) =>
+    apiClient.get(`/firms/${firmId}/stablecoin/attestations`, { params }).then(r => r.data),
+  generateAttestation: (firmId: string, tokenId: string, snapshotDate: string) =>
+    apiClient.post(`/firms/${firmId}/stablecoin/attestations/generate`, { tokenId, snapshotDate }).then(r => r.data.data),
+};
+
 // ─── Crypto ──────────────────────────────────────────────────────────────
 
 export const cryptoApi = {
