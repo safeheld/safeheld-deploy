@@ -242,6 +242,38 @@ export const cassApi = {
     apiClient.put(`/firms/${firmId}/cass/impact-assessments/${assessmentId}`, data).then(r => r.data.data),
 };
 
+// ─── Crypto ──────────────────────────────────────────────────────────────
+
+export const cryptoApi = {
+  getDashboard: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/crypto/dashboard`).then(r => r.data.data),
+  // Wallets
+  getWallets: (firmId: string, params?: Record<string, string>) =>
+    apiClient.get(`/firms/${firmId}/crypto/wallets`, { params }).then(r => r.data),
+  createWallet: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/crypto/wallets`, data).then(r => r.data.data),
+  updateWallet: (firmId: string, walletId: string, data: object) =>
+    apiClient.put(`/firms/${firmId}/crypto/wallets/${walletId}`, data).then(r => r.data.data),
+  // Balances
+  getBalances: (firmId: string, params?: Record<string, string>) =>
+    apiClient.get(`/firms/${firmId}/crypto/balances`, { params }).then(r => r.data),
+  createBalance: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/crypto/balances`, data).then(r => r.data.data),
+  // Entitlements
+  getEntitlements: (firmId: string, params?: Record<string, string>) =>
+    apiClient.get(`/firms/${firmId}/crypto/entitlements`, { params }).then(r => r.data),
+  createEntitlement: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/crypto/entitlements`, data).then(r => r.data.data),
+  // Proof of Reserves
+  getProofOfReserves: (firmId: string, params?: Record<string, string>) =>
+    apiClient.get(`/firms/${firmId}/crypto/proof-of-reserves`, { params }).then(r => r.data),
+  generateProofOfReserves: (firmId: string, snapshotDate: string) =>
+    apiClient.post(`/firms/${firmId}/crypto/proof-of-reserves/generate`, { snapshotDate }).then(r => r.data.data),
+  // Data Lineage
+  getDataLineage: (firmId: string, params?: Record<string, string>) =>
+    apiClient.get(`/firms/${firmId}/crypto/data-lineage`, { params }).then(r => r.data),
+};
+
 // ─── Governance ───────────────────────────────────────────────────────────────
 
 export const governanceApi = {

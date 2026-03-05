@@ -377,6 +377,49 @@ enum ImpactAssessmentStatus {
   REJECTED
 }
 
+// ─── Crypto Module Enums ─────────────────────────────────────────────────────
+
+enum WalletType {
+  HOT
+  COLD
+  WARM
+  CUSTODIAL
+  OMNIBUS
+}
+
+enum WalletStatus {
+  ACTIVE
+  FROZEN
+  DECOMMISSIONED
+}
+
+enum BlockchainNetwork {
+  ETHEREUM
+  BITCOIN
+  POLYGON
+  ARBITRUM
+  OPTIMISM
+  SOLANA
+  AVALANCHE
+  BSC
+  OTHER
+}
+
+enum ProofOfReservesStatus {
+  PENDING
+  GENERATING
+  VERIFIED
+  FAILED
+}
+
+enum DataLineageEventType {
+  INGESTION
+  TRANSFORMATION
+  RECONCILIATION
+  ATTESTATION
+  EXPORT
+}
+
 enum HealthCheckType {
   INFRASTRUCTURE
   DAILY_OPS
@@ -478,6 +521,11 @@ model Firm {
   alertSettings                   AlertSetting[]
   emailLogs                       EmailLog[]
   bankInstitutionFirms            BankInstitutionFirm[]
+  wallets                         Wallet[]
+  walletBalances                  WalletBalance[]
+  clientEntitlements              ClientEntitlement[]
+  proofOfReserves                 ProofOfReserves[]
+  dataLineageEvents               DataLineageEvent[]
   clientAssets                    ClientAsset[]
   cmarSubmissions                 CmarSubmission[]
   riskControls                    RiskControl[]
@@ -1269,4 +1317,110 @@ model ImpactAssessment {
 
   @@index([firmId, status])
   @@map("impact_assessments")
+}
+
+// ─── CRYPTO MODULE ────────────────────────────────────────────────────────────
+
+model Wallet {
+  id                    String            @id @default(uuid()) @db.Uuid
+  firmId                String            @db.Uuid @map("firm_id")
+  walletName            String            @db.VarChar(255) @map("wallet_name")
+  walletType            WalletType        @map("wallet_type")
+  network               BlockchainNetwork
+  address               String            @db.VarChar(255)
+  custodian             String?           @db.VarChar(255)
+  status                WalletStatus      @default(ACTIVE)
+  isMultisig            Boolean           @default(false) @map("is_multisig")
+  requiredSignatures    Int?              @map("required_signatures")
+  totalSignatories      Int?              @map("total_signatories")
+  notes                 String?           @db.Text
+  createdAt             DateTime          @default(now()) @map("created_at")
+  updatedAt             DateTime          @updatedAt @map("updated_at")
+
+  firm                  Firm              @relation(fields: [firmId], references: [id])
+  balances              WalletBalance[]
+
+  @@unique([firmId, network, address])
+  @@index([firmId, walletType])
+  @@map("wallets")
+}
+
+model WalletBalance {
+  id                    String            @id @default(uuid()) @db.Uuid
+  firmId                String            @db.Uuid @map("firm_id")
+  walletId              String            @db.Uuid @map("wallet_id")
+  tokenSymbol           String            @db.VarChar(20) @map("token_symbol")
+  tokenName             String?           @db.VarChar(100) @map("token_name")
+  contractAddress       String?           @db.VarChar(255) @map("contract_address")
+  balance               Decimal           @db.Decimal(36, 18)
+  balanceUsd            Decimal?          @db.Decimal(18, 2) @map("balance_usd")
+  snapshotDate          DateTime          @db.Date @map("snapshot_date")
+  blockNumber           BigInt?           @map("block_number")
+  createdAt             DateTime          @default(now()) @map("created_at")
+
+  firm                  Firm              @relation(fields: [firmId], references: [id])
+  wallet                Wallet            @relation(fields: [walletId], references: [id])
+
+  @@index([firmId, walletId, snapshotDate])
+  @@index([firmId, tokenSymbol, snapshotDate])
+  @@map("wallet_balances")
+}
+
+model ClientEntitlement {
+  id                    String    @id @default(uuid()) @db.Uuid
+  firmId                String    @db.Uuid @map("firm_id")
+  clientId              String    @db.VarChar(100) @map("client_id")
+  clientName            String?   @db.VarChar(255) @map("client_name")
+  tokenSymbol           String    @db.VarChar(20) @map("token_symbol")
+  entitledBalance       Decimal   @db.Decimal(36, 18) @map("entitled_balance")
+  entitledValueUsd      Decimal?  @db.Decimal(18, 2) @map("entitled_value_usd")
+  recordDate            DateTime  @db.Date @map("record_date")
+  createdAt             DateTime  @default(now()) @map("created_at")
+
+  firm                  Firm      @relation(fields: [firmId], references: [id])
+
+  @@index([firmId, clientId, recordDate])
+  @@index([firmId, tokenSymbol, recordDate])
+  @@map("client_entitlements")
+}
+
+model ProofOfReserves {
+  id                    String                @id @default(uuid()) @db.Uuid
+  firmId                String                @db.Uuid @map("firm_id")
+  snapshotDate          DateTime              @db.Date @map("snapshot_date")
+  totalReservesUsd      Decimal               @db.Decimal(18, 2) @map("total_reserves_usd")
+  totalEntitlementsUsd  Decimal               @db.Decimal(18, 2) @map("total_entitlements_usd")
+  reserveRatio          Decimal               @db.Decimal(8, 4) @map("reserve_ratio")
+  status                ProofOfReservesStatus @default(PENDING)
+  tokenBreakdown        Json                  @map("token_breakdown")
+  walletBreakdown       Json                  @map("wallet_breakdown")
+  attestationHash       String?               @db.VarChar(128) @map("attestation_hash")
+  generatedBy           String?               @db.Uuid @map("generated_by")
+  verifiedAt            DateTime?             @map("verified_at")
+  createdAt             DateTime              @default(now()) @map("created_at")
+
+  firm                  Firm                  @relation(fields: [firmId], references: [id])
+
+  @@index([firmId, snapshotDate])
+  @@map("proof_of_reserves")
+}
+
+model DataLineageEvent {
+  id                    String                @id @default(uuid()) @db.Uuid
+  firmId                String                @db.Uuid @map("firm_id")
+  eventType             DataLineageEventType  @map("event_type")
+  sourceSystem          String                @db.VarChar(255) @map("source_system")
+  entityType            String                @db.VarChar(100) @map("entity_type")
+  entityId              String?               @db.Uuid @map("entity_id")
+  recordCount           Int?                  @map("record_count")
+  dataHash              String?               @db.VarChar(128) @map("data_hash")
+  metadata              Json?
+  parentEventId         String?               @db.Uuid @map("parent_event_id")
+  createdAt             DateTime              @default(now()) @map("created_at")
+
+  firm                  Firm                  @relation(fields: [firmId], references: [id])
+
+  @@index([firmId, eventType, createdAt])
+  @@index([entityType, entityId])
+  @@map("data_lineage_events")
 }
