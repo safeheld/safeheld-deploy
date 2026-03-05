@@ -145,13 +145,13 @@ export default function UploadPage() {
           loading={isLoading}
           data={uploads}
           columns={[
-            { key: 'filename', header: 'Filename', render: r => <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--color-navy-600)' }}>{r.filename}</span> },
-            { key: 'inputType', header: 'Type', render: r => r.inputType.replace(/_/g, ' '), width: '200px' },
-            { key: 'status', header: 'Status', render: r => statusBadge(r.status), width: '110px' },
-            { key: 'rowCount', header: 'Rows', render: r => r.rowCount?.toLocaleString() || '\u2014', width: '80px' },
+            { key: 'filename', header: 'Filename', render: (r: any) => <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--color-navy-600)' }}>{r.filename}</span> },
+            { key: 'inputType', header: 'Type', render: (r: any) => r.inputType.replace(/_/g, ' '), width: '200px' },
+            { key: 'status', header: 'Status', render: (r: any) => statusBadge(r.status), width: '110px' },
+            { key: 'rowCount', header: 'Rows', render: (r: any) => r.rowCount?.toLocaleString() || '\u2014', width: '80px' },
             {
               key: 'rowsAccepted', header: 'Accepted/Rejected', width: '140px',
-              render: r => r.rowCount > 0 ? (
+              render: (r: any) => r.rowCount > 0 ? (
                 <span>
                   <span style={{ color: 'var(--color-success)', fontWeight: 600 }}>{r.rowsAccepted}</span>
                   {' / '}
