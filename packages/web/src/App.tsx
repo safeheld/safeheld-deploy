@@ -15,6 +15,7 @@ import GovernancePage from './pages/governance/GovernancePage';
 import AdminPage from './pages/admin/AdminPage';
 import AuditPage from './pages/audit/AuditPage';
 import BankDashboardPage from './pages/bank-dashboard/BankDashboardPage';
+import CassPage from './pages/cass/CassPage';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, isLoading } = useAuth();
@@ -75,6 +76,7 @@ export default function App() {
         <Route path="breach" element={<FirmRoute><BreachPage /></FirmRoute>} />
         <Route path="reports" element={<FirmRoute><ReportsPage /></FirmRoute>} />
         <Route path="governance" element={<FirmRoute><GovernancePage /></FirmRoute>} />
+        <Route path="cass" element={<FirmRoute><CassPage /></FirmRoute>} />
         <Route path="audit" element={<FirmRoute><AuditPage /></FirmRoute>} />
         <Route
           path="bank-dashboard"

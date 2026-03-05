@@ -23,6 +23,7 @@ import { reportingRouter } from './modules/reporting/routes';
 import { governanceRouter } from './modules/governance/routes';
 import { monitoringRouter } from './modules/monitoring/routes';
 import { bankDashboardRouter } from './modules/bank-dashboard/routes';
+import { cassRouter } from './modules/cass/routes';
 
 // Ensure Bull queues are registered
 import './modules/ingestion/queue';
@@ -133,6 +134,7 @@ app.use('/api/v1/firms', generalLimiter, breachRouter);
 app.use('/api/v1/firms', generalLimiter, reportingRouter);
 app.use('/api/v1/firms', generalLimiter, governanceRouter);
 app.use('/api/v1', generalLimiter, monitoringRouter);
+app.use('/api/v1/firms', generalLimiter, cassRouter);
 app.use('/api/v1/bank-dashboard', generalLimiter, bankDashboardRouter);
 
 // ─── Error Handling ───────────────────────────────────────────────────────────

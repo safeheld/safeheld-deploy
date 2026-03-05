@@ -297,6 +297,86 @@ enum AuditorFindingStatus {
   CLOSED
 }
 
+enum CassClassification {
+  CASS_SMALL
+  CASS_MEDIUM
+  CASS_LARGE
+}
+
+enum CmarFrequency {
+  MONTHLY
+  QUARTERLY
+}
+
+enum CmarSubmissionStatus {
+  DRAFT
+  IN_REVIEW
+  SUBMITTED
+  ACCEPTED
+  REJECTED
+}
+
+enum AssetType {
+  CASH
+  CUSTODY_ASSET
+  COLLATERAL
+  MANDATE
+}
+
+enum AssetStatus {
+  HELD
+  IN_TRANSIT
+  RETURNED
+  WRITTEN_OFF
+}
+
+enum RiskControlCategory {
+  CLIENT_MONEY
+  CUSTODY_ASSETS
+  RECONCILIATION
+  REPORTING
+  GOVERNANCE
+  OPERATIONAL
+}
+
+enum RiskControlStatus {
+  EFFECTIVE
+  PARTIALLY_EFFECTIVE
+  INEFFECTIVE
+  NOT_TESTED
+}
+
+enum RiskLikelihood {
+  RARE
+  UNLIKELY
+  POSSIBLE
+  LIKELY
+  ALMOST_CERTAIN
+}
+
+enum RiskImpact {
+  NEGLIGIBLE
+  MINOR
+  MODERATE
+  MAJOR
+  SEVERE
+}
+
+enum RegulatoryUpdateStatus {
+  NEW
+  UNDER_REVIEW
+  IMPACT_ASSESSED
+  IMPLEMENTED
+  NOT_APPLICABLE
+}
+
+enum ImpactAssessmentStatus {
+  DRAFT
+  IN_REVIEW
+  APPROVED
+  REJECTED
+}
+
 enum HealthCheckType {
   INFRASTRUCTURE
   DAILY_OPS
@@ -364,6 +444,11 @@ model Firm {
   createdAt                       DateTime            @default(now()) @map("created_at")
   updatedAt                       DateTime            @updatedAt @map("updated_at")
 
+  // CASS-specific fields
+  cassClassification              CassClassification? @map("cass_classification")
+  cassAuditDueDate                DateTime?           @db.Date @map("cass_audit_due_date")
+  cmarSubmissionFrequency         CmarFrequency?      @map("cmar_submission_frequency")
+
   users                           User[]
   clientAccounts                  ClientAccount[]
   clientBalances                  ClientBalance[]
@@ -393,6 +478,11 @@ model Firm {
   alertSettings                   AlertSetting[]
   emailLogs                       EmailLog[]
   bankInstitutionFirms            BankInstitutionFirm[]
+  clientAssets                    ClientAsset[]
+  cmarSubmissions                 CmarSubmission[]
+  riskControls                    RiskControl[]
+  regulatoryUpdates               RegulatoryUpdate[]
+  impactAssessments               ImpactAssessment[]
 
   @@map("firms")
 }
@@ -1057,4 +1147,126 @@ model BankInstitutionFirm {
 
   @@unique([bankInstitutionId, firmId])
   @@map("bank_institution_firms")
+}
+
+// ─── CASS MODULE ──────────────────────────────────────────────────────────────
+
+model ClientAsset {
+  id                    String      @id @default(uuid()) @db.Uuid
+  firmId                String      @db.Uuid @map("firm_id")
+  assetName             String      @db.VarChar(255) @map("asset_name")
+  assetType             AssetType   @map("asset_type")
+  isin                  String?     @db.VarChar(12)
+  sedol                 String?     @db.VarChar(7)
+  clientId              String      @db.VarChar(100) @map("client_id")
+  clientName            String?     @db.VarChar(255) @map("client_name")
+  quantity              Decimal     @db.Decimal(18, 6)
+  marketValue           Decimal?    @db.Decimal(18, 2) @map("market_value")
+  currency              String      @db.Char(3)
+  custodian             String?     @db.VarChar(255)
+  subCustodian          String?     @db.VarChar(255) @map("sub_custodian")
+  accountReference      String?     @db.VarChar(100) @map("account_reference")
+  status                AssetStatus @default(HELD)
+  recordDate            DateTime    @db.Date @map("record_date")
+  createdAt             DateTime    @default(now()) @map("created_at")
+  updatedAt             DateTime    @updatedAt @map("updated_at")
+
+  firm                  Firm        @relation(fields: [firmId], references: [id])
+
+  @@index([firmId, recordDate])
+  @@index([firmId, clientId])
+  @@map("client_assets")
+}
+
+model CmarSubmission {
+  id                    String                @id @default(uuid()) @db.Uuid
+  firmId                String                @db.Uuid @map("firm_id")
+  reportingPeriodStart  DateTime              @db.Date @map("reporting_period_start")
+  reportingPeriodEnd    DateTime              @db.Date @map("reporting_period_end")
+  submissionDeadline    DateTime              @db.Date @map("submission_deadline")
+  status                CmarSubmissionStatus  @default(DRAFT)
+  clientMoneyHeld       Decimal?              @db.Decimal(18, 2) @map("client_money_held")
+  custodyAssetsHeld     Decimal?              @db.Decimal(18, 2) @map("custody_assets_held")
+  numberOfClients       Int?                  @map("number_of_clients")
+  reconciliationBreaches Int?                 @map("reconciliation_breaches")
+  dataPayload           Json?                 @map("data_payload")
+  submittedAt           DateTime?             @map("submitted_at")
+  submittedBy           String?               @db.Uuid @map("submitted_by")
+  fcaReference          String?               @db.VarChar(100) @map("fca_reference")
+  notes                 String?               @db.Text
+  createdAt             DateTime              @default(now()) @map("created_at")
+  updatedAt             DateTime              @updatedAt @map("updated_at")
+
+  firm                  Firm                  @relation(fields: [firmId], references: [id])
+
+  @@index([firmId, reportingPeriodEnd])
+  @@map("cmar_submissions")
+}
+
+model RiskControl {
+  id                    String              @id @default(uuid()) @db.Uuid
+  firmId                String              @db.Uuid @map("firm_id")
+  category              RiskControlCategory
+  title                 String              @db.VarChar(255)
+  description           String              @db.Text
+  likelihood            RiskLikelihood
+  impact                RiskImpact
+  riskScore             Int                 @map("risk_score")
+  controlDescription    String              @db.Text @map("control_description")
+  controlOwner          String?             @db.VarChar(255) @map("control_owner")
+  status                RiskControlStatus   @default(NOT_TESTED)
+  lastTestedAt          DateTime?           @map("last_tested_at")
+  nextReviewDue         DateTime?           @db.Date @map("next_review_due")
+  mitigatingActions     String?             @db.Text @map("mitigating_actions")
+  createdAt             DateTime            @default(now()) @map("created_at")
+  updatedAt             DateTime            @updatedAt @map("updated_at")
+
+  firm                  Firm                @relation(fields: [firmId], references: [id])
+
+  @@index([firmId, category])
+  @@map("risk_controls")
+}
+
+model RegulatoryUpdate {
+  id                    String                  @id @default(uuid()) @db.Uuid
+  firmId                String                  @db.Uuid @map("firm_id")
+  title                 String                  @db.VarChar(500)
+  source                String                  @db.VarChar(255)
+  publishedDate         DateTime                @db.Date @map("published_date")
+  effectiveDate         DateTime?               @db.Date @map("effective_date")
+  summary               String                  @db.Text
+  affectedRegimes       Json                    @map("affected_regimes")
+  status                RegulatoryUpdateStatus  @default(NEW)
+  assignedTo            String?                 @db.VarChar(255) @map("assigned_to")
+  notes                 String?                 @db.Text
+  createdAt             DateTime                @default(now()) @map("created_at")
+  updatedAt             DateTime                @updatedAt @map("updated_at")
+
+  firm                  Firm                    @relation(fields: [firmId], references: [id])
+  impactAssessments     ImpactAssessment[]
+
+  @@index([firmId, status])
+  @@map("regulatory_updates")
+}
+
+model ImpactAssessment {
+  id                    String                  @id @default(uuid()) @db.Uuid
+  firmId                String                  @db.Uuid @map("firm_id")
+  regulatoryUpdateId    String                  @db.Uuid @map("regulatory_update_id")
+  assessedBy            String                  @db.VarChar(255) @map("assessed_by")
+  impactLevel           RiskImpact              @map("impact_level")
+  affectedProcesses     Json                    @map("affected_processes")
+  requiredChanges       String                  @db.Text @map("required_changes")
+  implementationDeadline DateTime?              @db.Date @map("implementation_deadline")
+  status                ImpactAssessmentStatus  @default(DRAFT)
+  approvedBy            String?                 @db.VarChar(255) @map("approved_by")
+  approvedAt            DateTime?               @map("approved_at")
+  createdAt             DateTime                @default(now()) @map("created_at")
+  updatedAt             DateTime                @updatedAt @map("updated_at")
+
+  firm                  Firm                    @relation(fields: [firmId], references: [id])
+  regulatoryUpdate      RegulatoryUpdate        @relation(fields: [regulatoryUpdateId], references: [id])
+
+  @@index([firmId, status])
+  @@map("impact_assessments")
 }

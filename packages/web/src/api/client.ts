@@ -202,6 +202,46 @@ export const bankDashboardApi = {
     apiClient.get('/bank-dashboard/export', { params, responseType: 'blob' }),
 };
 
+// ─── CASS ────────────────────────────────────────────────────────────────────
+
+export const cassApi = {
+  getDashboard: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/cass/dashboard`).then(r => r.data.data),
+  // Assets
+  getAssets: (firmId: string, params?: Record<string, string>) =>
+    apiClient.get(`/firms/${firmId}/cass/assets`, { params }).then(r => r.data),
+  createAsset: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/cass/assets`, data).then(r => r.data.data),
+  // CMAR
+  getCmarSubmissions: (firmId: string, params?: Record<string, string>) =>
+    apiClient.get(`/firms/${firmId}/cass/cmar`, { params }).then(r => r.data),
+  createCmar: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/cass/cmar`, data).then(r => r.data.data),
+  updateCmar: (firmId: string, cmarId: string, data: object) =>
+    apiClient.put(`/firms/${firmId}/cass/cmar/${cmarId}`, data).then(r => r.data.data),
+  // Risk Controls
+  getRiskControls: (firmId: string, params?: Record<string, string>) =>
+    apiClient.get(`/firms/${firmId}/cass/risk-controls`, { params }).then(r => r.data),
+  createRiskControl: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/cass/risk-controls`, data).then(r => r.data.data),
+  updateRiskControl: (firmId: string, controlId: string, data: object) =>
+    apiClient.put(`/firms/${firmId}/cass/risk-controls/${controlId}`, data).then(r => r.data.data),
+  // Regulatory Updates
+  getRegulatoryUpdates: (firmId: string, params?: Record<string, string>) =>
+    apiClient.get(`/firms/${firmId}/cass/regulatory-updates`, { params }).then(r => r.data),
+  createRegulatoryUpdate: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/cass/regulatory-updates`, data).then(r => r.data.data),
+  updateRegulatoryUpdate: (firmId: string, updateId: string, data: object) =>
+    apiClient.put(`/firms/${firmId}/cass/regulatory-updates/${updateId}`, data).then(r => r.data.data),
+  // Impact Assessments
+  getImpactAssessments: (firmId: string, params?: Record<string, string>) =>
+    apiClient.get(`/firms/${firmId}/cass/impact-assessments`, { params }).then(r => r.data),
+  createImpactAssessment: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/cass/impact-assessments`, data).then(r => r.data.data),
+  updateImpactAssessment: (firmId: string, assessmentId: string, data: object) =>
+    apiClient.put(`/firms/${firmId}/cass/impact-assessments/${assessmentId}`, data).then(r => r.data.data),
+};
+
 // ─── Governance ───────────────────────────────────────────────────────────────
 
 export const governanceApi = {

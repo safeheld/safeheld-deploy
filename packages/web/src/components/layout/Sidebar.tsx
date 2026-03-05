@@ -51,6 +51,11 @@ const icons: Record<string, React.ReactNode> = {
       <polygon points="12 2 20 7 4 7" />
     </svg>
   ),
+  cass: (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M2 20h20" /><path d="M5 20V8l7-5 7 5v12" /><path d="M9 20v-4h6v4" /><path d="M9 12h.01" /><path d="M15 12h.01" />
+    </svg>
+  ),
   admin: (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="12" cy="12" r="3" />
@@ -73,6 +78,7 @@ const navItems: NavItem[] = [
   { path: '/breach', label: 'Breaches', icon: 'breach', roles: ['COMPLIANCE_OFFICER', 'FINANCE_OPS', 'AUDITOR', 'ADMIN'] },
   { path: '/reports', label: 'Reports', icon: 'reports', roles: ['COMPLIANCE_OFFICER', 'FINANCE_OPS', 'AUDITOR', 'ADMIN'] },
   { path: '/governance', label: 'Governance', icon: 'governance', roles: ['COMPLIANCE_OFFICER', 'FINANCE_OPS', 'AUDITOR', 'ADMIN'] },
+  { path: '/cass', label: 'CASS', icon: 'cass', roles: ['COMPLIANCE_OFFICER', 'FINANCE_OPS', 'AUDITOR', 'ADMIN'] },
   { path: '/audit', label: 'Audit Log', icon: 'audit', roles: ['COMPLIANCE_OFFICER', 'ADMIN', 'AUDITOR'] },
   { path: '/bank-dashboard', label: 'Bank Dashboard', icon: 'bank', roles: ['BANK_VIEWER'] },
   { path: '/admin', label: 'Admin', icon: 'admin', roles: ['ADMIN'] },
