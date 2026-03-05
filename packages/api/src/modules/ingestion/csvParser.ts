@@ -23,8 +23,8 @@ export interface CsvParseResult {
 }
 
 function detectEncoding(buffer: Buffer): string {
-  const detected = jschardet.detect(buffer);
-  const charset = (detected.charset || 'UTF-8').toLowerCase();
+  const detected = jschardet.detect(buffer) as { encoding?: string; charset?: string };
+  const charset = (detected.encoding || detected.charset || 'UTF-8').toLowerCase();
   if (charset.includes('utf-8') || charset.includes('ascii')) return 'utf-8';
   if (charset.includes('windows-1252') || charset.includes('cp1252')) return 'windows-1252';
   if (charset.includes('iso-8859') || charset.includes('latin')) return 'latin1';
