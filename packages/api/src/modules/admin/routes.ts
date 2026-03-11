@@ -167,4 +167,31 @@ router.post('/firms/:firmId/users', authenticate, requireRole('ADMIN'), async (r
   }
 });
 
+// POST /api/v1/admin/users/:userId/reset-mfa
+router.post('/users/:userId/reset-mfa', authenticate, requireRole('ADMIN'), async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const user = await prisma.user.findUnique({ where: { id: req.params.userId } });
+    if (!user) throw new NotFoundError('User');
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { mfaSecret: null, mfaEnabled: false },
+    });
+
+    await logAudit({
+      firmId: user.firmId,
+      userId: req.user!.userId,
+      action: 'MFA_RESET',
+      entityType: 'users',
+      entityId: user.id,
+      details: { email: user.email, resetBy: req.user!.email },
+      ipAddress: req.ip,
+    });
+
+    successResponse(res, { message: `MFA reset for ${user.email}` });
+  } catch (err) {
+    next(err);
+  }
+});
+
 export { router as adminRouter };

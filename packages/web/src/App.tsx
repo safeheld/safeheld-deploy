@@ -30,7 +30,10 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
     );
   }
 
-  if (!user) return <Navigate to="/login" replace />;
+  // Check both React state and localStorage to avoid race condition
+  // after MFA verification where setUser hasn't rendered yet
+  const hasAuth = user || (localStorage.getItem('access_token') && localStorage.getItem('auth_user'));
+  if (!hasAuth) return <Navigate to="/login" replace />;
   return <>{children}</>;
 }
 

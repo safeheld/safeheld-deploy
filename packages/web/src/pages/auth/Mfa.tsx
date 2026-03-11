@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -8,20 +8,33 @@ export default function MfaPage() {
   const [loading, setLoading] = useState(false);
   const [qrData, setQrData] = useState<{ qrCodeDataUrl: string; secret: string } | null>(null);
   const [setupLoading, setSetupLoading] = useState(false);
+  const setupCalled = useRef(false);
 
-  const { setupMfa, verifyMfa } = useAuth();
+  const { user, setupMfa, verifyMfa } = useAuth();
   const navigate = useNavigate();
 
   const tempToken = sessionStorage.getItem('temp_token') || '';
   const isSetupRequired = sessionStorage.getItem('mfa_setup_required') === 'true';
 
+  // Navigate to dashboard once user state is confirmed set
   useEffect(() => {
+    if (user) {
+      sessionStorage.removeItem('temp_token');
+      sessionStorage.removeItem('mfa_setup_required');
+      navigate('/dashboard', { replace: true });
+    }
+  }, [user, navigate]);
+
+  useEffect(() => {
+    if (user) return;
     if (!tempToken) {
-      navigate('/login');
+      navigate('/login', { replace: true });
       return;
     }
 
-    if (isSetupRequired) {
+    // Guard against StrictMode / double-mount calling setupMfa twice
+    if (isSetupRequired && !setupCalled.current) {
+      setupCalled.current = true;
       setSetupLoading(true);
       setupMfa(tempToken)
         .then(setQrData)
@@ -37,9 +50,7 @@ export default function MfaPage() {
 
     try {
       await verifyMfa(tempToken, code, isSetupRequired);
-      sessionStorage.removeItem('temp_token');
-      sessionStorage.removeItem('mfa_setup_required');
-      navigate('/dashboard');
+      // Navigation handled by useEffect watching user state
     } catch (err: unknown) {
       const message = (err as { response?: { data?: { error?: { message?: string } } } })?.response?.data?.error?.message;
       setError(message || 'Invalid code. Please try again.');

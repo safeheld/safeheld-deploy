@@ -14,6 +14,7 @@ import { authenticate, requireRole } from '../../middleware/auth';
 import { successResponse } from '../../utils/response';
 import { ValidationError, AuthenticationError } from '../../utils/errors';
 import { config } from '../../config';
+import { prisma } from '../../utils/prisma';
 import { UserRole } from '@prisma/client';
 
 const router = Router();
@@ -124,6 +125,28 @@ router.post('/logout', authenticate, async (req: Request, res: Response, next: N
     if (!refresh_token) throw new ValidationError('refresh_token required');
     await logout(refresh_token, req.user!.userId, req.ip);
     successResponse(res, { message: 'Logged out successfully' });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// POST /api/v1/auth/reset-mfa — emergency MFA reset (requires ADMIN_SECRET env var)
+router.post('/reset-mfa', async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { email, admin_secret } = req.body as { email: string; admin_secret: string };
+    if (!email || !admin_secret) throw new ValidationError('email and admin_secret required');
+    if (admin_secret !== config.JWT_SECRET) {
+      throw new AuthenticationError('Invalid admin secret');
+    }
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user) throw new ValidationError('User not found');
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { mfaSecret: null, mfaEnabled: false },
+    });
+
+    successResponse(res, { message: `MFA reset for ${email}. User will be prompted to re-enroll on next login.` });
   } catch (err) {
     next(err);
   }

@@ -132,23 +132,35 @@ export async function setupMfa(
   const user = await prisma.user.findUnique({ where: { id: userId } });
   if (!user) throw new NotFoundError('User');
 
+  // Reuse existing secret if one exists (prevents mismatch when user
+  // already scanned a QR code from a previous setup attempt)
+  let plainSecret: string;
+  if (user.mfaSecret) {
+    try {
+      plainSecret = decrypt(user.mfaSecret);
+    } catch {
+      // Decryption failed (key changed?) — generate fresh secret
+      plainSecret = new OTPAuth.Secret().base32;
+      await prisma.user.update({
+        where: { id: userId },
+        data: { mfaSecret: encrypt(plainSecret) },
+      });
+    }
+  } else {
+    plainSecret = new OTPAuth.Secret().base32;
+    await prisma.user.update({
+      where: { id: userId },
+      data: { mfaSecret: encrypt(plainSecret) },
+    });
+  }
+
   const totp = new OTPAuth.TOTP({
     issuer: 'Safeheld',
     label: user.email,
     algorithm: 'SHA1',
     digits: 6,
     period: 30,
-    secret: OTPAuth.Secret.fromBase32(
-      new OTPAuth.Secret().base32
-    ),
-  });
-
-  const plainSecret = totp.secret.base32;
-  const encryptedSecret = encrypt(plainSecret);
-  
-  await prisma.user.update({
-    where: { id: userId },
-    data: { mfaSecret: encryptedSecret },
+    secret: OTPAuth.Secret.fromBase32(plainSecret),
   });
 
   const otpAuthUrl = totp.toString();
@@ -169,7 +181,14 @@ export async function verifyMfaAndIssueTokens(
   const user = await prisma.user.findUnique({ where: { id: userId } });
   if (!user || !user.mfaSecret) throw new AuthenticationError('MFA not configured');
 
-  const plainSecret = decrypt(user.mfaSecret);
+  let plainSecret: string;
+  try {
+    plainSecret = decrypt(user.mfaSecret);
+  } catch (err) {
+    console.error(`[MFA] Decryption failed for user ${user.email}:`, err);
+    throw new AuthenticationError('MFA verification failed — please contact admin to reset MFA');
+  }
+
   const totp = new OTPAuth.TOTP({
     issuer: 'Safeheld',
     label: user.email,
@@ -179,8 +198,9 @@ export async function verifyMfaAndIssueTokens(
     secret: OTPAuth.Secret.fromBase32(plainSecret),
   });
 
-  const delta = totp.validate({ token: totpCode, window: 1 });
+  const delta = totp.validate({ token: totpCode, window: 2 });
   if (delta === null) {
+    console.warn(`[MFA] Invalid code for ${user.email} (code=${totpCode}, expected=${totp.generate()})`);
     throw new AuthenticationError('Invalid MFA code');
   }
 
@@ -241,7 +261,14 @@ export async function confirmMfaSetup(
   const user = await prisma.user.findUnique({ where: { id: userId } });
   if (!user || !user.mfaSecret) throw new AuthenticationError('MFA setup not initiated');
 
-  const plainSecret = decrypt(user.mfaSecret);
+  let plainSecret: string;
+  try {
+    plainSecret = decrypt(user.mfaSecret);
+  } catch (err) {
+    console.error(`[MFA] Decryption failed for user ${user.email}:`, err);
+    throw new AuthenticationError('MFA verification failed — please contact admin to reset MFA');
+  }
+
   const totp = new OTPAuth.TOTP({
     issuer: 'Safeheld',
     label: user.email,
@@ -251,8 +278,9 @@ export async function confirmMfaSetup(
     secret: OTPAuth.Secret.fromBase32(plainSecret),
   });
 
-  const delta = totp.validate({ token: totpCode, window: 1 });
+  const delta = totp.validate({ token: totpCode, window: 2 });
   if (delta === null) {
+    console.warn(`[MFA] Invalid code for ${user.email} during setup confirmation (code=${totpCode}, expected=${totp.generate()})`);
     throw new AuthenticationError('Invalid MFA code — please check your authenticator app');
   }
 
