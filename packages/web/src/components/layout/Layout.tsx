@@ -12,12 +12,10 @@ export default function Layout() {
         <main style={{
           flex: 1,
           overflow: 'auto',
-          padding: '32px',
-          background: 'var(--color-navy-50)',
+          padding: '24px',
+          background: 'var(--color-gray-50)',
         }}>
-          <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-            <Outlet />
-          </div>
+          <Outlet />
         </main>
       </div>
     </div>

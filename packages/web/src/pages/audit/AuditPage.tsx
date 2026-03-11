@@ -41,12 +41,6 @@ export default function AuditPage() {
   const logs = logsResp?.data || [];
   const pagination = logsResp?.pagination;
 
-  const inputStyle: React.CSSProperties = {
-    padding: '8px 12px', border: '1px solid var(--color-navy-300)',
-    borderRadius: 'var(--radius-md)', fontSize: '13px', minWidth: '180px',
-    color: 'var(--color-navy-700)', background: 'white',
-  };
-
   return (
     <div>
       <PageHeader
@@ -57,39 +51,32 @@ export default function AuditPage() {
       />
 
       {/* Filters */}
-      <div style={{
-        display: 'flex', gap: '10px', marginBottom: '20px', flexWrap: 'wrap',
-        padding: '16px 20px',
-        background: 'white',
-        borderRadius: 'var(--radius-lg)',
-        border: '1px solid var(--color-navy-200)',
-        boxShadow: 'var(--shadow-xs)',
-      }}>
+      <div style={{ display: 'flex', gap: '10px', marginBottom: '16px', flexWrap: 'wrap' }}>
         <input
           type="text"
           placeholder="Filter by action..."
           value={filters.action}
           onChange={e => setFilters(p => ({ ...p, action: e.target.value }))}
-          style={inputStyle}
+          style={{ padding: '7px 10px', border: '1px solid var(--color-gray-300)', borderRadius: '6px', fontSize: '13px', minWidth: '180px' }}
         />
         <input
           type="text"
           placeholder="Filter by entity type..."
           value={filters.entityType}
           onChange={e => setFilters(p => ({ ...p, entityType: e.target.value }))}
-          style={inputStyle}
+          style={{ padding: '7px 10px', border: '1px solid var(--color-gray-300)', borderRadius: '6px', fontSize: '13px', minWidth: '180px' }}
         />
         <input
           type="date"
           value={filters.from}
           onChange={e => setFilters(p => ({ ...p, from: e.target.value }))}
-          style={{ ...inputStyle, minWidth: 'auto' }}
+          style={{ padding: '7px 10px', border: '1px solid var(--color-gray-300)', borderRadius: '6px', fontSize: '13px' }}
         />
         <input
           type="date"
           value={filters.to}
           onChange={e => setFilters(p => ({ ...p, to: e.target.value }))}
-          style={{ ...inputStyle, minWidth: 'auto' }}
+          style={{ padding: '7px 10px', border: '1px solid var(--color-gray-300)', borderRadius: '6px', fontSize: '13px' }}
         />
         {(filters.action || filters.entityType || filters.from || filters.to) && (
           <Button variant="ghost" size="sm" onClick={() => setFilters({ action: '', entityType: '', from: '', to: '' })}>
@@ -103,12 +90,12 @@ export default function AuditPage() {
           loading={isLoading}
           data={logs}
           columns={[
-            { key: 'createdAt', header: 'Timestamp', render: r => <span style={{ fontSize: '12px' }}>{format(new Date(r.createdAt), 'dd MMM yyyy HH:mm:ss')}</span>, width: '170px' },
-            { key: 'action', header: 'Action', render: r => <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--color-accent)', fontWeight: 500 }}>{r.action}</span> },
+            { key: 'createdAt', header: 'Timestamp', render: r => format(new Date(r.createdAt), 'dd MMM yyyy HH:mm:ss'), width: '160px' },
+            { key: 'action', header: 'Action', render: r => <span style={{ fontFamily: 'monospace', fontSize: '12px', color: 'var(--color-primary)' }}>{r.action}</span> },
             { key: 'entityType', header: 'Entity', width: '160px' },
-            { key: 'entityId', header: 'Entity ID', render: r => <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--color-navy-400)' }}>{r.entityId?.substring(0, 8)}...</span>, width: '110px' },
-            { key: 'user', header: 'User', render: r => r.user ? `${r.user.name} <${r.user.email}>` : '\u2014' },
-            { key: 'ipAddress', header: 'IP', render: r => <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--color-navy-500)' }}>{r.ipAddress || '\u2014'}</span>, width: '120px' },
+            { key: 'entityId', header: 'Entity ID', render: r => <span style={{ fontFamily: 'monospace', fontSize: '11px', color: 'var(--color-gray-400)' }}>{r.entityId?.substring(0, 8)}...</span>, width: '110px' },
+            { key: 'user', header: 'User', render: r => r.user ? `${r.user.name} <${r.user.email}>` : '—' },
+            { key: 'ipAddress', header: 'IP', render: r => r.ipAddress || '—', width: '120px' },
           ]}
           emptyMessage="No audit log entries found."
         />

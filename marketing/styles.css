@@ -76,7 +76,7 @@ h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.15;letter-spacing:-0.025em;color
 
 .nav-inner{max-width:var(--container);margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:100%;gap:32px}
 
-.nav-logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px;letter-spacing:-0.03em;color:var(--navy);flex-shrink:0}
+.nav-logo{display:flex;align-items:center;gap:10px;font-weight:600;font-size:20px;letter-spacing:-0.03em;color:var(--navy);flex-shrink:0}
 .nav-transparent .nav-logo{color:var(--white)}
 
 .nav-mark{width:30px;height:30px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;color:white;font-size:14px}

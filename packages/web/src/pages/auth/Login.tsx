@@ -37,71 +37,29 @@ export default function LoginPage() {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      background: 'var(--color-navy-900)',
+      background: 'linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%)',
       padding: '20px',
-      position: 'relative',
-      overflow: 'hidden',
     }}>
-      {/* Background gradient orb */}
-      <div style={{
-        position: 'absolute',
-        width: '600px', height: '600px',
-        borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(61,61,255,0.15) 0%, transparent 70%)',
-        top: '-100px', right: '-100px',
-        pointerEvents: 'none',
-      }} />
-      <div style={{
-        position: 'absolute',
-        width: '400px', height: '400px',
-        borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(61,61,255,0.1) 0%, transparent 70%)',
-        bottom: '-50px', left: '-50px',
-        pointerEvents: 'none',
-      }} />
-
       <div style={{
         background: 'white',
-        borderRadius: 'var(--radius-xl)',
-        padding: '48px',
+        borderRadius: '12px',
+        padding: '40px',
         width: '100%',
-        maxWidth: '420px',
-        boxShadow: 'var(--shadow-xl)',
-        position: 'relative',
-        border: '1px solid var(--color-navy-200)',
+        maxWidth: '400px',
+        boxShadow: '0 25px 50px rgba(0,0,0,0.3)',
       }}>
-        <div style={{ marginBottom: '36px', textAlign: 'center' }}>
-          {/* Logo mark */}
-          <div style={{
-            width: '44px', height: '44px',
-            background: 'var(--color-accent)',
-            borderRadius: 'var(--radius-lg)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            margin: '0 auto 16px',
-            fontWeight: 800, color: 'white', fontSize: '18px',
-            boxShadow: '0 4px 12px rgb(61 61 255 / 0.3)',
-          }}>
-            S
-          </div>
-          <h1 style={{
-            fontSize: '22px', fontWeight: 700,
-            color: 'var(--color-navy-900)',
-            margin: '0 0 6px',
-            letterSpacing: '-0.03em',
-          }}>
-            Welcome back
+        <div style={{ marginBottom: '32px', textAlign: 'center' }}>
+          <h1 style={{ fontSize: '24px', fontWeight: 800, color: '#1e40af', margin: '0 0 8px' }}>
+            Safeheld
           </h1>
-          <p style={{ color: 'var(--color-navy-500)', fontSize: '14px', margin: 0 }}>
-            Sign in to Safeheld Compliance Platform
+          <p style={{ color: '#6b7280', fontSize: '14px', margin: 0 }}>
+            Safeguarding Compliance Platform
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div>
-            <label style={{
-              display: 'block', fontSize: '13px', fontWeight: 500,
-              color: 'var(--color-navy-700)', marginBottom: '6px',
-            }}>
+            <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, color: '#374151', marginBottom: '4px' }}>
               Email address
             </label>
             <input
@@ -112,28 +70,15 @@ export default function LoginPage() {
               autoFocus
               placeholder="you@company.com"
               style={{
-                width: '100%', padding: '10px 14px',
-                border: '1px solid var(--color-navy-300)', borderRadius: 'var(--radius-md)',
+                width: '100%', padding: '10px 12px',
+                border: '1px solid #d1d5db', borderRadius: '6px',
                 fontSize: '14px', outline: 'none', boxSizing: 'border-box',
-                color: 'var(--color-navy-800)',
-                transition: 'border-color var(--transition-fast), box-shadow var(--transition-fast)',
-              }}
-              onFocus={e => {
-                e.target.style.borderColor = 'var(--color-accent)';
-                e.target.style.boxShadow = '0 0 0 3px rgb(61 61 255 / 0.1)';
-              }}
-              onBlur={e => {
-                e.target.style.borderColor = 'var(--color-navy-300)';
-                e.target.style.boxShadow = 'none';
               }}
             />
           </div>
 
           <div>
-            <label style={{
-              display: 'block', fontSize: '13px', fontWeight: 500,
-              color: 'var(--color-navy-700)', marginBottom: '6px',
-            }}>
+            <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, color: '#374151', marginBottom: '4px' }}>
               Password
             </label>
             <input
@@ -141,36 +86,21 @@ export default function LoginPage() {
               value={password}
               onChange={e => setPassword(e.target.value)}
               required
-              placeholder="\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"
+              placeholder="••••••••••••"
               style={{
-                width: '100%', padding: '10px 14px',
-                border: '1px solid var(--color-navy-300)', borderRadius: 'var(--radius-md)',
+                width: '100%', padding: '10px 12px',
+                border: '1px solid #d1d5db', borderRadius: '6px',
                 fontSize: '14px', outline: 'none', boxSizing: 'border-box',
-                color: 'var(--color-navy-800)',
-                transition: 'border-color var(--transition-fast), box-shadow var(--transition-fast)',
-              }}
-              onFocus={e => {
-                e.target.style.borderColor = 'var(--color-accent)';
-                e.target.style.boxShadow = '0 0 0 3px rgb(61 61 255 / 0.1)';
-              }}
-              onBlur={e => {
-                e.target.style.borderColor = 'var(--color-navy-300)';
-                e.target.style.boxShadow = 'none';
               }}
             />
           </div>
 
           {error && (
             <div style={{
-              padding: '12px 16px',
-              background: 'var(--color-danger-light)',
-              border: '1px solid #fecaca',
-              borderRadius: 'var(--radius-md)',
-              color: '#991b1b',
-              fontSize: '13px',
-              display: 'flex', alignItems: 'center', gap: '8px',
+              padding: '10px 14px', background: '#fee2e2',
+              border: '1px solid #fca5a5', borderRadius: '6px',
+              color: '#991b1b', fontSize: '13px',
             }}>
-              <span style={{ fontSize: '14px' }}>{'\u26D4'}</span>
               {error}
             </div>
           )}
@@ -180,25 +110,18 @@ export default function LoginPage() {
             disabled={loading}
             style={{
               width: '100%', padding: '11px',
-              background: loading ? 'var(--color-accent-muted)' : 'var(--color-accent)',
-              color: 'white', border: 'none', borderRadius: 'var(--radius-md)',
+              background: loading ? '#93c5fd' : '#1e40af',
+              color: 'white', border: 'none', borderRadius: '6px',
               fontSize: '14px', fontWeight: 600,
               cursor: loading ? 'not-allowed' : 'pointer',
               marginTop: '4px',
-              transition: 'background var(--transition-fast)',
-              boxShadow: '0 1px 3px rgb(61 61 255 / 0.3)',
             }}
           >
             {loading ? 'Signing in...' : 'Sign in'}
           </button>
         </form>
 
-        <p style={{
-          textAlign: 'center', fontSize: '11px',
-          color: 'var(--color-navy-400)',
-          marginTop: '28px', marginBottom: 0,
-          lineHeight: 1.5,
-        }}>
+        <p style={{ textAlign: 'center', fontSize: '12px', color: '#9ca3af', marginTop: '24px', marginBottom: 0 }}>
           All access is logged and monitored for compliance purposes.
         </p>
       </div>

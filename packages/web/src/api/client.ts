@@ -33,9 +33,7 @@ apiClient.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-    const url = originalRequest?.url || '';
-    const isAuthEndpoint = url.includes('/auth/');
-    if (error.response?.status === 401 && !originalRequest._retry && !isAuthEndpoint) {
+    if (error.response?.status === 401 && !originalRequest._retry) {
       const refreshToken = localStorage.getItem('refresh_token');
       if (!refreshToken) {
         localStorage.clear();
@@ -179,16 +177,6 @@ export const reportingApi = {
     apiClient.post(`/firms/${firmId}/reports/${reportId}/share`, { expires_in_hours: expiresInHours }).then(r => r.data.data),
   downloadReport: (firmId: string, reportId: string) =>
     `${API_BASE}/firms/${firmId}/reports/${reportId}/download`,
-  exportSafeguardingReport: (firmId: string, periodStart?: string, periodEnd?: string) => {
-    const params: Record<string, string> = {};
-    if (periodStart) params.period_start = periodStart;
-    if (periodEnd) params.period_end = periodEnd;
-    return apiClient.get(`/firms/${firmId}/exports/safeguarding-report`, { params, responseType: 'blob' });
-  },
-  exportReconciliationSummary: (firmId: string) =>
-    apiClient.get(`/firms/${firmId}/exports/reconciliation-summary`, { responseType: 'blob' }),
-  exportBreachReport: (firmId: string) =>
-    apiClient.get(`/firms/${firmId}/exports/breach-report`, { responseType: 'blob' }),
 };
 
 // ─── Bank Dashboard ───────────────────────────────────────────────────────────
@@ -202,107 +190,6 @@ export const bankDashboardApi = {
     apiClient.get('/bank-dashboard/alerts', { params }).then(r => r.data.data),
   exportCsv: (params?: Record<string, string>) =>
     apiClient.get('/bank-dashboard/export', { params, responseType: 'blob' }),
-};
-
-// ─── CASS ────────────────────────────────────────────────────────────────────
-
-export const cassApi = {
-  getDashboard: (firmId: string) =>
-    apiClient.get(`/firms/${firmId}/cass/dashboard`).then(r => r.data.data),
-  // Assets
-  getAssets: (firmId: string, params?: Record<string, string>) =>
-    apiClient.get(`/firms/${firmId}/cass/assets`, { params }).then(r => r.data),
-  createAsset: (firmId: string, data: object) =>
-    apiClient.post(`/firms/${firmId}/cass/assets`, data).then(r => r.data.data),
-  // CMAR
-  getCmarSubmissions: (firmId: string, params?: Record<string, string>) =>
-    apiClient.get(`/firms/${firmId}/cass/cmar`, { params }).then(r => r.data),
-  createCmar: (firmId: string, data: object) =>
-    apiClient.post(`/firms/${firmId}/cass/cmar`, data).then(r => r.data.data),
-  updateCmar: (firmId: string, cmarId: string, data: object) =>
-    apiClient.put(`/firms/${firmId}/cass/cmar/${cmarId}`, data).then(r => r.data.data),
-  // Risk Controls
-  getRiskControls: (firmId: string, params?: Record<string, string>) =>
-    apiClient.get(`/firms/${firmId}/cass/risk-controls`, { params }).then(r => r.data),
-  createRiskControl: (firmId: string, data: object) =>
-    apiClient.post(`/firms/${firmId}/cass/risk-controls`, data).then(r => r.data.data),
-  updateRiskControl: (firmId: string, controlId: string, data: object) =>
-    apiClient.put(`/firms/${firmId}/cass/risk-controls/${controlId}`, data).then(r => r.data.data),
-  // Regulatory Updates
-  getRegulatoryUpdates: (firmId: string, params?: Record<string, string>) =>
-    apiClient.get(`/firms/${firmId}/cass/regulatory-updates`, { params }).then(r => r.data),
-  createRegulatoryUpdate: (firmId: string, data: object) =>
-    apiClient.post(`/firms/${firmId}/cass/regulatory-updates`, data).then(r => r.data.data),
-  updateRegulatoryUpdate: (firmId: string, updateId: string, data: object) =>
-    apiClient.put(`/firms/${firmId}/cass/regulatory-updates/${updateId}`, data).then(r => r.data.data),
-  // Impact Assessments
-  getImpactAssessments: (firmId: string, params?: Record<string, string>) =>
-    apiClient.get(`/firms/${firmId}/cass/impact-assessments`, { params }).then(r => r.data),
-  createImpactAssessment: (firmId: string, data: object) =>
-    apiClient.post(`/firms/${firmId}/cass/impact-assessments`, data).then(r => r.data.data),
-  updateImpactAssessment: (firmId: string, assessmentId: string, data: object) =>
-    apiClient.put(`/firms/${firmId}/cass/impact-assessments/${assessmentId}`, data).then(r => r.data.data),
-};
-
-// ─── Stablecoin ──────────────────────────────────────────────────────────
-
-export const stablecoinApi = {
-  getDashboard: (firmId: string) =>
-    apiClient.get(`/firms/${firmId}/stablecoin/dashboard`).then(r => r.data.data),
-  // Tokens
-  getTokens: (firmId: string, params?: Record<string, string>) =>
-    apiClient.get(`/firms/${firmId}/stablecoin/tokens`, { params }).then(r => r.data),
-  createToken: (firmId: string, data: object) =>
-    apiClient.post(`/firms/${firmId}/stablecoin/tokens`, data).then(r => r.data.data),
-  updateToken: (firmId: string, tokenId: string, data: object) =>
-    apiClient.put(`/firms/${firmId}/stablecoin/tokens/${tokenId}`, data).then(r => r.data.data),
-  // Peg Snapshots
-  getPegSnapshots: (firmId: string, params?: Record<string, string>) =>
-    apiClient.get(`/firms/${firmId}/stablecoin/peg-snapshots`, { params }).then(r => r.data),
-  createPegSnapshot: (firmId: string, data: object) =>
-    apiClient.post(`/firms/${firmId}/stablecoin/peg-snapshots`, data).then(r => r.data.data),
-  // Reserve Assets
-  getReserveAssets: (firmId: string, params?: Record<string, string>) =>
-    apiClient.get(`/firms/${firmId}/stablecoin/reserve-assets`, { params }).then(r => r.data),
-  createReserveAsset: (firmId: string, data: object) =>
-    apiClient.post(`/firms/${firmId}/stablecoin/reserve-assets`, data).then(r => r.data.data),
-  // Attestations
-  getAttestations: (firmId: string, params?: Record<string, string>) =>
-    apiClient.get(`/firms/${firmId}/stablecoin/attestations`, { params }).then(r => r.data),
-  generateAttestation: (firmId: string, tokenId: string, snapshotDate: string) =>
-    apiClient.post(`/firms/${firmId}/stablecoin/attestations/generate`, { tokenId, snapshotDate }).then(r => r.data.data),
-};
-
-// ─── Crypto ──────────────────────────────────────────────────────────────
-
-export const cryptoApi = {
-  getDashboard: (firmId: string) =>
-    apiClient.get(`/firms/${firmId}/crypto/dashboard`).then(r => r.data.data),
-  // Wallets
-  getWallets: (firmId: string, params?: Record<string, string>) =>
-    apiClient.get(`/firms/${firmId}/crypto/wallets`, { params }).then(r => r.data),
-  createWallet: (firmId: string, data: object) =>
-    apiClient.post(`/firms/${firmId}/crypto/wallets`, data).then(r => r.data.data),
-  updateWallet: (firmId: string, walletId: string, data: object) =>
-    apiClient.put(`/firms/${firmId}/crypto/wallets/${walletId}`, data).then(r => r.data.data),
-  // Balances
-  getBalances: (firmId: string, params?: Record<string, string>) =>
-    apiClient.get(`/firms/${firmId}/crypto/balances`, { params }).then(r => r.data),
-  createBalance: (firmId: string, data: object) =>
-    apiClient.post(`/firms/${firmId}/crypto/balances`, data).then(r => r.data.data),
-  // Entitlements
-  getEntitlements: (firmId: string, params?: Record<string, string>) =>
-    apiClient.get(`/firms/${firmId}/crypto/entitlements`, { params }).then(r => r.data),
-  createEntitlement: (firmId: string, data: object) =>
-    apiClient.post(`/firms/${firmId}/crypto/entitlements`, data).then(r => r.data.data),
-  // Proof of Reserves
-  getProofOfReserves: (firmId: string, params?: Record<string, string>) =>
-    apiClient.get(`/firms/${firmId}/crypto/proof-of-reserves`, { params }).then(r => r.data),
-  generateProofOfReserves: (firmId: string, snapshotDate: string) =>
-    apiClient.post(`/firms/${firmId}/crypto/proof-of-reserves/generate`, { snapshotDate }).then(r => r.data.data),
-  // Data Lineage
-  getDataLineage: (firmId: string, params?: Record<string, string>) =>
-    apiClient.get(`/firms/${firmId}/crypto/data-lineage`, { params }).then(r => r.data),
 };
 
 // ─── Governance ───────────────────────────────────────────────────────────────

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security &amp; Trust — Safeheld</title>
+  <meta name="description" content="Safeheld takes the protection of client data as seriously as the protection of client funds. Enterprise-grade infrastructure, encryption, and compliance.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     Navigation
+     ═══════════════════════════════════════════════════════════════════════ -->
+<nav class="nav nav-solid" id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Safeheld</a>
+
+    <div class="nav-links">
+      <a href="/platform" class="nav-link">Platform</a>
+
+      <!-- Solutions Dropdown -->
+      <div class="nav-dd">
+        <div class="nav-dd-trigger">
+          Solutions
+          <svg viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="nav-dd-menu">
+          <div class="nav-dd-label">Regulated Sectors</div>
+
+          <a href="/solutions/payments" class="nav-dd-item">
+            <div class="nav-dd-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+            </div>
+            <div>
+              <h4>Payments (PS25)</h4>
+              <p>UK EMI and PI safeguarding compliance</p>
+            </div>
+          </a>
+
+          <a href="/solutions/investments" class="nav-dd-item">
+            <div class="nav-dd-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <h4>Investments (CASS)</h4>
+              <p>FCA CASS 6, 7 and 10 compliance</p>
+            </div>
+          </a>
+
+          <a href="/solutions/legal" class="nav-dd-item">
+            <div class="nav-dd-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <div>
+              <h4>Legal</h4>
+              <p>SRA client account rules</p>
+            </div>
+          </a>
+
+          <a href="/solutions/insurance" class="nav-dd-item">
+            <div class="nav-dd-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <h4>Insurance</h4>
+              <p>FCA client premium protection</p>
+            </div>
+          </a>
+
+          <a href="/solutions/gaming" class="nav-dd-item">
+            <div class="nav-dd-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+            </div>
+            <div>
+              <h4>Gaming</h4>
+              <p>Player fund segregation compliance</p>
+            </div>
+          </a>
+
+          <a href="/solutions/real-estate" class="nav-dd-item">
+            <div class="nav-dd-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div>
+              <h4>Real Estate</h4>
+              <p>Client deposit protection</p>
+            </div>
+          </a>
+
+          <div class="nav-dd-label">Emerging Markets</div>
+
+          <a href="/solutions/crypto" class="nav-dd-item">
+            <div class="nav-dd-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.5 8h5c1.1 0 2 .9 2 2s-.9 2-2 2h-5"/><path d="M9.5 12h5.5c1.1 0 2 .9 2 2s-.9 2-2 2H9.5"/><path d="M12 6v2"/><path d="M12 16v2"/></svg>
+            </div>
+            <div>
+              <h4>Crypto</h4>
+              <p>On-chain reconciliation and proof of reserves</p>
+            </div>
+          </a>
+
+          <a href="/solutions/stablecoins" class="nav-dd-item">
+            <div class="nav-dd-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M8 8h8"/></svg>
+            </div>
+            <div>
+              <h4>Stablecoins</h4>
+              <p>Peg verification and reserve proof</p>
+            </div>
+          </a>
+
+          <a href="/solutions/mica" class="nav-dd-item">
+            <div class="nav-dd-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/></svg>
+            </div>
+            <div>
+              <h4>MiCA</h4>
+              <p>EU Markets in Crypto-Assets compliance</p>
+            </div>
+          </a>
+
+          <a href="/solutions/genius-act" class="nav-dd-item">
+            <div class="nav-dd-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+            </div>
+            <div>
+              <h4>GENIUS Act</h4>
+              <p>US stablecoin regulatory framework</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <a href="/partners" class="nav-link">Partners</a>
+      <a href="/pricing" class="nav-link">Pricing</a>
+      <a href="/about" class="nav-link">About</a>
+    </div>
+
+    <div class="nav-cta">
+      <a href="https://app.safeheld.com" class="nav-login">Log In</a>
+      <a href="/contact" class="btn btn-accent btn-sm">Request a Demo</a>
+    </div>
+
+    <button class="nav-mobile" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     Page Header
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="page-header bg-dark dark">
+  <div class="container">
+    <p class="t-label">SECURITY</p>
+    <h1 class="t-h1">Security &amp; Trust</h1>
+    <p class="t-body-lg">Safeheld takes the protection of client data as seriously as the protection of client funds.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     Section 1 — Infrastructure Security
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="section bg-white">
+  <div class="container">
+    <div class="sh">
+      <p class="t-label">INFRASTRUCTURE</p>
+      <h2 class="t-h2">Enterprise-Grade Infrastructure</h2>
+    </div>
+
+    <div class="feat reveal">
+      <div class="feat-content">
+        <p class="t-body" style="margin-bottom:24px">Safeheld is deployed on enterprise-grade European infrastructure hosted by Hetzner in Germany. All data is encrypted at rest using AES-256 and in transit using TLS 1.2+. Tenant environments are fully isolated, and redundant backups run automatically across geographically separated zones.</p>
+        <ul class="feat-list">
+          <li>
+            <svg viewBox="0 0 18 18" fill="none"><path d="M15 4.5L6.75 12.75L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            European data residency (Hetzner, Germany)
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none"><path d="M15 4.5L6.75 12.75L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            End-to-end encryption (AES-256 at rest, TLS 1.2+ in transit)
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none"><path d="M15 4.5L6.75 12.75L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Network isolation between tenant environments
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none"><path d="M15 4.5L6.75 12.75L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Automated backups with geo-redundant storage
+          </li>
+        </ul>
+      </div>
+      <div class="feat-visual">
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Shield / infrastructure layers diagram -->
+          <path d="M200 30 L320 80 L320 180 C320 240 200 280 200 280 C200 280 80 240 80 180 L80 80 Z" stroke="rgba(61,61,255,0.3)" stroke-width="2" fill="rgba(61,61,255,0.03)"/>
+          <path d="M200 60 L290 100 L290 170 C290 220 200 250 200 250 C200 250 110 220 110 170 L110 100 Z" stroke="rgba(61,61,255,0.2)" stroke-width="1.5" fill="rgba(61,61,255,0.04)"/>
+          <path d="M200 90 L260 120 L260 160 C260 195 200 220 200 220 C200 220 140 195 140 160 L140 120 Z" stroke="rgba(61,61,255,0.15)" stroke-width="1" fill="rgba(61,61,255,0.06)"/>
+          <!-- Lock icon in center -->
+          <rect x="187" y="140" width="26" height="20" rx="3" stroke="rgba(61,61,255,0.5)" stroke-width="1.5" fill="rgba(61,61,255,0.08)"/>
+          <path d="M192 140 L192 132 C192 126 196 122 200 122 C204 122 208 126 208 132 L208 140" stroke="rgba(61,61,255,0.5)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <circle cx="200" cy="151" r="2.5" fill="rgba(61,61,255,0.5)"/>
+          <!-- Layer labels -->
+          <text x="200" y="50" text-anchor="middle" fill="rgba(61,61,255,0.3)" font-size="9" font-family="Inter, sans-serif" font-weight="600">NETWORK</text>
+          <text x="200" y="80" text-anchor="middle" fill="rgba(61,61,255,0.35)" font-size="9" font-family="Inter, sans-serif" font-weight="600">ENCRYPTION</text>
+          <text x="200" y="110" text-anchor="middle" fill="rgba(61,61,255,0.4)" font-size="9" font-family="Inter, sans-serif" font-weight="600">ISOLATION</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     Section 2 — Access Controls
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="section bg-light">
+  <div class="container">
+    <div class="sh">
+      <p class="t-label">ACCESS CONTROLS</p>
+      <h2 class="t-h2">Defence in Depth</h2>
+    </div>
+
+    <div class="grid g3 gap-lg">
+      <!-- Role-Based Access -->
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h3>Role-Based Access</h3>
+        <p>Granular permissions model with five distinct roles: Compliance Officer, Finance Ops, Auditor, Bank Viewer, and Admin. Each role sees only the data and actions relevant to their function.</p>
+      </div>
+
+      <!-- Multi-Factor Authentication -->
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/><circle cx="12" cy="16" r="1"/></svg>
+        </div>
+        <h3>Multi-Factor Authentication</h3>
+        <p>TOTP-based multi-factor authentication on every account, enforced by policy. MFA secrets are AES-256-GCM encrypted in the database. No account can bypass the second factor.</p>
+      </div>
+
+      <!-- Complete Audit Trail -->
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <h3>Complete Audit Trail</h3>
+        <p>Every action is logged with immutable, tamper-evident audit records. Full traceability of who did what, when, from where -- ready for regulatory inspection at any time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     Section 3 — Data Protection
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="section bg-white">
+  <div class="container">
+    <div class="sh">
+      <p class="t-label">DATA PROTECTION</p>
+      <h2 class="t-h2">Your Data, Protected</h2>
+    </div>
+
+    <div class="feat reveal">
+      <div class="feat-content">
+        <p class="t-body" style="margin-bottom:24px">Safeheld is fully GDPR compliant with data residency in the EU and UK. We do not share data with third parties for any purpose beyond delivering the service. Our infrastructure undergoes regular penetration testing, and we provide data processing agreements to all customers.</p>
+        <ul class="feat-list">
+          <li>
+            <svg viewBox="0 0 18 18" fill="none"><path d="M15 4.5L6.75 12.75L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            GDPR and UK Data Protection Act 2018 compliant
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none"><path d="M15 4.5L6.75 12.75L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Data residency in EU/UK jurisdictions
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none"><path d="M15 4.5L6.75 12.75L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            No third-party data sharing beyond service delivery
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none"><path d="M15 4.5L6.75 12.75L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Regular penetration testing by independent assessors
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none"><path d="M15 4.5L6.75 12.75L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Data processing agreements available for all customers
+          </li>
+        </ul>
+      </div>
+      <div class="feat-visual">
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Data protection / GDPR visual -->
+          <rect x="100" y="60" width="200" height="180" rx="16" stroke="rgba(61,61,255,0.25)" stroke-width="1.5" fill="rgba(61,61,255,0.02)"/>
+          <!-- Document icon -->
+          <rect x="150" y="90" width="100" height="120" rx="8" stroke="rgba(61,61,255,0.3)" stroke-width="1.5" fill="rgba(61,61,255,0.04)"/>
+          <line x1="170" y1="120" x2="230" y2="120" stroke="rgba(61,61,255,0.2)" stroke-width="1"/>
+          <line x1="170" y1="135" x2="220" y2="135" stroke="rgba(61,61,255,0.15)" stroke-width="1"/>
+          <line x1="170" y1="150" x2="225" y2="150" stroke="rgba(61,61,255,0.15)" stroke-width="1"/>
+          <line x1="170" y1="165" x2="210" y2="165" stroke="rgba(61,61,255,0.12)" stroke-width="1"/>
+          <line x1="170" y1="180" x2="215" y2="180" stroke="rgba(61,61,255,0.12)" stroke-width="1"/>
+          <!-- Shield overlay -->
+          <path d="M200 75 L240 95 L240 135 C240 165 200 180 200 180 C200 180 160 165 160 135 L160 95 Z" stroke="rgba(61,61,255,0.35)" stroke-width="1.5" fill="rgba(61,61,255,0.05)"/>
+          <!-- Checkmark inside shield -->
+          <path d="M188 130 L196 138 L214 120" stroke="rgba(61,61,255,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <!-- EU stars (simplified) -->
+          <circle cx="200" cy="250" r="2" fill="rgba(61,61,255,0.25)"/>
+          <circle cx="210" cy="247" r="2" fill="rgba(61,61,255,0.25)"/>
+          <circle cx="218" cy="250" r="2" fill="rgba(61,61,255,0.25)"/>
+          <circle cx="190" cy="247" r="2" fill="rgba(61,61,255,0.25)"/>
+          <circle cx="182" cy="250" r="2" fill="rgba(61,61,255,0.25)"/>
+          <text x="200" y="268" text-anchor="middle" fill="rgba(61,61,255,0.3)" font-size="9" font-family="Inter, sans-serif" font-weight="600">GDPR COMPLIANT</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     Section 4 — Standards & Certifications
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="section bg-dark dark">
+  <div class="container">
+    <div class="sh center">
+      <p class="t-label">COMPLIANCE</p>
+      <h2 class="t-h2">Standards &amp; Certifications</h2>
+    </div>
+
+    <div class="grid g2 gap-lg">
+      <!-- SOC 2 Type II -->
+      <div class="cap reveal">
+        <h4>SOC 2 Type II</h4>
+        <p>In progress. Safeheld is pursuing SOC 2 Type II certification to independently verify our security controls, availability, and confidentiality practices.</p>
+      </div>
+
+      <!-- GDPR -->
+      <div class="cap reveal">
+        <h4>GDPR</h4>
+        <p>Fully compliant with the General Data Protection Regulation. Data subject rights, lawful processing bases, and data minimisation principles are embedded in our platform design.</p>
+      </div>
+
+      <!-- UK DPA 2018 -->
+      <div class="cap reveal">
+        <h4>UK DPA 2018</h4>
+        <p>Registered with the Information Commissioner's Office. Compliant with the UK Data Protection Act 2018 and the UK GDPR.</p>
+      </div>
+
+      <!-- Responsible Disclosure -->
+      <div class="cap reveal">
+        <h4>Responsible Disclosure</h4>
+        <p>Security researchers can report vulnerabilities to <a href="mailto:security@safeheld.com" style="color:rgba(61,61,255,0.8);font-weight:500">security@safeheld.com</a>. We are committed to working with the security community to keep Safeheld safe.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     CTA Section
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="section bg-gradient">
+  <div class="container">
+    <div class="cta-section">
+      <h2 class="t-h2">Questions about our security practices?</h2>
+      <a href="/contact" class="btn btn-accent btn-lg">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     Footer
+     ═══════════════════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a href="/" class="nav-logo">Safeheld</a>
+        <p>The global verification layer for client funds.</p>
+      </div>
+
+      <!-- Platform -->
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="/platform">Reconciliation Engine</a>
+        <a href="/platform">Breach Detection</a>
+        <a href="/platform">Regulatory Reporting</a>
+        <a href="/platform">Governance &amp; Audit</a>
+        <a href="/for-banks">Bank Oversight</a>
+        <a href="/api">API Access</a>
+      </div>
+
+      <!-- Frameworks -->
+      <div class="footer-col">
+        <h4>Frameworks</h4>
+        <a href="/solutions/payments">PS25 (UK Payments)</a>
+        <a href="/solutions/investments">CASS (UK Investments)</a>
+        <a href="/solutions/mica">MiCA (EU Crypto)</a>
+        <a href="/solutions/genius-act">GENIUS Act (US Stablecoins)</a>
+        <a href="/solutions/legal">SRA (UK Legal)</a>
+        <a href="/solutions/insurance">FCA Insurance Rules</a>
+        <a href="/solutions/gaming">Gambling Commission</a>
+        <a href="/solutions/real-estate">Client Deposit Schemes</a>
+      </div>
+
+      <!-- Company -->
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/about">About</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/partners">Partners</a>
+        <a href="/security">Security &amp; Trust</a>
+        <a href="https://status.safeheld.com">System Status</a>
+        <a href="/contact">Contact</a>
+      </div>
+
+      <!-- Resources -->
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="/docs">Documentation</a>
+        <a href="/api">API Reference</a>
+        <a href="/blog">Blog</a>
+        <a href="/changelog">Changelog</a>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Safeheld Ltd. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="/terms">Terms</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     JavaScript
+     ═══════════════════════════════════════════════════════════════════════ -->
+<script>
+  // Scroll reveal animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+</script>
+
+</body>
+</html>
