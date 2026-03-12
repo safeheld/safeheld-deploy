@@ -1090,6 +1090,8 @@ model AuditLog {
   entityId    String    @db.Uuid @map("entity_id")
   details     Json
   ipAddress   String?   @db.VarChar(45) @map("ip_address")
+  previousHash String? @db.VarChar(64) @map("previous_hash")
+  currentHash  String? @db.VarChar(64) @map("current_hash")
   createdAt   DateTime  @default(now()) @map("created_at")
 
   firm        Firm?     @relation(fields: [firmId], references: [id])

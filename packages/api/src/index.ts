@@ -30,6 +30,9 @@ import { stablecoinRouter } from './modules/stablecoin/routes';
 // Ensure Bull queues are registered
 import './modules/ingestion/queue';
 
+// Start scheduled jobs (reconciliation, governance, reports)
+import './scheduler';
+
 const app = express();
 const startTime = Date.now();
 

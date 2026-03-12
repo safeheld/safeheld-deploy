@@ -1,6 +1,7 @@
 import { prisma } from '../../utils/prisma';
 import { logger } from '../../utils/logger';
 import { sendEmail, breachDetectedEmail, breachStatusChangeEmail } from '../../utils/email';
+import { dispatchWebhooks } from '../../utils/webhook';
 import {
   BreachType,
   BreachSeverity,
@@ -230,6 +231,15 @@ async function notifyBreachStakeholders(
         emailType: 'BREACH_ALERT',
       }).catch(() => {}); // Don't fail on email errors
     }
+
+    // Dispatch webhooks for breach alerts
+    await dispatchWebhooks(firmId, 'BREACH_DETECTED', {
+      breachId,
+      firmName,
+      breachType,
+      severity,
+      description,
+    }).catch(() => {});
   } catch (err) {
     logger.error({ err, breachId }, 'Failed to notify breach stakeholders');
   }
@@ -381,6 +391,15 @@ async function notifyBreachStatusChange(
         emailType: 'BREACH_STATUS_CHANGE',
       }).catch(() => {});
     }
+    // Dispatch webhooks for status changes
+    await dispatchWebhooks(firmId, 'BREACH_ESCALATED', {
+      breachId,
+      firmName: firm?.name || 'Unknown',
+      breachType,
+      severity,
+      previousStatus,
+      newStatus,
+    }).catch(() => {});
   } catch (err) {
     logger.error({ err, breachId, newStatus }, 'Failed to notify breach status change');
   }
