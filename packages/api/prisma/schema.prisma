@@ -535,6 +535,7 @@ model Firm {
   pegSnapshots                    PegSnapshot[]
   reserveAssets                   ReserveAsset[]
   reserveAttestations             ReserveAttestation[]
+  verificationCertificates        VerificationCertificate[]
 
   @@map("firms")
 }
@@ -806,6 +807,7 @@ model ReconciliationRun {
   rulePack            RulePack              @relation(fields: [rulePackId], references: [id])
   breaks              ReconciliationBreak[]
   breaches            Breach[]
+  verificationCertificates VerificationCertificate[]
 
   @@index([firmId, reconciliationDate, reconciliationType])
   @@map("reconciliation_runs")
@@ -1569,4 +1571,27 @@ model DataLineageEvent {
   @@index([firmId, eventType, createdAt])
   @@index([entityType, entityId])
   @@map("data_lineage_events")
+}
+
+model VerificationCertificate {
+  id                    String            @id @default(uuid()) @db.Uuid
+  firmId                String            @db.Uuid @map("firm_id")
+  reconciliationRunId   String            @db.Uuid @map("reconciliation_run_id")
+  issuedAt              DateTime          @map("issued_at")
+  clientFunds           Decimal           @db.Decimal(18, 2) @map("client_funds")
+  safeguardedFunds      Decimal           @db.Decimal(18, 2) @map("safeguarded_funds")
+  variance              Decimal           @db.Decimal(18, 2)
+  coverageRatio         Decimal           @db.Decimal(8, 4) @map("coverage_ratio")
+  framework             String            @db.VarChar(100)
+  status                String            @default("VALID") @db.VarChar(20)
+  sha256Hash            String            @unique @db.VarChar(64) @map("sha256_hash")
+  certificateData       Json              @map("certificate_data")
+  createdAt             DateTime          @default(now()) @map("created_at")
+
+  firm                  Firm              @relation(fields: [firmId], references: [id])
+  reconciliationRun     ReconciliationRun @relation(fields: [reconciliationRunId], references: [id])
+
+  @@index([firmId, issuedAt])
+  @@index([sha256Hash])
+  @@map("verification_certificates")
 }
