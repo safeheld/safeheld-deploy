@@ -71,7 +71,7 @@
     <div class="reveal">
       <p class="t-label">DIGITAL ASSETS</p>
       <h1 class="t-h1">Crypto Custody Verification</h1>
-      <p class="t-body-lg">On-chain wallet reconciliation, proof of reserves, and hot/cold wallet monitoring for crypto custodians, exchanges, and fund administrators. Verify holdings across every major blockchain.</p>
+      <p class="t-body-lg">Wallet tracking, reserve ratio monitoring, and hot/cold wallet classification for crypto custodians, exchanges, and fund administrators. On-chain verification integration coming soon.</p>
     </div>
   </div>
 </header>
@@ -90,21 +90,21 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
         </div>
         <h3>Multi-Chain Tracking</h3>
-        <p>Monitor wallets across Bitcoin, Ethereum, Solana, Polygon, Arbitrum, and other major L1 and L2 networks from a single dashboard with unified balance aggregation.</p>
+        <p>Track wallets across Bitcoin, Ethereum, Solana, Polygon, and other networks from a single dashboard with balance aggregation. Supports 9 networks with more being added.</p>
       </div>
       <div class="card">
         <div class="card-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <h3>Proof of Reserves</h3>
-        <p>Generate cryptographic proof of reserves using Merkle tree attestations, allowing independent verification that total on-chain holdings cover customer liabilities.</p>
+        <p>Calculate reserve ratios comparing total wallet balances against customer entitlements. Merkle tree attestation and on-chain verification coming in a future release.</p>
       </div>
       <div class="card">
         <div class="card-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
         </div>
         <h3>Real-Time Monitoring</h3>
-        <p>Continuous monitoring of hot and cold wallet balances with threshold-based alerts for unusual withdrawals, balance deviations, and unauthorised wallet movements.</p>
+        <p>Track hot and cold wallet balances with wallet classification and balance snapshots. Automated threshold monitoring coming soon.</p>
       </div>
     </div>
   </div>
@@ -124,23 +124,19 @@
       <div class="feat-content">
         <p class="t-label">Wallet Tracking</p>
         <h3 class="t-h3">Multi-Chain Wallet Tracking</h3>
-        <p class="t-body">Register and monitor custody wallets across all major blockchains. SafeHeld queries on-chain state directly, bypassing API intermediaries to ensure data integrity.</p>
+        <p class="t-body">Register and track custody wallets across supported blockchains. Record balances with block-level precision and maintain a complete audit trail of wallet holdings over time.</p>
         <ul class="feat-list">
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            Native support for Bitcoin, Ethereum, Solana, and 20+ networks
+            Support for Bitcoin, Ethereum, Solana, Polygon, Arbitrum, and 4 additional networks
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            ERC-20, SPL, and other token standard balance tracking
+            Token balance tracking with BigInt precision
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
             Hot, cold, and warm wallet classification and tagging
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            DeFi protocol position tracking (staking, lending, LP)
           </li>
         </ul>
       </div>
@@ -184,24 +180,24 @@
     <div class="feat reverse reveal">
       <div class="feat-content">
         <p class="t-label">Proof of Reserves</p>
-        <h3 class="t-h3">Cryptographic Reserve Proof Generation</h3>
-        <p class="t-body">Generate Merkle tree-based proof of reserves that allows anyone to verify your total holdings cover customer liabilities, without exposing individual customer data.</p>
+        <h3 class="t-h3">Reserve Ratio Monitoring</h3>
+        <p class="t-body">Calculate reserve ratios by comparing total wallet balances against client entitlements. Track coverage over time with full audit trails and data lineage.</p>
         <ul class="feat-list">
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            Merkle tree construction with hashed customer balances
+            Reserve ratio calculation (total holdings vs. client entitlements)
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            On-chain address ownership verification via signed messages
+            Client entitlement tracking per token and network
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            Periodic attestation snapshots with tamper-proof timestamps
+            Balance snapshots with block numbers and timestamps
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            Individual customer verification portal for self-service checks
+            Data lineage tracking with cryptographic signatures
           </li>
         </ul>
       </div>
@@ -248,23 +244,19 @@
       <div class="feat-content">
         <p class="t-label">Reconciliation</p>
         <h3 class="t-h3">Custody Reconciliation Engine</h3>
-        <p class="t-body">Reconcile on-chain wallet balances against internal ledger records and customer liability databases. Identify discrepancies between what you hold and what you owe before they become problems.</p>
+        <p class="t-body">Compare recorded wallet balances against customer entitlements to identify discrepancies. Track breaks and monitor reserve coverage across all wallets and tokens.</p>
         <ul class="feat-list">
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            On-chain balance queries compared against internal ledger state
+            Wallet balance tracking compared against client entitlements
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            Pending transaction and mempool-aware balance calculations
+            Multi-asset tracking across native and token balances
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            Multi-asset reconciliation across native and token balances
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            Break investigation workflow with on-chain transaction tracing
+            Balance snapshot history for investigation and audit
           </li>
         </ul>
       </div>
@@ -318,24 +310,24 @@
     <div class="feat reverse reveal">
       <div class="feat-content">
         <p class="t-label">Monitoring</p>
-        <h3 class="t-h3">Real-Time Balance Monitoring</h3>
-        <p class="t-body">Monitor hot and cold wallet balances continuously, with configurable alerts for balance thresholds, large withdrawals, and unusual transaction patterns that could indicate security incidents.</p>
+        <h3 class="t-h3">Wallet Balance Tracking</h3>
+        <p class="t-body">Track hot and cold wallet balances with classification tags, multisig configuration tracking, and balance snapshot history.</p>
         <ul class="feat-list">
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            Hot wallet balance threshold monitoring with auto-alerts
+            Hot, cold, warm, and custodial wallet classification
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            Cold wallet access event detection and notification
+            Multisig configuration tracking (required/total signatures)
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            Large withdrawal flagging with configurable thresholds
+            Balance snapshot recording with block-level precision
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            24/7 monitoring with webhook and email alert channels
+            Full audit trail for all wallet and balance changes
           </li>
         </ul>
       </div>
@@ -390,17 +382,17 @@
       <div class="step">
         <div class="step-num">1</div>
         <h3>Register Wallets</h3>
-        <p>Add your custody wallet addresses and prove ownership via signed messages. SafeHeld begins monitoring on-chain balances across all registered chains.</p>
+        <p>Add your custody wallet addresses and classify them by type (hot, cold, warm). SafeHeld begins tracking balances across all registered wallets.</p>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <h3>Continuous Verification</h3>
-        <p>SafeHeld queries on-chain state continuously, reconciles against your internal ledger, and monitors for threshold breaches, unusual activity, and balance deviations.</p>
+        <p>Record balance snapshots, compare against client entitlements, and monitor reserve coverage ratios across your wallet portfolio.</p>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <h3>Publish Proofs</h3>
-        <p>Generate Merkle tree proof of reserves, export compliance reports, and provide customer-facing verification portals -- all backed by on-chain data.</p>
+        <p>Generate reserve ratio reports, export compliance documentation, and maintain a complete audit trail of wallet holdings over time.</p>
       </div>
     </div>
   </div>
@@ -469,8 +461,8 @@
         <h4>Resources</h4>
         <a href="/docs">Documentation</a>
         <a href="/api">API Reference</a>
-        <a href="/blog">Blog</a>
-        <a href="/changelog">Changelog</a>
+        <a href="/blog" style="opacity:0.4;pointer-events:none;">Blog (Coming Soon)</a>
+        <a href="/changelog" style="opacity:0.4;pointer-events:none;">Changelog (Coming Soon)</a>
       </div>
 
     </div>

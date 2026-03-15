@@ -71,7 +71,7 @@
     <div class="reveal">
       <p class="t-label">STABLECOINS</p>
       <h1 class="t-h1">Reserve Verification &amp; Peg Monitoring</h1>
-      <p class="t-body-lg">Independent verification of stablecoin reserves, peg stability monitoring, and issuer compliance. Prove that every token in circulation is backed by qualifying reserve assets.</p>
+      <p class="t-body-lg">Independent verification of stablecoin reserves, peg tracking, and issuer compliance. Prove that every token in circulation is backed by qualifying reserve assets.</p>
     </div>
   </div>
 </header>
@@ -90,21 +90,21 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
         </div>
         <h3>Reserve Matching</h3>
-        <p>Continuously verify that total reserve assets match or exceed the total supply of tokens in circulation, across all chains and issuance addresses.</p>
+        <p>Verify that total reserve assets match or exceed the total supply of tokens in circulation, across all chains and issuance addresses.</p>
       </div>
       <div class="card">
         <div class="card-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
         </div>
         <h3>Peg Monitoring</h3>
-        <p>Track the stablecoin's market price against its target peg across major exchanges and DEXs, with alerts when deviations exceed configurable thresholds.</p>
+        <p>Record peg snapshots with status classification (on-peg, minor deviation, major deviation, depegged). Automated price feed integration coming soon.</p>
       </div>
       <div class="card">
         <div class="card-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <h3>Issuer Compliance</h3>
-        <p>Monitor reserve composition against regulatory requirements, track redemption capacity, and generate attestation reports for auditors and regulators.</p>
+        <p>Monitor reserve composition against regulatory requirements, track redemption capacity, and generate reserve ratio calculation reports for auditors and regulators.</p>
       </div>
     </div>
   </div>
@@ -136,7 +136,7 @@
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            Real-time reserve ratio calculation (reserves / circulating supply)
+            Reserve ratio calculation (reserves / circulating supply)
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
@@ -191,23 +191,23 @@
       <div class="feat-content">
         <p class="t-label">Peg Stability</p>
         <h3 class="t-h3">Peg Deviation Alerts</h3>
-        <p class="t-body">Monitor your stablecoin's price across centralised and decentralised exchanges in real time. Detect depegging events early with configurable alert thresholds and escalation chains.</p>
+        <p class="t-body">Record peg data via manual entry with status classification (ON_PEG / MINOR_DEVIATION / MAJOR_DEVIATION / DEPEGGED). Automated price feed integration coming soon.</p>
         <ul class="feat-list">
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            Multi-venue price aggregation (CEX and DEX feeds)
+            Manual peg data entry with status classification
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            Configurable deviation thresholds (e.g. 0.5%, 1%, 2%)
+            Peg snapshot recording with historical tracking
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            Volume-weighted price calculation to filter noise
+            Deviation percentage calculation and trend analysis
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            Historical peg deviation analysis and trend reporting
+            Automated price feed integration coming soon
           </li>
         </ul>
       </div>
@@ -250,11 +250,11 @@
       <div class="feat-content">
         <p class="t-label">Compliance</p>
         <h3 class="t-h3">Issuer Compliance Reporting</h3>
-        <p class="t-body">Generate the attestation reports and compliance documentation required by regulators, auditors, and institutional counterparties. Track reserve composition against permitted asset requirements.</p>
+        <p class="t-body">Generate reserve ratio calculation reports and compliance documentation for regulators, auditors, and institutional counterparties. Track reserve composition against permitted asset requirements.</p>
         <ul class="feat-list">
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            Monthly and quarterly attestation report generation
+            Monthly and quarterly reserve ratio report generation
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
@@ -276,7 +276,7 @@
           <text x="200" y="25" text-anchor="middle" font-size="11" font-weight="600" fill="#6B7280">ATTESTATION REPORT</text>
           <rect x="80" y="38" width="240" height="240" rx="8" stroke="#3D3DFF" stroke-width="1.5" fill="white"/>
           <rect x="80" y="38" width="240" height="42" rx="8 8 0 0" fill="rgba(61,61,255,0.06)"/>
-          <text x="200" y="58" text-anchor="middle" font-size="10" font-weight="700" fill="#374151">Reserve Attestation</text>
+          <text x="200" y="58" text-anchor="middle" font-size="10" font-weight="700" fill="#374151">Reserve Ratio Report</text>
           <text x="200" y="72" text-anchor="middle" font-size="8" fill="#6B7280">March 2026 | Independent Verification</text>
           <!-- Reserve composition pie chart representation -->
           <circle cx="150" cy="130" r="35" fill="none" stroke="#E5E7EB" stroke-width="8"/>
@@ -381,12 +381,12 @@
       <div class="step">
         <div class="step-num">2</div>
         <h3>Continuous Matching</h3>
-        <p>SafeHeld continuously reconciles total token supply against reserve assets, monitors peg stability across venues, and tests redemption capacity under stress scenarios.</p>
+        <p>SafeHeld reconciles total token supply against reserve assets, tracks peg status via manual data entry, and tests redemption capacity under stress scenarios. Automated price feed integration coming soon.</p>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <h3>Attest &amp; Publish</h3>
-        <p>Generate monthly attestation reports, provide auditor access portals, and publish a public transparency page showing reserve backing in real time.</p>
+        <p>Generate monthly reserve ratio reports, provide auditor access portals, and publish a public transparency page showing reserve backing.</p>
       </div>
     </div>
   </div>
@@ -455,8 +455,8 @@
         <h4>Resources</h4>
         <a href="/docs">Documentation</a>
         <a href="/api">API Reference</a>
-        <a href="/blog">Blog</a>
-        <a href="/changelog">Changelog</a>
+        <a href="/blog" style="opacity:0.4;pointer-events:none;">Blog (Coming Soon)</a>
+        <a href="/changelog" style="opacity:0.4;pointer-events:none;">Changelog (Coming Soon)</a>
       </div>
 
     </div>
