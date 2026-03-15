@@ -10,6 +10,11 @@ import {
   getProofOfReserves, generateProofOfReserves,
   getDataLineage, getCryptoDashboard,
 } from './service';
+import {
+  syncWalletBalances,
+  reconcileWalletBalances,
+  getOnChainSyncStatus,
+} from './onchain-service';
 
 const router = Router();
 
@@ -242,6 +247,62 @@ router.get('/:firmId/crypto/data-lineage',
       paginatedResponse(res, result.events, {
         page: result.page, pageSize: result.pageSize, total: result.total, totalPages: result.totalPages,
       });
+    } catch (err) { next(err); }
+  }
+);
+
+// ─── On-Chain Balance Sync ──────────────────────────────────────────────────
+
+router.post('/:firmId/crypto/sync-balances',
+  authenticate, requireFirmAccess, requireRole('COMPLIANCE_OFFICER', 'ADMIN'),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const result = await syncWalletBalances(req.params.firmId);
+
+      await logAudit({
+        firmId: req.params.firmId, userId: req.user!.userId, action: 'WALLET_BALANCE_SYNCED',
+        entityType: 'wallets', entityId: req.params.firmId,
+        details: { synced: result.synced, failed: result.failed, skipped: result.skipped },
+        ipAddress: req.ip,
+      });
+
+      successResponse(res, result);
+    } catch (err) { next(err); }
+  }
+);
+
+// ─── On-Chain Reconciliation ────────────────────────────────────────────────
+
+router.post('/:firmId/crypto/reconcile',
+  authenticate, requireFirmAccess, requireRole('COMPLIANCE_OFFICER', 'ADMIN'),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const result = await reconcileWalletBalances(req.params.firmId);
+
+      await logAudit({
+        firmId: req.params.firmId, userId: req.user!.userId, action: 'CRYPTO_RECONCILIATION_RUN',
+        entityType: 'crypto_reconciliation', entityId: req.params.firmId,
+        details: {
+          isFullyCollateralized: result.isFullyCollateralized,
+          underCollateralized: result.underCollateralized,
+          tokenCount: Object.keys(result.reserveRatios).length,
+        },
+        ipAddress: req.ip,
+      });
+
+      successResponse(res, result);
+    } catch (err) { next(err); }
+  }
+);
+
+// ─── On-Chain Sync Status ───────────────────────────────────────────────────
+
+router.get('/:firmId/crypto/on-chain-status',
+  authenticate, requireFirmAccess,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const statuses = await getOnChainSyncStatus(req.params.firmId);
+      successResponse(res, statuses);
     } catch (err) { next(err); }
   }
 );

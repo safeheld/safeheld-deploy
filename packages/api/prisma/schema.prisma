@@ -17,6 +17,13 @@ enum FirmRegime {
   CASS7
   CASS15
   MICA_CUSTODY
+  MICA_CASP
+  MICA_EMT
+  GENIUS_ACT
+  SRA_SOLICITOR
+  FCA_INSURANCE
+  GAMBLING_COMMISSION
+  CLIENT_DEPOSIT_SCHEME
 }
 
 enum FirmStatus {
@@ -160,6 +167,9 @@ enum BreachType {
   RESOLUTION_PACK_INCOMPLETE
   SEGREGATION_FAILURE
   RECORD_KEEPING_FAILURE
+  CUSTODY_MISMATCH
+  MISSING_CUSTODY_ASSET
+  UNREGISTERED_HOLDING
 }
 
 enum BreachSeverity {
@@ -536,6 +546,8 @@ model Firm {
   reserveAssets                   ReserveAsset[]
   reserveAttestations             ReserveAttestation[]
   verificationCertificates        VerificationCertificate[]
+  custodyAssetReconciliations     CustodyAssetReconciliation[]
+  signOffs                        SignOff[]
 
   @@map("firms")
 }
@@ -1224,14 +1236,75 @@ model ClientAsset {
   accountReference      String?     @db.VarChar(100) @map("account_reference")
   status                AssetStatus @default(HELD)
   recordDate            DateTime    @db.Date @map("record_date")
+  custodianQuantity     Decimal?    @db.Decimal(18, 6) @map("custodian_quantity")
+  custodianMarketValue  Decimal?    @db.Decimal(18, 2) @map("custodian_market_value")
+  nomineeRegistered     Boolean     @default(false) @map("nominee_registered")
+  nomineeName           String?     @db.VarChar(255) @map("nominee_name")
+  lastReconciled        DateTime?   @db.Date @map("last_reconciled")
   createdAt             DateTime    @default(now()) @map("created_at")
   updatedAt             DateTime    @updatedAt @map("updated_at")
 
   firm                  Firm        @relation(fields: [firmId], references: [id])
+  custodyReconItems     CustodyAssetReconItem[]
 
   @@index([firmId, recordDate])
   @@index([firmId, clientId])
+  @@index([firmId, custodian])
   @@map("client_assets")
+}
+
+enum CustodyReconStatus {
+  MATCHED
+  QUANTITY_MISMATCH
+  VALUE_MISMATCH
+  MISSING_AT_CUSTODIAN
+  UNREGISTERED_HOLDING
+}
+
+model CustodyAssetReconciliation {
+  id                    String                @id @default(uuid()) @db.Uuid
+  firmId                String                @db.Uuid @map("firm_id")
+  reconciliationDate    DateTime              @db.Date @map("reconciliation_date")
+  totalAssets           Int                   @map("total_assets")
+  matched               Int                   @default(0)
+  mismatched            Int                   @default(0)
+  missing               Int                   @default(0)
+  unregistered          Int                   @default(0)
+  totalFirmQuantity     Decimal               @db.Decimal(18, 6) @map("total_firm_quantity")
+  totalCustodianQuantity Decimal              @db.Decimal(18, 6) @map("total_custodian_quantity")
+  totalFirmValue        Decimal               @db.Decimal(18, 2) @map("total_firm_value")
+  totalCustodianValue   Decimal               @db.Decimal(18, 2) @map("total_custodian_value")
+  breachesCreated       Int                   @default(0) @map("breaches_created")
+  completedAt           DateTime              @default(now()) @map("completed_at")
+  createdAt             DateTime              @default(now()) @map("created_at")
+
+  firm                  Firm                  @relation(fields: [firmId], references: [id])
+  items                 CustodyAssetReconItem[]
+
+  @@index([firmId, reconciliationDate])
+  @@map("custody_asset_reconciliations")
+}
+
+model CustodyAssetReconItem {
+  id                    String                @id @default(uuid()) @db.Uuid
+  reconciliationId      String                @db.Uuid @map("reconciliation_id")
+  clientAssetId         String                @db.Uuid @map("client_asset_id")
+  firmQuantity          Decimal               @db.Decimal(18, 6) @map("firm_quantity")
+  custodianQuantity     Decimal?              @db.Decimal(18, 6) @map("custodian_quantity")
+  quantityVariance      Decimal               @db.Decimal(18, 6) @map("quantity_variance")
+  firmMarketValue       Decimal?              @db.Decimal(18, 2) @map("firm_market_value")
+  custodianMarketValue  Decimal?              @db.Decimal(18, 2) @map("custodian_market_value")
+  valueVariance         Decimal?              @db.Decimal(18, 2) @map("value_variance")
+  status                CustodyReconStatus    @default(MATCHED)
+  breachId              String?               @db.Uuid @map("breach_id")
+  createdAt             DateTime              @default(now()) @map("created_at")
+
+  reconciliation        CustodyAssetReconciliation @relation(fields: [reconciliationId], references: [id])
+  clientAsset           ClientAsset           @relation(fields: [clientAssetId], references: [id])
+
+  @@index([reconciliationId])
+  @@index([clientAssetId])
+  @@map("custody_asset_recon_items")
 }
 
 model CmarSubmission {
@@ -1594,4 +1667,23 @@ model VerificationCertificate {
   @@index([firmId, issuedAt])
   @@index([sha256Hash])
   @@map("verification_certificates")
+}
+
+model SignOff {
+  id              String    @id @default(uuid()) @db.Uuid
+  firmId          String    @db.Uuid @map("firm_id")
+  entityType      String    @db.VarChar(50) @map("entity_type")
+  entityId        String    @db.Uuid @map("entity_id")
+  requestedBy     String    @db.Uuid @map("requested_by")
+  approvedBy      String?   @db.Uuid @map("approved_by")
+  status          String    @default("PENDING") @db.VarChar(20)
+  comments        String?   @db.Text
+  rejectionReason String?   @db.Text @map("rejection_reason")
+  requestedAt     DateTime  @default(now()) @map("requested_at")
+  resolvedAt      DateTime? @map("resolved_at")
+
+  firm            Firm      @relation(fields: [firmId], references: [id])
+
+  @@index([firmId, entityType, status])
+  @@map("sign_offs")
 }

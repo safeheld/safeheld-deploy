@@ -12,6 +12,14 @@ import {
   getImpactAssessments, createImpactAssessment, updateImpactAssessment,
   getCassDashboard,
 } from './service';
+import {
+  runCustodyAssetReconciliation,
+  getCustodyReconciliationHistory,
+  getNomineeAccountStatus,
+  getSubCustodianExposure,
+} from './cass6-service';
+import { generateCmarDraft, validateCmarSubmission, submitCmar } from './cmar-service';
+import { requestSignOff, approveSignOff, rejectSignOff } from './signoff-service';
 
 const router = Router();
 
@@ -368,6 +376,204 @@ router.put('/:firmId/cass/impact-assessments/:assessmentId',
       });
 
       successResponse(res, assessment);
+    } catch (err) { next(err); }
+  }
+);
+
+// ─── CASS 6 Custody Asset Reconciliation ────────────────────────────────────
+
+router.post('/:firmId/cass/custody-reconciliation',
+  authenticate, requireFirmAccess, requireRole('COMPLIANCE_OFFICER', 'ADMIN'),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { firmId } = req.params;
+      const schema = z.object({
+        reconciliationDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+      });
+      const body = schema.parse(req.body);
+      const reconId = await runCustodyAssetReconciliation(firmId, new Date(body.reconciliationDate));
+
+      await logAudit({
+        firmId, userId: req.user!.userId, action: 'CUSTODY_RECON_TRIGGERED',
+        entityType: 'custody_asset_reconciliations', entityId: reconId,
+        details: { reconciliationDate: body.reconciliationDate },
+        ipAddress: req.ip,
+      });
+
+      successResponse(res, { reconciliationId: reconId }, 201);
+    } catch (err) { next(err); }
+  }
+);
+
+router.get('/:firmId/cass/custody-reconciliation/history',
+  authenticate, requireFirmAccess,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { page, pageSize } = getPaginationParams(req.query as Record<string, unknown>);
+      const { from, to } = req.query as Record<string, string>;
+      const result = await getCustodyReconciliationHistory(req.params.firmId, {
+        page, pageSize,
+        from: from ? new Date(from) : undefined,
+        to: to ? new Date(to) : undefined,
+      });
+      paginatedResponse(res, result.reconciliations, {
+        page: result.page, pageSize: result.pageSize, total: result.total, totalPages: result.totalPages,
+      });
+    } catch (err) { next(err); }
+  }
+);
+
+router.get('/:firmId/cass/nominee-accounts',
+  authenticate, requireFirmAccess,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const data = await getNomineeAccountStatus(req.params.firmId);
+      successResponse(res, data);
+    } catch (err) { next(err); }
+  }
+);
+
+router.get('/:firmId/cass/sub-custodian-exposure',
+  authenticate, requireFirmAccess,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const data = await getSubCustodianExposure(req.params.firmId);
+      successResponse(res, data);
+    } catch (err) { next(err); }
+  }
+);
+
+// ─── CMAR Auto-Population ───────────────────────────────────────────────────
+
+router.post('/:firmId/cass/cmar/generate',
+  authenticate, requireFirmAccess, requireRole('COMPLIANCE_OFFICER', 'ADMIN'),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { firmId } = req.params;
+      const schema = z.object({
+        reportingPeriodEnd: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+      });
+      const body = schema.parse(req.body);
+      const draft = await generateCmarDraft(firmId, new Date(body.reportingPeriodEnd));
+
+      await logAudit({
+        firmId, userId: req.user!.userId, action: 'CMAR_DRAFT_GENERATED',
+        entityType: 'cmar_submissions', entityId: draft.id,
+        details: { reportingPeriodEnd: body.reportingPeriodEnd },
+        ipAddress: req.ip,
+      });
+
+      successResponse(res, draft, 201);
+    } catch (err) { next(err); }
+  }
+);
+
+router.post('/:firmId/cass/cmar/:submissionId/validate',
+  authenticate, requireFirmAccess, requireRole('COMPLIANCE_OFFICER', 'ADMIN'),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { firmId, submissionId } = req.params;
+      const result = await validateCmarSubmission(submissionId, firmId);
+
+      await logAudit({
+        firmId, userId: req.user!.userId, action: 'CMAR_VALIDATED',
+        entityType: 'cmar_submissions', entityId: submissionId,
+        details: { isValid: result.isValid, errorCount: result.errors.length, warningCount: result.warnings.length },
+        ipAddress: req.ip,
+      });
+
+      successResponse(res, result);
+    } catch (err) { next(err); }
+  }
+);
+
+router.post('/:firmId/cass/cmar/:submissionId/submit',
+  authenticate, requireFirmAccess, requireRole('COMPLIANCE_OFFICER', 'ADMIN'),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { firmId, submissionId } = req.params;
+      const submission = await submitCmar(submissionId, firmId, req.user!.userId);
+
+      await logAudit({
+        firmId, userId: req.user!.userId, action: 'CMAR_SUBMITTED',
+        entityType: 'cmar_submissions', entityId: submissionId,
+        details: { submittedAt: submission.submittedAt },
+        ipAddress: req.ip,
+      });
+
+      successResponse(res, submission);
+    } catch (err) { next(err); }
+  }
+);
+
+// ─── Dual Sign-Off ──────────────────────────────────────────────────────────
+
+router.post('/:firmId/cass/sign-off/request',
+  authenticate, requireFirmAccess, requireRole('COMPLIANCE_OFFICER', 'ADMIN'),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { firmId } = req.params;
+      const schema = z.object({
+        entityType: z.enum(['CMAR_SUBMISSION', 'RECONCILIATION_RUN', 'BREACH_RESOLUTION']),
+        entityId: z.string().uuid(),
+      });
+      const body = schema.parse(req.body);
+      const signOff = await requestSignOff(body.entityType, body.entityId, firmId, req.user!.userId);
+
+      await logAudit({
+        firmId, userId: req.user!.userId, action: 'SIGN_OFF_REQUESTED',
+        entityType: 'sign_offs', entityId: signOff.id,
+        details: { entityType: body.entityType, entityId: body.entityId },
+        ipAddress: req.ip,
+      });
+
+      successResponse(res, signOff, 201);
+    } catch (err) { next(err); }
+  }
+);
+
+router.post('/:firmId/cass/sign-off/:signOffId/approve',
+  authenticate, requireFirmAccess, requireRole('COMPLIANCE_OFFICER', 'ADMIN'),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { firmId, signOffId } = req.params;
+      const schema = z.object({
+        comments: z.string().max(5000).optional(),
+      });
+      const body = schema.parse(req.body);
+      const signOff = await approveSignOff(signOffId, firmId, req.user!.userId, body.comments);
+
+      await logAudit({
+        firmId, userId: req.user!.userId, action: 'SIGN_OFF_APPROVED',
+        entityType: 'sign_offs', entityId: signOffId,
+        details: { entityType: signOff.entityType, entityId: signOff.entityId, comments: body.comments },
+        ipAddress: req.ip,
+      });
+
+      successResponse(res, signOff);
+    } catch (err) { next(err); }
+  }
+);
+
+router.post('/:firmId/cass/sign-off/:signOffId/reject',
+  authenticate, requireFirmAccess, requireRole('COMPLIANCE_OFFICER', 'ADMIN'),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { firmId, signOffId } = req.params;
+      const schema = z.object({
+        reason: z.string().min(1).max(5000),
+      });
+      const body = schema.parse(req.body);
+      const signOff = await rejectSignOff(signOffId, firmId, req.user!.userId, body.reason);
+
+      await logAudit({
+        firmId, userId: req.user!.userId, action: 'SIGN_OFF_REJECTED',
+        entityType: 'sign_offs', entityId: signOffId,
+        details: { entityType: signOff.entityType, entityId: signOff.entityId, reason: body.reason },
+        ipAddress: req.ip,
+      });
+
+      successResponse(res, signOff);
     } catch (err) { next(err); }
   }
 );

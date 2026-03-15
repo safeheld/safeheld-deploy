@@ -4,6 +4,7 @@ import { logger } from '../utils/logger';
 import { runReconciliation } from '../modules/reconciliation/service';
 import { detectGovernanceBreaches } from '../modules/breach/service';
 import { generateSafeguardingReturn } from '../modules/reporting/service';
+import { checkPegStatus } from '../modules/stablecoin/peg-service';
 
 const DAY_MAP: Record<string, number> = {
   SUN: 0, MON: 1, TUE: 2, WED: 3, THU: 4, FRI: 5, SAT: 6,
@@ -121,4 +122,35 @@ cron.schedule('0 8 1 * *', async () => {
   }
 });
 
-logger.info('Scheduler initialized — reconciliation 06:00 UTC daily, governance 07:00 UTC weekdays, reports 08:00 UTC monthly');
+/**
+ * Stablecoin peg monitoring — runs every 4 hours.
+ * Fetches live prices and checks peg status for all active firms with stablecoin tokens.
+ */
+cron.schedule('0 */4 * * *', async () => {
+  logger.info('Scheduled stablecoin peg check started');
+
+  try {
+    const firms = await prisma.firm.findMany({
+      where: {
+        status: 'ACTIVE',
+        stablecoinTokens: { some: {} },
+      },
+      select: { id: true, name: true },
+    });
+
+    for (const firm of firms) {
+      try {
+        const result = await checkPegStatus(firm.id);
+        logger.info({ firmId: firm.id, firmName: firm.name, checked: result.checked }, 'Peg check completed');
+      } catch (err) {
+        logger.error({ err, firmId: firm.id }, 'Peg check failed for firm');
+      }
+    }
+
+    logger.info({ totalFirms: firms.length }, 'Scheduled stablecoin peg check finished');
+  } catch (err) {
+    logger.error({ err }, 'Scheduled stablecoin peg check job failed');
+  }
+});
+
+logger.info('Scheduler initialized — reconciliation 06:00 UTC daily, governance 07:00 UTC weekdays, reports 08:00 UTC monthly, peg check every 4h');

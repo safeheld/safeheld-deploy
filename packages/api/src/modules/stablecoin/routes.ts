@@ -10,6 +10,7 @@ import {
   getAttestations, generateAttestation,
   getStablecoinDashboard,
 } from './service';
+import { checkPegStatus, getReserveRatio } from './peg-service';
 
 const router = Router();
 
@@ -230,6 +231,50 @@ router.post('/:firmId/stablecoin/attestations/generate',
       });
 
       successResponse(res, attestation, 201);
+    } catch (err) { next(err); }
+  }
+);
+
+// ─── Automated Peg Check ────────────────────────────────────────────────────
+
+router.post('/:firmId/stablecoin/check-peg',
+  authenticate, requireFirmAccess, requireRole('COMPLIANCE_OFFICER', 'ADMIN'),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const result = await checkPegStatus(req.params.firmId);
+
+      await logAudit({
+        firmId: req.params.firmId, userId: req.user!.userId, action: 'PEG_CHECK_TRIGGERED',
+        entityType: 'stablecoin_tokens', entityId: req.params.firmId,
+        details: { checked: result.checked },
+        ipAddress: req.ip,
+      });
+
+      successResponse(res, result);
+    } catch (err) { next(err); }
+  }
+);
+
+router.get('/:firmId/stablecoin/peg-history',
+  authenticate, requireFirmAccess,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { page, pageSize } = getPaginationParams(req.query as Record<string, unknown>);
+      const { token_id, peg_status } = req.query as Record<string, string>;
+      const result = await getPegSnapshots(req.params.firmId, { page, pageSize, tokenId: token_id, pegStatus: peg_status });
+      paginatedResponse(res, result.snapshots, {
+        page: result.page, pageSize: result.pageSize, total: result.total, totalPages: result.totalPages,
+      });
+    } catch (err) { next(err); }
+  }
+);
+
+router.get('/:firmId/stablecoin/reserve-ratio',
+  authenticate, requireFirmAccess,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const result = await getReserveRatio(req.params.firmId);
+      successResponse(res, result);
     } catch (err) { next(err); }
   }
 );
