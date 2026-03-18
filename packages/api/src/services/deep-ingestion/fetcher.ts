@@ -125,24 +125,62 @@ async function extractHtml(response: Response): Promise<{ content: string; hash:
   const html = await response.text();
   const hash = crypto.createHash('sha256').update(html).digest('hex');
 
-  // Strip HTML tags, scripts, styles — simple extraction
-  const text = html
-    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
-    .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '')
-    .replace(/<nav\b[^<]*(?:(?!<\/nav>)<[^<]*)*<\/nav>/gi, '')
-    .replace(/<header\b[^<]*(?:(?!<\/header>)<[^<]*)*<\/header>/gi, '')
-    .replace(/<footer\b[^<]*(?:(?!<\/footer>)<[^<]*)*<\/footer>/gi, '')
-    .replace(/<[^>]+>/g, ' ')
+  // Strip HTML using safe iterative approach (avoids catastrophic backtracking)
+  const text = stripHtmlSafe(html);
+
+  return { content: text, hash, pageCount: null };
+}
+
+/**
+ * Safely strip HTML tags and extract text content.
+ * Uses iterative tag removal instead of complex regex to avoid
+ * catastrophic backtracking on large/complex HTML documents.
+ */
+function stripHtmlSafe(html: string): string {
+  // Remove block elements we don't want (script, style, nav, header, footer)
+  // Use simple start/end tag matching with indexOf — no regex backtracking
+  const tagsToRemove = ['script', 'style', 'nav', 'header', 'footer', 'noscript', 'svg'];
+
+  let result = html;
+  for (const tag of tagsToRemove) {
+    let output = '';
+    let pos = 0;
+    while (pos < result.length) {
+      const openIdx = result.toLowerCase().indexOf(`<${tag}`, pos);
+      if (openIdx === -1) {
+        output += result.substring(pos);
+        break;
+      }
+      output += result.substring(pos, openIdx);
+      const closeTag = `</${tag}>`;
+      const closeIdx = result.toLowerCase().indexOf(closeTag, openIdx);
+      if (closeIdx === -1) {
+        // No closing tag — skip just the opening tag
+        const tagEnd = result.indexOf('>', openIdx);
+        pos = tagEnd === -1 ? result.length : tagEnd + 1;
+      } else {
+        pos = closeIdx + closeTag.length;
+      }
+    }
+    result = output;
+  }
+
+  // Strip remaining HTML tags
+  result = result.replace(/<[^>]+>/g, ' ');
+
+  // Decode common HTML entities
+  result = result
     .replace(/&nbsp;/g, ' ')
     .replace(/&amp;/g, '&')
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"')
-    .replace(/&#\d+;/g, '')
-    .replace(/\s+/g, ' ')
-    .trim();
+    .replace(/&apos;/g, "'")
+    .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(parseInt(n, 10)))
+    .replace(/&#x([0-9a-fA-F]+);/g, (_, n) => String.fromCharCode(parseInt(n, 16)));
 
-  return { content: text, hash, pageCount: null };
+  // Collapse whitespace
+  return result.replace(/\s+/g, ' ').trim();
 }
 
 async function fetchHtmlFallback(url: string): Promise<{ content: string; hash: string; pageCount: number | null }> {
