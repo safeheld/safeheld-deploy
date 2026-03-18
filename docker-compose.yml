@@ -104,6 +104,7 @@ services:
     env_file: .env
     environment:
       NODE_ENV: production
+      NODE_OPTIONS: "--max-old-space-size=4096"
       # These override any DATABASE_URL / REDIS_URL / S3 values in .env
       # so that internal Docker hostnames are always used:
       DATABASE_URL:        postgresql://${POSTGRES_USER:-safeheld}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-safeheld}
@@ -126,9 +127,9 @@ services:
     healthcheck:
       test: ['CMD-SHELL', 'wget -qO- http://localhost:3001/health || exit 1']
       interval: 30s
-      timeout: 10s
+      timeout: 30s
       start_period: 40s
-      retries: 3
+      retries: 5
 
   # ── Web (React SPA via Nginx — proxies /api/* to the api container) ──────────
   web:
