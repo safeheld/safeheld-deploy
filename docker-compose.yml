@@ -104,7 +104,7 @@ services:
     env_file: .env
     environment:
       NODE_ENV: production
-      NODE_OPTIONS: "--max-old-space-size=2048"
+      NODE_OPTIONS: "--max-old-space-size=4096"
       # These override any DATABASE_URL / REDIS_URL / S3 values in .env
       # so that internal Docker hostnames are always used:
       DATABASE_URL:        postgresql://${POSTGRES_USER:-safeheld}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-safeheld}
