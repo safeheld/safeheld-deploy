@@ -122,17 +122,13 @@ function extractTextFromPdfBuffer(buffer: Buffer): string {
 }
 
 async function extractHtml(response: Response): Promise<{ content: string; hash: string; pageCount: number | null }> {
-  // Limit response to 2MB to prevent OOM on large pages
-  const MAX_HTML_SIZE = 2 * 1024 * 1024;
-  const buffer = await response.arrayBuffer();
-  const rawBytes = Buffer.from(buffer);
-  const html = rawBytes.length > MAX_HTML_SIZE
-    ? rawBytes.subarray(0, MAX_HTML_SIZE).toString('utf-8')
-    : rawBytes.toString('utf-8');
-  const hash = crypto.createHash('sha256').update(rawBytes).digest('hex');
+  const html = await response.text();
+  // Truncate to 500KB of text to keep memory bounded
+  const truncated = html.length > 500_000 ? html.substring(0, 500_000) : html;
+  const hash = crypto.createHash('sha256').update(truncated).digest('hex');
 
   // Strip HTML using safe iterative approach (avoids catastrophic backtracking)
-  const text = stripHtmlSafe(html);
+  const text = stripHtmlSafe(truncated);
 
   return { content: text, hash, pageCount: null };
 }
