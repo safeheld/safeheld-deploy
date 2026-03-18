@@ -139,37 +139,61 @@ async function extractHtml(response: Response): Promise<{ content: string; hash:
 
 /**
  * Safely strip HTML tags and extract text content.
- * Uses iterative tag removal instead of complex regex to avoid
- * catastrophic backtracking on large/complex HTML documents.
+ * Works on the lowercase version once, collects keep-ranges, then
+ * builds the output from the original string. Memory-efficient.
  */
 function stripHtmlSafe(html: string): string {
-  // Remove block elements we don't want (script, style, nav, header, footer)
-  // Use simple start/end tag matching with indexOf — no regex backtracking
+  const lower = html.toLowerCase();
   const tagsToRemove = ['script', 'style', 'nav', 'header', 'footer', 'noscript', 'svg'];
 
-  let result = html;
+  // Build a list of ranges to EXCLUDE
+  const excludes: Array<[number, number]> = [];
   for (const tag of tagsToRemove) {
-    let output = '';
+    const openTag = `<${tag}`;
+    const closeTag = `</${tag}>`;
     let pos = 0;
-    while (pos < result.length) {
-      const openIdx = result.toLowerCase().indexOf(`<${tag}`, pos);
-      if (openIdx === -1) {
-        output += result.substring(pos);
-        break;
+    while (pos < lower.length) {
+      const openIdx = lower.indexOf(openTag, pos);
+      if (openIdx === -1) break;
+      // Make sure it's a real tag (followed by space, >, or end)
+      const charAfter = lower[openIdx + openTag.length];
+      if (charAfter && charAfter !== ' ' && charAfter !== '>' && charAfter !== '\t' && charAfter !== '\n') {
+        pos = openIdx + 1;
+        continue;
       }
-      output += result.substring(pos, openIdx);
-      const closeTag = `</${tag}>`;
-      const closeIdx = result.toLowerCase().indexOf(closeTag, openIdx);
+      const closeIdx = lower.indexOf(closeTag, openIdx);
       if (closeIdx === -1) {
-        // No closing tag — skip just the opening tag
-        const tagEnd = result.indexOf('>', openIdx);
-        pos = tagEnd === -1 ? result.length : tagEnd + 1;
+        const tagEnd = lower.indexOf('>', openIdx);
+        excludes.push([openIdx, tagEnd === -1 ? lower.length : tagEnd + 1]);
+        pos = tagEnd === -1 ? lower.length : tagEnd + 1;
       } else {
+        excludes.push([openIdx, closeIdx + closeTag.length]);
         pos = closeIdx + closeTag.length;
       }
     }
-    result = output;
   }
+
+  // Sort excludes and merge overlaps
+  excludes.sort((a, b) => a[0] - b[0]);
+  const merged: Array<[number, number]> = [];
+  for (const ex of excludes) {
+    if (merged.length > 0 && ex[0] <= merged[merged.length - 1][1]) {
+      merged[merged.length - 1][1] = Math.max(merged[merged.length - 1][1], ex[1]);
+    } else {
+      merged.push([...ex]);
+    }
+  }
+
+  // Build result from non-excluded ranges
+  const parts: string[] = [];
+  let pos = 0;
+  for (const [start, end] of merged) {
+    if (pos < start) parts.push(html.substring(pos, start));
+    pos = end;
+  }
+  if (pos < html.length) parts.push(html.substring(pos));
+
+  let result = parts.join(' ');
 
   // Strip remaining HTML tags
   result = result.replace(/<[^>]+>/g, ' ');
