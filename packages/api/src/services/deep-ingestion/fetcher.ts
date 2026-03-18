@@ -57,9 +57,24 @@ async function extractPdf(response: Response): Promise<{ content: string; hash: 
   const hash = crypto.createHash('sha256').update(buffer).digest('hex');
 
   try {
-    // Try dynamic import of pdf-parse
+    // pdf-parse v2.x exports a PDFParse class, not a callable function
     const mod = await import('pdf-parse');
-    const parseFn = typeof mod === 'function' ? mod : (mod as any).default || (mod as any).parsePdf;
+    const PDFParse = (mod as any).PDFParse || (mod as any).default?.PDFParse || (mod as any).default;
+
+    if (typeof PDFParse === 'function' && PDFParse.prototype) {
+      // v2.x class-based API
+      const parser = new PDFParse({ data: buffer });
+      const result = await parser.getText();
+      const info = await parser.getInfo().catch(() => ({})) as any;
+      return {
+        content: result?.text || '',
+        hash,
+        pageCount: info?.numPages || info?.numpages || null,
+      };
+    }
+
+    // v1.x fallback — callable function
+    const parseFn = typeof mod === 'function' ? mod : (mod as any).default;
     if (typeof parseFn === 'function') {
       const data = await parseFn(buffer);
       return {
@@ -68,7 +83,8 @@ async function extractPdf(response: Response): Promise<{ content: string; hash: 
         pageCount: data.numpages || null,
       };
     }
-    throw new Error('pdf-parse module does not export a callable function');
+
+    throw new Error('pdf-parse module: no compatible API found');
   } catch (err) {
     logger.warn({ err: (err as Error).message }, 'PDF parsing unavailable — attempting text extraction from binary');
     // Basic text extraction from PDF binary as fallback
