@@ -122,8 +122,14 @@ function extractTextFromPdfBuffer(buffer: Buffer): string {
 }
 
 async function extractHtml(response: Response): Promise<{ content: string; hash: string; pageCount: number | null }> {
-  const html = await response.text();
-  const hash = crypto.createHash('sha256').update(html).digest('hex');
+  // Limit response to 2MB to prevent OOM on large pages
+  const MAX_HTML_SIZE = 2 * 1024 * 1024;
+  const buffer = await response.arrayBuffer();
+  const rawBytes = Buffer.from(buffer);
+  const html = rawBytes.length > MAX_HTML_SIZE
+    ? rawBytes.subarray(0, MAX_HTML_SIZE).toString('utf-8')
+    : rawBytes.toString('utf-8');
+  const hash = crypto.createHash('sha256').update(rawBytes).digest('hex');
 
   // Strip HTML using safe iterative approach (avoids catastrophic backtracking)
   const text = stripHtmlSafe(html);
