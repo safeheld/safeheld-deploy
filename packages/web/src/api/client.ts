@@ -316,6 +316,21 @@ export const cassApi = {
     apiClient.put(`/firms/${firmId}/cass/impact-assessments/${assessmentId}`, data).then(r => r.data.data),
 };
 
+// ─── AI Assistant ────────────────────────────────────────────────────────────
+
+export const aiAssistantApi = {
+  getProactiveAlert: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/ai-assistant/proactive`).then(r => r.data.data),
+  getHistory: (firmId: string, params?: Record<string, string>) =>
+    apiClient.get(`/firms/${firmId}/ai-assistant/history`, { params }).then(r => r.data),
+  clearHistory: (firmId: string) =>
+    apiClient.delete(`/firms/${firmId}/ai-assistant/history`).then(r => r.data.data),
+  getAdminUsage: () =>
+    apiClient.get('/admin/ai-assistant/usage').then(r => r.data.data),
+  getAdminConversations: (params?: Record<string, string>) =>
+    apiClient.get('/admin/ai-assistant/conversations', { params }).then(r => r.data),
+};
+
 // ─── Billing ─────────────────────────────────────────────────────────────────
 
 export const billingApi = {

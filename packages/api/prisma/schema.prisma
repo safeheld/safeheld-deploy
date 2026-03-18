@@ -568,6 +568,7 @@ model Firm {
   billingDay                      Int                 @default(28) @map("billing_day")
   billingInvoices                 BillingInvoice[]
   billingSettings                 BillingSetting[]
+  aiConversations                 AiConversation[]
 
   @@map("firms")
 }
@@ -607,6 +608,7 @@ model User {
   emailLogs         EmailLog[]
   uploadedPolicies  PolicyDocument[]
   billingSettings   BillingSetting[]
+  aiConversations   AiConversation[]
 
   @@map("users")
 }
@@ -2015,4 +2017,26 @@ model BillingSetting {
 
   @@index([firmId])
   @@map("billing_settings")
+}
+
+// ─── AI Assistant ─────────────────────────────────────────────────────────────
+
+model AiConversation {
+  id          String   @id @default(uuid()) @db.Uuid
+  firmId      String   @db.Uuid @map("firm_id")
+  userId      String   @db.Uuid @map("user_id")
+  sessionId   String   @db.VarChar(100) @map("session_id")
+  role        String   @db.VarChar(20)
+  content     String   @db.Text
+  contextType String   @default("general") @db.VarChar(50) @map("context_type")
+  tokensUsed  Int      @default(0) @map("tokens_used")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  firm        Firm     @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([firmId, createdAt(sort: Desc)])
+  @@index([sessionId])
+  @@index([userId])
+  @@map("ai_conversations")
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import TopBar from './TopBar';
+import AiChatWidget from '../AiChatWidget';
 
 export default function Layout() {
   return (
@@ -18,6 +19,7 @@ export default function Layout() {
           <Outlet />
         </main>
       </div>
+      <AiChatWidget />
     </div>
   );
 }
