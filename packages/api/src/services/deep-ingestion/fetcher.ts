@@ -248,9 +248,12 @@ export function chunkContent(content: string, maxChars = 16000, overlapChars = 8
     }
 
     chunks.push(content.substring(start, end));
-    start = end - overlapChars;
-    if (start < 0) start = 0;
+    const newStart = end - overlapChars;
+    // Ensure forward progress — must advance by at least 1 character
+    start = Math.max(newStart, start + 1);
     if (start >= content.length) break;
+    // Safety: cap at 1000 chunks to prevent infinite loops
+    if (chunks.length >= 1000) break;
   }
 
   return chunks;
