@@ -1,8 +1,6 @@
 import { prisma } from '../../utils/prisma';
 import { logger } from '../../utils/logger';
-import Anthropic from '@anthropic-ai/sdk';
-
-const anthropic = new Anthropic();
+import { config } from '../../config';
 
 function toNum(val: unknown): number {
   if (val === null || val === undefined) return 0;
@@ -144,7 +142,7 @@ Tone: Professional but approachable. You are a trusted compliance expert, not a 
   return context;
 }
 
-// ─── Chat (Streaming via SSE) ────────────────────────────────────────────────
+// ─── Chat (Streaming via SSE using raw fetch) ───────────────────────────────
 
 export async function streamChat(
   firmId: string,
@@ -167,36 +165,68 @@ export async function streamChat(
       });
     }
 
-    // Call Claude API with streaming
-    const stream = anthropic.messages.stream({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 1024,
-      system: systemPrompt,
-      messages: messages.map(m => ({ role: m.role, content: m.content })),
+    // Call Claude API with streaming via raw fetch
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': config.ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1024,
+        stream: true,
+        system: systemPrompt,
+        messages: messages.map(m => ({ role: m.role, content: m.content })),
+      }),
     });
 
+    if (!response.ok) {
+      const errText = await response.text();
+      throw new Error(`Claude API error ${response.status}: ${errText.substring(0, 200)}`);
+    }
+
+    const reader = response.body?.getReader();
+    if (!reader) throw new Error('No response body reader');
+
+    const decoder = new TextDecoder();
     let fullResponse = '';
+    let tokensUsed = 0;
+    let buffer = '';
 
-    stream.on('text', (text) => {
-      fullResponse += text;
-      onChunk(text);
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n');
+      buffer = lines.pop() || '';
+
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        const data = line.slice(6).trim();
+        if (data === '[DONE]') continue;
+
+        try {
+          const event = JSON.parse(data);
+          if (event.type === 'content_block_delta' && event.delta?.text) {
+            fullResponse += event.delta.text;
+            onChunk(event.delta.text);
+          }
+          if (event.type === 'message_delta' && event.usage) {
+            tokensUsed = (event.usage.input_tokens || 0) + (event.usage.output_tokens || 0);
+          }
+        } catch {}
+      }
+    }
+
+    // Save assistant response
+    await prisma.aiConversation.create({
+      data: { firmId, userId, sessionId, role: 'assistant', content: fullResponse, contextType, tokensUsed },
     });
 
-    stream.on('finalMessage', async (message) => {
-      const tokensUsed = (message.usage?.input_tokens || 0) + (message.usage?.output_tokens || 0);
-
-      // Save assistant response
-      await prisma.aiConversation.create({
-        data: { firmId, userId, sessionId, role: 'assistant', content: fullResponse, contextType, tokensUsed },
-      });
-
-      onDone(fullResponse, tokensUsed);
-    });
-
-    stream.on('error', (err) => {
-      logger.error({ err, firmId }, 'Claude API stream error');
-      onError(err instanceof Error ? err : new Error(String(err)));
-    });
+    onDone(fullResponse, tokensUsed);
   } catch (err) {
     logger.error({ err, firmId }, 'AI assistant chat failed');
     onError(err instanceof Error ? err : new Error(String(err)));
