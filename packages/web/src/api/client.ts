@@ -316,6 +316,27 @@ export const cassApi = {
     apiClient.put(`/firms/${firmId}/cass/impact-assessments/${assessmentId}`, data).then(r => r.data.data),
 };
 
+// ─── Billing ─────────────────────────────────────────────────────────────────
+
+export const billingApi = {
+  getDashboard: () =>
+    apiClient.get('/admin/billing/dashboard').then(r => r.data.data),
+  getFirms: (params?: Record<string, string>) =>
+    apiClient.get('/admin/billing/firms', { params }).then(r => r.data),
+  updateFirm: (firmId: string, data: object) =>
+    apiClient.patch(`/admin/billing/firms/${firmId}`, data).then(r => r.data.data),
+  getInvoices: (params?: Record<string, string>) =>
+    apiClient.get('/admin/billing/invoices', { params }).then(r => r.data),
+  triggerInvoice: (firmId: string) =>
+    apiClient.post(`/admin/billing/firms/${firmId}/invoice`).then(r => r.data.data),
+  extendTrial: (firmId: string, trialEndsAt: string) =>
+    apiClient.post(`/admin/billing/firms/${firmId}/trial/extend`, { trialEndsAt }).then(r => r.data.data),
+  getFirmBilling: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/billing`).then(r => r.data.data),
+  getFirmInvoices: (firmId: string, params?: Record<string, string>) =>
+    apiClient.get(`/firms/${firmId}/billing/invoices`, { params }).then(r => r.data),
+};
+
 // ─── Stablecoin ──────────────────────────────────────────────────────────────
 
 export const stablecoinApi = {

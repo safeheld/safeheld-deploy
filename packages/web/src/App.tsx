@@ -15,6 +15,7 @@ import GovernancePage from './pages/governance/GovernancePage';
 import AdminPage from './pages/admin/AdminPage';
 import RegMonitorPage from './pages/admin/RegMonitorPage';
 import DeepIngestionPage from './pages/admin/DeepIngestionPage';
+import BillingPage from './pages/admin/BillingPage';
 import AuditPage from './pages/audit/AuditPage';
 import BankDashboardPage from './pages/bank-dashboard/BankDashboardPage';
 import CassPage from './pages/cass/CassPage';
@@ -101,6 +102,14 @@ export default function App() {
           element={
             <AdminRoute>
               <DeepIngestionPage />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="admin/billing"
+          element={
+            <AdminRoute>
+              <BillingPage />
             </AdminRoute>
           }
         />

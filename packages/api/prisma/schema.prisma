@@ -559,6 +559,16 @@ model Firm {
   signOffs                        SignOff[]
   remediationActions              RemediationAction[]
 
+  // Billing
+  stripeCustomerId                String?             @db.VarChar(255) @map("stripe_customer_id")
+  baseMonthlyFee                  Decimal             @default(1500) @db.Decimal(12, 2) @map("base_monthly_fee")
+  basisPointsRate                 Decimal             @default(0.0000025) @db.Decimal(12, 10) @map("basis_points_rate")
+  billingStatus                   BillingStatus       @default(TRIAL) @map("billing_status")
+  trialEndsAt                     DateTime?           @db.Timestamptz @map("trial_ends_at")
+  billingDay                      Int                 @default(28) @map("billing_day")
+  billingInvoices                 BillingInvoice[]
+  billingSettings                 BillingSetting[]
+
   @@map("firms")
 }
 
@@ -596,6 +606,7 @@ model User {
   alertSettings     AlertSetting[]
   emailLogs         EmailLog[]
   uploadedPolicies  PolicyDocument[]
+  billingSettings   BillingSetting[]
 
   @@map("users")
 }
@@ -1948,4 +1959,60 @@ model IngestionValidationResult {
   @@index([framework, validationStatus])
   @@index([documentId])
   @@map("ingestion_validation_results")
+}
+
+// ─── Billing ──────────────────────────────────────────────────────────────────
+
+enum BillingStatus {
+  TRIAL
+  ACTIVE
+  SUSPENDED
+  CANCELLED
+}
+
+enum InvoiceStatus {
+  DRAFT
+  PENDING
+  PAID
+  FAILED
+  VOID
+}
+
+model BillingInvoice {
+  id                String        @id @default(uuid()) @db.Uuid
+  firmId            String        @db.Uuid @map("firm_id")
+  stripeInvoiceId   String?       @db.VarChar(255) @map("stripe_invoice_id")
+  periodStart       DateTime      @db.Date @map("period_start")
+  periodEnd         DateTime      @db.Date @map("period_end")
+  monthEndBalance   Decimal       @default(0) @db.Decimal(18, 2) @map("month_end_balance")
+  baseFee           Decimal       @db.Decimal(12, 2) @map("base_fee")
+  basisPointsAmount Decimal       @db.Decimal(12, 2) @map("basis_points_amount")
+  totalAmount       Decimal       @db.Decimal(12, 2) @map("total_amount")
+  currency          String        @default("GBP") @db.Char(3)
+  status            InvoiceStatus @default(DRAFT)
+  createdAt         DateTime      @default(now()) @map("created_at")
+  paidAt            DateTime?     @db.Timestamptz @map("paid_at")
+
+  firm              Firm          @relation(fields: [firmId], references: [id], onDelete: Cascade)
+
+  @@index([firmId, status])
+  @@index([periodStart, periodEnd])
+  @@map("billing_invoices")
+}
+
+model BillingSetting {
+  id              String   @id @default(uuid()) @db.Uuid
+  firmId          String   @db.Uuid @map("firm_id")
+  baseMonthlyFee  Decimal  @db.Decimal(12, 2) @map("base_monthly_fee")
+  basisPointsRate Decimal  @db.Decimal(12, 10) @map("basis_points_rate")
+  trialDays       Int      @default(30) @map("trial_days")
+  notes           String?  @db.Text
+  updatedBy       String?  @db.Uuid @map("updated_by")
+  updatedAt       DateTime @default(now()) @map("updated_at")
+
+  firm            Firm     @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  updater         User?    @relation(fields: [updatedBy], references: [id])
+
+  @@index([firmId])
+  @@map("billing_settings")
 }

@@ -35,6 +35,7 @@ import { geniusActRouter } from './modules/genius-act/routes';
 import { rulesEngineRouter, frameworkAdminRouter } from './modules/rules-engine/routes';
 import { regMonitorRouter } from './modules/reg-monitor/routes';
 import { deepIngestionRouter } from './modules/deep-ingestion/routes';
+import { billingAdminRouter, firmBillingRouter, stripeWebhookRouter } from './modules/billing/routes';
 
 // Ensure Bull queues are registered
 import './modules/ingestion/queue';
@@ -162,6 +163,9 @@ app.use('/api/v1/frameworks', generalLimiter, frameworkAdminRouter);
 app.use('/api/v1/admin/frameworks', generalLimiter, frameworkAdminRouter);
 app.use('/api/v1/admin/reg-monitor', generalLimiter, regMonitorRouter);
 app.use('/api/v1/admin/deep-ingestion', generalLimiter, deepIngestionRouter);
+app.use('/api/v1/admin/billing', generalLimiter, billingAdminRouter);
+app.use('/api/v1/firms', generalLimiter, firmBillingRouter);
+app.use('/api/v1/webhook', stripeWebhookRouter);
 app.use('/api/v1/bank-dashboard', generalLimiter, bankDashboardRouter);
 
 // ─── Error Handling ───────────────────────────────────────────────────────────

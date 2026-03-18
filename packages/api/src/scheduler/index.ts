@@ -8,6 +8,7 @@ import { checkPegStatus } from '../modules/stablecoin/peg-service';
 import { escalateOverdueActions } from '../services/rules-engine';
 import { runFullMonitor } from '../services/reg-monitor';
 import { runFullIngestion } from '../services/deep-ingestion';
+import { runMonthlyBilling, checkTrials, checkFailedPayments } from '../services/billing';
 
 const DAY_MAP: Record<string, number> = {
   SUN: 0, MON: 1, TUE: 2, WED: 3, THU: 4, FRI: 5, SAT: 6,
@@ -200,4 +201,46 @@ cron.schedule('0 2 1 1,4,7,10 *', async () => {
   }
 });
 
-logger.info('Scheduler initialized — recon 06:00 daily, governance 07:00 weekdays, reports 08:00 monthly, peg 4h, remediation 08:00 weekdays, reg-monitor 06:00 daily, deep-ingestion quarterly');
+/**
+ * Monthly billing — runs at 07:00 UTC on the 1st of each month.
+ * Generates invoices for all active firms based on month-end safeguarded balance.
+ */
+cron.schedule('0 7 1 * *', async () => {
+  logger.info('Monthly billing job started');
+  try {
+    const result = await runMonthlyBilling();
+    logger.info(result, 'Monthly billing job finished');
+  } catch (err) {
+    logger.error({ err }, 'Monthly billing job failed');
+  }
+});
+
+/**
+ * Trial management — runs at 09:00 UTC daily.
+ * Warns firms 7 days before trial expiry, activates expired trials.
+ */
+cron.schedule('0 9 * * *', async () => {
+  logger.info('Trial management check started');
+  try {
+    const result = await checkTrials();
+    logger.info(result, 'Trial management check finished');
+  } catch (err) {
+    logger.error({ err }, 'Trial management check failed');
+  }
+});
+
+/**
+ * Failed payment check — runs at 10:00 UTC daily.
+ * Suspends firms with failed invoices older than 14 days.
+ */
+cron.schedule('0 10 * * *', async () => {
+  logger.info('Failed payment check started');
+  try {
+    const suspended = await checkFailedPayments();
+    logger.info({ suspended }, 'Failed payment check finished');
+  } catch (err) {
+    logger.error({ err }, 'Failed payment check failed');
+  }
+});
+
+logger.info('Scheduler initialized — recon 06:00 daily, governance 07:00 weekdays, reports 08:00 monthly, billing 07:00 1st, trials 09:00 daily, peg 4h, remediation 08:00 weekdays, reg-monitor 06:00 daily, deep-ingestion quarterly');
