@@ -206,7 +206,7 @@ export async function runFullIngestion(): Promise<FullIngestionResult> {
   await logAudit({
     action: 'DEEP_INGESTION_STARTED',
     entityType: 'ingestion_documents',
-    entityId: 'SYSTEM',
+    entityId: '00000000-0000-0000-0000-000000000000',
     details: { totalSources: LEGISLATIVE_SOURCES.length },
   });
 
@@ -240,7 +240,7 @@ export async function runFullIngestion(): Promise<FullIngestionResult> {
   await logAudit({
     action: 'DEEP_INGESTION_COMPLETE',
     entityType: 'ingestion_documents',
-    entityId: 'SYSTEM',
+    entityId: '00000000-0000-0000-0000-000000000000',
     details: {
       ...fullResult.summary,
       successfulSources,
@@ -283,7 +283,7 @@ export async function runFrameworkIngestion(framework: string): Promise<Ingestio
   await logAudit({
     action: 'DEEP_INGESTION_FRAMEWORK_STARTED',
     entityType: 'ingestion_documents',
-    entityId: framework,
+    entityId: '00000000-0000-0000-0000-000000000000',
     details: { framework, sourceCount: sources.length },
   });
 

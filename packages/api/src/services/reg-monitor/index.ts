@@ -295,7 +295,7 @@ export async function runFullMonitor(): Promise<{
   await logAudit({
     action: 'REG_MONITOR_RUN',
     entityType: 'regulatory_sources',
-    entityId: 'SYSTEM',
+    entityId: '00000000-0000-0000-0000-000000000000',
     details: { checked, changed, errors },
   });
 
@@ -533,7 +533,7 @@ export async function assessFirmImpact(framework: string, ruleCode: string, user
     userId,
     action: 'FIRM_IMPACT_ASSESSED',
     entityType: 'framework_rules',
-    entityId: ruleCode,
+    entityId: '00000000-0000-0000-0000-000000000000',
     details: {
       framework,
       ruleCode,
