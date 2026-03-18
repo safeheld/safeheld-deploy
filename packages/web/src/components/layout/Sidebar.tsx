@@ -22,6 +22,8 @@ const navItems: NavItem[] = [
   { path: '/audit', label: 'Audit Log', icon: '◎', roles: ['COMPLIANCE_OFFICER', 'ADMIN', 'AUDITOR'] },
   { path: '/bank-dashboard', label: 'Bank Dashboard', icon: '⊞', roles: ['BANK_VIEWER', 'ADMIN'] },
   { path: '/admin', label: 'Admin', icon: '⚙', roles: ['ADMIN'] },
+  { path: '/admin/reg-monitor', label: 'Reg Monitor', icon: '⊕', roles: ['ADMIN'] },
+  { path: '/admin/deep-ingestion', label: 'Deep Ingestion', icon: '⊘', roles: ['ADMIN'] },
 ];
 
 const linkStyle = (isActive: boolean): React.CSSProperties => ({

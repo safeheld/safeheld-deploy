@@ -11,6 +11,7 @@ import {
 } from '@prisma/client';
 import { detectBreaches } from '../breach/service';
 import { sendEmail, reconciliationFailedEmail } from '../../utils/email';
+import { rulesEngine } from '../../services/rules-engine';
 
 function toNum(val: unknown): number {
   if (val === null || val === undefined) return 0;
@@ -265,6 +266,16 @@ export async function runReconciliation(params: RunReconciliationParams): Promis
       }
 
       logger.info({ firmId, accountId: account.id, currency, status }, 'External recon completed');
+    }
+  }
+
+  // ─── Rules Engine Evaluation ──────────────────────────────────────────────────
+  // Run the rules engine against each reconciliation run
+  for (const runId of runIds) {
+    try {
+      await rulesEngine.evaluate(runId);
+    } catch (err) {
+      logger.error({ err, runId, firmId }, 'Rules engine evaluation failed — reconciliation run persisted without compliance scoring');
     }
   }
 

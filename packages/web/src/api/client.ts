@@ -107,6 +107,44 @@ export const adminApi = {
     apiClient.get('/admin/audit-log/export', { params, responseType: 'blob' }),
 };
 
+// ─── Regulatory Monitor ──────────────────────────────────────────────────────
+
+export const regMonitorApi = {
+  getSources: () =>
+    apiClient.get('/admin/reg-monitor/sources').then(r => r.data.data),
+  getEvents: (params?: Record<string, string>) =>
+    apiClient.get('/admin/reg-monitor/events', { params }).then(r => r.data),
+  getProposals: (params?: Record<string, string>) =>
+    apiClient.get('/admin/reg-monitor/proposals', { params }).then(r => r.data),
+  approveProposal: (id: string) =>
+    apiClient.patch(`/admin/reg-monitor/proposals/${id}/approve`).then(r => r.data.data),
+  rejectProposal: (id: string, reason: string) =>
+    apiClient.patch(`/admin/reg-monitor/proposals/${id}/reject`, { reason }).then(r => r.data.data),
+  checkSource: (id: string) =>
+    apiClient.post(`/admin/reg-monitor/sources/${id}/check`).then(r => r.data.data),
+  runFullMonitor: () =>
+    apiClient.post('/admin/reg-monitor/run').then(r => r.data.data),
+  getFirmImpact: (proposalId: string) =>
+    apiClient.get(`/admin/reg-monitor/firm-impact/${proposalId}`).then(r => r.data.data),
+};
+
+// ─── Deep Ingestion ──────────────────────────────────────────────────────────
+
+export const deepIngestionApi = {
+  runAll: () =>
+    apiClient.post('/admin/deep-ingestion/run').then(r => r.data.data),
+  runFramework: (framework: string) =>
+    apiClient.post(`/admin/deep-ingestion/run/${framework}`).then(r => r.data.data),
+  getStatus: () =>
+    apiClient.get('/admin/deep-ingestion/status').then(r => r.data.data),
+  getResults: (params?: Record<string, string>) =>
+    apiClient.get('/admin/deep-ingestion/results', { params }).then(r => r.data),
+  confirmResult: (id: string) =>
+    apiClient.patch(`/admin/deep-ingestion/results/${id}/confirm`).then(r => r.data.data),
+  rejectResult: (id: string) =>
+    apiClient.patch(`/admin/deep-ingestion/results/${id}/reject`).then(r => r.data.data),
+};
+
 // ─── Ingestion ────────────────────────────────────────────────────────────────
 
 export const ingestionApi = {

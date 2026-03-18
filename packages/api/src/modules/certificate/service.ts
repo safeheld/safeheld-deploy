@@ -27,6 +27,12 @@ export async function generateCertificate(reconciliationRunId: string): Promise<
     return null;
   }
 
+  // Rules engine gate: certificate only issued when eligible
+  if (run.certificateEligible === false) {
+    logger.info({ reconciliationRunId, complianceScore: run.complianceScore }, 'Certificate blocked: rules engine determined not eligible');
+    return null;
+  }
+
   const clientFunds = toNum(run.totalRequirement);
   const safeguardedFunds = toNum(run.totalResource);
   const variance = toNum(run.variance);
@@ -68,6 +74,12 @@ export async function generateCertificate(reconciliationRunId: string): Promise<
       coverageRatio: parseFloat(coverageRatio.toFixed(4)),
     },
     framework: run.rulePack?.name || run.firm.regime,
+    compliance: {
+      score: run.complianceScore,
+      rulesEngineVersion: run.rulesEngineVersion,
+      frameworkRulesApplied: run.frameworkRulesApplied,
+      certificateStatus: (run.frameworkRulesApplied as Record<string, unknown>)?.certificateStatus || 'FULLY_COMPLIANT',
+    },
     issuedAt: issuedAt.toISOString(),
     sha256Hash,
     verificationUrl: `https://safeheld.com/api/v1/certificates/${sha256Hash}/verify`,

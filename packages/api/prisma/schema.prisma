@@ -14,7 +14,12 @@ enum FirmRegime {
   PS25_PI
   PS25_EMI
   PS25_SMALL_EMI
+  PSD2_EMI
+  PSD2_PI
+  CASS5
+  CASS6
   CASS7
+  CASS10
   CASS15
   MICA_CUSTODY
   MICA_CASP
@@ -24,6 +29,10 @@ enum FirmRegime {
   FCA_INSURANCE
   GAMBLING_COMMISSION
   CLIENT_DEPOSIT_SCHEME
+  DORA
+  FCA_OP_RESILIENCE
+  FINRA_15C33
+  FCA_CONSUMER_DUTY
 }
 
 enum FirmStatus {
@@ -548,6 +557,7 @@ model Firm {
   verificationCertificates        VerificationCertificate[]
   custodyAssetReconciliations     CustodyAssetReconciliation[]
   signOffs                        SignOff[]
+  remediationActions              RemediationAction[]
 
   @@map("firms")
 }
@@ -815,11 +825,19 @@ model ReconciliationRun {
   completedAt         DateTime?             @map("completed_at")
   createdAt           DateTime              @default(now()) @map("created_at")
 
+  // Rules engine fields
+  rulesEngineVersion  String?               @db.VarChar(20) @map("rules_engine_version")
+  complianceScore     Int?                  @map("compliance_score")
+  rulesFindings       Json?                 @map("rules_findings")
+  certificateEligible Boolean?              @map("certificate_eligible")
+  frameworkRulesApplied Json?               @map("framework_rules_applied")
+
   firm                Firm                  @relation(fields: [firmId], references: [id])
   rulePack            RulePack              @relation(fields: [rulePackId], references: [id])
   breaks              ReconciliationBreak[]
   breaches            Breach[]
   verificationCertificates VerificationCertificate[]
+  complianceFindings  ComplianceFinding[]
 
   @@index([firmId, reconciliationDate, reconciliationType])
   @@map("reconciliation_runs")
@@ -1686,4 +1704,248 @@ model SignOff {
 
   @@index([firmId, entityType, status])
   @@map("sign_offs")
+}
+
+// ─── RULES ENGINE ────────────────────────────────────────────────────────────
+
+enum FindingSeverity {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum FindingStatus {
+  PASS
+  FAIL
+  WARNING
+  NOT_APPLICABLE
+}
+
+enum RemediationStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  OVERDUE
+  ESCALATED
+}
+
+model FrameworkRule {
+  id                String          @id @default(uuid()) @db.Uuid
+  framework         String          @db.VarChar(50)
+  ruleCode          String          @unique @db.VarChar(20) @map("rule_code")
+  ruleName          String          @db.VarChar(255) @map("rule_name")
+  ruleDescription   String          @db.Text @map("rule_description")
+  severity          FindingSeverity
+  active            Boolean         @default(true)
+  version           Int             @default(1)
+  effectiveFrom     DateTime        @db.Date @map("effective_from")
+  effectiveTo       DateTime?       @db.Date @map("effective_to")
+  sourceRegulation  String          @db.VarChar(255) @map("source_regulation")
+  sourceArticle     String          @db.VarChar(255) @map("source_article")
+  evaluationConfig  Json?           @map("evaluation_config")
+  createdAt         DateTime        @default(now()) @map("created_at")
+  updatedAt         DateTime        @updatedAt @map("updated_at")
+
+  findings          ComplianceFinding[]
+
+  @@index([framework, active])
+  @@index([ruleCode])
+  @@map("framework_rules")
+}
+
+model ComplianceFinding {
+  id                    String          @id @default(uuid()) @db.Uuid
+  reconciliationRunId   String          @db.Uuid @map("reconciliation_run_id")
+  ruleId                String          @db.Uuid @map("rule_id")
+  ruleCode              String          @db.VarChar(20) @map("rule_code")
+  framework             String          @db.VarChar(50)
+  severity              FindingSeverity
+  status                FindingStatus
+  detail                String          @db.Text
+  remediationGuidance   String?         @db.Text @map("remediation_guidance")
+  ruleVersion           Int             @default(1) @map("rule_version")
+  createdAt             DateTime        @default(now()) @map("created_at")
+
+  reconciliationRun     ReconciliationRun @relation(fields: [reconciliationRunId], references: [id])
+  rule                  FrameworkRule     @relation(fields: [ruleId], references: [id])
+  remediationActions    RemediationAction[]
+
+  @@index([reconciliationRunId])
+  @@index([ruleCode, status])
+  @@map("compliance_findings")
+}
+
+model RemediationAction {
+  id                String            @id @default(uuid()) @db.Uuid
+  findingId         String            @db.Uuid @map("finding_id")
+  firmId            String            @db.Uuid @map("firm_id")
+  actionDescription String            @db.Text @map("action_description")
+  deadline          DateTime          @map("deadline")
+  severity          FindingSeverity
+  status            RemediationStatus @default(OPEN)
+  assignedTo        String?           @db.VarChar(255) @map("assigned_to")
+  escalationPath    String?           @db.Text @map("escalation_path")
+  resolvedAt        DateTime?         @map("resolved_at")
+  createdAt         DateTime          @default(now()) @map("created_at")
+  updatedAt         DateTime          @updatedAt @map("updated_at")
+
+  finding           ComplianceFinding @relation(fields: [findingId], references: [id])
+  firm              Firm              @relation(fields: [firmId], references: [id])
+
+  @@index([firmId, status])
+  @@index([findingId])
+  @@map("remediation_actions")
+}
+
+// ─── REGULATORY MONITOR ──────────────────────────────────────────────────────
+
+enum MonitorFrequency {
+  DAILY
+  WEEKLY
+  MONTHLY
+}
+
+enum ChangeEventStatus {
+  DETECTED
+  ANALYSED
+  PROPOSED
+  APPROVED
+  REJECTED
+  APPLIED
+}
+
+enum ProposalChangeType {
+  UPDATE
+  CREATE
+  DEPRECATE
+}
+
+enum ProposalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model RegulatorySource {
+  id                String           @id @default(uuid()) @db.Uuid
+  framework         String           @db.VarChar(50)
+  sourceName        String           @db.VarChar(255) @map("source_name")
+  sourceUrl         String           @db.VarChar(500) @map("source_url")
+  jurisdiction      String           @db.VarChar(50)
+  monitorFrequency  MonitorFrequency @default(DAILY) @map("monitor_frequency")
+  lastChecked       DateTime?        @map("last_checked")
+  lastChanged       DateTime?        @map("last_changed")
+  contentHash       String?          @db.VarChar(64) @map("content_hash")
+  active            Boolean          @default(true)
+  createdAt         DateTime         @default(now()) @map("created_at")
+
+  changeEvents      RegulatoryChangeEvent[]
+
+  @@index([framework, active])
+  @@map("regulatory_sources")
+}
+
+model RegulatoryChangeEvent {
+  id              String            @id @default(uuid()) @db.Uuid
+  sourceId        String            @db.Uuid @map("source_id")
+  detectedAt      DateTime          @default(now()) @map("detected_at")
+  changeSummary   String?           @db.Text @map("change_summary")
+  previousHash    String?           @db.VarChar(64) @map("previous_hash")
+  newHash         String            @db.VarChar(64) @map("new_hash")
+  rawContent      String?           @db.Text @map("raw_content")
+  aiAnalysis      Json?             @map("ai_analysis")
+  status          ChangeEventStatus @default(DETECTED)
+  createdAt       DateTime          @default(now()) @map("created_at")
+
+  source          RegulatorySource  @relation(fields: [sourceId], references: [id])
+  proposals       RegulatoryUpdateProposal[]
+
+  @@index([sourceId, detectedAt])
+  @@index([status])
+  @@map("regulatory_change_events")
+}
+
+model RegulatoryUpdateProposal {
+  id                  String            @id @default(uuid()) @db.Uuid
+  changeEventId       String            @db.Uuid @map("change_event_id")
+  ruleCode            String            @db.VarChar(20) @map("rule_code")
+  framework           String            @db.VarChar(50)
+  proposedChangeType  ProposalChangeType @map("proposed_change_type")
+  currentRuleText     String?           @db.Text @map("current_rule_text")
+  proposedRuleText    String            @db.Text @map("proposed_rule_text")
+  changeRationale     String            @db.Text @map("change_rationale")
+  severity            FindingSeverity
+  effectiveDate       DateTime?         @db.Date @map("effective_date")
+  status              ProposalStatus    @default(PENDING)
+  reviewedBy          String?           @db.Uuid @map("reviewed_by")
+  reviewedAt          DateTime?         @map("reviewed_at")
+  rejectionReason     String?           @db.Text @map("rejection_reason")
+  appliedAt           DateTime?         @map("applied_at")
+  createdAt           DateTime          @default(now()) @map("created_at")
+
+  changeEvent         RegulatoryChangeEvent @relation(fields: [changeEventId], references: [id])
+
+  @@index([status])
+  @@index([framework, ruleCode])
+  @@map("regulatory_update_proposals")
+}
+
+// ─── DEEP INGESTION ──────────────────────────────────────────────────────────
+
+enum IngestionDocStatus {
+  PENDING
+  FETCHING
+  CHUNKING
+  EXTRACTING
+  VALIDATING
+  COMPLETE
+  FAILED
+}
+
+enum ValidationStatus {
+  VERIFIED
+  UPDATED
+  CREATED
+  UNVERIFIED
+}
+
+model IngestionDocument {
+  id            String             @id @default(uuid()) @db.Uuid
+  framework     String             @db.VarChar(50)
+  sourceName    String             @db.VarChar(255) @map("source_name")
+  sourceUrl     String             @db.VarChar(500) @map("source_url")
+  rawContent    String?            @db.Text @map("raw_content")
+  contentHash   String?            @db.VarChar(64) @map("content_hash")
+  pageCount     Int?               @map("page_count")
+  chunkCount    Int?               @map("chunk_count")
+  ingestedAt    DateTime?          @map("ingested_at")
+  status        IngestionDocStatus @default(PENDING)
+  errorMessage  String?            @db.Text @map("error_message")
+  createdAt     DateTime           @default(now()) @map("created_at")
+
+  validationResults IngestionValidationResult[]
+
+  @@index([framework, status])
+  @@map("ingestion_documents")
+}
+
+model IngestionValidationResult {
+  id                    String           @id @default(uuid()) @db.Uuid
+  documentId            String           @db.Uuid @map("document_id")
+  framework             String           @db.VarChar(50)
+  ruleCode              String?          @db.VarChar(20) @map("rule_code")
+  validationStatus      ValidationStatus @map("validation_status")
+  sourceArticle         String?          @db.VarChar(255) @map("source_article")
+  extractedObligation   String           @db.Text @map("extracted_obligation")
+  confidenceScore       Int              @map("confidence_score")
+  detail                String?          @db.Text
+  adminReviewed         Boolean          @default(false) @map("admin_reviewed")
+  createdAt             DateTime         @default(now()) @map("created_at")
+
+  document              IngestionDocument @relation(fields: [documentId], references: [id])
+
+  @@index([framework, validationStatus])
+  @@index([documentId])
+  @@map("ingestion_validation_results")
 }

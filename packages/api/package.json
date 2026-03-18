@@ -46,6 +46,7 @@
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
+    "pdf-parse": "^2.4.5",
     "pdfkit": "^0.15.0",
     "pino": "^9.3.2",
     "pino-http": "^10.2.0",

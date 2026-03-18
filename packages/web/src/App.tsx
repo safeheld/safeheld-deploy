@@ -13,6 +13,8 @@ import BreachPage from './pages/breach/BreachPage';
 import ReportsPage from './pages/reports/ReportsPage';
 import GovernancePage from './pages/governance/GovernancePage';
 import AdminPage from './pages/admin/AdminPage';
+import RegMonitorPage from './pages/admin/RegMonitorPage';
+import DeepIngestionPage from './pages/admin/DeepIngestionPage';
 import AuditPage from './pages/audit/AuditPage';
 import BankDashboardPage from './pages/bank-dashboard/BankDashboardPage';
 import CassPage from './pages/cass/CassPage';
@@ -83,6 +85,22 @@ export default function App() {
           element={
             <AdminRoute>
               <AdminPage />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="admin/reg-monitor"
+          element={
+            <AdminRoute>
+              <RegMonitorPage />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="admin/deep-ingestion"
+          element={
+            <AdminRoute>
+              <DeepIngestionPage />
             </AdminRoute>
           }
         />

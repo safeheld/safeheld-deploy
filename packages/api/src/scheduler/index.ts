@@ -5,6 +5,9 @@ import { runReconciliation } from '../modules/reconciliation/service';
 import { detectGovernanceBreaches } from '../modules/breach/service';
 import { generateSafeguardingReturn } from '../modules/reporting/service';
 import { checkPegStatus } from '../modules/stablecoin/peg-service';
+import { escalateOverdueActions } from '../services/rules-engine';
+import { runFullMonitor } from '../services/reg-monitor';
+import { runFullIngestion } from '../services/deep-ingestion';
 
 const DAY_MAP: Record<string, number> = {
   SUN: 0, MON: 1, TUE: 2, WED: 3, THU: 4, FRI: 5, SAT: 6,
@@ -153,4 +156,48 @@ cron.schedule('0 */4 * * *', async () => {
   }
 });
 
-logger.info('Scheduler initialized — reconciliation 06:00 UTC daily, governance 07:00 UTC weekdays, reports 08:00 UTC monthly, peg check every 4h');
+/**
+ * Remediation escalation — runs at 08:00 UTC every weekday.
+ * Checks for overdue remediation actions and escalates severity.
+ */
+cron.schedule('0 8 * * 1-5', async () => {
+  logger.info('Scheduled remediation escalation check started');
+
+  try {
+    const escalated = await escalateOverdueActions();
+    logger.info({ escalated }, 'Remediation escalation check finished');
+  } catch (err) {
+    logger.error({ err }, 'Remediation escalation check failed');
+  }
+});
+
+/**
+ * Regulatory monitoring — runs at 06:00 UTC every day.
+ * Checks all active regulatory sources for content changes.
+ */
+cron.schedule('0 6 * * *', async () => {
+  logger.info('Scheduled regulatory monitoring run started');
+
+  try {
+    const result = await runFullMonitor();
+    logger.info(result, 'Scheduled regulatory monitoring run finished');
+  } catch (err) {
+    logger.error({ err }, 'Scheduled regulatory monitoring run failed');
+  }
+});
+
+/**
+ * Quarterly deep ingestion — runs on the 1st of Jan, Apr, Jul, Oct at 02:00 UTC.
+ * Validates all rules against source legislation.
+ */
+cron.schedule('0 2 1 1,4,7,10 *', async () => {
+  logger.info('Scheduled quarterly deep ingestion started');
+  try {
+    const result = await runFullIngestion();
+    logger.info(result.summary, 'Scheduled quarterly deep ingestion finished');
+  } catch (err) {
+    logger.error({ err }, 'Scheduled quarterly deep ingestion failed');
+  }
+});
+
+logger.info('Scheduler initialized — recon 06:00 daily, governance 07:00 weekdays, reports 08:00 monthly, peg 4h, remediation 08:00 weekdays, reg-monitor 06:00 daily, deep-ingestion quarterly');
