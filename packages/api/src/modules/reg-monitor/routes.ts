@@ -145,7 +145,7 @@ router.post(
         userId: req.user!.userId,
         action: 'REG_MONITOR_MANUAL_RUN',
         entityType: 'regulatory_sources',
-        entityId: 'SYSTEM',
+        entityId: '00000000-0000-0000-0000-000000000000',
         details: result,
         ipAddress: req.ip,
       });

@@ -24,7 +24,7 @@ router.post(
         userId: req.user!.userId,
         action: 'DEEP_INGESTION_TRIGGERED',
         entityType: 'ingestion_documents',
-        entityId: 'SYSTEM',
+        entityId: '00000000-0000-0000-0000-000000000000',
         details: { trigger: 'MANUAL', scope: 'ALL' },
         ipAddress: req.ip,
       });
@@ -60,7 +60,7 @@ router.post(
         userId: req.user!.userId,
         action: 'DEEP_INGESTION_TRIGGERED',
         entityType: 'ingestion_documents',
-        entityId: framework,
+        entityId: '00000000-0000-0000-0000-000000000000',
         details: { trigger: 'MANUAL', scope: framework },
         ipAddress: req.ip,
       });
