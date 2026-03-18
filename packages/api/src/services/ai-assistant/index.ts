@@ -87,8 +87,8 @@ async function buildFirmContext(firmId: string): Promise<string> {
   const criticalBreaches = breaches.filter(b => b.severity === 'CRITICAL').length;
 
   const expiredLetters = letters.filter(l => l.status === 'EXPIRED').length;
-  const missingLetters = letters.filter(l => l.status === 'MISSING').length;
-  const letterStatus = expiredLetters > 0 ? `${expiredLetters} expired` : missingLetters > 0 ? `${missingLetters} missing` : letters.length > 0 ? 'All current' : 'None recorded';
+  const currentLetters = letters.filter(l => l.status === 'CURRENT').length;
+  const letterStatus = expiredLetters > 0 ? `${expiredLetters} expired` : currentLetters > 0 ? `${currentLetters} current` : letters.length > 0 ? 'All superseded' : 'None recorded';
 
   const trialDays = firm.billingStatus === 'TRIAL' && firm.trialEndsAt
     ? Math.max(0, Math.ceil((new Date(firm.trialEndsAt).getTime() - Date.now()) / 86400000))
