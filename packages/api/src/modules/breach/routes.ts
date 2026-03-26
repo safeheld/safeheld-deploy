@@ -1,4 +1,5 @@
 import { Router, Request, Response, NextFunction } from 'express';
+import multer from 'multer';
 import { z } from 'zod';
 import { authenticate, requireRole, requireFirmAccess } from '../../middleware/auth';
 import { successResponse, paginatedResponse, getPaginationParams } from '../../utils/response';
@@ -11,10 +12,19 @@ import {
   updateBreachStatusService,
   createFcaNotification,
   submitFcaNotification,
+  createManualBreach,
+  uploadBreachSupportingDoc,
+  getBreachRegister,
+  generateFcaNotificationTemplate,
 } from './service';
-import { BreachStatus, BreachType, BreachSeverity, FcaNotificationType } from '@prisma/client';
+import { BreachStatus, BreachType, BreachSeverity, BreachCategory, FcaNotificationType } from '@prisma/client';
 
 const router = Router();
+
+const docUpload = multer({
+  limits: { fileSize: 20 * 1024 * 1024 }, // 20MB
+  storage: multer.memoryStorage(),
+});
 
 // GET /api/v1/firms/:firmId/breaches
 router.get('/:firmId/breaches',
@@ -47,6 +57,46 @@ router.get('/:firmId/breaches',
   }
 );
 
+// GET /api/v1/firms/:firmId/breaches/register - Full breach register view
+router.get('/:firmId/breaches/register',
+  authenticate,
+  requireFirmAccess,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { firmId } = req.params;
+      const { page, pageSize } = getPaginationParams(req.query as Record<string, unknown>);
+      const {
+        breach_category, is_material, date_from, date_to, status, severity,
+      } = req.query as Record<string, string>;
+
+      const result = await getBreachRegister(firmId, {
+        breachCategory: breach_category as BreachCategory | undefined,
+        isMaterial: is_material === 'true' ? true : is_material === 'false' ? false : undefined,
+        dateFrom: date_from,
+        dateTo: date_to,
+        status: status as BreachStatus | undefined,
+        severity: severity as BreachSeverity | undefined,
+        page,
+        pageSize,
+      });
+
+      res.json({
+        status: 'success',
+        data: result.breaches,
+        summary: result.summary,
+        pagination: {
+          page: result.page,
+          pageSize: result.pageSize,
+          total: result.total,
+          totalPages: result.totalPages,
+        },
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
 // GET /api/v1/firms/:firmId/breaches/:breachId
 router.get('/:firmId/breaches/:breachId',
   authenticate,
@@ -66,6 +116,121 @@ router.get('/:firmId/breaches/:breachId',
       });
       if (!breach) throw new NotFoundError('Breach');
       successResponse(res, breach);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+// POST /api/v1/firms/:firmId/breaches/manual - Create manual breach
+router.post('/:firmId/breaches/manual',
+  authenticate,
+  requireFirmAccess,
+  requireRole('COMPLIANCE_OFFICER', 'ADMIN'),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { firmId } = req.params;
+      const schema = z.object({
+        description: z.string().min(1).max(5000),
+        breachType: z.nativeEnum(BreachType),
+        severity: z.nativeEnum(BreachSeverity),
+        dateOccurred: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+        dateIdentified: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+        dateReportedToSeniorMgmt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+        breachCategory: z.nativeEnum(BreachCategory),
+        rootCauseAnalysis: z.string().max(5000).optional(),
+        personResponsible: z.string().max(255).optional(),
+        isMaterial: z.boolean(),
+        currency: z.string().length(3).optional(),
+        shortfallAmount: z.number().min(0).optional(),
+        remediationAction: z.string().max(2000).optional(),
+      });
+      const body = schema.parse(req.body);
+
+      const breach = await createManualBreach(firmId, body);
+
+      await logAudit({
+        firmId,
+        userId: req.user!.userId,
+        action: 'BREACH_MANUALLY_CREATED',
+        entityType: 'breaches',
+        entityId: breach.id,
+        details: {
+          breachType: body.breachType,
+          breachCategory: body.breachCategory,
+          severity: body.severity,
+          isMaterial: body.isMaterial,
+        },
+        ipAddress: req.ip,
+      });
+
+      successResponse(res, breach, 201);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+// POST /api/v1/firms/:firmId/breaches/:breachId/documents - Upload supporting doc
+router.post('/:firmId/breaches/:breachId/documents',
+  authenticate,
+  requireFirmAccess,
+  requireRole('COMPLIANCE_OFFICER', 'ADMIN', 'FINANCE_OPS'),
+  docUpload.single('file'),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { firmId, breachId } = req.params;
+      if (!req.file) throw new ValidationError('File is required');
+
+      const result = await uploadBreachSupportingDoc(firmId, breachId, {
+        buffer: req.file.buffer,
+        originalname: req.file.originalname,
+        mimetype: req.file.mimetype,
+      });
+
+      await logAudit({
+        firmId,
+        userId: req.user!.userId,
+        action: 'BREACH_DOCUMENT_UPLOADED',
+        entityType: 'breaches',
+        entityId: breachId,
+        details: { fileName: req.file.originalname, storagePath: result.storagePath },
+        ipAddress: req.ip,
+      });
+
+      successResponse(res, result, 201);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+// POST /api/v1/firms/:firmId/breaches/:breachId/fca-notification-template - Generate FCA notification template
+router.post('/:firmId/breaches/:breachId/fca-notification-template',
+  authenticate,
+  requireFirmAccess,
+  requireRole('COMPLIANCE_OFFICER', 'ADMIN'),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { firmId, breachId } = req.params;
+      const schema = z.object({
+        scenario: z.enum(['records_invalid', 'unable_to_reconcile', 'unable_to_remedy', 'material_difference']),
+      });
+      const body = schema.parse(req.body);
+
+      const template = await generateFcaNotificationTemplate(firmId, breachId, body.scenario);
+
+      await logAudit({
+        firmId,
+        userId: req.user!.userId,
+        action: 'FCA_NOTIFICATION_TEMPLATE_GENERATED',
+        entityType: 'breaches',
+        entityId: breachId,
+        details: { scenario: body.scenario },
+        ipAddress: req.ip,
+      });
+
+      successResponse(res, template);
     } catch (err) {
       next(err);
     }

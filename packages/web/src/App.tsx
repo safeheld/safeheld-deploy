@@ -21,6 +21,14 @@ import BankDashboardPage from './pages/bank-dashboard/BankDashboardPage';
 import CassPage from './pages/cass/CassPage';
 import CryptoPage from './pages/crypto/CryptoPage';
 import StablecoinPage from './pages/stablecoin/StablecoinPage';
+import ResolutionPackPage from './pages/resolution-pack/ResolutionPackPage';
+import FcaReturnsPage from './pages/fca-returns/FcaReturnsPage';
+import AuditSupportPage from './pages/audit-support/AuditSupportPage';
+import AcknowledgementLettersPage from './pages/acknowledgement-letters/AcknowledgementLettersPage';
+import ThirdPartyDdPage from './pages/third-party-dd/ThirdPartyDdPage';
+import InsuranceManagementPage from './pages/insurance-management/InsuranceManagementPage';
+import PolicyLibraryPage from './pages/policy-library/PolicyLibraryPage';
+import SafeguardingTimingPage from './pages/safeguarding-timing/SafeguardingTimingPage';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, isLoading } = useAuth();
@@ -72,6 +80,14 @@ export default function App() {
         <Route path="cass" element={<CassPage />} />
         <Route path="crypto" element={<CryptoPage />} />
         <Route path="stablecoin" element={<StablecoinPage />} />
+        <Route path="resolution-pack" element={<ResolutionPackPage />} />
+        <Route path="fca-returns" element={<FcaReturnsPage />} />
+        <Route path="audit-support" element={<AuditSupportPage />} />
+        <Route path="acknowledgement-letters" element={<AcknowledgementLettersPage />} />
+        <Route path="third-party-dd" element={<ThirdPartyDdPage />} />
+        <Route path="insurance-management" element={<InsuranceManagementPage />} />
+        <Route path="policy-library" element={<PolicyLibraryPage />} />
+        <Route path="safeguarding-timing" element={<SafeguardingTimingPage />} />
         <Route path="audit" element={<AuditPage />} />
         <Route
           path="bank-dashboard"

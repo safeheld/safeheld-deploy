@@ -1,11 +1,14 @@
+import crypto from 'crypto';
 import { prisma } from '../../utils/prisma';
 import { logger } from '../../utils/logger';
 import { sendEmail, breachDetectedEmail, breachStatusChangeEmail } from '../../utils/email';
 import { dispatchWebhooks } from '../../utils/webhook';
+import { fileStorage } from '../../utils/fileStorage';
 import {
   BreachType,
   BreachSeverity,
   BreachStatus,
+  BreachCategory,
   FcaNotificationStatus,
   FcaNotificationType,
   Prisma,
@@ -82,6 +85,10 @@ export async function detectBreaches(params: DetectBreachesParams): Promise<void
           `Requirement: ${requirement.toFixed(2)}, Resource: ${(requirement + variance).toFixed(2)}, ` +
           `Shortfall: ${Math.abs(variance).toFixed(2)} (${absVariancePct.toFixed(2)}%).`,
         status: 'DETECTED',
+        dateOccurred: new Date(),
+        dateIdentified: new Date(),
+        breachCategory: 'SHORTFALL',
+        isMaterial,
       },
     });
 
@@ -112,6 +119,10 @@ export async function detectBreaches(params: DetectBreachesParams): Promise<void
           `(${safeguardingAccountId}). Break age: ${breakAgeDays} business days. ` +
           `Variance: ${variance.toFixed(2)}.`,
         status: 'DETECTED',
+        dateOccurred: new Date(),
+        dateIdentified: new Date(),
+        breachCategory: 'RECONCILIATION_FAILURE',
+        isMaterial: false,
       },
     });
 
@@ -296,6 +307,7 @@ export async function updateBreachStatusService(
   if (newStatus === 'RESOLVED') {
     updateData.resolvedAt = new Date();
     updateData.closureEvidence = evidence;
+    updateData.remediationCompletionDate = new Date();
   }
   if (newStatus === 'CLOSED') {
     updateData.closedBy = userId;
@@ -439,4 +451,402 @@ export async function getBreaches(firmId: string, filters: {
   ]);
 
   return { breaches, total, page, pageSize, totalPages: Math.ceil(total / pageSize) };
+}
+
+// ─── ENHANCED BREACH REGISTER FUNCTIONS ─────────────────────────────────────
+
+export async function createManualBreach(
+  firmId: string,
+  data: {
+    description: string;
+    breachType: BreachType;
+    severity: BreachSeverity;
+    dateOccurred: string;
+    dateIdentified: string;
+    dateReportedToSeniorMgmt?: string;
+    breachCategory: BreachCategory;
+    rootCauseAnalysis?: string;
+    personResponsible?: string;
+    isMaterial: boolean;
+    currency?: string;
+    shortfallAmount?: number;
+    remediationAction?: string;
+  }
+) {
+  const firm = await prisma.firm.findUnique({ where: { id: firmId }, select: { name: true } });
+  if (!firm) throw new Error('Firm not found');
+
+  const isNotifiable = data.isMaterial && (data.severity === 'HIGH' || data.severity === 'CRITICAL');
+
+  const breach = await prisma.breach.create({
+    data: {
+      firmId,
+      breachType: data.breachType,
+      severity: data.severity,
+      isNotifiable,
+      materialDiscrepancyExceeded: data.isMaterial,
+      isMaterial: data.isMaterial,
+      currency: data.currency || null,
+      shortfallAmount: data.shortfallAmount || null,
+      description: data.description,
+      status: 'DETECTED',
+      dateOccurred: new Date(data.dateOccurred),
+      dateIdentified: new Date(data.dateIdentified),
+      dateReportedToSeniorMgmt: data.dateReportedToSeniorMgmt ? new Date(data.dateReportedToSeniorMgmt) : null,
+      breachCategory: data.breachCategory,
+      rootCauseAnalysis: data.rootCauseAnalysis || null,
+      personResponsible: data.personResponsible || null,
+      remediationAction: data.remediationAction || null,
+      supportingDocPaths: [],
+    },
+  });
+
+  if (isNotifiable) {
+    await notifyBreachStakeholders(firmId, breach.id, firm.name, data.breachType, data.severity, data.description);
+  }
+
+  logger.info({ firmId, breachId: breach.id, breachType: data.breachType }, 'Manual breach created');
+  return breach;
+}
+
+export async function uploadBreachSupportingDoc(
+  firmId: string,
+  breachId: string,
+  file: { buffer: Buffer; originalname: string; mimetype: string }
+) {
+  const breach = await prisma.breach.findFirst({ where: { id: breachId, firmId } });
+  if (!breach) throw new Error('Breach not found');
+
+  const ext = file.originalname.split('.').pop() || 'bin';
+  const key = `firms/${firmId}/breaches/${breachId}/docs/${crypto.randomUUID()}.${ext}`;
+  const storagePath = await fileStorage.store(key, file.buffer, file.mimetype);
+
+  const existingPaths = (Array.isArray(breach.supportingDocPaths) ? breach.supportingDocPaths : []) as string[];
+  const updatedPaths = [...existingPaths, storagePath];
+
+  const updated = await prisma.breach.update({
+    where: { id: breachId },
+    data: {
+      supportingDocPaths: updatedPaths as unknown as Prisma.InputJsonValue,
+      version: { increment: 1 },
+    },
+  });
+
+  logger.info({ firmId, breachId, storagePath }, 'Supporting document uploaded for breach');
+  return { storagePath, breach: updated };
+}
+
+export async function autoCreateBreachForMissedRecon(firmId: string, missedDate: string) {
+  const firm = await prisma.firm.findUnique({ where: { id: firmId }, select: { name: true } });
+  if (!firm) throw new Error('Firm not found');
+
+  // Check if a breach for this missed date already exists
+  const existing = await prisma.breach.findFirst({
+    where: {
+      firmId,
+      breachType: 'RECORD_KEEPING_FAILURE',
+      breachCategory: 'RECONCILIATION_FAILURE',
+      dateOccurred: new Date(missedDate),
+      status: { notIn: ['RESOLVED', 'CLOSED'] },
+    },
+  });
+  if (existing) return existing;
+
+  const breach = await prisma.breach.create({
+    data: {
+      firmId,
+      breachType: 'RECORD_KEEPING_FAILURE',
+      severity: 'HIGH',
+      isNotifiable: true,
+      materialDiscrepancyExceeded: false,
+      isMaterial: false,
+      description: `Reconciliation was not performed on scheduled reconciliation day ${missedDate}. ` +
+        `PS 25 requires firms to perform internal reconciliation on each business day that is a reconciliation day.`,
+      status: 'DETECTED',
+      dateOccurred: new Date(missedDate),
+      dateIdentified: new Date(),
+      breachCategory: 'RECONCILIATION_FAILURE',
+      supportingDocPaths: [],
+    },
+  });
+
+  await notifyBreachStakeholders(firmId, breach.id, firm.name, 'RECORD_KEEPING_FAILURE', 'HIGH', breach.description);
+  logger.info({ firmId, breachId: breach.id, missedDate }, 'Auto-created breach for missed reconciliation day');
+  return breach;
+}
+
+export async function getBreachRegister(firmId: string, filters: {
+  breachCategory?: BreachCategory;
+  isMaterial?: boolean;
+  dateFrom?: string;
+  dateTo?: string;
+  status?: BreachStatus;
+  severity?: BreachSeverity;
+  page?: number;
+  pageSize?: number;
+}) {
+  const where: Prisma.BreachWhereInput = { firmId };
+
+  if (filters.breachCategory) where.breachCategory = filters.breachCategory;
+  if (filters.isMaterial !== undefined) where.isMaterial = filters.isMaterial;
+  if (filters.status) where.status = filters.status;
+  if (filters.severity) where.severity = filters.severity;
+
+  if (filters.dateFrom || filters.dateTo) {
+    where.createdAt = {};
+    if (filters.dateFrom) (where.createdAt as Prisma.DateTimeFilter).gte = new Date(filters.dateFrom);
+    if (filters.dateTo) (where.createdAt as Prisma.DateTimeFilter).lte = new Date(filters.dateTo + 'T23:59:59.999Z');
+  }
+
+  const page = filters.page || 1;
+  const pageSize = filters.pageSize || 50;
+  const skip = (page - 1) * pageSize;
+
+  const [breaches, total] = await Promise.all([
+    prisma.breach.findMany({
+      where,
+      orderBy: [{ createdAt: 'desc' }],
+      skip,
+      take: pageSize,
+      include: {
+        fcaNotifications: { select: { id: true, status: true, notificationType: true, submittedAt: true } },
+        acknowledger: { select: { name: true, email: true } },
+        closer: { select: { name: true, email: true } },
+        reconciliationRun: { select: { reconciliationDate: true, reconciliationType: true, currency: true } },
+      },
+    }),
+    prisma.breach.count({ where }),
+  ]);
+
+  // Summary statistics
+  const allBreaches = await prisma.breach.findMany({
+    where: { firmId },
+    select: { isMaterial: true, status: true, severity: true, breachCategory: true },
+  });
+
+  const summary = {
+    total: allBreaches.length,
+    open: allBreaches.filter(b => !['RESOLVED', 'CLOSED'].includes(b.status)).length,
+    material: allBreaches.filter(b => b.isMaterial).length,
+    immaterial: allBreaches.filter(b => !b.isMaterial).length,
+    bySeverity: {
+      CRITICAL: allBreaches.filter(b => b.severity === 'CRITICAL').length,
+      HIGH: allBreaches.filter(b => b.severity === 'HIGH').length,
+      MEDIUM: allBreaches.filter(b => b.severity === 'MEDIUM').length,
+      LOW: allBreaches.filter(b => b.severity === 'LOW').length,
+    },
+    byCategory: {
+      SHORTFALL: allBreaches.filter(b => b.breachCategory === 'SHORTFALL').length,
+      EXCESS: allBreaches.filter(b => b.breachCategory === 'EXCESS').length,
+      RECORD_KEEPING: allBreaches.filter(b => b.breachCategory === 'RECORD_KEEPING').length,
+      RECONCILIATION_FAILURE: allBreaches.filter(b => b.breachCategory === 'RECONCILIATION_FAILURE').length,
+      NOTIFICATION_FAILURE: allBreaches.filter(b => b.breachCategory === 'NOTIFICATION_FAILURE').length,
+      SEGREGATION_FAILURE: allBreaches.filter(b => b.breachCategory === 'SEGREGATION_FAILURE').length,
+      OTHER: allBreaches.filter(b => b.breachCategory === 'OTHER').length,
+    },
+  };
+
+  return { breaches, summary, total, page, pageSize, totalPages: Math.ceil(total / pageSize) };
+}
+
+type FcaNotificationScenario = 'records_invalid' | 'unable_to_reconcile' | 'unable_to_remedy' | 'material_difference';
+
+export async function generateFcaNotificationTemplate(
+  firmId: string,
+  breachId: string,
+  scenario: FcaNotificationScenario
+) {
+  const [firm, breach] = await Promise.all([
+    prisma.firm.findUnique({
+      where: { id: firmId },
+      select: { name: true, fcaFrn: true, regime: true, safeguardingMethod: true, baseCurrency: true },
+    }),
+    prisma.breach.findFirst({
+      where: { id: breachId, firmId },
+      include: { reconciliationRun: true },
+    }),
+  ]);
+
+  if (!firm) throw new Error('Firm not found');
+  if (!breach) throw new Error('Breach not found');
+
+  const today = new Date().toISOString().split('T')[0];
+  const breachDate = breach.dateOccurred
+    ? breach.dateOccurred.toISOString().split('T')[0]
+    : breach.createdAt.toISOString().split('T')[0];
+  const identifiedDate = breach.dateIdentified
+    ? breach.dateIdentified.toISOString().split('T')[0]
+    : breach.createdAt.toISOString().split('T')[0];
+
+  const scenarioTemplates: Record<FcaNotificationScenario, { subject: string; body: string; regulation: string }> = {
+    records_invalid: {
+      subject: 'Notification under Electronic Money Regulations / Payment Services Regulations - Records Found to be Inaccurate or Incomplete',
+      regulation: 'Regulation 21(4) EMR 2011 / Regulation 23(13) PSR 2017',
+      body: `Dear Sir/Madam,
+
+We are writing to notify the Financial Conduct Authority that ${firm.name} (FRN: ${firm.fcaFrn || '[FRN]'}) has identified that its records relating to safeguarded funds are inaccurate or incomplete.
+
+Date of occurrence: ${breachDate}
+Date identified: ${identifiedDate}
+
+Description of the issue:
+${breach.description}
+
+${breach.rootCauseAnalysis ? `Root cause analysis:\n${breach.rootCauseAnalysis}\n` : ''}
+The inaccuracy/incompleteness relates to:
+[Describe specific records affected, e.g., client ledger entries, bank reconciliation records, transaction records]
+
+Impact assessment:
+- Affected currency: ${breach.currency || '[Currency]'}
+${breach.shortfallAmount ? `- Amount affected: ${Number(breach.shortfallAmount).toFixed(2)}` : '- Amount affected: [Amount]'}
+- Material discrepancy threshold exceeded: ${breach.materialDiscrepancyExceeded ? 'Yes' : 'No'}
+
+Remedial steps taken or planned:
+${breach.remediationAction || '[Describe remedial steps]'}
+
+We confirm that we are taking all necessary steps to rectify this matter and will keep the FCA informed of progress.
+
+Yours faithfully,
+
+[Name]
+[Title]
+${firm.name}
+Date: ${today}`,
+    },
+
+    unable_to_reconcile: {
+      subject: 'Notification under Electronic Money Regulations / Payment Services Regulations - Unable to Perform Reconciliation',
+      regulation: 'Regulation 21(4) EMR 2011 / Regulation 23(13) PSR 2017',
+      body: `Dear Sir/Madam,
+
+We are writing to notify the Financial Conduct Authority that ${firm.name} (FRN: ${firm.fcaFrn || '[FRN]'}) has been unable to perform its required reconciliation of safeguarded funds.
+
+Date reconciliation was due: ${breachDate}
+Date issue identified: ${identifiedDate}
+
+Description of the issue:
+${breach.description}
+
+${breach.rootCauseAnalysis ? `Root cause analysis:\n${breach.rootCauseAnalysis}\n` : ''}
+Reason for inability to reconcile:
+[Describe reason - e.g., system failure, missing data, bank statement unavailability]
+
+Duration of non-compliance:
+[Number of business days reconciliation has not been performed]
+
+Impact assessment:
+- Last successful reconciliation date: [Date]
+- Safeguarding method: ${firm.safeguardingMethod.replace(/_/g, ' ')}
+- Estimated funds at risk: [Amount]
+
+Remedial steps taken or planned:
+${breach.remediationAction || '[Describe remedial steps and expected resolution date]'}
+
+We confirm that we are taking all necessary steps to restore our reconciliation capability and will keep the FCA informed of progress.
+
+Yours faithfully,
+
+[Name]
+[Title]
+${firm.name}
+Date: ${today}`,
+    },
+
+    unable_to_remedy: {
+      subject: 'Notification under Electronic Money Regulations / Payment Services Regulations - Unable to Remedy Discrepancy',
+      regulation: 'Regulation 21(4) EMR 2011 / Regulation 23(13) PSR 2017',
+      body: `Dear Sir/Madam,
+
+We are writing to notify the Financial Conduct Authority that ${firm.name} (FRN: ${firm.fcaFrn || '[FRN]'}) has identified a discrepancy in its safeguarded funds that it has been unable to remedy by close of business on the next business day.
+
+Date discrepancy first identified: ${identifiedDate}
+Date of occurrence: ${breachDate}
+Business days since identification: [Number]
+
+Description of the discrepancy:
+${breach.description}
+
+${breach.rootCauseAnalysis ? `Root cause analysis:\n${breach.rootCauseAnalysis}\n` : ''}
+Nature of the discrepancy:
+- Type: ${breach.breachType.replace(/_/g, ' ')}
+- Category: ${breach.breachCategory?.replace(/_/g, ' ') || '[Category]'}
+- Affected currency: ${breach.currency || '[Currency]'}
+${breach.shortfallAmount ? `- Discrepancy amount: ${Number(breach.shortfallAmount).toFixed(2)}` : '- Discrepancy amount: [Amount]'}
+- Material: ${breach.isMaterial ? 'Yes' : 'No'}
+
+Steps taken to remedy:
+${breach.remediationAction || '[Describe all steps taken to date]'}
+
+Expected resolution:
+[Describe expected timeline and approach]
+
+We confirm that we continue to take all necessary steps to remedy this discrepancy and will keep the FCA informed of progress.
+
+Yours faithfully,
+
+[Name]
+[Title]
+${firm.name}
+Date: ${today}`,
+    },
+
+    material_difference: {
+      subject: 'Notification under Electronic Money Regulations / Payment Services Regulations - Material Difference Identified',
+      regulation: 'Regulation 21(4) EMR 2011 / Regulation 23(13) PSR 2017',
+      body: `Dear Sir/Madam,
+
+We are writing to notify the Financial Conduct Authority that ${firm.name} (FRN: ${firm.fcaFrn || '[FRN]'}) has identified a material difference between the amount of safeguarded funds required to be held and the amount actually safeguarded.
+
+Date of identification: ${identifiedDate}
+Date of occurrence: ${breachDate}
+
+Description of the material difference:
+${breach.description}
+
+${breach.rootCauseAnalysis ? `Root cause analysis:\n${breach.rootCauseAnalysis}\n` : ''}
+Quantification of the material difference:
+- Affected currency: ${breach.currency || '[Currency]'}
+- Amount required to be safeguarded: [Amount]
+- Amount actually safeguarded: [Amount]
+${breach.shortfallAmount ? `- Shortfall/Excess: ${Number(breach.shortfallAmount).toFixed(2)}` : '- Shortfall/Excess: [Amount]'}
+${breach.shortfallPercentage ? `- Percentage difference: ${Number(breach.shortfallPercentage).toFixed(4)}%` : '- Percentage difference: [Percentage]'}
+
+Cause of the material difference:
+${breach.rootCauseAnalysis || '[Describe root cause]'}
+
+Person responsible: ${breach.personResponsible || '[Name and title]'}
+
+${breach.dateReportedToSeniorMgmt ? `Date reported to senior management: ${breach.dateReportedToSeniorMgmt.toISOString().split('T')[0]}` : 'Date reported to senior management: [Date]'}
+
+Remedial steps taken or planned:
+${breach.remediationAction || '[Describe all remedial steps]'}
+
+Consumer impact assessment:
+[Describe any impact on consumers and steps taken to protect them]
+
+We confirm that we are taking all necessary steps to remedy this material difference and will keep the FCA informed of progress.
+
+Yours faithfully,
+
+[Name]
+[Title]
+${firm.name}
+Date: ${today}`,
+    },
+  };
+
+  const template = scenarioTemplates[scenario];
+
+  return {
+    scenario,
+    regulation: template.regulation,
+    subject: template.subject,
+    body: template.body,
+    firmName: firm.name,
+    firmFrn: firm.fcaFrn,
+    breachId: breach.id,
+    breachType: breach.breachType,
+    breachCategory: breach.breachCategory,
+    generatedAt: new Date().toISOString(),
+  };
 }

@@ -177,6 +177,18 @@ export const reconciliationApi = {
     apiClient.put(`/firms/${firmId}/reconciliation/breaks/${breakId}/resolve`, data).then(r => r.data.data),
   getDashboard: (firmId: string) =>
     apiClient.get(`/firms/${firmId}/reconciliation/dashboard`).then(r => r.data.data),
+  getCalendar: (firmId: string, year: number, month: number) =>
+    apiClient.get(`/firms/${firmId}/reconciliation/calendar`, { params: { year, month } }).then(r => r.data.data),
+  getNextDue: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/reconciliation/next-due`).then(r => r.data.data),
+  importStatement: (firmId: string, formData: FormData) =>
+    apiClient.post(`/firms/${firmId}/reconciliation/import-statement`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }).then(r => r.data.data),
+  getAssetPools: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/reconciliation/asset-pools`).then(r => r.data.data),
+  createAssetPool: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/reconciliation/asset-pools`, data).then(r => r.data.data),
 };
 
 // ─── Breaches ─────────────────────────────────────────────────────────────────
@@ -402,4 +414,157 @@ export const cryptoApi = {
     apiClient.post(`/firms/${firmId}/crypto/proof-of-reserves/generate`, { snapshotDate }).then(r => r.data.data),
   getDataLineage: (firmId: string, params?: Record<string, string>) =>
     apiClient.get(`/firms/${firmId}/crypto/data-lineage`, { params }).then(r => r.data),
+};
+
+// ─── Resolution Pack ────────────────────────────────────────────────────────
+
+export const resolutionPackApi = {
+  generate: (firmId: string) =>
+    apiClient.post(`/firms/${firmId}/resolution-pack`).then(r => r.data.data),
+  getHistory: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/resolution-pack/history`).then(r => r.data),
+  download: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/resolution-pack/download`, { responseType: 'blob' }),
+  getStaleness: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/resolution-pack/staleness`).then(r => r.data.data),
+};
+
+// ─── FCA Returns ────────────────────────────────────────────────────────────
+
+export const fcaReturnsApi = {
+  generateMonthly: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/fca-returns/monthly`, data).then(r => r.data.data),
+  getMonthlyReturns: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/fca-returns/monthly`).then(r => r.data),
+  getMonthlyReturn: (firmId: string, returnId: string) =>
+    apiClient.get(`/firms/${firmId}/fca-returns/monthly/${returnId}`).then(r => r.data.data),
+  finalise: (firmId: string, returnId: string) =>
+    apiClient.post(`/firms/${firmId}/fca-returns/monthly/${returnId}/finalise`).then(r => r.data.data),
+  validate: (firmId: string, returnId: string) =>
+    apiClient.get(`/firms/${firmId}/fca-returns/monthly/${returnId}/validate`).then(r => r.data.data),
+  exportPdf: (firmId: string, returnId: string) =>
+    apiClient.get(`/firms/${firmId}/fca-returns/monthly/${returnId}/export-pdf`, { responseType: 'blob' }),
+  exportData: (firmId: string, returnId: string) =>
+    apiClient.get(`/firms/${firmId}/fca-returns/monthly/${returnId}/export-data`).then(r => r.data.data),
+};
+
+// ─── FCA Forms ──────────────────────────────────────────────────────────────
+
+export const fcaFormsApi = {
+  generate: (firmId: string, formType: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/fca-forms/${formType}/generate`, data).then(r => r.data.data),
+  getForms: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/fca-forms`).then(r => r.data),
+  getForm: (firmId: string, formId: string) =>
+    apiClient.get(`/firms/${firmId}/fca-forms/${formId}`).then(r => r.data.data),
+  exportPdf: (firmId: string, formId: string) =>
+    apiClient.get(`/firms/${firmId}/fca-forms/${formId}/export-pdf`, { responseType: 'blob' }),
+  exportData: (firmId: string, formId: string) =>
+    apiClient.get(`/firms/${firmId}/fca-forms/${formId}/export-data`).then(r => r.data.data),
+};
+
+// ─── Audit Support ──────────────────────────────────────────────────────────
+
+export const auditSupportApi = {
+  generateEvidencePack: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/audit-support/evidence-pack`, data).then(r => r.data.data),
+  listEvidencePacks: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/audit-support/evidence-pack`).then(r => r.data),
+  downloadPack: (firmId: string, packId: string) =>
+    apiClient.get(`/firms/${firmId}/audit-support/evidence-pack/${packId}/download`, { responseType: 'blob' }),
+  getPeriodInfo: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/audit-support/period-info`).then(r => r.data.data),
+  checkThreshold: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/audit-support/threshold-check`).then(r => r.data.data),
+  signOffExemption: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/audit-support/exemption-signoff`, data).then(r => r.data.data),
+  getAuditorView: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/audit-support/auditor-view`).then(r => r.data.data),
+};
+
+// ─── Acknowledgement Letters ────────────────────────────────────────────────
+
+export const acknowledgementLettersApi = {
+  generateTemplate: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/acknowledgement-letters/template`, data, { responseType: 'blob' }),
+  getTracking: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/acknowledgement-letters/tracking`).then(r => r.data),
+  uploadSigned: (firmId: string, formData: FormData) =>
+    apiClient.post(`/firms/${firmId}/acknowledgement-letters/upload`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }).then(r => r.data.data),
+  getAlerts: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/acknowledgement-letters/alerts`).then(r => r.data.data),
+};
+
+// ─── Third Party Due Diligence ──────────────────────────────────────────────
+
+export const thirdPartyDdApi = {
+  getRegister: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/third-party-dd/register`).then(r => r.data),
+  createParty: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/third-party-dd/register`, data).then(r => r.data.data),
+  updateParty: (firmId: string, partyId: string, data: object) =>
+    apiClient.put(`/firms/${firmId}/third-party-dd/register/${partyId}`, data).then(r => r.data.data),
+  createAssessment: (firmId: string, partyId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/third-party-dd/${partyId}/assessment`, data).then(r => r.data.data),
+  getDiversification: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/third-party-dd/diversification`).then(r => r.data.data),
+  createDiversification: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/third-party-dd/diversification`, data).then(r => r.data.data),
+  getAlerts: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/third-party-dd/alerts`).then(r => r.data.data),
+};
+
+// ─── Insurance Management ───────────────────────────────────────────────────
+
+export const insuranceManagementApi = {
+  getPolicies: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/insurance-management`).then(r => r.data),
+  createPolicy: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/insurance-management`, data).then(r => r.data.data),
+  getExpiry: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/insurance-management/expiry`).then(r => r.data.data),
+  recordDecision: (firmId: string, policyId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/insurance-management/${policyId}/expiry-decision`, data).then(r => r.data.data),
+  getFcaNotifications: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/insurance-management/fca-notifications`).then(r => r.data),
+};
+
+// ─── Policy Library ─────────────────────────────────────────────────────────
+
+export const policyLibraryApi = {
+  getPolicies: (firmId: string, params?: Record<string, string>) =>
+    apiClient.get(`/firms/${firmId}/policy-library`, { params }).then(r => r.data),
+  uploadPolicy: (firmId: string, formData: FormData) =>
+    apiClient.post(`/firms/${firmId}/policy-library`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }).then(r => r.data.data),
+  getVersionHistory: (firmId: string, docType: string) =>
+    apiClient.get(`/firms/${firmId}/policy-library/versions/${docType}`).then(r => r.data),
+  getChecklist: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/policy-library/checklist`).then(r => r.data.data),
+  getReviewAlerts: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/policy-library/review-alerts`).then(r => r.data.data),
+  chatHistory: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/policy-library/chat/history`).then(r => r.data),
+};
+
+// ─── Safeguarding Timing ────────────────────────────────────────────────────
+
+export const safeguardingTimingApi = {
+  recordReceived: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/safeguarding-timing/received`, data).then(r => r.data.data),
+  recordExited: (firmId: string, obligationId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/safeguarding-timing/${obligationId}/exited`, data).then(r => r.data.data),
+  getActive: (firmId: string, params?: Record<string, string>) =>
+    apiClient.get(`/firms/${firmId}/safeguarding-timing/active`, { params }).then(r => r.data),
+  tagFx: (firmId: string, obligationId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/safeguarding-timing/${obligationId}/fx-tag`, data).then(r => r.data.data),
+  getUnclaimed: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/safeguarding-timing/unclaimed`).then(r => r.data),
+  markUnclaimed: (firmId: string, obligationId: string) =>
+    apiClient.post(`/firms/${firmId}/safeguarding-timing/${obligationId}/mark-unclaimed`).then(r => r.data.data),
+  getDashboard: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/safeguarding-timing/dashboard`).then(r => r.data.data),
 };

@@ -486,6 +486,98 @@ enum EmailStatus {
   BOUNCED
 }
 
+// ─── TASK 1-12 NEW ENUMS ─────────────────────────────────────────────────────
+
+enum ReconciliationMethod {
+  STANDARD
+  NON_STANDARD
+}
+
+enum AssetPoolType {
+  E_MONEY
+  PAYMENT_SERVICES
+  COMBINED
+}
+
+enum BankStatementFormat {
+  CSV_GENERIC
+  CSV_BARCLAYS
+  CSV_NATWEST
+  CSV_HSBC
+  CSV_LLOYDS
+  CSV_CLEARBANK
+  CSV_MODULR
+  CSV_GRIFFIN
+  MT940
+  MANUAL
+  OPEN_BANKING
+}
+
+enum BankStatementImportStatus {
+  PENDING
+  PARSED
+  MATCHED
+  FAILED
+}
+
+enum BreachCategory {
+  SHORTFALL
+  EXCESS
+  RECORD_KEEPING
+  RECONCILIATION_FAILURE
+  NOTIFICATION_FAILURE
+  SEGREGATION_FAILURE
+  OTHER
+}
+
+enum FcaReturnStatus {
+  DRAFT
+  REVIEW
+  FINAL
+  SUBMITTED
+}
+
+enum FcaFormType {
+  FSA056
+  FSA057
+  FIN060A
+  SUP16_MONTHLY
+}
+
+enum AuditRequirementStatus {
+  REQUIRED
+  EXEMPT
+  PENDING_DETERMINATION
+}
+
+enum AckLetterTrackingStatus {
+  NOT_SENT
+  SENT
+  RECEIVED
+  REVIEWED
+  NEEDS_RENEWAL
+}
+
+enum ThirdPartyType {
+  BANK
+  CUSTODIAN
+  INSURANCE_PROVIDER
+  GUARANTEE_PROVIDER
+  OTHER
+}
+
+enum SafeguardingObligationStatus {
+  ACTIVE
+  ENDED
+  PENDING
+}
+
+enum FxTransactionType {
+  FX_ONLY
+  PAYMENT_LINKED
+  UNKNOWN
+}
+
 // ─── MODELS ──────────────────────────────────────────────────────────────────
 
 model Firm {
@@ -510,6 +602,23 @@ model Firm {
   cassClassification              CassClassification? @map("cass_classification")
   cassAuditDueDate                DateTime?           @db.Date @map("cass_audit_due_date")
   cmarSubmissionFrequency         CmarFrequency?      @map("cmar_submission_frequency")
+
+  // Task 1: Enhanced Reconciliation
+  reconciliationMethod            ReconciliationMethod @default(STANDARD) @map("reconciliation_method")
+  nonStandardMethodDoc            String?             @db.Text @map("non_standard_method_doc")
+  nonStandardAuditorReport        String?             @db.VarChar(500) @map("non_standard_auditor_report")
+  foreignMarketCalendars          Json                @default("[]") @map("foreign_market_calendars")
+
+  // Task 6: Audit Support
+  auditPeriodStart                DateTime?           @db.Date @map("audit_period_start")
+  auditPeriodEnd                  DateTime?           @db.Date @map("audit_period_end")
+  auditSubmissionDeadline         DateTime?           @db.Date @map("audit_submission_deadline")
+  auditRequirementStatus          AuditRequirementStatus @default(PENDING_DETERMINATION) @map("audit_requirement_status")
+  auditThresholdExceeded          Boolean             @default(false) @map("audit_threshold_exceeded")
+  auditExemptionSignedOffBy       String?             @db.VarChar(255) @map("audit_exemption_signed_off_by")
+  auditExemptionSignedOffAt       DateTime?           @map("audit_exemption_signed_off_at")
+  maxSafeguardedAmount            Decimal?            @db.Decimal(18, 2) @map("max_safeguarded_amount")
+  maxSafeguardedAmountDate        DateTime?           @db.Date @map("max_safeguarded_amount_date")
 
   users                           User[]
   clientAccounts                  ClientAccount[]
@@ -559,6 +668,19 @@ model Firm {
   signOffs                        SignOff[]
   remediationActions              RemediationAction[]
 
+  // Task 1-12 new relations
+  assetPools                      AssetPool[]
+  bankStatementImports            BankStatementImport[]
+  reconciliationCalendarDays      ReconciliationCalendarDay[]
+  resolutionPacks                 ResolutionPack[]
+  fcaMonthlyReturns               FcaMonthlyReturn[]
+  fcaFormSubmissions              FcaFormSubmission[]
+  auditEvidencePacks              AuditEvidencePack[]
+  thirdPartyRegisters             ThirdPartyRegister[]
+  diversificationAssessments      DiversificationAssessment[]
+  safeguardingObligations         SafeguardingObligation[]
+  bankApiKeys                     BankApiKey[]
+
   // Billing
   stripeCustomerId                String?             @db.VarChar(255) @map("stripe_customer_id")
   baseMonthlyFee                  Decimal             @default(1500) @db.Decimal(12, 2) @map("base_monthly_fee")
@@ -585,6 +707,9 @@ model User {
   status            UserStatus  @default(ACTIVE)
   accessExpiresAt   DateTime?   @map("access_expires_at")
   bankInstitutionId String?     @db.Uuid @map("bank_institution_id")
+  // Task 6: Auditor period scope
+  auditorPeriodStart DateTime?  @db.Date @map("auditor_period_start")
+  auditorPeriodEnd   DateTime?  @db.Date @map("auditor_period_end")
   createdAt         DateTime    @default(now()) @map("created_at")
   lastLoginAt       DateTime?   @map("last_login_at")
   failedLoginCount  Int         @default(0) @map("failed_login_count")
@@ -708,6 +833,7 @@ model SafeguardingAccount {
   reconciliationBreaks  ReconciliationBreak[]
   acknowledgementLetters AcknowledgementLetter[]
   thirdPartyDueDiligence ThirdPartyDueDiligence[]
+  bankStatementImports   BankStatementImport[]
 
   @@unique([firmId, externalAccountId])
   @@map("safeguarding_accounts")
@@ -838,6 +964,14 @@ model ReconciliationRun {
   completedAt         DateTime?             @map("completed_at")
   createdAt           DateTime              @default(now()) @map("created_at")
 
+  // Task 1: Enhanced reconciliation fields
+  assetPoolId         String?               @db.Uuid @map("asset_pool_id")
+  reconciliationPointTime DateTime?         @map("reconciliation_point_time")
+  segregationRequirement  Decimal?          @db.Decimal(18, 2) @map("segregation_requirement")
+  segregationResource     Decimal?          @db.Decimal(18, 2) @map("segregation_resource")
+  actionTaken         String?               @db.Text @map("action_taken")
+  reconMethod         ReconciliationMethod? @map("recon_method")
+
   // Rules engine fields
   rulesEngineVersion  String?               @db.VarChar(20) @map("rules_engine_version")
   complianceScore     Int?                  @map("compliance_score")
@@ -847,6 +981,7 @@ model ReconciliationRun {
 
   firm                Firm                  @relation(fields: [firmId], references: [id])
   rulePack            RulePack              @relation(fields: [rulePackId], references: [id])
+  assetPool           AssetPool?            @relation(fields: [assetPoolId], references: [id])
   breaks              ReconciliationBreak[]
   breaches            Breach[]
   verificationCertificates VerificationCertificate[]
@@ -903,6 +1038,18 @@ model Breach {
   closedAt                  DateTime?     @map("closed_at")
   closureEvidence           String?       @db.Text @map("closure_evidence")
   fcaNotificationId         String?       @db.Uuid @map("fca_notification_id")
+  // Task 3: Enhanced breach register fields
+  dateOccurred              DateTime?     @db.Date @map("date_occurred")
+  dateIdentified            DateTime?     @db.Date @map("date_identified")
+  dateReportedToSeniorMgmt  DateTime?     @map("date_reported_to_senior_mgmt")
+  breachCategory            BreachCategory? @map("breach_category")
+  rootCauseAnalysis         String?       @db.Text @map("root_cause_analysis")
+  remediationCompletionDate DateTime?     @db.Date @map("remediation_completion_date")
+  isMaterial                Boolean       @default(false) @map("is_material")
+  fcaNotificationDate       DateTime?     @map("fca_notification_date")
+  fcaNotificationReference  String?       @db.VarChar(100) @map("fca_notification_reference")
+  personResponsible         String?       @db.VarChar(255) @map("person_responsible")
+  supportingDocPaths        Json?         @map("supporting_doc_paths")
   createdAt                 DateTime      @default(now()) @map("created_at")
 
   firm                      Firm          @relation(fields: [firmId], references: [id])
@@ -1011,6 +1158,14 @@ model ThirdPartyDueDiligence {
   creditworthinessAssessment  String?                   @db.Text @map("creditworthiness_assessment")
   diversificationConsidered   Boolean                   @default(false) @map("diversification_considered")
   ddOutcome                   DueDiligenceOutcome       @map("dd_outcome")
+  // Task 8: Enhanced DD fields
+  financialStabilityAssessment String?                  @db.Text @map("financial_stability_assessment")
+  regulatoryStatusAssessment   String?                  @db.Text @map("regulatory_status_assessment")
+  serviceQualityAssessment     String?                  @db.Text @map("service_quality_assessment")
+  jurisdictionRiskAssessment   String?                  @db.Text @map("jurisdiction_risk_assessment")
+  approvedByName               String?                  @db.VarChar(255) @map("approved_by_name")
+  approvedByRole               String?                  @db.VarChar(255) @map("approved_by_role")
+  approvedDate                 DateTime?                @db.Date @map("approved_date")
   createdAt                   DateTime                  @default(now()) @map("created_at")
   updatedAt                   DateTime                  @updatedAt @map("updated_at")
 
@@ -1033,6 +1188,16 @@ model InsuranceGuarantee {
   contingencyPlanRequiredBy   DateTime                    @db.Date @map("contingency_plan_required_by")
   contingencyPlanStatus       InsuranceContingencyStatus  @default(NOT_DUE) @map("contingency_plan_status")
   documentStoragePath         String?                     @db.VarChar(500) @map("document_storage_path")
+  // Task 9: Enhanced insurance fields
+  premium                     Decimal?                    @db.Decimal(18, 2)
+  hasRestrictiveConditions    Boolean                     @default(false) @map("has_restrictive_conditions")
+  restrictiveConditionDetails String?                     @db.Text @map("restrictive_condition_details")
+  fcaNotifiedBeforeFirstUse   Boolean                     @default(false) @map("fca_notified_before_first_use")
+  fcaFirstUseNotificationDate DateTime?                   @map("fca_first_use_notification_date")
+  fcaChangeNotificationDate   DateTime?                   @map("fca_change_notification_date")
+  switchToSegregationPlan     String?                     @db.Text @map("switch_to_segregation_plan")
+  decisionMade                Boolean                     @default(false) @map("decision_made")
+  decisionDate                DateTime?                   @db.Date @map("decision_date")
   status                      InsuranceStatus
   createdAt                   DateTime                    @default(now()) @map("created_at")
   updatedAt                   DateTime                    @updatedAt @map("updated_at")
@@ -1071,6 +1236,11 @@ model PolicyDocument {
   boardApproved       Boolean               @default(false) @map("board_approved")
   boardApprovalDate   DateTime?             @db.Date @map("board_approval_date")
   annualReviewDue     DateTime?             @db.Date @map("annual_review_due")
+  // Task 10: Enhanced policy library fields
+  reviewFrequencyMonths Int?                @map("review_frequency_months")
+  textContent         String?               @db.Text @map("text_content")
+  lastReviewedAt      DateTime?             @map("last_reviewed_at")
+  lastReviewedBy      String?               @db.VarChar(255) @map("last_reviewed_by")
   status              PolicyDocumentStatus  @default(DRAFT)
   uploadedBy          String                @db.Uuid @map("uploaded_by")
   createdAt           DateTime              @default(now()) @map("created_at")
@@ -2039,4 +2209,254 @@ model AiConversation {
   @@index([sessionId])
   @@index([userId])
   @@map("ai_conversations")
+}
+
+// ─── TASK 1: ASSET POOLS & RECONCILIATION CALENDAR ──────────────────────────
+
+model AssetPool {
+  id              String        @id @default(uuid()) @db.Uuid
+  firmId          String        @db.Uuid @map("firm_id")
+  name            String        @db.VarChar(255)
+  poolType        AssetPoolType @map("pool_type")
+  description     String?       @db.Text
+  isActive        Boolean       @default(true) @map("is_active")
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+
+  firm            Firm          @relation(fields: [firmId], references: [id])
+  reconciliationRuns ReconciliationRun[]
+
+  @@unique([firmId, name])
+  @@map("asset_pools")
+}
+
+model ReconciliationCalendarDay {
+  id              String    @id @default(uuid()) @db.Uuid
+  firmId          String?   @db.Uuid @map("firm_id")
+  calendarDate    DateTime  @db.Date @map("calendar_date")
+  isHoliday       Boolean   @default(false) @map("is_holiday")
+  holidayName     String?   @db.VarChar(255) @map("holiday_name")
+  calendarType    String    @db.VarChar(50) @map("calendar_type")
+  country         String    @db.VarChar(10)
+  createdAt       DateTime  @default(now()) @map("created_at")
+
+  firm            Firm?     @relation(fields: [firmId], references: [id])
+
+  @@unique([firmId, calendarDate, calendarType])
+  @@index([calendarDate])
+  @@map("reconciliation_calendar_days")
+}
+
+model BankStatementImport {
+  id                    String                    @id @default(uuid()) @db.Uuid
+  firmId                String                    @db.Uuid @map("firm_id")
+  safeguardingAccountId String?                   @db.Uuid @map("safeguarding_account_id")
+  format                BankStatementFormat
+  filename              String                    @db.VarChar(255)
+  fileStoragePath       String?                   @db.VarChar(500) @map("file_storage_path")
+  statementDate         DateTime?                 @db.Date @map("statement_date")
+  openingBalance        Decimal?                  @db.Decimal(18, 2) @map("opening_balance")
+  closingBalance        Decimal?                  @db.Decimal(18, 2) @map("closing_balance")
+  transactionCount      Int                       @default(0) @map("transaction_count")
+  currency              String?                   @db.Char(3)
+  bankReference         String?                   @db.VarChar(255) @map("bank_reference")
+  rawData               Json?                     @map("raw_data")
+  status                BankStatementImportStatus @default(PENDING)
+  errorMessage          String?                   @db.Text @map("error_message")
+  importedBy            String?                   @db.Uuid @map("imported_by")
+  createdAt             DateTime                  @default(now()) @map("created_at")
+
+  firm                  Firm                      @relation(fields: [firmId], references: [id])
+  safeguardingAccount   SafeguardingAccount?      @relation(fields: [safeguardingAccountId], references: [id])
+
+  @@index([firmId, statementDate])
+  @@map("bank_statement_imports")
+}
+
+// ─── TASK 2: RESOLUTION PACK ────────────────────────────────────────────────
+
+model ResolutionPack {
+  id                String    @id @default(uuid()) @db.Uuid
+  firmId            String    @db.Uuid @map("firm_id")
+  version           Int       @default(1)
+  generatedAt       DateTime  @default(now()) @map("generated_at")
+  pdfStoragePath    String?   @db.VarChar(500) @map("pdf_storage_path")
+  completenessScore Int       @default(0) @map("completeness_score")
+  components        Json
+  componentStatuses Json      @map("component_statuses")
+  lastChangedAt     DateTime  @default(now()) @map("last_changed_at")
+  createdAt         DateTime  @default(now()) @map("created_at")
+
+  firm              Firm      @relation(fields: [firmId], references: [id])
+
+  @@index([firmId, version])
+  @@map("resolution_packs")
+}
+
+// ─── TASK 4: FCA MONTHLY RETURN ─────────────────────────────────────────────
+
+model FcaMonthlyReturn {
+  id                    String          @id @default(uuid()) @db.Uuid
+  firmId                String          @db.Uuid @map("firm_id")
+  reportingMonth        DateTime        @db.Date @map("reporting_month")
+  submissionDeadline    DateTime        @db.Date @map("submission_deadline")
+  status                FcaReturnStatus @default(DRAFT)
+  // Section A - Firm details
+  sectionA              Json            @map("section_a")
+  // Section B - Relevant funds
+  sectionB              Json            @map("section_b")
+  // Section C - Safeguarding accounts
+  sectionC              Json            @map("section_c")
+  // Section D - Relevant assets
+  sectionD              Json            @map("section_d")
+  // Section E - Insurance/guarantee
+  sectionE              Json?           @map("section_e")
+  // Section F - Breaches
+  sectionF              Json            @map("section_f")
+  validationErrors      Json?           @map("validation_errors")
+  pdfStoragePath        String?         @db.VarChar(500) @map("pdf_storage_path")
+  exportDataPath        String?         @db.VarChar(500) @map("export_data_path")
+  finalisedBy           String?         @db.Uuid @map("finalised_by")
+  finalisedAt           DateTime?       @map("finalised_at")
+  createdAt             DateTime        @default(now()) @map("created_at")
+  updatedAt             DateTime        @updatedAt @map("updated_at")
+
+  firm                  Firm            @relation(fields: [firmId], references: [id])
+
+  @@unique([firmId, reportingMonth])
+  @@index([firmId, status])
+  @@map("fca_monthly_returns")
+}
+
+// ─── TASK 5: ADDITIONAL FCA FORMS ───────────────────────────────────────────
+
+model FcaFormSubmission {
+  id                String        @id @default(uuid()) @db.Uuid
+  firmId            String        @db.Uuid @map("firm_id")
+  formType          FcaFormType   @map("form_type")
+  reportingPeriodStart DateTime  @db.Date @map("reporting_period_start")
+  reportingPeriodEnd   DateTime  @db.Date @map("reporting_period_end")
+  autoPopulatedData Json          @map("auto_populated_data")
+  manualFields      Json?         @map("manual_fields")
+  status            FcaReturnStatus @default(DRAFT)
+  pdfStoragePath    String?       @db.VarChar(500) @map("pdf_storage_path")
+  exportDataPath    String?       @db.VarChar(500) @map("export_data_path")
+  notes             String?       @db.Text
+  createdAt         DateTime      @default(now()) @map("created_at")
+  updatedAt         DateTime      @updatedAt @map("updated_at")
+
+  firm              Firm          @relation(fields: [firmId], references: [id])
+
+  @@index([firmId, formType])
+  @@map("fca_form_submissions")
+}
+
+// ─── TASK 6: AUDIT EVIDENCE PACK ────────────────────────────────────────────
+
+model AuditEvidencePack {
+  id              String    @id @default(uuid()) @db.Uuid
+  firmId          String    @db.Uuid @map("firm_id")
+  periodStart     DateTime  @db.Date @map("period_start")
+  periodEnd       DateTime  @db.Date @map("period_end")
+  pdfStoragePath  String?   @db.VarChar(500) @map("pdf_storage_path")
+  contentHash     String?   @db.VarChar(64) @map("content_hash")
+  generatedBy     String    @db.Uuid @map("generated_by")
+  reconDaysCount  Int       @default(0) @map("recon_days_count")
+  breachCount     Int       @default(0) @map("breach_count")
+  shortfallCount  Int       @default(0) @map("shortfall_count")
+  resPackStatus   String?   @db.VarChar(20) @map("res_pack_status")
+  createdAt       DateTime  @default(now()) @map("created_at")
+
+  firm            Firm      @relation(fields: [firmId], references: [id])
+
+  @@index([firmId, periodStart])
+  @@map("audit_evidence_packs")
+}
+
+// ─── TASK 8: THIRD-PARTY REGISTER ───────────────────────────────────────────
+
+model ThirdPartyRegister {
+  id              String          @id @default(uuid()) @db.Uuid
+  firmId          String          @db.Uuid @map("firm_id")
+  name            String          @db.VarChar(255)
+  partyType       ThirdPartyType  @map("party_type")
+  jurisdiction    String?         @db.VarChar(100)
+  dateAppointed   DateTime        @db.Date @map("date_appointed")
+  servicesProvided String?        @db.Text @map("services_provided")
+  contactName     String?         @db.VarChar(255) @map("contact_name")
+  contactEmail    String?         @db.VarChar(255) @map("contact_email")
+  contactPhone    String?         @db.VarChar(50) @map("contact_phone")
+  isActive        Boolean         @default(true) @map("is_active")
+  linkedSafeguardingAccountId String? @db.Uuid @map("linked_safeguarding_account_id")
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       DateTime        @updatedAt @map("updated_at")
+
+  firm            Firm            @relation(fields: [firmId], references: [id])
+
+  @@index([firmId, partyType])
+  @@map("third_party_registers")
+}
+
+model DiversificationAssessment {
+  id              String    @id @default(uuid()) @db.Uuid
+  firmId          String    @db.Uuid @map("firm_id")
+  assessmentDate  DateTime  @db.Date @map("assessment_date")
+  isDiversified   Boolean   @map("is_diversified")
+  rationale       String    @db.Text
+  singleBankFlag  Boolean   @default(false) @map("single_bank_flag")
+  assessedBy      String    @db.VarChar(255) @map("assessed_by")
+  createdAt       DateTime  @default(now()) @map("created_at")
+
+  firm            Firm      @relation(fields: [firmId], references: [id])
+
+  @@index([firmId, assessmentDate])
+  @@map("diversification_assessments")
+}
+
+// ─── TASK 11: BANK API KEYS ─────────────────────────────────────────────────
+
+model BankApiKey {
+  id                String          @id @default(uuid()) @db.Uuid
+  firmId            String?         @db.Uuid @map("firm_id")
+  bankInstitutionId String          @db.Uuid @map("bank_institution_id")
+  keyHash           String          @unique @db.VarChar(128) @map("key_hash")
+  keyPrefix         String          @db.VarChar(10) @map("key_prefix")
+  label             String          @db.VarChar(255)
+  isActive          Boolean         @default(true) @map("is_active")
+  lastUsedAt        DateTime?       @map("last_used_at")
+  expiresAt         DateTime?       @map("expires_at")
+  rateLimitPerMin   Int             @default(60) @map("rate_limit_per_min")
+  createdAt         DateTime        @default(now()) @map("created_at")
+
+  firm              Firm?           @relation(fields: [firmId], references: [id])
+
+  @@index([bankInstitutionId])
+  @@map("bank_api_keys")
+}
+
+// ─── TASK 12: SAFEGUARDING OBLIGATIONS ──────────────────────────────────────
+
+model SafeguardingObligation {
+  id                String                      @id @default(uuid()) @db.Uuid
+  firmId            String                      @db.Uuid @map("firm_id")
+  clientAccountId   String?                     @db.Uuid @map("client_account_id")
+  transactionRef    String?                     @db.VarChar(255) @map("transaction_ref")
+  amount            Decimal                     @db.Decimal(18, 2)
+  currency          String                      @db.Char(3)
+  fundsReceivedAt   DateTime                    @map("funds_received_at")
+  safeguardingStartedAt DateTime?               @map("safeguarding_started_at")
+  safeguardingEndedAt   DateTime?               @map("safeguarding_ended_at")
+  endReason         String?                     @db.VarChar(100) @map("end_reason")
+  fxType            FxTransactionType           @default(UNKNOWN) @map("fx_type")
+  isUnclaimed       Boolean                     @default(false) @map("is_unclaimed")
+  unclaimedSince    DateTime?                   @map("unclaimed_since")
+  status            SafeguardingObligationStatus @default(ACTIVE)
+  createdAt         DateTime                    @default(now()) @map("created_at")
+  updatedAt         DateTime                    @updatedAt @map("updated_at")
+
+  firm              Firm                        @relation(fields: [firmId], references: [id])
+
+  @@index([firmId, status])
+  @@index([firmId, isUnclaimed])
+  @@map("safeguarding_obligations")
 }

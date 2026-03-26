@@ -37,6 +37,16 @@ import { regMonitorRouter } from './modules/reg-monitor/routes';
 import { deepIngestionRouter } from './modules/deep-ingestion/routes';
 import { billingAdminRouter, firmBillingRouter, stripeWebhookRouter } from './modules/billing/routes';
 import { aiAssistantRouter, aiAssistantAdminRouter } from './modules/ai-assistant/routes';
+import { acknowledgementLettersRouter } from './modules/acknowledgement-letters/routes';
+import { thirdPartyDdRouter } from './modules/third-party-dd/routes';
+import { insuranceManagementRouter } from './modules/insurance-management/routes';
+import { bankApiRouter } from './modules/bank-api/routes';
+import { auditSupportRouter } from './modules/audit-support/routes';
+import { fcaFormsRouter } from './modules/fca-forms/routes';
+import { policyLibraryRouter } from './modules/policy-library/routes';
+import { safeguardingTimingRouter } from './modules/safeguarding-timing/routes';
+import { resolutionPackRouter } from './modules/resolution-pack/routes';
+import { fcaReturnsRouter } from './modules/fca-returns/routes';
 
 // Ensure Bull queues are registered
 import './modules/ingestion/queue';
@@ -170,6 +180,16 @@ app.use('/api/v1/webhook', stripeWebhookRouter);
 app.use('/api/v1/firms', generalLimiter, aiAssistantRouter);
 app.use('/api/v1/admin/ai-assistant', generalLimiter, aiAssistantAdminRouter);
 app.use('/api/v1/bank-dashboard', generalLimiter, bankDashboardRouter);
+app.use('/api/v1/firms', generalLimiter, acknowledgementLettersRouter);
+app.use('/api/v1/firms', generalLimiter, thirdPartyDdRouter);
+app.use('/api/v1/firms', generalLimiter, insuranceManagementRouter);
+app.use('/api/v1/bank-api', generalLimiter, bankApiRouter);
+app.use('/api/v1/firms', generalLimiter, auditSupportRouter);
+app.use('/api/v1/firms', generalLimiter, fcaFormsRouter);
+app.use('/api/v1/firms', generalLimiter, policyLibraryRouter);
+app.use('/api/v1/firms', generalLimiter, safeguardingTimingRouter);
+app.use('/api/v1/firms', generalLimiter, resolutionPackRouter);
+app.use('/api/v1/firms', generalLimiter, fcaReturnsRouter);
 
 // ─── Error Handling ───────────────────────────────────────────────────────────
 
