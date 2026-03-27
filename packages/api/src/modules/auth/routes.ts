@@ -14,7 +14,7 @@ import {
 } from './service';
 import { authenticate, requireRole } from '../../middleware/auth';
 import { successResponse } from '../../utils/response';
-import { ValidationError, AuthenticationError } from '../../utils/errors';
+import { ValidationError, AuthenticationError, NotFoundError } from '../../utils/errors';
 import { config } from '../../config';
 import { prisma } from '../../utils/prisma';
 import { fileStorage } from '../../utils/fileStorage';
@@ -166,6 +166,24 @@ const updateProfileSchema = z.object({
   email: z.string().email().optional(),
   phone: z.string().max(50).optional(),
   jobTitle: z.string().max(255).optional(),
+});
+
+// GET /api/v1/auth/me — get own profile
+router.get('/me', authenticate, async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: req.user!.userId },
+      select: {
+        id: true, email: true, name: true, role: true, mfaEnabled: true,
+        phone: true, jobTitle: true, status: true, createdAt: true, lastLoginAt: true,
+        firm: { select: { id: true, name: true, fcaFrn: true, regime: true, safeguardingMethod: true } },
+      },
+    });
+    if (!user) throw new NotFoundError('User');
+    successResponse(res, user);
+  } catch (err) {
+    next(err);
+  }
 });
 
 // PUT /api/v1/auth/me — update own profile
