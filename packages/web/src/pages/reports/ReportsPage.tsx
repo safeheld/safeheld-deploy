@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../../hooks/useAuth';
 import { reportingApi } from '../../api/client';
-import { Card, Table, Button, PageHeader, Pagination, statusBadge, Modal, Alert, Select } from '../../components/ui';
+import { Card, Table, Button, PageHeader, Pagination, statusBadge, Modal, Alert, Select, LoadingSkeleton, ErrorState } from '../../components/ui';
 import { format } from 'date-fns';
 
 const REPORT_TYPES = [
@@ -28,7 +28,7 @@ export default function ReportsPage() {
   const [sgResult, setSgResult] = useState<object | null>(null);
   const [genError, setGenError] = useState('');
 
-  const { data: reportsResp, isLoading } = useQuery({
+  const { data: reportsResp, isLoading, error: reportsError, refetch: reportsRefetch } = useQuery({
     queryKey: ['reports', firmId, page],
     queryFn: () => reportingApi.getReports(firmId, { page: String(page) }),
   });
@@ -105,10 +105,14 @@ export default function ReportsPage() {
         ))}
       </div>
 
-      {activeTab === 'assurance' && (
+      {activeTab === 'assurance' && reportsError && (
+        <ErrorState message="Failed to load reports." onRetry={() => reportsRefetch()} />
+      )}
+      {activeTab === 'assurance' && isLoading && <LoadingSkeleton type="table" />}
+      {activeTab === 'assurance' && !reportsError && !isLoading && (
         <Card>
           <Table
-            loading={isLoading}
+            loading={false}
             data={reports}
             columns={[
               { key: 'reportType', header: 'Type', render: r => r.reportType.replace(/_/g, ' ') },

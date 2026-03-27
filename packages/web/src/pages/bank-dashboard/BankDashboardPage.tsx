@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { bankDashboardApi } from '../../api/client';
+import { LoadingSkeleton, ErrorState } from '../../components/ui';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -254,19 +255,11 @@ export default function BankDashboardPage() {
   };
 
   if (overviewLoading) {
-    return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '300px' }}>
-        <div className="spinner" />
-      </div>
-    );
+    return <LoadingSkeleton type="cards" />;
   }
 
   if (overviewError) {
-    return (
-      <div style={{ padding: '24px', color: 'var(--color-danger)' }}>
-        Failed to load bank dashboard data.
-      </div>
-    );
+    return <ErrorState message="Failed to load bank dashboard data." onRetry={() => window.location.reload()} />;
   }
 
   return (

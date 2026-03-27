@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../../hooks/useAuth';
 import { thirdPartyDdApi } from '../../api/client';
-import { Card, Table, Button, PageHeader, Modal, Alert, statusBadge, Badge } from '../../components/ui';
+import { Card, Table, Button, PageHeader, Modal, Alert, statusBadge, Badge, LoadingSkeleton, ErrorState } from '../../components/ui';
 import { format } from 'date-fns';
 
 const PARTY_TYPES = ['BANK', 'CUSTODIAN', 'PAYMENT_PROCESSOR', 'EXCHANGE', 'OTHER'];
@@ -36,7 +36,7 @@ export default function ThirdPartyDdPage() {
   const [showDivModal, setShowDivModal] = useState(false);
   const [divForm, setDivForm] = useState({ isDiversified: false, rationale: '', assessedBy: '' });
 
-  const { data: registerData, isLoading: registerLoading } = useQuery({
+  const { data: registerData, isLoading: registerLoading, error: registerError, refetch: registerRefetch } = useQuery({
     queryKey: ['third-party-register', firmId],
     queryFn: () => thirdPartyDdApi.getRegister(firmId),
     enabled: activeTab === 'register' || activeTab === 'dd',
@@ -121,7 +121,11 @@ export default function ThirdPartyDdPage() {
         ))}
       </div>
 
-      {activeTab === 'register' && (
+      {activeTab === 'register' && registerError && (
+        <ErrorState message="Failed to load third-party register." onRetry={() => registerRefetch()} />
+      )}
+      {activeTab === 'register' && registerLoading && <LoadingSkeleton type="table" />}
+      {activeTab === 'register' && !registerError && !registerLoading && (
         <Card
           title="Third-Party Register"
           actions={isComplianceOrAdmin ? (
@@ -189,7 +193,7 @@ export default function ThirdPartyDdPage() {
             ) : undefined}
           >
             {divLoading ? (
-              <div style={{ padding: '20px', color: 'var(--color-gray-400)', textAlign: 'center' }}>Loading...</div>
+              <LoadingSkeleton type="detail" rows={4} />
             ) : divData ? (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '13px' }}>
                 <div style={{ display: 'flex', gap: '20px' }}>

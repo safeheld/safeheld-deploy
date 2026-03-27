@@ -47,6 +47,7 @@ import { policyLibraryRouter } from './modules/policy-library/routes';
 import { safeguardingTimingRouter } from './modules/safeguarding-timing/routes';
 import { resolutionPackRouter } from './modules/resolution-pack/routes';
 import { fcaReturnsRouter } from './modules/fca-returns/routes';
+import { notificationsRouter } from './modules/notifications/routes';
 
 // Ensure Bull queues are registered
 import './modules/ingestion/queue';
@@ -190,6 +191,7 @@ app.use('/api/v1/firms', generalLimiter, policyLibraryRouter);
 app.use('/api/v1/firms', generalLimiter, safeguardingTimingRouter);
 app.use('/api/v1/firms', generalLimiter, resolutionPackRouter);
 app.use('/api/v1/firms', generalLimiter, fcaReturnsRouter);
+app.use('/api/v1', generalLimiter, notificationsRouter);
 
 // ─── Error Handling ───────────────────────────────────────────────────────────
 

@@ -2,7 +2,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../../hooks/useAuth';
 import { policyLibraryApi } from '../../api/client';
-import { Card, Table, Button, PageHeader, Modal, Alert, statusBadge, Badge } from '../../components/ui';
+import { Card, Table, Button, PageHeader, Modal, Alert, statusBadge, Badge, LoadingSkeleton, ErrorState } from '../../components/ui';
 import { format } from 'date-fns';
 
 const DOCUMENT_TYPES = [
@@ -43,7 +43,7 @@ export default function PolicyLibraryPage() {
   const chatSessionId = useRef(`session-${Date.now()}`);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
-  const { data: policiesData, isLoading: policiesLoading } = useQuery({
+  const { data: policiesData, isLoading: policiesLoading, error: policiesError, refetch: policiesRefetch } = useQuery({
     queryKey: ['policy-library', firmId],
     queryFn: () => policyLibraryApi.getPolicies(firmId),
     enabled: activeTab === 'documents',
@@ -194,7 +194,11 @@ export default function PolicyLibraryPage() {
         ))}
       </div>
 
-      {activeTab === 'documents' && (
+      {activeTab === 'documents' && policiesError && (
+        <ErrorState message="Failed to load policy documents." onRetry={() => policiesRefetch()} />
+      )}
+      {activeTab === 'documents' && policiesLoading && <LoadingSkeleton type="table" />}
+      {activeTab === 'documents' && !policiesError && !policiesLoading && (
         <div>
           {/* Review alerts */}
           {Array.isArray(alerts) && alerts.length > 0 && (
@@ -229,11 +233,10 @@ export default function PolicyLibraryPage() {
         </div>
       )}
 
-      {activeTab === 'checklist' && (
+      {activeTab === 'checklist' && checklistLoading && <LoadingSkeleton type="table" />}
+      {activeTab === 'checklist' && !checklistLoading && (
         <Card title="Required Policy Documents Checklist">
-          {checklistLoading ? (
-            <div style={{ padding: '20px', color: 'var(--color-gray-400)', textAlign: 'center' }}>Loading...</div>
-          ) : (
+          {(
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {(Array.isArray(checklist) ? checklist : []).map((item: any, i: number) => (
                 <div key={i} style={{

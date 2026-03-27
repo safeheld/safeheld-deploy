@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -7,8 +7,16 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [sessionExpired, setSessionExpired] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (sessionStorage.getItem('session_expired') === 'true') {
+      setSessionExpired(true);
+      sessionStorage.removeItem('session_expired');
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -94,6 +102,16 @@ export default function LoginPage() {
               }}
             />
           </div>
+
+          {sessionExpired && (
+            <div style={{
+              padding: '10px 14px', background: '#fef3c7',
+              border: '1px solid #fcd34d', borderRadius: '6px',
+              color: '#92400e', fontSize: '13px',
+            }}>
+              Your session has expired. Please log in again.
+            </div>
+          )}
 
           {error && (
             <div style={{

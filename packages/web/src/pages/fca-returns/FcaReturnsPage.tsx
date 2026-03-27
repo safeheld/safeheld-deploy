@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../../hooks/useAuth';
 import { fcaReturnsApi, fcaFormsApi } from '../../api/client';
-import { Card, Table, Button, PageHeader, Modal, Alert, statusBadge, Badge } from '../../components/ui';
+import { Card, Table, Button, PageHeader, Modal, Alert, statusBadge, Badge, LoadingSkeleton, ErrorState } from '../../components/ui';
 import { format } from 'date-fns';
 
 export default function FcaReturnsPage() {
@@ -21,13 +21,13 @@ export default function FcaReturnsPage() {
   const [viewReturn, setViewReturn] = useState<any>(null);
   const [validationWarnings, setValidationWarnings] = useState<any[]>([]);
 
-  const { data: returnsData, isLoading: returnsLoading } = useQuery({
+  const { data: returnsData, isLoading: returnsLoading, error: returnsError, refetch: returnsRefetch } = useQuery({
     queryKey: ['fca-monthly-returns', firmId],
     queryFn: () => fcaReturnsApi.getMonthlyReturns(firmId),
     enabled: activeTab === 'monthly',
   });
 
-  const { data: formsData, isLoading: formsLoading } = useQuery({
+  const { data: formsData, isLoading: formsLoading, error: formsError, refetch: formsRefetch } = useQuery({
     queryKey: ['fca-forms', firmId],
     queryFn: () => fcaFormsApi.getForms(firmId),
     enabled: activeTab === 'forms',
@@ -124,7 +124,11 @@ export default function FcaReturnsPage() {
         ))}
       </div>
 
-      {activeTab === 'monthly' && (
+      {activeTab === 'monthly' && returnsError && (
+        <ErrorState message="Failed to load monthly returns." onRetry={() => returnsRefetch()} />
+      )}
+      {activeTab === 'monthly' && returnsLoading && <LoadingSkeleton type="table" />}
+      {activeTab === 'monthly' && !returnsError && !returnsLoading && (
         <Card
           title="Monthly Safeguarding Returns"
           actions={isComplianceOrAdmin ? (
@@ -175,7 +179,11 @@ export default function FcaReturnsPage() {
         </Card>
       )}
 
-      {activeTab === 'forms' && (
+      {activeTab === 'forms' && formsError && (
+        <ErrorState message="Failed to load FCA forms." onRetry={() => formsRefetch()} />
+      )}
+      {activeTab === 'forms' && formsLoading && <LoadingSkeleton type="table" />}
+      {activeTab === 'forms' && !formsError && !formsLoading && (
         <Card
           title="FCA Regulatory Forms"
           actions={isComplianceOrAdmin ? (

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../../hooks/useAuth';
 import { adminApi } from '../../api/client';
-import { Card, Table, PageHeader, Pagination, Button } from '../../components/ui';
+import { Card, Table, PageHeader, Pagination, Button, LoadingSkeleton, ErrorState } from '../../components/ui';
 import { format } from 'date-fns';
 
 export default function AuditPage() {
@@ -22,7 +22,7 @@ export default function AuditPage() {
   if (filters.from) queryParams.from = filters.from;
   if (filters.to) queryParams.to = filters.to;
 
-  const { data: logsResp, isLoading } = useQuery({
+  const { data: logsResp, isLoading, error: auditError, refetch: auditRefetch } = useQuery({
     queryKey: ['audit-log', page, filters],
     queryFn: () => adminApi.getAuditLog(queryParams),
   });
@@ -85,9 +85,11 @@ export default function AuditPage() {
         )}
       </div>
 
-      <Card>
+      {auditError && <ErrorState message="Failed to load audit log." onRetry={() => auditRefetch()} />}
+      {isLoading && <LoadingSkeleton type="table" />}
+      {!auditError && !isLoading && <Card>
         <Table
-          loading={isLoading}
+          loading={false}
           data={logs}
           columns={[
             { key: 'createdAt', header: 'Timestamp', render: r => format(new Date(r.createdAt), 'dd MMM yyyy HH:mm:ss'), width: '160px' },
@@ -102,7 +104,7 @@ export default function AuditPage() {
         {pagination && (
           <Pagination page={page} totalPages={pagination.totalPages} total={pagination.total} onPageChange={setPage} />
         )}
-      </Card>
+      </Card>}
     </div>
   );
 }

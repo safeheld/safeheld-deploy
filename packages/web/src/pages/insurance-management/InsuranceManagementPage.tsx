@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../../hooks/useAuth';
 import { insuranceManagementApi } from '../../api/client';
-import { Card, Table, Button, PageHeader, Modal, Alert, statusBadge, Badge } from '../../components/ui';
+import { Card, Table, Button, PageHeader, Modal, Alert, statusBadge, Badge, LoadingSkeleton, ErrorState } from '../../components/ui';
 import { format, differenceInDays } from 'date-fns';
 
 const COVERAGE_TYPES = [
@@ -34,7 +34,7 @@ export default function InsuranceManagementPage() {
     decision: 'CONTINUE' as string, fcaNotified: false, fcaNotificationDate: '', contingencyPlan: '',
   });
 
-  const { data: policiesData, isLoading: policiesLoading } = useQuery({
+  const { data: policiesData, isLoading: policiesLoading, error: policiesError, refetch: policiesRefetch } = useQuery({
     queryKey: ['insurance-policies', firmId],
     queryFn: () => insuranceManagementApi.getPolicies(firmId),
     enabled: activeTab === 'policies',
@@ -112,7 +112,11 @@ export default function InsuranceManagementPage() {
         ))}
       </div>
 
-      {activeTab === 'policies' && (
+      {activeTab === 'policies' && policiesError && (
+        <ErrorState message="Failed to load insurance policies." onRetry={() => policiesRefetch()} />
+      )}
+      {activeTab === 'policies' && policiesLoading && <LoadingSkeleton type="table" />}
+      {activeTab === 'policies' && !policiesError && !policiesLoading && (
         <Card
           title="Insurance Policies"
           actions={isComplianceOrAdmin ? (
@@ -149,10 +153,9 @@ export default function InsuranceManagementPage() {
             </div>
           )}
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '16px' }}>
-            {expiryLoading ? (
-              <div style={{ padding: '20px', color: 'var(--color-gray-400)' }}>Loading...</div>
-            ) : expiryItems.length === 0 ? (
+          {expiryLoading && <LoadingSkeleton type="cards" />}
+          {!expiryLoading && <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '16px' }}>
+            {expiryItems.length === 0 ? (
               <Card><div style={{ color: 'var(--color-gray-400)' }}>No policies to manage.</div></Card>
             ) : expiryItems.map((item: any) => {
               const daysLeft = item.daysUntilExpiry ?? (item.expiryDate ? differenceInDays(new Date(item.expiryDate), new Date()) : null);
@@ -188,7 +191,7 @@ export default function InsuranceManagementPage() {
                 </Card>
               );
             })}
-          </div>
+          </div>}
         </div>
       )}
 

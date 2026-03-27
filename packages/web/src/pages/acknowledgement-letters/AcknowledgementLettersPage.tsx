@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../../hooks/useAuth';
 import { acknowledgementLettersApi } from '../../api/client';
-import { Card, Table, Button, PageHeader, StatCard, Grid, Modal, Alert, statusBadge } from '../../components/ui';
+import { Card, Table, Button, PageHeader, StatCard, Grid, Modal, Alert, statusBadge, LoadingSkeleton, ErrorState } from '../../components/ui';
 import { format } from 'date-fns';
 
 export default function AcknowledgementLettersPage() {
@@ -17,7 +17,7 @@ export default function AcknowledgementLettersPage() {
   const [expiryDate, setExpiryDate] = useState('');
   const [uploadFile, setUploadFile] = useState<File | null>(null);
 
-  const { data: trackingData, isLoading: trackingLoading } = useQuery({
+  const { data: trackingData, isLoading: trackingLoading, error: trackingError, refetch: trackingRefetch } = useQuery({
     queryKey: ['ack-letters-tracking', firmId],
     queryFn: () => acknowledgementLettersApi.getTracking(firmId),
   });
@@ -79,6 +79,9 @@ export default function AcknowledgementLettersPage() {
           </Button>
         ) : undefined}
       />
+
+      {trackingError && <ErrorState message="Failed to load acknowledgement letters." onRetry={() => trackingRefetch()} />}
+      {trackingLoading && <LoadingSkeleton type="table" />}
 
       {/* Alerts */}
       {Array.isArray(alerts) && alerts.length > 0 && (

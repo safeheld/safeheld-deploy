@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../../hooks/useAuth';
 import { reconciliationApi } from '../../api/client';
-import { Card, Table, Button, Select, PageHeader, Pagination, statusBadge, Modal, Alert, StatCard, Grid } from '../../components/ui';
+import { Card, Table, Button, Select, PageHeader, Pagination, statusBadge, Modal, Alert, StatCard, Grid, LoadingSkeleton, EmptyState, ErrorState } from '../../components/ui';
 import { format } from 'date-fns';
 
 export default function ReconciliationPage() {
@@ -20,13 +20,13 @@ export default function ReconciliationPage() {
   const [selectedBreak, setSelectedBreak] = useState<{ id: string; variance: number; ageBusinessDays: number } | null>(null);
   const [resolution, setResolution] = useState({ classification: 'TIMING', explanation: '' });
 
-  const { data: historyResp, isLoading: historyLoading } = useQuery({
+  const { data: historyResp, isLoading: historyLoading, error: historyError, refetch: historyRefetch } = useQuery({
     queryKey: ['recon-history', firmId, historyPage],
     queryFn: () => reconciliationApi.getHistory(firmId, { page: String(historyPage) }),
     enabled: activeTab === 'history',
   });
 
-  const { data: breaksResp, isLoading: breaksLoading } = useQuery({
+  const { data: breaksResp, isLoading: breaksLoading, error: breaksError, refetch: breaksRefetch } = useQuery({
     queryKey: ['recon-breaks', firmId, breaksPage],
     queryFn: () => reconciliationApi.getBreaks(firmId, { page: String(breaksPage), resolved: 'false' }),
     enabled: activeTab === 'breaks',
@@ -105,10 +105,14 @@ export default function ReconciliationPage() {
         ))}
       </div>
 
-      {activeTab === 'history' && (
+      {activeTab === 'history' && historyError && (
+        <ErrorState message="Failed to load reconciliation history." onRetry={() => historyRefetch()} />
+      )}
+      {activeTab === 'history' && historyLoading && <LoadingSkeleton type="table" />}
+      {activeTab === 'history' && !historyError && !historyLoading && (
         <Card title="Reconciliation Run History">
           <Table
-            loading={historyLoading}
+            loading={false}
             data={historyResp?.data || []}
             columns={[
               { key: 'reconciliationDate', header: 'Date', render: r => format(new Date(r.reconciliationDate), 'dd MMM yyyy') },
@@ -146,10 +150,14 @@ export default function ReconciliationPage() {
         </Card>
       )}
 
-      {activeTab === 'breaks' && (
+      {activeTab === 'breaks' && breaksError && (
+        <ErrorState message="Failed to load reconciliation breaks." onRetry={() => breaksRefetch()} />
+      )}
+      {activeTab === 'breaks' && breaksLoading && <LoadingSkeleton type="table" />}
+      {activeTab === 'breaks' && !breaksError && !breaksLoading && (
         <Card title="Open Reconciliation Breaks">
           <Table
-            loading={breaksLoading}
+            loading={false}
             data={breaksResp?.data || []}
             columns={[
               { key: 'safeguardingAccount', header: 'Account', render: r => r.safeguardingAccount ? `${r.safeguardingAccount.bankName} (${r.safeguardingAccount.accountNumberMasked})` : '—' },

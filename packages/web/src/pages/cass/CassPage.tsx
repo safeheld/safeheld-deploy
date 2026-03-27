@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../../hooks/useAuth';
 import { cassApi } from '../../api/client';
-import { Card, Table, Button, PageHeader, Pagination, Modal, Alert, StatCard, Grid, statusBadge } from '../../components/ui';
+import { Card, Table, Button, PageHeader, Pagination, Modal, Alert, StatCard, Grid, statusBadge, LoadingSkeleton, EmptyState, ErrorState } from '../../components/ui';
 import { format } from 'date-fns';
 
-type Tab = 'dashboard' | 'assets' | 'cmar' | 'risk' | 'regulatory' | 'impact';
+type Tab = 'dashboard' | 'assets' | 'cmar' | 'risk' | 'regulatory' | 'impact' | 'custody-recon' | 'sign-off';
 
 export default function CassPage() {
   const { user } = useAuth();
@@ -22,6 +22,8 @@ export default function CassPage() {
     { key: 'risk', label: 'Risk Controls' },
     { key: 'regulatory', label: 'Regulatory Updates' },
     { key: 'impact', label: 'Impact Assessments' },
+    { key: 'custody-recon', label: 'Custody Reconciliation' },
+    { key: 'sign-off', label: 'Sign-Off' },
   ];
 
   return (
@@ -54,6 +56,8 @@ export default function CassPage() {
       {activeTab === 'risk' && <RiskControlsTab firmId={firmId} isCompliance={isCompliance} />}
       {activeTab === 'regulatory' && <RegulatoryTab firmId={firmId} isCompliance={isCompliance} />}
       {activeTab === 'impact' && <ImpactTab firmId={firmId} isCompliance={isCompliance} />}
+      {activeTab === 'custody-recon' && <CustodyReconTab firmId={firmId} isCompliance={isCompliance} />}
+      {activeTab === 'sign-off' && <SignOffTab firmId={firmId} isCompliance={isCompliance} />}
     </div>
   );
 }
@@ -61,10 +65,13 @@ export default function CassPage() {
 // ─── Dashboard Tab ───────────────────────────────────────────────────────────
 
 function CassDashboard({ firmId }: { firmId: string }) {
-  const { data } = useQuery({
+  const { data, isLoading: dashLoading, error: dashError, refetch: dashRefetch } = useQuery({
     queryKey: ['cass-dashboard', firmId],
     queryFn: () => cassApi.getDashboard(firmId),
   });
+
+  if (dashError) return <ErrorState message="Failed to load CASS dashboard." onRetry={() => dashRefetch()} />;
+  if (dashLoading) return <LoadingSkeleton type="cards" />;
 
   return (
     <div>
@@ -219,6 +226,24 @@ function CmarTab({ firmId, isCompliance }: { firmId: string; isCompliance: boole
     onError: (err: any) => setError(err?.response?.data?.error?.message || 'Update failed'),
   });
 
+  const generateCmarMut = useMutation({
+    mutationFn: (cmarId: string) => cassApi.generateCmar(firmId, { submissionId: cmarId }),
+    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['cass-cmar', firmId] }); },
+    onError: (err: any) => setError(err?.response?.data?.error?.message || 'Generate failed'),
+  });
+
+  const validateCmarMut = useMutation({
+    mutationFn: (cmarId: string) => cassApi.validateCmar(firmId, cmarId),
+    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['cass-cmar', firmId] }); },
+    onError: (err: any) => setError(err?.response?.data?.error?.message || 'Validation failed'),
+  });
+
+  const submitCmarMut = useMutation({
+    mutationFn: (cmarId: string) => cassApi.submitCmar(firmId, cmarId),
+    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['cass-cmar', firmId] }); },
+    onError: (err: any) => setError(err?.response?.data?.error?.message || 'Submission failed'),
+  });
+
   const submissions = data?.data || [];
   const pagination = data?.pagination;
 
@@ -249,13 +274,35 @@ function CmarTab({ firmId, isCompliance }: { firmId: string; isCompliance: boole
             { key: 'reconciliationBreaches', header: 'Breaches', render: r => r.reconciliationBreaches ?? '\u2014', width: '80px' },
             {
               key: 'actions', header: '',
-              render: r => isCompliance && r.status !== 'ACCEPTED' ? (
-                <Button size="sm" variant="secondary" onClick={e => {
-                  e.stopPropagation();
-                  setSelectedCmar(r);
-                  setUpdateForm({ status: r.status === 'DRAFT' ? 'IN_REVIEW' : r.status === 'IN_REVIEW' ? 'SUBMITTED' : '', fcaReference: '', notes: r.notes || '' });
-                  setShowUpdate(true); setError('');
-                }}>Update</Button>
+              render: r => isCompliance ? (
+                <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
+                  {r.status !== 'ACCEPTED' && (
+                    <Button size="sm" variant="secondary" onClick={e => {
+                      e.stopPropagation();
+                      setSelectedCmar(r);
+                      setUpdateForm({ status: r.status === 'DRAFT' ? 'IN_REVIEW' : r.status === 'IN_REVIEW' ? 'SUBMITTED' : '', fcaReference: '', notes: r.notes || '' });
+                      setShowUpdate(true); setError('');
+                    }}>Update</Button>
+                  )}
+                  {r.status === 'DRAFT' && (
+                    <Button size="sm" variant="secondary" onClick={e => {
+                      e.stopPropagation();
+                      generateCmarMut.mutate(r.id!);
+                    }} loading={generateCmarMut.isPending}>Generate</Button>
+                  )}
+                  {r.status === 'IN_REVIEW' && (
+                    <Button size="sm" variant="secondary" onClick={e => {
+                      e.stopPropagation();
+                      validateCmarMut.mutate(r.id!);
+                    }} loading={validateCmarMut.isPending}>Validate</Button>
+                  )}
+                  {r.status === 'IN_REVIEW' && (
+                    <Button size="sm" onClick={e => {
+                      e.stopPropagation();
+                      submitCmarMut.mutate(r.id!);
+                    }} loading={submitCmarMut.isPending}>Submit</Button>
+                  )}
+                </div>
               ) : null,
             },
           ]}
@@ -607,6 +654,199 @@ function ImpactTab({ firmId, isCompliance }: { firmId: string; isCompliance: boo
           <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
             <Button variant="secondary" onClick={() => setShowCreate(false)}>Cancel</Button>
             <Button onClick={() => createMut.mutate()} loading={createMut.isPending} disabled={!form.regulatoryUpdateId || !form.assessedBy || !form.requiredChanges}>Create</Button>
+          </div>
+        </div>
+      </Modal>
+    </div>
+  );
+}
+
+// ─── Custody Reconciliation Tab ──────────────────────────────────────────────
+
+function CustodyReconTab({ firmId, isCompliance }: { firmId: string; isCompliance: boolean }) {
+  const queryClient = useQueryClient();
+  const [page, setPage] = useState(1);
+  const [error, setError] = useState('');
+
+  const { data, isLoading } = useQuery({
+    queryKey: ['cass-custody-recon', firmId, page],
+    queryFn: () => cassApi.getCustodyReconHistory(firmId, { page: String(page) }),
+  });
+
+  const runReconMut = useMutation({
+    mutationFn: () => cassApi.runCustodyRecon(firmId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['cass-custody-recon', firmId] });
+      queryClient.invalidateQueries({ queryKey: ['cass-dashboard', firmId] });
+    },
+    onError: (err: any) => setError(err?.response?.data?.error?.message || 'Reconciliation failed'),
+  });
+
+  const history = data?.data || [];
+  const pagination = data?.pagination;
+
+  return (
+    <div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+        <p style={{ margin: 0, fontSize: '13px', color: 'var(--color-navy-500)' }}>
+          Custody asset reconciliation history — comparing internal records with custodian statements.
+        </p>
+        {isCompliance && (
+          <Button onClick={() => { setError(''); runReconMut.mutate(); }} loading={runReconMut.isPending}>
+            Run Custody Recon
+          </Button>
+        )}
+      </div>
+
+      {error && <div style={{ marginBottom: '12px' }}><Alert type="error" message={error} /></div>}
+
+      <Card>
+        <Table
+          loading={isLoading}
+          data={history}
+          columns={[
+            { key: 'reconDate', header: 'Date', render: r => format(new Date(r.reconDate || r.createdAt), 'dd MMM yyyy HH:mm'), width: '160px' },
+            { key: 'status', header: 'Status', render: r => statusBadge(r.status), width: '110px' },
+            { key: 'assetsReconciled', header: 'Assets Reconciled', render: r => r.assetsReconciled ?? '\u2014', width: '140px' },
+            { key: 'breaksFound', header: 'Breaks', render: r => r.breaksFound ?? '\u2014', width: '80px' },
+            { key: 'totalValue', header: 'Total Value', render: r => r.totalValue ? Number(r.totalValue).toLocaleString(undefined, { minimumFractionDigits: 2 }) : '\u2014', width: '140px' },
+            { key: 'runBy', header: 'Run By', render: r => r.runBy || '\u2014', width: '120px' },
+          ]}
+          emptyMessage="No custody reconciliation history. Run a reconciliation to get started."
+        />
+        {pagination && <Pagination page={page} totalPages={pagination.totalPages} total={pagination.total} onPageChange={setPage} />}
+      </Card>
+    </div>
+  );
+}
+
+// ─── Sign-Off Tab ───────────────────────────────────────────────────────────
+
+function SignOffTab({ firmId, isCompliance }: { firmId: string; isCompliance: boolean }) {
+  const queryClient = useQueryClient();
+  const [showRequest, setShowRequest] = useState(false);
+  const [showReject, setShowReject] = useState(false);
+  const [selectedSignOff, setSelectedSignOff] = useState<any>(null);
+  const [requestForm, setRequestForm] = useState({ signOffType: 'CASS_RECONCILIATION', description: '', dueDate: '' });
+  const [rejectReason, setRejectReason] = useState('');
+  const [error, setError] = useState('');
+
+  const { data: signOffs, isLoading } = useQuery({
+    queryKey: ['cass-sign-offs', firmId],
+    queryFn: () => cassApi.requestSignOff(firmId, { _list: true }),
+    retry: false,
+  });
+
+  const requestMut = useMutation({
+    mutationFn: () => cassApi.requestSignOff(firmId, {
+      signOffType: requestForm.signOffType,
+      description: requestForm.description,
+      dueDate: requestForm.dueDate || undefined,
+    }),
+    onSuccess: () => {
+      setShowRequest(false);
+      queryClient.invalidateQueries({ queryKey: ['cass-sign-offs', firmId] });
+      setRequestForm({ signOffType: 'CASS_RECONCILIATION', description: '', dueDate: '' });
+    },
+    onError: (err: any) => setError(err?.response?.data?.error?.message || 'Request failed'),
+  });
+
+  const approveMut = useMutation({
+    mutationFn: (signOffId: string) => cassApi.approveSignOff(firmId, signOffId),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['cass-sign-offs', firmId] }),
+    onError: (err: any) => setError(err?.response?.data?.error?.message || 'Approval failed'),
+  });
+
+  const rejectMut = useMutation({
+    mutationFn: () => cassApi.rejectSignOff(firmId, selectedSignOff!.id, { reason: rejectReason }),
+    onSuccess: () => {
+      setShowReject(false);
+      queryClient.invalidateQueries({ queryKey: ['cass-sign-offs', firmId] });
+    },
+    onError: (err: any) => setError(err?.response?.data?.error?.message || 'Rejection failed'),
+  });
+
+  const items = Array.isArray(signOffs) ? signOffs : (signOffs as any)?.data || [];
+
+  return (
+    <div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+        <p style={{ margin: 0, fontSize: '13px', color: 'var(--color-navy-500)' }}>
+          CASS sign-off workflow for reconciliation and compliance approvals.
+        </p>
+        {isCompliance && (
+          <Button onClick={() => { setShowRequest(true); setError(''); }}>
+            Request Sign-Off
+          </Button>
+        )}
+      </div>
+
+      {error && <div style={{ marginBottom: '12px' }}><Alert type="error" message={error} /></div>}
+
+      <Card>
+        <Table
+          loading={isLoading}
+          data={items}
+          columns={[
+            { key: 'signOffType', header: 'Type', render: r => (r.signOffType || '').replace(/_/g, ' '), width: '180px' },
+            { key: 'description', header: 'Description', width: '250px' },
+            { key: 'status', header: 'Status', render: r => statusBadge(r.status), width: '110px' },
+            { key: 'requestedBy', header: 'Requested By', render: r => r.requestedBy || '\u2014', width: '130px' },
+            { key: 'dueDate', header: 'Due', render: r => r.dueDate ? format(new Date(r.dueDate), 'dd MMM yyyy') : '\u2014', width: '110px' },
+            { key: 'createdAt', header: 'Requested', render: r => r.createdAt ? format(new Date(r.createdAt), 'dd MMM yyyy') : '\u2014', width: '110px' },
+            {
+              key: 'actions', header: '',
+              render: r => isCompliance && r.status === 'PENDING' ? (
+                <div style={{ display: 'flex', gap: '4px' }}>
+                  <Button size="sm" onClick={e => { e.stopPropagation(); approveMut.mutate(r.id!); }} loading={approveMut.isPending}>
+                    Approve
+                  </Button>
+                  <Button size="sm" variant="danger" onClick={e => {
+                    e.stopPropagation();
+                    setSelectedSignOff(r);
+                    setRejectReason('');
+                    setShowReject(true);
+                    setError('');
+                  }}>
+                    Reject
+                  </Button>
+                </div>
+              ) : null,
+            },
+          ]}
+          emptyMessage="No sign-off requests found."
+        />
+      </Card>
+
+      {/* Request Sign-Off Modal */}
+      <Modal open={showRequest} onClose={() => setShowRequest(false)} title="Request Sign-Off">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          <FormSelect label="Sign-Off Type" value={requestForm.signOffType} onChange={v => setRequestForm(f => ({ ...f, signOffType: v }))}
+            options={[
+              { v: 'CASS_RECONCILIATION', l: 'CASS Reconciliation' },
+              { v: 'CMAR_SUBMISSION', l: 'CMAR Submission' },
+              { v: 'CUSTODY_TRANSFER', l: 'Custody Transfer' },
+              { v: 'RISK_ASSESSMENT', l: 'Risk Assessment' },
+              { v: 'OTHER', l: 'Other' },
+            ]} />
+          <FormTextarea label="Description" value={requestForm.description} onChange={v => setRequestForm(f => ({ ...f, description: v }))} />
+          <FormField label="Due Date" value={requestForm.dueDate} onChange={v => setRequestForm(f => ({ ...f, dueDate: v }))} type="date" />
+          {error && <Alert type="error" message={error} />}
+          <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
+            <Button variant="secondary" onClick={() => setShowRequest(false)}>Cancel</Button>
+            <Button onClick={() => requestMut.mutate()} loading={requestMut.isPending} disabled={!requestForm.description}>Request</Button>
+          </div>
+        </div>
+      </Modal>
+
+      {/* Reject Sign-Off Modal */}
+      <Modal open={showReject} onClose={() => setShowReject(false)} title="Reject Sign-Off">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          <FormTextarea label="Rejection Reason" value={rejectReason} onChange={v => setRejectReason(v)} />
+          {error && <Alert type="error" message={error} />}
+          <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
+            <Button variant="secondary" onClick={() => setShowReject(false)}>Cancel</Button>
+            <Button variant="danger" onClick={() => rejectMut.mutate()} loading={rejectMut.isPending} disabled={!rejectReason.trim()}>Reject</Button>
           </div>
         </div>
       </Modal>

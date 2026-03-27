@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../../hooks/useAuth';
 import { safeguardingTimingApi } from '../../api/client';
-import { Card, Table, Button, PageHeader, StatCard, Grid, Modal, Alert, Pagination, statusBadge, Badge } from '../../components/ui';
+import { Card, Table, Button, PageHeader, StatCard, Grid, Modal, Alert, Pagination, statusBadge, Badge, LoadingSkeleton, ErrorState } from '../../components/ui';
 import { format } from 'date-fns';
 
 export default function SafeguardingTimingPage() {
@@ -35,7 +35,7 @@ export default function SafeguardingTimingPage() {
   const [fxObligationId, setFxObligationId] = useState('');
   const [fxType, setFxType] = useState('FX_ONLY');
 
-  const { data: dashboardData, isLoading: dashboardLoading } = useQuery({
+  const { data: dashboardData, isLoading: dashboardLoading, error: dashboardError, refetch: dashboardRefetch } = useQuery({
     queryKey: ['safeguarding-timing-dashboard', firmId],
     queryFn: () => safeguardingTimingApi.getDashboard(firmId),
     enabled: activeTab === 'dashboard',
@@ -125,7 +125,11 @@ export default function SafeguardingTimingPage() {
         ))}
       </div>
 
-      {activeTab === 'dashboard' && (
+      {activeTab === 'dashboard' && dashboardError && (
+        <ErrorState message="Failed to load safeguarding timing dashboard." onRetry={() => dashboardRefetch()} />
+      )}
+      {activeTab === 'dashboard' && dashboardLoading && <LoadingSkeleton type="cards" />}
+      {activeTab === 'dashboard' && !dashboardError && !dashboardLoading && (
         <div>
           <div style={{ marginBottom: '20px' }}>
             <Grid cols={4}>

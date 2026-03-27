@@ -2,14 +2,14 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../../hooks/useAuth';
 import { reconciliationApi, breachApi, governanceApi } from '../../api/client';
-import { StatCard, Card, Grid, statusBadge } from '../../components/ui';
+import { StatCard, Card, Grid, statusBadge, LoadingSkeleton, ErrorState } from '../../components/ui';
 import { format } from 'date-fns';
 
 export default function DashboardPage() {
   const { user } = useAuth();
   const firmId = user!.firmId;
 
-  const { data: reconDash } = useQuery({
+  const { data: reconDash, isLoading: reconLoading, error: reconError, refetch: reconRefetch } = useQuery({
     queryKey: ['recon-dashboard', firmId],
     queryFn: () => reconciliationApi.getDashboard(firmId),
   });
@@ -32,6 +32,9 @@ export default function DashboardPage() {
   const rpackColor = rpackStatus === 'GREEN' ? 'var(--color-success)'
     : rpackStatus === 'AMBER' ? 'var(--color-warning)'
     : rpackStatus === 'RED' ? 'var(--color-danger)' : undefined;
+
+  if (reconError) return <ErrorState message="Failed to load dashboard data." onRetry={() => reconRefetch()} />;
+  if (reconLoading) return <LoadingSkeleton type="cards" />;
 
   return (
     <div>

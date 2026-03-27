@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../../hooks/useAuth';
 import { cryptoApi } from '../../api/client';
-import { Card, Table, Button, PageHeader, Pagination, Modal, Alert, StatCard, Grid, statusBadge } from '../../components/ui';
+import { Card, Table, Button, PageHeader, Pagination, Modal, Alert, StatCard, Grid, statusBadge, LoadingSkeleton, EmptyState, ErrorState } from '../../components/ui';
 import { format } from 'date-fns';
 
 type Tab = 'dashboard' | 'wallets' | 'balances' | 'entitlements' | 'por' | 'lineage';
@@ -79,9 +79,29 @@ function FormField({ label, required, children }: { label: string; required?: bo
 // ─── Dashboard Tab ────────────────────────────────────────────────────────────
 
 function CryptoDashboard({ firmId }: { firmId: string }) {
-  const { data } = useQuery({
+  const queryClient = useQueryClient();
+  const { data, isLoading: dashLoading, error: dashError, refetch: dashRefetch } = useQuery({
     queryKey: ['crypto-dashboard', firmId],
     queryFn: () => cryptoApi.getDashboard(firmId),
+  });
+
+  const { data: onChainStatus } = useQuery({
+    queryKey: ['crypto-on-chain-status', firmId],
+    queryFn: () => cryptoApi.getOnChainStatus(firmId),
+  });
+
+  const [reconError, setReconError] = useState('');
+  const [reconSuccess, setReconSuccess] = useState(false);
+
+  const reconMut = useMutation({
+    mutationFn: () => cryptoApi.reconcile(firmId),
+    onSuccess: () => {
+      setReconSuccess(true);
+      queryClient.invalidateQueries({ queryKey: ['crypto-dashboard', firmId] });
+      queryClient.invalidateQueries({ queryKey: ['crypto-on-chain-status', firmId] });
+      setTimeout(() => setReconSuccess(false), 3000);
+    },
+    onError: (err: any) => setReconError(err?.response?.data?.error?.message || 'Reconciliation failed.'),
   });
 
   const ratioColor = (r: string | null) => {
@@ -89,6 +109,9 @@ function CryptoDashboard({ firmId }: { firmId: string }) {
     const n = Number(r);
     return n >= 1 ? 'var(--color-success)' : n >= 0.95 ? 'var(--color-warning)' : 'var(--color-danger)';
   };
+
+  if (dashError) return <ErrorState message="Failed to load crypto dashboard." onRetry={() => dashRefetch()} />;
+  if (dashLoading) return <LoadingSkeleton type="cards" />;
 
   return (
     <div>
@@ -117,6 +140,43 @@ function CryptoDashboard({ firmId }: { firmId: string }) {
         />
         <StatCard label="Lineage Events" value={data?.lineageEvents ?? '\u2014'} color="var(--color-navy-500)" />
       </Grid>
+
+      {/* On-Chain Status Panel */}
+      <div style={{ marginTop: '24px' }}>
+        <Card title="On-Chain Status">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '20px' }}>
+            <div style={{ flex: 1 }}>
+              {onChainStatus ? (
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
+                  <div>
+                    <div style={{ fontSize: '12px', color: 'var(--color-navy-400)', marginBottom: '4px' }}>Sync Status</div>
+                    <div style={{ fontSize: '14px', fontWeight: 600, color: onChainStatus.syncStatus === 'SYNCED' ? 'var(--color-success)' : 'var(--color-warning)' }}>
+                      {(onChainStatus.syncStatus || 'Unknown').replace(/_/g, ' ')}
+                    </div>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '12px', color: 'var(--color-navy-400)', marginBottom: '4px' }}>Last Sync</div>
+                    <div style={{ fontSize: '14px', fontWeight: 500 }}>
+                      {onChainStatus.lastSyncAt ? format(new Date(onChainStatus.lastSyncAt), 'dd MMM yyyy HH:mm') : '\u2014'}
+                    </div>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '12px', color: 'var(--color-navy-400)', marginBottom: '4px' }}>Networks Monitored</div>
+                    <div style={{ fontSize: '14px', fontWeight: 500 }}>{onChainStatus.networksMonitored ?? '\u2014'}</div>
+                  </div>
+                </div>
+              ) : (
+                <p style={{ margin: 0, color: 'var(--color-navy-400)', fontSize: '13px' }}>Loading on-chain status...</p>
+              )}
+            </div>
+            <Button onClick={() => { setReconError(''); reconMut.mutate(); }} loading={reconMut.isPending}>
+              Run Crypto Reconciliation
+            </Button>
+          </div>
+          {reconError && <div style={{ marginTop: '12px' }}><Alert type="error" message={reconError} /></div>}
+          {reconSuccess && <div style={{ marginTop: '12px' }}><Alert type="success" message="Crypto reconciliation completed successfully." /></div>}
+        </Card>
+      </div>
     </div>
   );
 }
@@ -312,6 +372,7 @@ function BalancesTab({ firmId, isCompliance }: { firmId: string; isCompliance: b
   const [showCreate, setShowCreate] = useState(false);
   const [form, setForm] = useState({ walletId: '', tokenSymbol: '', tokenName: '', contractAddress: '', balance: '', balanceUsd: '', snapshotDate: '', blockNumber: '' });
   const [error, setError] = useState('');
+  const [syncSuccess, setSyncSuccess] = useState(false);
 
   const { data, isLoading } = useQuery({
     queryKey: ['crypto-balances', firmId, page, tokenFilter],
@@ -335,15 +396,34 @@ function BalancesTab({ firmId, isCompliance }: { firmId: string; isCompliance: b
     onError: (err: any) => setError(err?.response?.data?.error?.message || 'Failed to create balance.'),
   });
 
+  const syncMut = useMutation({
+    mutationFn: () => cryptoApi.syncBalances(firmId),
+    onSuccess: () => {
+      setSyncSuccess(true);
+      queryClient.invalidateQueries({ queryKey: ['crypto-balances', firmId] });
+      queryClient.invalidateQueries({ queryKey: ['crypto-dashboard', firmId] });
+      setTimeout(() => setSyncSuccess(false), 3000);
+    },
+    onError: (err: any) => setError(err?.response?.data?.error?.message || 'Sync failed.'),
+  });
+
   const balances = data?.data || [];
   const pagination = data?.pagination;
   const wallets = walletsData?.data || [];
 
   return (
     <div>
+      {syncSuccess && <div style={{ marginBottom: '12px' }}><Alert type="success" message="On-chain balances synced successfully." /></div>}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
         <input style={{ ...fieldInput, width: '200px' }} placeholder="Filter by token..." value={tokenFilter} onChange={e => { setTokenFilter(e.target.value); setPage(1); }} />
-        {isCompliance && <Button onClick={() => { setShowCreate(true); setError(''); }}>Record Balance</Button>}
+        <div style={{ display: 'flex', gap: '8px' }}>
+          {isCompliance && (
+            <Button variant="secondary" onClick={() => { setError(''); syncMut.mutate(); }} loading={syncMut.isPending}>
+              Sync On-Chain Balances
+            </Button>
+          )}
+          {isCompliance && <Button onClick={() => { setShowCreate(true); setError(''); }}>Record Balance</Button>}
+        </div>
       </div>
 
       <Card>

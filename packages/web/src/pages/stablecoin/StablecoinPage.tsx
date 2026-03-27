@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../../hooks/useAuth';
 import { stablecoinApi } from '../../api/client';
-import { Card, Table, Button, PageHeader, Pagination, Modal, Alert, StatCard, Grid, statusBadge } from '../../components/ui';
+import { Card, Table, Button, PageHeader, Pagination, Modal, Alert, StatCard, Grid, statusBadge, LoadingSkeleton, EmptyState, ErrorState } from '../../components/ui';
 import { format } from 'date-fns';
 
 type Tab = 'dashboard' | 'tokens' | 'peg' | 'reserves' | 'attestations';
@@ -80,10 +80,13 @@ const coverageColor = (r: number) => r >= 1 ? 'var(--color-success)' : r >= 0.95
 // ─── Dashboard ───────────────────────────────────────────────────────────────
 
 function StablecoinDashboard({ firmId }: { firmId: string }) {
-  const { data } = useQuery({
+  const { data, isLoading: dashLoading, error: dashError, refetch: dashRefetch } = useQuery({
     queryKey: ['stablecoin-dashboard', firmId],
     queryFn: () => stablecoinApi.getDashboard(firmId),
   });
+
+  if (dashError) return <ErrorState message="Failed to load stablecoin dashboard." onRetry={() => dashRefetch()} />;
+  if (dashLoading) return <LoadingSkeleton type="cards" />;
 
   return (
     <div>
@@ -308,6 +311,10 @@ function PegTab({ firmId, isCompliance }: { firmId: string; isCompliance: boolea
   const [page, setPage] = useState(1);
   const [pegFilter, setPegFilter] = useState('');
   const [showCreate, setShowCreate] = useState(false);
+  const [showCheckPeg, setShowCheckPeg] = useState(false);
+  const [checkPegForm, setCheckPegForm] = useState({ tokenId: '' });
+  const [checkPegResult, setCheckPegResult] = useState<any>(null);
+  const [pegHistoryPage, setPegHistoryPage] = useState(1);
   const [form, setForm] = useState({ tokenId: '', price: '', snapshotAt: '', totalSupply: '', marketCap: '', volume24h: '' });
   const [error, setError] = useState('');
 
@@ -337,9 +344,32 @@ function PegTab({ firmId, isCompliance }: { firmId: string; isCompliance: boolea
     onError: (err: any) => setError(err?.response?.data?.error?.message || 'Failed to record snapshot.'),
   });
 
+  const checkPegMut = useMutation({
+    mutationFn: () => stablecoinApi.checkPeg(firmId, { tokenId: checkPegForm.tokenId }),
+    onSuccess: (data) => {
+      setCheckPegResult(data);
+      queryClient.invalidateQueries({ queryKey: ['stablecoin-peg', firmId] });
+      queryClient.invalidateQueries({ queryKey: ['stablecoin-peg-history', firmId] });
+      queryClient.invalidateQueries({ queryKey: ['stablecoin-dashboard', firmId] });
+    },
+    onError: (err: any) => setError(err?.response?.data?.error?.message || 'Peg check failed.'),
+  });
+
+  const { data: pegHistoryResp } = useQuery({
+    queryKey: ['stablecoin-peg-history', firmId, pegHistoryPage],
+    queryFn: () => stablecoinApi.getPegHistory(firmId, { page: String(pegHistoryPage) }),
+  });
+
+  const { data: reserveRatio } = useQuery({
+    queryKey: ['stablecoin-reserve-ratio', firmId],
+    queryFn: () => stablecoinApi.getReserveRatio(firmId),
+  });
+
   const snapshots = data?.data || [];
   const pagination = data?.pagination;
   const tokens = tokensData?.data || [];
+  const pegHistory = pegHistoryResp?.data || [];
+  const pegHistoryPagination = pegHistoryResp?.pagination;
 
   return (
     <div>
@@ -348,8 +378,49 @@ function PegTab({ firmId, isCompliance }: { firmId: string; isCompliance: boolea
           <option value="">All Statuses</option>
           {['ON_PEG', 'MINOR_DEVIATION', 'MAJOR_DEVIATION', 'DEPEGGED'].map(s => <option key={s} value={s}>{s.replace(/_/g, ' ')}</option>)}
         </select>
-        {isCompliance && <Button onClick={() => { setShowCreate(true); setError(''); }}>Record Snapshot</Button>}
+        <div style={{ display: 'flex', gap: '8px' }}>
+          {isCompliance && (
+            <Button variant="secondary" onClick={() => { setShowCheckPeg(true); setError(''); setCheckPegResult(null); setCheckPegForm({ tokenId: '' }); }}>
+              Check Peg Now
+            </Button>
+          )}
+          {isCompliance && <Button onClick={() => { setShowCreate(true); setError(''); }}>Record Snapshot</Button>}
+        </div>
       </div>
+
+      {/* Reserve Ratio Card */}
+      {reserveRatio && (
+        <div style={{ marginBottom: '20px' }}>
+          <Card>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '16px', padding: '4px' }}>
+              <div>
+                <div style={{ fontSize: '12px', color: 'var(--color-navy-400)', marginBottom: '4px' }}>Aggregate Reserve Ratio</div>
+                <div style={{ fontSize: '20px', fontWeight: 700, color: reserveRatio.ratio >= 1 ? 'var(--color-success)' : reserveRatio.ratio >= 0.95 ? 'var(--color-warning)' : 'var(--color-danger)' }}>
+                  {(Number(reserveRatio.ratio) * 100).toFixed(1)}%
+                </div>
+              </div>
+              <div>
+                <div style={{ fontSize: '12px', color: 'var(--color-navy-400)', marginBottom: '4px' }}>Total Reserves</div>
+                <div style={{ fontSize: '16px', fontWeight: 600, fontFamily: 'var(--font-mono)' }}>
+                  ${Number(reserveRatio.totalReserves || 0).toLocaleString()}
+                </div>
+              </div>
+              <div>
+                <div style={{ fontSize: '12px', color: 'var(--color-navy-400)', marginBottom: '4px' }}>Total Circulating</div>
+                <div style={{ fontSize: '16px', fontWeight: 600, fontFamily: 'var(--font-mono)' }}>
+                  ${Number(reserveRatio.totalCirculating || 0).toLocaleString()}
+                </div>
+              </div>
+              <div>
+                <div style={{ fontSize: '12px', color: 'var(--color-navy-400)', marginBottom: '4px' }}>Last Computed</div>
+                <div style={{ fontSize: '14px', fontWeight: 500 }}>
+                  {reserveRatio.computedAt ? format(new Date(reserveRatio.computedAt), 'dd MMM yyyy HH:mm') : '\u2014'}
+                </div>
+              </div>
+            </div>
+          </Card>
+        </div>
+      )}
 
       <Card>
         <Table
@@ -421,6 +492,84 @@ function PegTab({ firmId, isCompliance }: { firmId: string; isCompliance: boolea
           </div>
         </div>
       </Modal>
+
+      {/* Check Peg Modal */}
+      <Modal open={showCheckPeg} onClose={() => setShowCheckPeg(false)} title="Check Peg Now">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          {!checkPegResult ? (
+            <>
+              <FormField label="Token" required>
+                <select style={fieldInput} value={checkPegForm.tokenId} onChange={e => setCheckPegForm({ tokenId: e.target.value })}>
+                  <option value="">Select token...</option>
+                  {tokens.map((t: any) => <option key={t.id} value={t.id}>{t.symbol} ({t.name})</option>)}
+                </select>
+              </FormField>
+              {error && <Alert type="error" message={error} />}
+              <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
+                <Button variant="secondary" onClick={() => setShowCheckPeg(false)}>Cancel</Button>
+                <Button onClick={() => checkPegMut.mutate()} loading={checkPegMut.isPending} disabled={!checkPegForm.tokenId}>Check Peg</Button>
+              </div>
+            </>
+          ) : (
+            <>
+              <div style={{ padding: '16px', background: 'var(--color-navy-50)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-navy-200)' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                  <div>
+                    <div style={{ fontSize: '12px', color: 'var(--color-navy-400)' }}>Peg Status</div>
+                    <div style={{ fontSize: '16px', fontWeight: 700, color: pegColor(checkPegResult.pegStatus || 'ON_PEG') }}>
+                      {(checkPegResult.pegStatus || 'Unknown').replace(/_/g, ' ')}
+                    </div>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '12px', color: 'var(--color-navy-400)' }}>Current Price</div>
+                    <div style={{ fontSize: '16px', fontWeight: 600, fontFamily: 'var(--font-mono)' }}>
+                      ${Number(checkPegResult.currentPrice || 0).toFixed(4)}
+                    </div>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '12px', color: 'var(--color-navy-400)' }}>Deviation</div>
+                    <div style={{ fontSize: '16px', fontWeight: 600, fontFamily: 'var(--font-mono)' }}>
+                      {Number(checkPegResult.deviationPct || 0).toFixed(2)}%
+                    </div>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '12px', color: 'var(--color-navy-400)' }}>Checked At</div>
+                    <div style={{ fontSize: '14px' }}>
+                      {checkPegResult.checkedAt ? format(new Date(checkPegResult.checkedAt), 'dd MMM yyyy HH:mm') : 'Just now'}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
+                <Button variant="secondary" onClick={() => setShowCheckPeg(false)}>Close</Button>
+              </div>
+            </>
+          )}
+        </div>
+      </Modal>
+
+      {/* Peg History */}
+      {pegHistory.length > 0 && (
+        <div style={{ marginTop: '24px' }}>
+          <Card title="Peg History">
+            <Table
+              data={pegHistory}
+              columns={[
+                { key: 'token', header: 'Token', render: (r: any) => <strong>{r.token?.symbol || r.tokenSymbol || '\u2014'}</strong>, width: '80px' },
+                { key: 'price', header: 'Price', render: (r: any) => <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px' }}>${Number(r.price || 0).toFixed(4)}</span>, width: '100px' },
+                { key: 'pegStatus', header: 'Status', render: (r: any) => <span style={{ fontWeight: 600, fontSize: '12px', color: pegColor(r.pegStatus) }}>{(r.pegStatus || '').replace(/_/g, ' ')}</span>, width: '130px' },
+                { key: 'deviationPct', header: 'Deviation', render: (r: any) => {
+                  const d = Number(r.deviationPct || 0);
+                  return <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px' }}>{d >= 0 ? '+' : ''}{d.toFixed(2)}%</span>;
+                }, width: '100px' },
+                { key: 'checkedAt', header: 'Checked', render: (r: any) => r.checkedAt ? format(new Date(r.checkedAt), 'dd MMM yyyy HH:mm') : '\u2014', width: '150px' },
+              ]}
+              emptyMessage="No peg history."
+            />
+            {pegHistoryPagination && <Pagination page={pegHistoryPage} totalPages={pegHistoryPagination.totalPages} total={pegHistoryPagination.total} onPageChange={setPegHistoryPage} />}
+          </Card>
+        </div>
+      )}
     </div>
   );
 }

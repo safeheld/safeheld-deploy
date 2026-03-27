@@ -29,6 +29,9 @@ import ThirdPartyDdPage from './pages/third-party-dd/ThirdPartyDdPage';
 import InsuranceManagementPage from './pages/insurance-management/InsuranceManagementPage';
 import PolicyLibraryPage from './pages/policy-library/PolicyLibraryPage';
 import SafeguardingTimingPage from './pages/safeguarding-timing/SafeguardingTimingPage';
+import ProfilePage from './pages/profile/ProfilePage';
+import AccountSettingsPage from './pages/settings/AccountSettingsPage';
+import NotificationPreferencesPage from './pages/settings/NotificationPreferencesPage';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, isLoading } = useAuth();
@@ -88,6 +91,9 @@ export default function App() {
         <Route path="insurance-management" element={<InsuranceManagementPage />} />
         <Route path="policy-library" element={<PolicyLibraryPage />} />
         <Route path="safeguarding-timing" element={<SafeguardingTimingPage />} />
+        <Route path="profile" element={<ProfilePage />} />
+        <Route path="settings/account" element={<AccountSettingsPage />} />
+        <Route path="settings/notifications" element={<NotificationPreferencesPage />} />
         <Route path="audit" element={<AuditPage />} />
         <Route
           path="bank-dashboard"

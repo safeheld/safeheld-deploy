@@ -37,6 +37,7 @@ apiClient.interceptors.response.use(
       const refreshToken = localStorage.getItem('refresh_token');
       if (!refreshToken) {
         localStorage.clear();
+        sessionStorage.setItem('session_expired', 'true');
         window.location.href = '/login';
         return Promise.reject(error);
       }
@@ -63,6 +64,7 @@ apiClient.interceptors.response.use(
       } catch (err) {
         processQueue(err, null);
         localStorage.clear();
+        sessionStorage.setItem('session_expired', 'true');
         window.location.href = '/login';
         return Promise.reject(err);
       } finally {
@@ -208,6 +210,14 @@ export const breachApi = {
     apiClient.post(`/firms/${firmId}/fca-notifications/${notificationId}/submit`, { fca_reference: fcaReference }).then(r => r.data.data),
   getFcaNotifications: (firmId: string) =>
     apiClient.get(`/firms/${firmId}/fca-notifications`).then(r => r.data),
+  getRegister: (firmId: string, params?: Record<string, string>) =>
+    apiClient.get(`/firms/${firmId}/breaches/register`, { params }).then(r => r.data),
+  createManual: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/breaches/manual`, data).then(r => r.data.data),
+  uploadDocument: (firmId: string, breachId: string, formData: FormData) =>
+    apiClient.post(`/firms/${firmId}/breaches/${breachId}/documents`, formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(r => r.data.data),
+  getFcaTemplate: (firmId: string, breachId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/breaches/${breachId}/fca-notification-template`, data).then(r => r.data.data),
 };
 
 // ─── Reports ──────────────────────────────────────────────────────────────────
@@ -227,6 +237,10 @@ export const reportingApi = {
     apiClient.post(`/firms/${firmId}/reports/${reportId}/share`, { expires_in_hours: expiresInHours }).then(r => r.data.data),
   downloadReport: (firmId: string, reportId: string) =>
     `${API_BASE}/firms/${firmId}/reports/${reportId}/download`,
+  getReport: (firmId: string, reportId: string) =>
+    apiClient.get(`/firms/${firmId}/reports/${reportId}`).then(r => r.data.data),
+  getBoardReports: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/board-reports`).then(r => r.data),
 };
 
 // ─── Bank Dashboard ───────────────────────────────────────────────────────────
@@ -291,6 +305,12 @@ export const governanceApi = {
     apiClient.post(`/firms/${firmId}/auditor-findings`, data).then(r => r.data.data),
   respondToFinding: (firmId: string, findingId: string, response: string) =>
     apiClient.post(`/firms/${firmId}/auditor-findings/${findingId}/respond`, { management_response: response }).then(r => r.data.data),
+  updateAccount: (firmId: string, accountId: string, data: object) =>
+    apiClient.put(`/firms/${firmId}/safeguarding-accounts/${accountId}`, data).then(r => r.data.data),
+  getResponsibilities: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/responsibilities`).then(r => r.data),
+  createResponsibility: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/responsibilities`, data).then(r => r.data.data),
 };
 
 // ─── CASS ─────────────────────────────────────────────────────────────────────
@@ -326,6 +346,26 @@ export const cassApi = {
     apiClient.post(`/firms/${firmId}/cass/impact-assessments`, data).then(r => r.data.data),
   updateImpactAssessment: (firmId: string, assessmentId: string, data: object) =>
     apiClient.put(`/firms/${firmId}/cass/impact-assessments/${assessmentId}`, data).then(r => r.data.data),
+  runCustodyRecon: (firmId: string) =>
+    apiClient.post(`/firms/${firmId}/cass/custody-reconciliation`).then(r => r.data.data),
+  getCustodyReconHistory: (firmId: string, params?: Record<string, string>) =>
+    apiClient.get(`/firms/${firmId}/cass/custody-reconciliation/history`, { params }).then(r => r.data),
+  getNomineeAccounts: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/cass/nominee-accounts`).then(r => r.data.data),
+  getSubCustodianExposure: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/cass/sub-custodian-exposure`).then(r => r.data.data),
+  generateCmar: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/cass/cmar/generate`, data).then(r => r.data.data),
+  validateCmar: (firmId: string, submissionId: string) =>
+    apiClient.post(`/firms/${firmId}/cass/cmar/${submissionId}/validate`).then(r => r.data.data),
+  submitCmar: (firmId: string, submissionId: string) =>
+    apiClient.post(`/firms/${firmId}/cass/cmar/${submissionId}/submit`).then(r => r.data.data),
+  requestSignOff: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/cass/sign-off/request`, data).then(r => r.data.data),
+  approveSignOff: (firmId: string, signOffId: string) =>
+    apiClient.post(`/firms/${firmId}/cass/sign-off/${signOffId}/approve`).then(r => r.data.data),
+  rejectSignOff: (firmId: string, signOffId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/cass/sign-off/${signOffId}/reject`, data).then(r => r.data.data),
 };
 
 // ─── AI Assistant ────────────────────────────────────────────────────────────
@@ -387,6 +427,12 @@ export const stablecoinApi = {
     apiClient.get(`/firms/${firmId}/stablecoin/attestations`, { params }).then(r => r.data),
   generateAttestation: (firmId: string, tokenId: string, snapshotDate: string) =>
     apiClient.post(`/firms/${firmId}/stablecoin/attestations/generate`, { tokenId, snapshotDate }).then(r => r.data.data),
+  checkPeg: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/stablecoin/check-peg`, data).then(r => r.data.data),
+  getPegHistory: (firmId: string, params?: Record<string, string>) =>
+    apiClient.get(`/firms/${firmId}/stablecoin/peg-history`, { params }).then(r => r.data),
+  getReserveRatio: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/stablecoin/reserve-ratio`).then(r => r.data.data),
 };
 
 // ─── Crypto ──────────────────────────────────────────────────────────────────
@@ -414,6 +460,12 @@ export const cryptoApi = {
     apiClient.post(`/firms/${firmId}/crypto/proof-of-reserves/generate`, { snapshotDate }).then(r => r.data.data),
   getDataLineage: (firmId: string, params?: Record<string, string>) =>
     apiClient.get(`/firms/${firmId}/crypto/data-lineage`, { params }).then(r => r.data),
+  syncBalances: (firmId: string) =>
+    apiClient.post(`/firms/${firmId}/crypto/sync-balances`).then(r => r.data.data),
+  reconcile: (firmId: string) =>
+    apiClient.post(`/firms/${firmId}/crypto/reconcile`).then(r => r.data.data),
+  getOnChainStatus: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/crypto/on-chain-status`).then(r => r.data.data),
 };
 
 // ─── Resolution Pack ────────────────────────────────────────────────────────
@@ -567,4 +619,54 @@ export const safeguardingTimingApi = {
     apiClient.post(`/firms/${firmId}/safeguarding-timing/${obligationId}/mark-unclaimed`).then(r => r.data.data),
   getDashboard: (firmId: string) =>
     apiClient.get(`/firms/${firmId}/safeguarding-timing/dashboard`).then(r => r.data.data),
+};
+
+// ─── Monitoring ─────────────────────────────────────────────────────────────
+
+export const monitoringApi = {
+  getDetailedHealth: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/monitoring/health/detailed`).then(r => r.data.data),
+  getHealthChecks: (firmId: string, params?: Record<string, string>) =>
+    apiClient.get(`/firms/${firmId}/monitoring/health-checks`, { params }).then(r => r.data),
+  getAlertSettings: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/monitoring/alert-settings`).then(r => r.data.data),
+  createAlertSetting: (firmId: string, data: object) =>
+    apiClient.post(`/firms/${firmId}/monitoring/alert-settings`, data).then(r => r.data.data),
+  updateAlertSetting: (firmId: string, settingId: string, data: object) =>
+    apiClient.put(`/firms/${firmId}/monitoring/alert-settings/${settingId}`, data).then(r => r.data.data),
+  getEmailLogs: (firmId: string, params?: Record<string, string>) =>
+    apiClient.get(`/firms/${firmId}/monitoring/email-logs`, { params }).then(r => r.data),
+};
+
+// ─── Rules Engine ───────────────────────────────────────────────────────────
+
+export const rulesEngineApi = {
+  getFindings: (firmId: string, params?: Record<string, string>) =>
+    apiClient.get(`/firms/${firmId}/rules-engine/findings`, { params }).then(r => r.data),
+  getComplianceScore: (firmId: string) =>
+    apiClient.get(`/firms/${firmId}/rules-engine/compliance-score`).then(r => r.data.data),
+  getRemediation: (firmId: string, findingId: string) =>
+    apiClient.get(`/firms/${firmId}/rules-engine/findings/${findingId}/remediation`).then(r => r.data.data),
+  updateRemediation: (firmId: string, findingId: string, data: object) =>
+    apiClient.put(`/firms/${firmId}/rules-engine/findings/${findingId}/remediation`, data).then(r => r.data.data),
+};
+
+// ─── Profile ────────────────────────────────────────────────────────────────
+
+export const profileApi = {
+  getProfile: () => apiClient.get('/auth/me').then(r => r.data.data),
+  updateProfile: (data: Record<string, any>) => apiClient.put('/auth/me', data).then(r => r.data.data),
+  changePassword: (data: { current_password: string; new_password: string }) =>
+    apiClient.put('/auth/me/password', data).then(r => r.data.data),
+};
+
+// ─── Notifications ──────────────────────────────────────────────────────────
+
+export const notificationsApi = {
+  getUnreadCount: () => apiClient.get('/notifications/unread-count').then(r => r.data.data),
+  getNotifications: (params?: Record<string, any>) => apiClient.get('/notifications', { params }).then(r => r.data),
+  markRead: (id: string) => apiClient.post(`/notifications/${id}/read`).then(r => r.data.data),
+  markAllRead: () => apiClient.post('/notifications/read-all').then(r => r.data.data),
+  getPreferences: () => apiClient.get('/users/me/notification-preferences').then(r => r.data.data),
+  updatePreferences: (data: Record<string, any>) => apiClient.put('/users/me/notification-preferences', data).then(r => r.data.data),
 };

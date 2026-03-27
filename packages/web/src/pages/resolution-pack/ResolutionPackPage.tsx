@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../../hooks/useAuth';
 import { resolutionPackApi } from '../../api/client';
-import { Card, Table, Button, PageHeader, StatCard, Grid, Alert, Badge, statusBadge } from '../../components/ui';
+import { Card, Table, Button, PageHeader, StatCard, Grid, Alert, Badge, statusBadge, LoadingSkeleton, EmptyState, ErrorState } from '../../components/ui';
 import { format } from 'date-fns';
 
 export default function ResolutionPackPage() {
@@ -13,7 +13,7 @@ export default function ResolutionPackPage() {
 
   const [activeTab, setActiveTab] = useState<'components' | 'history'>('components');
 
-  const { data: packData, isLoading: packLoading } = useQuery({
+  const { data: packData, isLoading: packLoading, error: packError, refetch: packRefetch } = useQuery({
     queryKey: ['resolution-pack', firmId],
     queryFn: () => resolutionPackApi.generate(firmId),
   });
@@ -74,6 +74,9 @@ export default function ResolutionPackPage() {
           </div>
         ) : undefined}
       />
+
+      {packError && <ErrorState message="Failed to load resolution pack." onRetry={() => packRefetch()} />}
+      {packLoading && <LoadingSkeleton type="cards" />}
 
       {/* Staleness alerts */}
       {staleAlerts.length > 0 && (

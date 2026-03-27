@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../../hooks/useAuth';
 import { breachApi } from '../../api/client';
-import { Card, Table, Button, PageHeader, Pagination, statusBadge, Modal, Alert } from '../../components/ui';
+import { Card, Table, Button, PageHeader, Pagination, statusBadge, Modal, Alert, LoadingSkeleton, EmptyState, ErrorState } from '../../components/ui';
 import { format } from 'date-fns';
 import type { Breach } from '../../types';
 
@@ -18,13 +18,32 @@ export default function BreachPage() {
   const [showAckModal, setShowAckModal] = useState(false);
   const [showStatusModal, setShowStatusModal] = useState(false);
   const [showFcaModal, setShowFcaModal] = useState(false);
+  const [showManualModal, setShowManualModal] = useState(false);
+  const [showUploadModal, setShowUploadModal] = useState(false);
+  const [showTemplateModal, setShowTemplateModal] = useState(false);
   const [remediationAction, setRemediationAction] = useState('');
   const [newStatus, setNewStatus] = useState<'REMEDIATING' | 'RESOLVED' | 'CLOSED'>('REMEDIATING');
   const [evidence, setEvidence] = useState('');
   const [fcaForm, setFcaForm] = useState({ notification_type: 'SAFEGUARDING_BREACH', description: '' });
   const [actionError, setActionError] = useState('');
+  const [templateResult, setTemplateResult] = useState<object | null>(null);
 
-  const { data: breachesResp, isLoading } = useQuery({
+  // Manual breach form
+  const [manualForm, setManualForm] = useState({
+    breachType: 'SHORTFALL',
+    severity: 'MEDIUM',
+    description: '',
+    dateOccurred: '',
+    dateIdentified: '',
+    category: 'RECONCILIATION',
+    personResponsible: '',
+    isMaterial: false,
+  });
+
+  // File upload
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const { data: breachesResp, isLoading, error: breachesError, refetch: breachesRefetch } = useQuery({
     queryKey: ['breaches', firmId, page, statusFilter],
     queryFn: () => breachApi.getBreaches(firmId, { page: String(page), ...(statusFilter ? { status: statusFilter } : {}) }),
   });
@@ -66,6 +85,55 @@ export default function BreachPage() {
     },
   });
 
+  const manualMutation = useMutation({
+    mutationFn: () => breachApi.createManual(firmId, {
+      ...manualForm,
+      dateOccurred: manualForm.dateOccurred || undefined,
+      dateIdentified: manualForm.dateIdentified || undefined,
+      personResponsible: manualForm.personResponsible || undefined,
+    }),
+    onSuccess: () => {
+      setShowManualModal(false);
+      queryClient.invalidateQueries({ queryKey: ['breaches', firmId] });
+      setManualForm({ breachType: 'SHORTFALL', severity: 'MEDIUM', description: '', dateOccurred: '', dateIdentified: '', category: 'RECONCILIATION', personResponsible: '', isMaterial: false });
+    },
+    onError: (err: unknown) => {
+      const msg = (err as { response?: { data?: { error?: { message?: string } } } })?.response?.data?.error?.message;
+      setActionError(msg || 'Failed to create manual breach.');
+    },
+  });
+
+  const uploadMutation = useMutation({
+    mutationFn: (formData: FormData) => breachApi.uploadDocument(firmId, selectedBreach!.id, formData),
+    onSuccess: () => {
+      setShowUploadModal(false);
+      queryClient.invalidateQueries({ queryKey: ['breaches', firmId] });
+    },
+    onError: (err: unknown) => {
+      const msg = (err as { response?: { data?: { error?: { message?: string } } } })?.response?.data?.error?.message;
+      setActionError(msg || 'Document upload failed.');
+    },
+  });
+
+  const templateMutation = useMutation({
+    mutationFn: () => breachApi.getFcaTemplate(firmId, selectedBreach!.id, {}),
+    onSuccess: (data) => {
+      setTemplateResult(data);
+    },
+    onError: (err: unknown) => {
+      const msg = (err as { response?: { data?: { error?: { message?: string } } } })?.response?.data?.error?.message;
+      setActionError(msg || 'Failed to generate FCA template.');
+    },
+  });
+
+  const handleFileUpload = () => {
+    const file = fileInputRef.current?.files?.[0];
+    if (!file) return;
+    const formData = new FormData();
+    formData.append('document', file);
+    uploadMutation.mutate(formData);
+  };
+
   const severityColor = (s: string) => s === 'CRITICAL' ? '#dc2626' : s === 'HIGH' ? '#ea580c' : s === 'MEDIUM' ? '#d97706' : '#6b7280';
 
   const breaches = breachesResp?.data || [];
@@ -73,7 +141,14 @@ export default function BreachPage() {
 
   return (
     <div>
-      <PageHeader title="Breach Management" />
+      <PageHeader
+        title="Breach Management"
+        actions={isCompliance ? (
+          <Button onClick={() => { setShowManualModal(true); setActionError(''); }}>
+            Create Manual Breach
+          </Button>
+        ) : undefined}
+      />
 
       {/* Filters */}
       <div style={{ display: 'flex', gap: '10px', marginBottom: '16px' }}>
@@ -94,9 +169,11 @@ export default function BreachPage() {
         ))}
       </div>
 
-      <Card>
+      {breachesError && <ErrorState message="Failed to load breaches." onRetry={() => breachesRefetch()} />}
+      {isLoading && <LoadingSkeleton type="table" />}
+      {!breachesError && !isLoading && <Card>
         <Table
-          loading={isLoading}
+          loading={false}
           data={breaches}
           columns={[
             {
@@ -121,7 +198,7 @@ export default function BreachPage() {
             {
               key: 'actions', header: '',
               render: r => isCompliance ? (
-                <div style={{ display: 'flex', gap: '6px' }}>
+                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
                   {r.status === 'DETECTED' && (
                     <Button size="sm" onClick={e => { e.stopPropagation(); setSelectedBreach(r); setShowAckModal(true); setActionError(''); }}>
                       Acknowledge
@@ -148,6 +225,25 @@ export default function BreachPage() {
                       FCA Notify
                     </Button>
                   )}
+                  <Button size="sm" variant="secondary" onClick={e => {
+                    e.stopPropagation();
+                    setSelectedBreach(r);
+                    setShowUploadModal(true);
+                    setActionError('');
+                  }}>
+                    Upload Doc
+                  </Button>
+                  {r.isNotifiable && (
+                    <Button size="sm" variant="secondary" onClick={e => {
+                      e.stopPropagation();
+                      setSelectedBreach(r);
+                      setTemplateResult(null);
+                      setShowTemplateModal(true);
+                      setActionError('');
+                    }}>
+                      FCA Template
+                    </Button>
+                  )}
                 </div>
               ) : null,
             },
@@ -157,7 +253,7 @@ export default function BreachPage() {
         {pagination && (
           <Pagination page={page} totalPages={pagination.totalPages} total={pagination.total} onPageChange={setPage} />
         )}
-      </Card>
+      </Card>}
 
       {/* Acknowledge Modal */}
       <Modal open={showAckModal} onClose={() => setShowAckModal(false)} title="Acknowledge Breach">
@@ -250,6 +346,185 @@ export default function BreachPage() {
               Create Notification (Draft)
             </Button>
           </div>
+        </div>
+      </Modal>
+
+      {/* Create Manual Breach Modal */}
+      <Modal open={showManualModal} onClose={() => setShowManualModal(false)} title="Create Manual Breach">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+            <div>
+              <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '4px' }}>Breach Type *</label>
+              <select
+                value={manualForm.breachType}
+                onChange={e => setManualForm(p => ({ ...p, breachType: e.target.value }))}
+                style={{ width: '100%', padding: '8px 10px', border: '1px solid var(--color-gray-300)', borderRadius: '6px', fontSize: '13px' }}
+              >
+                <option value="SHORTFALL">Shortfall</option>
+                <option value="EXCESS">Excess</option>
+                <option value="TIMING_BREACH">Timing Breach</option>
+                <option value="RECORD_KEEPING">Record Keeping</option>
+                <option value="GOVERNANCE">Governance</option>
+                <option value="POLICY_BREACH">Policy Breach</option>
+                <option value="OTHER">Other</option>
+              </select>
+            </div>
+            <div>
+              <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '4px' }}>Severity *</label>
+              <select
+                value={manualForm.severity}
+                onChange={e => setManualForm(p => ({ ...p, severity: e.target.value }))}
+                style={{ width: '100%', padding: '8px 10px', border: '1px solid var(--color-gray-300)', borderRadius: '6px', fontSize: '13px' }}
+              >
+                <option value="LOW">Low</option>
+                <option value="MEDIUM">Medium</option>
+                <option value="HIGH">High</option>
+                <option value="CRITICAL">Critical</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '4px' }}>Description *</label>
+            <textarea
+              value={manualForm.description}
+              onChange={e => setManualForm(p => ({ ...p, description: e.target.value }))}
+              rows={4}
+              placeholder="Describe the breach in detail..."
+              style={{ width: '100%', padding: '8px 10px', border: '1px solid var(--color-gray-300)', borderRadius: '6px', fontSize: '13px', resize: 'vertical', boxSizing: 'border-box' }}
+            />
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+            <div>
+              <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '4px' }}>Date Occurred</label>
+              <input
+                type="date"
+                value={manualForm.dateOccurred}
+                onChange={e => setManualForm(p => ({ ...p, dateOccurred: e.target.value }))}
+                style={{ width: '100%', padding: '8px 10px', border: '1px solid var(--color-gray-300)', borderRadius: '6px', fontSize: '13px', boxSizing: 'border-box' }}
+              />
+            </div>
+            <div>
+              <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '4px' }}>Date Identified</label>
+              <input
+                type="date"
+                value={manualForm.dateIdentified}
+                onChange={e => setManualForm(p => ({ ...p, dateIdentified: e.target.value }))}
+                style={{ width: '100%', padding: '8px 10px', border: '1px solid var(--color-gray-300)', borderRadius: '6px', fontSize: '13px', boxSizing: 'border-box' }}
+              />
+            </div>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+            <div>
+              <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '4px' }}>Category</label>
+              <select
+                value={manualForm.category}
+                onChange={e => setManualForm(p => ({ ...p, category: e.target.value }))}
+                style={{ width: '100%', padding: '8px 10px', border: '1px solid var(--color-gray-300)', borderRadius: '6px', fontSize: '13px' }}
+              >
+                <option value="RECONCILIATION">Reconciliation</option>
+                <option value="SAFEGUARDING">Safeguarding</option>
+                <option value="GOVERNANCE">Governance</option>
+                <option value="REPORTING">Reporting</option>
+                <option value="OTHER">Other</option>
+              </select>
+            </div>
+            <div>
+              <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '4px' }}>Person Responsible</label>
+              <input
+                value={manualForm.personResponsible}
+                onChange={e => setManualForm(p => ({ ...p, personResponsible: e.target.value }))}
+                placeholder="Name of person responsible"
+                style={{ width: '100%', padding: '8px 10px', border: '1px solid var(--color-gray-300)', borderRadius: '6px', fontSize: '13px', boxSizing: 'border-box' }}
+              />
+            </div>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <input
+              type="checkbox"
+              checked={manualForm.isMaterial}
+              onChange={e => setManualForm(p => ({ ...p, isMaterial: e.target.checked }))}
+              id="isMaterial"
+            />
+            <label htmlFor="isMaterial" style={{ fontSize: '13px', fontWeight: 500 }}>Material breach (notifiable to FCA)</label>
+          </div>
+          {actionError && <Alert type="error" message={actionError} />}
+          <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
+            <Button variant="secondary" onClick={() => setShowManualModal(false)}>Cancel</Button>
+            <Button onClick={() => manualMutation.mutate()} loading={manualMutation.isPending} disabled={!manualForm.description.trim()}>
+              Create Breach
+            </Button>
+          </div>
+        </div>
+      </Modal>
+
+      {/* Upload Document Modal */}
+      <Modal open={showUploadModal} onClose={() => setShowUploadModal(false)} title="Upload Breach Document">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          {selectedBreach && (
+            <div style={{ padding: '12px', background: 'var(--color-gray-50)', borderRadius: '6px', fontSize: '13px' }}>
+              <strong>{selectedBreach.severity}</strong> — {selectedBreach.breachType.replace(/_/g, ' ')}
+            </div>
+          )}
+          <div>
+            <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '4px' }}>Select Document</label>
+            <input
+              ref={fileInputRef}
+              type="file"
+              style={{ width: '100%', padding: '8px 10px', border: '1px solid var(--color-gray-300)', borderRadius: '6px', fontSize: '13px', boxSizing: 'border-box' }}
+            />
+          </div>
+          {actionError && <Alert type="error" message={actionError} />}
+          <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
+            <Button variant="secondary" onClick={() => setShowUploadModal(false)}>Cancel</Button>
+            <Button onClick={handleFileUpload} loading={uploadMutation.isPending}>
+              Upload Document
+            </Button>
+          </div>
+        </div>
+      </Modal>
+
+      {/* FCA Template Modal */}
+      <Modal open={showTemplateModal} onClose={() => setShowTemplateModal(false)} title="FCA Notification Template">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          {selectedBreach && (
+            <div style={{ padding: '12px', background: 'var(--color-gray-50)', borderRadius: '6px', fontSize: '13px' }}>
+              <strong>{selectedBreach.severity}</strong> — {selectedBreach.breachType.replace(/_/g, ' ')}
+            </div>
+          )}
+          {!templateResult ? (
+            <>
+              <p style={{ margin: 0, fontSize: '13px', color: 'var(--color-gray-600)' }}>
+                Generate an FCA notification template pre-populated with breach details.
+              </p>
+              {actionError && <Alert type="error" message={actionError} />}
+              <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
+                <Button variant="secondary" onClick={() => setShowTemplateModal(false)}>Cancel</Button>
+                <Button onClick={() => templateMutation.mutate()} loading={templateMutation.isPending}>
+                  Generate Template
+                </Button>
+              </div>
+            </>
+          ) : (
+            <>
+              <pre style={{ background: 'var(--color-gray-50)', padding: '16px', borderRadius: '6px', fontSize: '12px', overflow: 'auto', maxHeight: '400px', whiteSpace: 'pre-wrap' }}>
+                {JSON.stringify(templateResult, null, 2)}
+              </pre>
+              <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
+                <Button variant="secondary" onClick={() => setShowTemplateModal(false)}>Close</Button>
+                <Button onClick={() => {
+                  const blob = new Blob([JSON.stringify(templateResult, null, 2)], { type: 'application/json' });
+                  const url = URL.createObjectURL(blob);
+                  const a = document.createElement('a');
+                  a.href = url;
+                  a.download = `fca-template-${selectedBreach?.id || 'breach'}.json`;
+                  a.click();
+                  URL.revokeObjectURL(url);
+                }}>
+                  Download Template
+                </Button>
+              </div>
+            </>
+          )}
         </div>
       </Modal>
     </div>

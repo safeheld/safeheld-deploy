@@ -714,6 +714,9 @@ model User {
   lastLoginAt       DateTime?   @map("last_login_at")
   failedLoginCount  Int         @default(0) @map("failed_login_count")
   lockedUntil       DateTime?   @map("locked_until")
+  phone             String?     @db.VarChar(50)
+  jobTitle          String?     @db.VarChar(255) @map("job_title")
+  notificationPreferences Json? @map("notification_preferences")
 
   firm              Firm        @relation(fields: [firmId], references: [id])
   bankInstitution   BankInstitution? @relation(fields: [bankInstitutionId], references: [id])

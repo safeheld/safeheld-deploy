@@ -1,5 +1,7 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+import multer from 'multer';
 import { z } from 'zod';
 import {
   login,
@@ -15,7 +17,12 @@ import { successResponse } from '../../utils/response';
 import { ValidationError, AuthenticationError } from '../../utils/errors';
 import { config } from '../../config';
 import { prisma } from '../../utils/prisma';
+import { fileStorage } from '../../utils/fileStorage';
+import { logAudit } from '../audit/service';
+import { logger } from '../../utils/logger';
 import { UserRole } from '@prisma/client';
+
+const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 5 * 1024 * 1024 } });
 
 const router = Router();
 
@@ -147,6 +154,124 @@ router.post('/reset-mfa', async (req: Request, res: Response, next: NextFunction
     });
 
     successResponse(res, { message: `MFA reset for ${email}. User will be prompted to re-enroll on next login.` });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// ─── Profile Endpoints ───────────────────────────────────────────────────────
+
+const updateProfileSchema = z.object({
+  name: z.string().min(1).max(255).optional(),
+  email: z.string().email().optional(),
+  phone: z.string().max(50).optional(),
+  jobTitle: z.string().max(255).optional(),
+});
+
+// PUT /api/v1/auth/me — update own profile
+router.put('/me', authenticate, async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const body = updateProfileSchema.parse(req.body);
+    if (Object.keys(body).length === 0) {
+      throw new ValidationError('At least one field must be provided');
+    }
+
+    // If email is being changed, check for uniqueness
+    if (body.email && body.email !== req.user!.email) {
+      const existing = await prisma.user.findUnique({ where: { email: body.email } });
+      if (existing) throw new ValidationError('Email is already in use');
+    }
+
+    const updated = await prisma.user.update({
+      where: { id: req.user!.userId },
+      data: body,
+      select: { id: true, name: true, email: true, role: true },
+    });
+
+    await logAudit({
+      firmId: req.user!.firmId,
+      userId: req.user!.userId,
+      action: 'USER_PROFILE_UPDATED',
+      entityType: 'User',
+      entityId: req.user!.userId,
+      details: { updatedFields: Object.keys(body) },
+      ipAddress: req.ip,
+    });
+
+    logger.info({ userId: req.user!.userId }, 'User profile updated');
+    successResponse(res, updated);
+  } catch (err) {
+    next(err);
+  }
+});
+
+const changePasswordSchema = z.object({
+  current_password: z.string().min(1),
+  new_password: z.string().min(12),
+});
+
+// PUT /api/v1/auth/me/password — change password
+router.put('/me/password', authenticate, async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const body = changePasswordSchema.parse(req.body);
+
+    const user = await prisma.user.findUnique({
+      where: { id: req.user!.userId },
+      select: { passwordHash: true },
+    });
+    if (!user) throw new AuthenticationError('User not found');
+
+    const isValid = await bcrypt.compare(body.current_password, user.passwordHash);
+    if (!isValid) throw new ValidationError('Current password is incorrect');
+
+    const newHash = await bcrypt.hash(body.new_password, 12);
+    await prisma.user.update({
+      where: { id: req.user!.userId },
+      data: { passwordHash: newHash },
+    });
+
+    await logAudit({
+      firmId: req.user!.firmId,
+      userId: req.user!.userId,
+      action: 'USER_PASSWORD_CHANGED',
+      entityType: 'User',
+      entityId: req.user!.userId,
+      details: {},
+      ipAddress: req.ip,
+    });
+
+    logger.info({ userId: req.user!.userId }, 'User password changed');
+    successResponse(res, { message: 'Password changed successfully' });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// POST /api/v1/auth/me/avatar — upload profile photo
+router.post('/me/avatar', authenticate, upload.single('avatar'), async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    if (!req.file) throw new ValidationError('No file uploaded');
+
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+    if (!allowedTypes.includes(req.file.mimetype)) {
+      throw new ValidationError('File must be JPEG, PNG, or WebP');
+    }
+
+    const key = `avatars/${req.user!.userId}/${Date.now()}-${req.file.originalname}`;
+    const storagePath = await fileStorage.store(key, req.file.buffer, req.file.mimetype);
+
+    await logAudit({
+      firmId: req.user!.firmId,
+      userId: req.user!.userId,
+      action: 'USER_AVATAR_UPLOADED',
+      entityType: 'User',
+      entityId: req.user!.userId,
+      details: { storagePath },
+      ipAddress: req.ip,
+    });
+
+    logger.info({ userId: req.user!.userId }, 'User avatar uploaded');
+    successResponse(res, { avatarUrl: storagePath });
   } catch (err) {
     next(err);
   }

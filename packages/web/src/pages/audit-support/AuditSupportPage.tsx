@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../../hooks/useAuth';
 import { auditSupportApi } from '../../api/client';
-import { Card, Table, Button, PageHeader, StatCard, Grid, Modal, Alert, statusBadge } from '../../components/ui';
+import { Card, Table, Button, PageHeader, StatCard, Grid, Modal, Alert, statusBadge, LoadingSkeleton, ErrorState } from '../../components/ui';
 import { format } from 'date-fns';
 
 export default function AuditSupportPage() {
@@ -18,7 +18,7 @@ export default function AuditSupportPage() {
   const [periodEnd, setPeriodEnd] = useState('');
   const [signOffName, setSignOffName] = useState('');
 
-  const { data: periodInfo, isLoading: periodLoading } = useQuery({
+  const { data: periodInfo, isLoading: periodLoading, error: periodError, refetch: periodRefetch } = useQuery({
     queryKey: ['audit-period-info', firmId],
     queryFn: () => auditSupportApi.getPeriodInfo(firmId),
     enabled: activeTab === 'period',
@@ -107,7 +107,11 @@ export default function AuditSupportPage() {
         ))}
       </div>
 
-      {activeTab === 'period' && (
+      {activeTab === 'period' && periodError && (
+        <ErrorState message="Failed to load audit period information." onRetry={() => periodRefetch()} />
+      )}
+      {activeTab === 'period' && periodLoading && <LoadingSkeleton type="cards" />}
+      {activeTab === 'period' && !periodError && !periodLoading && (
         <div>
           <div style={{ marginBottom: '20px' }}>
             <Grid cols={3}>
@@ -122,9 +126,7 @@ export default function AuditSupportPage() {
           </div>
 
           <Card title="Period Information">
-            {periodLoading ? (
-              <div style={{ padding: '20px', color: 'var(--color-gray-400)', textAlign: 'center' }}>Loading...</div>
-            ) : periodInfo ? (
+            {periodInfo ? (
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', fontSize: '13px' }}>
                 <div><span style={{ color: 'var(--color-gray-500)', fontWeight: 500 }}>Period Start:</span> {periodInfo.periodStart ? format(new Date(periodInfo.periodStart), 'dd MMM yyyy') : '—'}</div>
                 <div><span style={{ color: 'var(--color-gray-500)', fontWeight: 500 }}>Period End:</span> {periodInfo.periodEnd ? format(new Date(periodInfo.periodEnd), 'dd MMM yyyy') : '—'}</div>
@@ -200,11 +202,10 @@ export default function AuditSupportPage() {
         </Card>
       )}
 
-      {activeTab === 'auditor' && (
+      {activeTab === 'auditor' && auditorLoading && <LoadingSkeleton type="cards" />}
+      {activeTab === 'auditor' && !auditorLoading && (
         <Card title={isAuditor ? 'Auditor Data View' : 'Auditor Portal Management'}>
-          {auditorLoading ? (
-            <div style={{ padding: '20px', color: 'var(--color-gray-400)', textAlign: 'center' }}>Loading...</div>
-          ) : isAuditor ? (
+          {isAuditor ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               {auditorView?.reconciliations && (
                 <div>

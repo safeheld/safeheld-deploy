@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../../hooks/useAuth';
 import { governanceApi } from '../../api/client';
-import { Card, Table, Button, PageHeader, Pagination, statusBadge, Modal, Alert } from '../../components/ui';
+import { Card, Table, Button, PageHeader, Pagination, statusBadge, Modal, Alert, LoadingSkeleton, ErrorState } from '../../components/ui';
 import { format } from 'date-fns';
 
-type Tab = 'accounts' | 'letters' | 'dd' | 'policies' | 'insurance' | 'resolution';
+type Tab = 'accounts' | 'letters' | 'dd' | 'policies' | 'insurance' | 'resolution' | 'responsibilities';
 
 export default function GovernancePage() {
   const { user } = useAuth();
@@ -16,9 +16,14 @@ export default function GovernancePage() {
   const [activeTab, setActiveTab] = useState<Tab>('accounts');
   const [selectedAccount, setSelectedAccount] = useState<string | null>(null);
   const [error, setError] = useState('');
+  const [showEditAccount, setShowEditAccount] = useState(false);
+  const [editAccountData, setEditAccountData] = useState<any>(null);
+  const [editForm, setEditForm] = useState({ bankName: '', designation: '', status: '', currency: '' });
+  const [showResponsibilityModal, setShowResponsibilityModal] = useState(false);
+  const [responsibilityForm, setResponsibilityForm] = useState({ role: '', personName: '', description: '', effectiveDate: '' });
 
   // Accounts
-  const { data: accountsResp, isLoading: accountsLoading } = useQuery({
+  const { data: accountsResp, isLoading: accountsLoading, error: accountsError, refetch: accountsRefetch } = useQuery({
     queryKey: ['sg-accounts', firmId],
     queryFn: () => governanceApi.getAccounts(firmId),
     enabled: activeTab === 'accounts' || activeTab === 'letters' || activeTab === 'dd',
@@ -71,6 +76,41 @@ export default function GovernancePage() {
     },
   });
 
+  // Responsibilities
+  const { data: responsibilitiesResp } = useQuery({
+    queryKey: ['responsibilities', firmId],
+    queryFn: () => governanceApi.getResponsibilities(firmId),
+    enabled: activeTab === 'responsibilities',
+  });
+
+  const editAccountMutation = useMutation({
+    mutationFn: () => governanceApi.updateAccount(firmId, editAccountData!.id, editForm),
+    onSuccess: () => {
+      setShowEditAccount(false);
+      queryClient.invalidateQueries({ queryKey: ['sg-accounts', firmId] });
+    },
+    onError: (err: unknown) => {
+      const msg = (err as { response?: { data?: { error?: { message?: string } } } })?.response?.data?.error?.message;
+      setError(msg || 'Update failed.');
+    },
+  });
+
+  const createResponsibilityMutation = useMutation({
+    mutationFn: () => governanceApi.createResponsibility(firmId, {
+      ...responsibilityForm,
+      effectiveDate: responsibilityForm.effectiveDate || undefined,
+    }),
+    onSuccess: () => {
+      setShowResponsibilityModal(false);
+      queryClient.invalidateQueries({ queryKey: ['responsibilities', firmId] });
+      setResponsibilityForm({ role: '', personName: '', description: '', effectiveDate: '' });
+    },
+    onError: (err: unknown) => {
+      const msg = (err as { response?: { data?: { error?: { message?: string } } } })?.response?.data?.error?.message;
+      setError(msg || 'Failed to create responsibility.');
+    },
+  });
+
   const tabs: Array<{ id: Tab; label: string }> = [
     { id: 'accounts', label: 'Safeguarding Accounts' },
     { id: 'letters', label: 'Acknowledgement Letters' },
@@ -78,6 +118,7 @@ export default function GovernancePage() {
     { id: 'policies', label: 'Policy Documents' },
     { id: 'insurance', label: 'Insurance & Guarantees' },
     { id: 'resolution', label: 'Resolution Pack Health' },
+    { id: 'responsibilities', label: 'Responsibilities' },
   ];
 
   return (
@@ -105,10 +146,14 @@ export default function GovernancePage() {
       {error && <div style={{ marginBottom: '16px' }}><Alert type="error" message={error} /></div>}
 
       {/* Safeguarding Accounts */}
-      {activeTab === 'accounts' && (
+      {activeTab === 'accounts' && accountsError && (
+        <ErrorState message="Failed to load safeguarding accounts." onRetry={() => accountsRefetch()} />
+      )}
+      {activeTab === 'accounts' && accountsLoading && <LoadingSkeleton type="table" />}
+      {activeTab === 'accounts' && !accountsError && !accountsLoading && (
         <Card title="Safeguarding Accounts Register">
           <Table
-            loading={accountsLoading}
+            loading={false}
             data={accountsResp?.data || []}
             columns={[
               { key: 'bankName', header: 'Bank Name' },
@@ -119,6 +164,23 @@ export default function GovernancePage() {
               { key: 'status', header: 'Status', render: r => statusBadge(r.status), width: '100px' },
               { key: 'letterStatus', header: 'Letter', render: r => statusBadge(r.letterStatus), width: '100px' },
               { key: 'openedDate', header: 'Opened', render: r => format(new Date(r.openedDate), 'dd MMM yyyy'), width: '110px' },
+              ...(isCompliance ? [{
+                key: 'actions', header: '',
+                render: (r: any) => (
+                  <Button size="sm" variant="secondary" onClick={(e: any) => {
+                    e.stopPropagation();
+                    setEditAccountData(r);
+                    setEditForm({
+                      bankName: r.bankName || '',
+                      designation: r.designation || '',
+                      status: r.status || '',
+                      currency: r.currency || '',
+                    });
+                    setShowEditAccount(true);
+                    setError('');
+                  }}>Edit</Button>
+                ),
+              }] : []),
             ]}
             emptyMessage="No safeguarding accounts registered."
           />
@@ -260,6 +322,148 @@ export default function GovernancePage() {
           )}
         </div>
       )}
+
+      {/* Responsibilities Tab */}
+      {activeTab === 'responsibilities' && (
+        <div>
+          {isCompliance && (
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '16px' }}>
+              <Button onClick={() => { setShowResponsibilityModal(true); setError(''); }}>
+                Assign Responsibility
+              </Button>
+            </div>
+          )}
+          <Card title="Responsibility Assignments">
+            <Table
+              data={responsibilitiesResp?.data || []}
+              columns={[
+                { key: 'role', header: 'Role', render: r => (r.role || '').replace(/_/g, ' '), width: '180px' },
+                { key: 'personName', header: 'Person', width: '180px' },
+                { key: 'description', header: 'Description', width: '250px' },
+                { key: 'status', header: 'Status', render: r => statusBadge(r.status), width: '100px' },
+                { key: 'effectiveDate', header: 'Effective', render: r => r.effectiveDate ? format(new Date(r.effectiveDate), 'dd MMM yyyy') : '\u2014', width: '120px' },
+                { key: 'createdAt', header: 'Created', render: r => r.createdAt ? format(new Date(r.createdAt), 'dd MMM yyyy') : '\u2014', width: '110px' },
+              ]}
+              emptyMessage="No responsibility assignments found."
+            />
+          </Card>
+        </div>
+      )}
+
+      {/* Edit Account Modal */}
+      <Modal open={showEditAccount} onClose={() => setShowEditAccount(false)} title="Edit Safeguarding Account">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          {editAccountData && (
+            <div style={{ padding: '12px', background: 'var(--color-gray-50)', borderRadius: '6px', fontSize: '13px' }}>
+              <strong>{editAccountData.bankName}</strong> ({editAccountData.accountNumberMasked})
+            </div>
+          )}
+          <div>
+            <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '4px' }}>Bank Name</label>
+            <input
+              value={editForm.bankName}
+              onChange={e => setEditForm(p => ({ ...p, bankName: e.target.value }))}
+              style={{ width: '100%', padding: '8px 10px', border: '1px solid var(--color-gray-300)', borderRadius: '6px', fontSize: '13px', boxSizing: 'border-box' }}
+            />
+          </div>
+          <div>
+            <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '4px' }}>Designation</label>
+            <input
+              value={editForm.designation}
+              onChange={e => setEditForm(p => ({ ...p, designation: e.target.value }))}
+              style={{ width: '100%', padding: '8px 10px', border: '1px solid var(--color-gray-300)', borderRadius: '6px', fontSize: '13px', boxSizing: 'border-box' }}
+            />
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+            <div>
+              <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '4px' }}>Status</label>
+              <select
+                value={editForm.status}
+                onChange={e => setEditForm(p => ({ ...p, status: e.target.value }))}
+                style={{ width: '100%', padding: '8px 10px', border: '1px solid var(--color-gray-300)', borderRadius: '6px', fontSize: '13px' }}
+              >
+                <option value="ACTIVE">Active</option>
+                <option value="CLOSING">Closing</option>
+                <option value="CLOSED">Closed</option>
+              </select>
+            </div>
+            <div>
+              <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '4px' }}>Currency</label>
+              <input
+                value={editForm.currency}
+                onChange={e => setEditForm(p => ({ ...p, currency: e.target.value }))}
+                maxLength={3}
+                style={{ width: '100%', padding: '8px 10px', border: '1px solid var(--color-gray-300)', borderRadius: '6px', fontSize: '13px', boxSizing: 'border-box' }}
+              />
+            </div>
+          </div>
+          {error && <Alert type="error" message={error} />}
+          <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
+            <Button variant="secondary" onClick={() => setShowEditAccount(false)}>Cancel</Button>
+            <Button onClick={() => editAccountMutation.mutate()} loading={editAccountMutation.isPending}>
+              Save Changes
+            </Button>
+          </div>
+        </div>
+      </Modal>
+
+      {/* Assign Responsibility Modal */}
+      <Modal open={showResponsibilityModal} onClose={() => setShowResponsibilityModal(false)} title="Assign Responsibility">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          <div>
+            <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '4px' }}>Role *</label>
+            <select
+              value={responsibilityForm.role}
+              onChange={e => setResponsibilityForm(p => ({ ...p, role: e.target.value }))}
+              style={{ width: '100%', padding: '8px 10px', border: '1px solid var(--color-gray-300)', borderRadius: '6px', fontSize: '13px' }}
+            >
+              <option value="">Select role...</option>
+              <option value="SAFEGUARDING_OFFICER">Safeguarding Officer</option>
+              <option value="COMPLIANCE_OVERSIGHT">Compliance Oversight</option>
+              <option value="RECONCILIATION_OWNER">Reconciliation Owner</option>
+              <option value="RESOLUTION_PACK_OWNER">Resolution Pack Owner</option>
+              <option value="BANK_RELATIONSHIP">Bank Relationship</option>
+              <option value="SENIOR_MANAGER">Senior Manager</option>
+              <option value="OTHER">Other</option>
+            </select>
+          </div>
+          <div>
+            <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '4px' }}>Person Name *</label>
+            <input
+              value={responsibilityForm.personName}
+              onChange={e => setResponsibilityForm(p => ({ ...p, personName: e.target.value }))}
+              placeholder="Full name of responsible person"
+              style={{ width: '100%', padding: '8px 10px', border: '1px solid var(--color-gray-300)', borderRadius: '6px', fontSize: '13px', boxSizing: 'border-box' }}
+            />
+          </div>
+          <div>
+            <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '4px' }}>Description</label>
+            <textarea
+              value={responsibilityForm.description}
+              onChange={e => setResponsibilityForm(p => ({ ...p, description: e.target.value }))}
+              rows={3}
+              placeholder="Describe the scope of this responsibility..."
+              style={{ width: '100%', padding: '8px 10px', border: '1px solid var(--color-gray-300)', borderRadius: '6px', fontSize: '13px', resize: 'vertical', boxSizing: 'border-box' }}
+            />
+          </div>
+          <div>
+            <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '4px' }}>Effective Date</label>
+            <input
+              type="date"
+              value={responsibilityForm.effectiveDate}
+              onChange={e => setResponsibilityForm(p => ({ ...p, effectiveDate: e.target.value }))}
+              style={{ width: '100%', padding: '8px 10px', border: '1px solid var(--color-gray-300)', borderRadius: '6px', fontSize: '13px', boxSizing: 'border-box' }}
+            />
+          </div>
+          {error && <Alert type="error" message={error} />}
+          <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
+            <Button variant="secondary" onClick={() => setShowResponsibilityModal(false)}>Cancel</Button>
+            <Button onClick={() => createResponsibilityMutation.mutate()} loading={createResponsibilityMutation.isPending} disabled={!responsibilityForm.role || !responsibilityForm.personName}>
+              Assign
+            </Button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }
